@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream-50 text-navy-900 antialiased;
+  }
+
+  ::selection {
+    @apply bg-amber-200 text-navy-900;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-amber-500 text-navy-900 font-bold text-lg rounded-xl
+    hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/25 hover:-translate-y-0.5
+    active:translate-y-0 active:shadow-md
+    transition-all duration-200 ease-out;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-navy-800 text-white font-bold text-lg rounded-xl
+    hover:bg-navy-700 hover:shadow-lg hover:shadow-navy-800/25 hover:-translate-y-0.5
+    active:translate-y-0 active:shadow-md
+    transition-all duration-200 ease-out;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-navy-800 text-navy-800 font-bold text-lg rounded-xl
+    hover:bg-navy-800 hover:text-white hover:shadow-lg hover:-translate-y-0.5
+    active:translate-y-0 active:shadow-md
+    transition-all duration-200 ease-out;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl p-8 shadow-sm border border-cream-300
+    hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1
+    transition-all duration-300 ease-out;
+  }
+
+  .card-highlight {
+    @apply bg-white rounded-2xl p-8 shadow-md border-2 border-amber-400
+    hover:shadow-xl hover:shadow-amber-500/10 hover:-translate-y-1
+    transition-all duration-300 ease-out;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-navy-800 via-navy-700 to-navy-600 bg-clip-text text-transparent;
+  }
+
+  .price-tag {
+    @apply inline-flex items-baseline gap-1 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cream-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-navy-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-navy-400;
+}
+
+/* WhatsApp button pulse animation */
+@keyframes whatsapp-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-pulse {
+  animation: whatsapp-pulse 2s infinite;
+}
+
+/* Hero gradient background */
+.hero-gradient {
+  background: linear-gradient(135deg, #102a43 0%, #1f3a5f 50%, #334e68 100%);
+}
+
+/* Subtle pattern overlay */
+.pattern-overlay {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
+}
