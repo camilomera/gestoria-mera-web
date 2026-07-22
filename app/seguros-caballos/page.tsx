@@ -146,6 +146,33 @@ export default function SegurosPage() {
   const totalFormSections = 8
   const progressPercent = Math.round(((formSection + 1) / totalFormSections) * 100)
 
+  // Browser history support (back/forward buttons)
+  useEffect(() => {
+    const state = { step, ageGroup, formSection };
+    window.history.replaceState(state, '');
+  }, []);
+
+  useEffect(() => {
+    const state = { step, ageGroup, formSection };
+    window.history.pushState(state, '');
+  }, [step, formSection]);
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state) {
+        setStep(event.state.step || 0);
+        if (event.state.ageGroup) setAgeGroup(event.state.ageGroup);
+        if (event.state.formSection !== undefined) setFormSection(event.state.formSection);
+      } else {
+        setStep(0);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+
+
   function validateDNI(value: string): boolean {
     const dniRegex = /^[0-9]{8}[A-Za-z]$/
     const nieRegex = /^[XYZxyz][0-9]{7}[A-Za-z]$/
@@ -464,35 +491,21 @@ export default function SegurosPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
             Selecciona la edad de tu caballo
           </h2>
-          <p className="text-slate-400 text-center mb-10">Elige la opción que corresponda para ver los planes disponibles.</p>
+          
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             <button
               onClick={() => { setAgeGroup('under15'); setStep(2) }}
-              className="group p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 hover:border-teal-500/30 transition-all text-left"
+              className="p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 transition-all text-center"
             >
-              <div className="w-12 h-12 rounded-lg bg-[#131b2a] group-hover:bg-white/10 flex items-center justify-center mb-4 transition-colors">
-                <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Caballos menores de 15 años</h3>
-              <p className="text-slate-400 text-sm mb-4">4 planes de cobertura disponibles</p>
-              <p className="text-lg font-bold text-white">Desde 48,27€/año</p>
+              <h3 className="text-xl font-semibold text-white">Menos de 15 años</h3>
             </button>
 
             <button
               onClick={() => { setAgeGroup('over15'); setStep(2) }}
-              className="group p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 hover:border-teal-500/30 transition-all text-left"
+              className="p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 transition-all text-center"
             >
-              <div className="w-12 h-12 rounded-lg bg-[#131b2a] group-hover:bg-white/10 flex items-center justify-center mb-4 transition-colors">
-                <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Caballos mayores de 15 años</h3>
-              <p className="text-slate-400 text-sm mb-4">Plan de responsabilidad civil</p>
-              <p className="text-lg font-bold text-white">48,27€/año</p>
+              <h3 className="text-xl font-semibold text-white">15 años o más</h3>
             </button>
           </div>
         </div>
