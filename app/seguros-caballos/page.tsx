@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, useEffect, useCallback, FormEvent } from 'react'
 
 interface OwnerData {
   nombre: string
