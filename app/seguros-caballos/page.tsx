@@ -54,8 +54,8 @@ const planMayor15: PlanOption = {
   id: 'mayor15-unica',
   title: 'Responsabilidad Civil',
   coverages: [
-    '150.000\u20ac de cobertura',
-    'Sin retirada de cad\u00e1veres',
+    '150.000€ de cobertura',
+    'Sin retirada de cadáveres',
   ],
   price: '48,27',
   priceNum: 48.27,
@@ -64,30 +64,30 @@ const planMayor15: PlanOption = {
 const planesMenor15: PlanOption[] = [
   {
     id: 'menor15-opcion1',
-    title: 'Responsabilidad Civil 150.000\u20ac + Retirada de cad\u00e1veres (300\u20ac)',
+    title: 'Responsabilidad Civil 150.000€ + Retirada de cadáveres (300€)',
     coverages: [
-      'Responsabilidad Civil 150.000\u20ac',
-      'Retirada de cad\u00e1veres hasta 300\u20ac',
+      'Responsabilidad Civil 150.000€',
+      'Retirada de cadáveres hasta 300€',
     ],
     price: '53,94',
     priceNum: 53.94,
   },
   {
     id: 'menor15-opcion2',
-    title: 'Responsabilidad Civil 306.000\u20ac + Cobertura por fallecimiento (300\u20ac)',
+    title: 'Responsabilidad Civil 306.000€ + Cobertura por fallecimiento (300€)',
     coverages: [
-      'Responsabilidad Civil 306.000\u20ac',
-      'Cobertura por fallecimiento hasta 300\u20ac',
+      'Responsabilidad Civil 306.000€',
+      'Cobertura por fallecimiento hasta 300€',
     ],
     price: '62,62',
     priceNum: 62.62,
   },
   {
     id: 'menor15-opcion3',
-    title: 'Responsabilidad Civil 306.000\u20ac + Cobertura por fallecimiento (1.000\u20ac)',
+    title: 'Responsabilidad Civil 306.000€ + Cobertura por fallecimiento (1.000€)',
     coverages: [
-      'Responsabilidad Civil 306.000\u20ac',
-      'Cobertura por fallecimiento hasta 1.000\u20ac',
+      'Responsabilidad Civil 306.000€',
+      'Cobertura por fallecimiento hasta 1.000€',
     ],
     price: '91,03',
     priceNum: 91.03,
@@ -97,15 +97,15 @@ const planesMenor15: PlanOption[] = [
 // ─── Form Steps ────────────────────────────────────────────────────────────────
 
 const FORM_STEPS = [
-  { key: 'nombre', question: '\u00bfC\u00f3mo te llamas?' },
-  { key: 'dni', question: '\u00bfCu\u00e1l es tu DNI o NIE?' },
-  { key: 'fechaNacimiento', question: '\u00bfCu\u00e1l es tu fecha de nacimiento?' },
-  { key: 'direccion', question: '\u00bfCu\u00e1l es tu direcci\u00f3n?' },
-  { key: 'telefono', question: '\u00bfCu\u00e1l es tu tel\u00e9fono m\u00f3vil?' },
-  { key: 'email', question: '\u00bfCu\u00e1l es tu email?' },
-  { key: 'nombreCaballo', question: '\u00bfC\u00f3mo se llama tu caballo?' },
-  { key: 'microchip', question: '\u00bfTiene microchip? Si es as\u00ed, \u00bfcu\u00e1l es el n\u00famero?' },
-  { key: 'iban', question: '\u00bfCu\u00e1l es el IBAN de la cuenta para domiciliar el pago?' },
+  { key: 'nombre', question: '¿Cómo te llamas?' },
+  { key: 'dni', question: '¿Cuál es tu DNI o NIE?' },
+  { key: 'fechaNacimiento', question: '¿Cuál es tu fecha de nacimiento?' },
+  { key: 'direccion', question: '¿Cuál es tu dirección?' },
+  { key: 'telefono', question: '¿Cuál es tu teléfono móvil?' },
+  { key: 'email', question: '¿Cuál es tu email?' },
+  { key: 'nombreCaballo', question: '¿Cómo se llama tu caballo?' },
+  { key: 'microchip', question: '¿Tiene microchip? Si es así, ¿cuál es el número?' },
+  { key: 'iban', question: '¿Cuál es el IBAN de la cuenta para domiciliar el pago?' },
   { key: 'legal', question: 'Condiciones legales' },
   { key: 'review', question: 'Revisa tus datos' },
 ] as const;
@@ -194,7 +194,7 @@ export default function SegurosCaballosPage() {
       microchip: formData.microchip || 'No tiene',
       iban: formData.iban,
       titular_cuenta: formData.titularCuenta,
-      _subject: `Nueva contrataci\u00f3n seguro caballo - ${formData.nombre}`,
+      _subject: `Nueva contratación seguro caballo - ${formData.nombre}`,
     };
 
     try {
@@ -207,10 +207,10 @@ export default function SegurosCaballosPage() {
       if (res.ok) {
         setStage('confirmation');
       } else {
-        setSubmitError('Ha ocurrido un error al enviar la solicitud. Por favor, ll\u00e1manos al 982 XXX XXX.');
+        setSubmitError('Ha ocurrido un error al enviar la solicitud. Por favor, llámanos al 986 651 478.');
       }
     } catch {
-      setSubmitError('Ha ocurrido un error al enviar la solicitud. Por favor, ll\u00e1manos al 982 XXX XXX.');
+      setSubmitError('Ha ocurrido un error al enviar la solicitud. Por favor, llámanos al 986 651 478.');
     } finally {
       setIsSubmitting(false);
     }
@@ -249,7 +249,7 @@ export default function SegurosCaballosPage() {
                 Seguro de Responsabilidad Civil para Caballos
               </h1>
               <p className="text-lg sm:text-xl text-navy-100 mb-8">
-                Protecci\u00f3n completa desde 48\u20ac al a\u00f1o
+                Protección completa desde 48€ al año
               </p>
               <button
                 onClick={() => setStage('age')}
@@ -280,7 +280,7 @@ export default function SegurosCaballosPage() {
             {stage === 'age' && (
               <div className="animate-slideUp">
                 <h2 className="text-2xl sm:text-3xl font-bold text-navy-800 text-center mb-10">
-                  \u00bfTu caballo tiene m\u00e1s de 15 a\u00f1os?
+                  ¿Tu caballo tiene más de 15 años?
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
                   <button
@@ -288,7 +288,7 @@ export default function SegurosCaballosPage() {
                     className="group bg-white border-2 border-navy-200 rounded-xl p-8 text-center hover:border-navy-600 hover:shadow-lg transition-all duration-200"
                   >
                     <p className="text-lg font-semibold text-navy-800 group-hover:text-navy-900">
-                      S\u00ed, tiene m\u00e1s de 15 a\u00f1os
+                      Sí, tiene más de 15 años
                     </p>
                   </button>
                   <button
@@ -296,7 +296,7 @@ export default function SegurosCaballosPage() {
                     className="group bg-white border-2 border-navy-200 rounded-xl p-8 text-center hover:border-navy-600 hover:shadow-lg transition-all duration-200"
                   >
                     <p className="text-lg font-semibold text-navy-800 group-hover:text-navy-900">
-                      No, tiene menos de 15 a\u00f1os
+                      No, tiene menos de 15 años
                     </p>
                   </button>
                 </div>
@@ -313,11 +313,11 @@ export default function SegurosCaballosPage() {
                         <h3 className="text-xl font-bold text-navy-800 mb-4">
                           Responsabilidad Civil
                         </h3>
-                        <p className="text-navy-600 mb-1">150.000\u20ac de cobertura</p>
-                        <p className="text-navy-500 text-sm mb-6">Sin retirada de cad\u00e1veres</p>
+                        <p className="text-navy-600 mb-1">150.000€ de cobertura</p>
+                        <p className="text-navy-500 text-sm mb-6">Sin retirada de cadáveres</p>
                         <div className="mb-6">
-                          <span className="text-3xl font-bold text-navy-800">48,27\u20ac</span>
-                          <span className="text-navy-500 ml-1">/a\u00f1o</span>
+                          <span className="text-3xl font-bold text-navy-800">48,27€</span>
+                          <span className="text-navy-500 ml-1">/año</span>
                         </div>
                         <button
                           onClick={() => { setSelectedPlan(planMayor15); setStage('summary'); }}
@@ -355,8 +355,8 @@ export default function SegurosCaballosPage() {
                             ))}
                           </ul>
                           <div className="mb-4">
-                            <span className="text-2xl font-bold text-navy-800">{plan.price}\u20ac</span>
-                            <span className="text-navy-500 ml-1 text-sm">/a\u00f1o</span>
+                            <span className="text-2xl font-bold text-navy-800">{plan.price}€</span>
+                            <span className="text-navy-500 ml-1 text-sm">/año</span>
                           </div>
                           <button
                             onClick={() => handlePlanSelect(plan)}
@@ -398,7 +398,7 @@ export default function SegurosCaballosPage() {
                   <div className="border-t border-navy-200 pt-4">
                     <div className="flex items-baseline justify-between">
                       <span className="text-navy-600 font-medium">Total anual</span>
-                      <span className="text-2xl font-bold text-navy-800">{selectedPlan.price}\u20ac</span>
+                      <span className="text-2xl font-bold text-navy-800">{selectedPlan.price}€</span>
                     </div>
                   </div>
                 </div>
@@ -406,7 +406,7 @@ export default function SegurosCaballosPage() {
                   onClick={() => { setFormStep(0); setStage('form'); }}
                   className="btn-primary w-full mt-8"
                 >
-                  Continuar con la contrataci\u00f3n
+                  Continuar con la contratación
                 </button>
                 <div className="text-center mt-4">
                   <button onClick={() => setStage('coverage')} className="text-navy-500 hover:text-navy-700 text-sm font-medium">
@@ -446,7 +446,7 @@ export default function SegurosCaballosPage() {
                         type="text"
                         value={formData.nombre}
                         onChange={(e) => updateForm('nombre', e.target.value)}
-                        placeholder="Ej: Mar\u00eda Garc\u00eda L\u00f3pez"
+                        placeholder="Ej: María García López"
                         className="w-full border border-navy-200 rounded-lg px-4 py-3 text-navy-800 focus:outline-none focus:ring-2 focus:ring-navy-600 focus:border-transparent"
                       />
                     </div>
@@ -490,18 +490,18 @@ export default function SegurosCaballosPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-navy-700 mb-2">N\u00famero</label>
+                        <label className="block text-sm font-medium text-navy-700 mb-2">Número</label>
                         <input
                           type="text"
                           value={formData.numero}
                           onChange={(e) => updateForm('numero', e.target.value)}
-                          placeholder="N\u00famero, piso, puerta"
+                          placeholder="Número, piso, puerta"
                           className="w-full border border-navy-200 rounded-lg px-4 py-3 text-navy-800 focus:outline-none focus:ring-2 focus:ring-navy-600 focus:border-transparent"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-navy-700 mb-2">C\u00f3digo Postal</label>
+                          <label className="block text-sm font-medium text-navy-700 mb-2">Código Postal</label>
                           <input
                             type="text"
                             value={formData.codigoPostal}
@@ -526,7 +526,7 @@ export default function SegurosCaballosPage() {
 
                   {FORM_STEPS[formStep].key === 'telefono' && (
                     <div>
-                      <label className="block text-sm font-medium text-navy-700 mb-2">Tel\u00e9fono m\u00f3vil</label>
+                      <label className="block text-sm font-medium text-navy-700 mb-2">Teléfono móvil</label>
                       <input
                         type="tel"
                         value={formData.telefono}
@@ -539,7 +539,7 @@ export default function SegurosCaballosPage() {
 
                   {FORM_STEPS[formStep].key === 'email' && (
                     <div>
-                      <label className="block text-sm font-medium text-navy-700 mb-2">Correo electr\u00f3nico</label>
+                      <label className="block text-sm font-medium text-navy-700 mb-2">Correo electrónico</label>
                       <input
                         type="email"
                         value={formData.email}
@@ -565,12 +565,12 @@ export default function SegurosCaballosPage() {
 
                   {FORM_STEPS[formStep].key === 'microchip' && (
                     <div>
-                      <label className="block text-sm font-medium text-navy-700 mb-2">N\u00famero de microchip (opcional)</label>
+                      <label className="block text-sm font-medium text-navy-700 mb-2">Número de microchip (opcional)</label>
                       <input
                         type="text"
                         value={formData.microchip}
                         onChange={(e) => updateForm('microchip', e.target.value)}
-                        placeholder="D\u00e9jalo vac\u00edo si no tiene"
+                        placeholder="Déjalo vacío si no tiene"
                         className="w-full border border-navy-200 rounded-lg px-4 py-3 text-navy-800 focus:outline-none focus:ring-2 focus:ring-navy-600 focus:border-transparent"
                       />
                       <p className="text-sm text-navy-400 mt-2">Si tu caballo no tiene microchip, puedes dejarlo en blanco.</p>
@@ -588,7 +588,7 @@ export default function SegurosCaballosPage() {
                           placeholder="ES00 0000 0000 0000 0000 0000"
                           className="w-full border border-navy-200 rounded-lg px-4 py-3 text-navy-800 focus:outline-none focus:ring-2 focus:ring-navy-600 focus:border-transparent font-mono"
                         />
-                        <p className="text-sm text-navy-400 mt-2">ES + 22 d\u00edgitos</p>
+                        <p className="text-sm text-navy-400 mt-2">ES + 22 dígitos</p>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-navy-700 mb-2">Titular de la cuenta</label>
@@ -613,7 +613,7 @@ export default function SegurosCaballosPage() {
                           className="mt-1 w-5 h-5 rounded border-navy-300 text-navy-700 focus:ring-navy-600"
                         />
                         <span className="text-sm text-navy-700">
-                          Acepto las condiciones de contrataci\u00f3n
+                          Acepto las condiciones de contratación
                         </span>
                       </label>
                       <label className="flex items-start gap-3 cursor-pointer">
@@ -637,8 +637,8 @@ export default function SegurosCaballosPage() {
                         <ReviewItem label="Nombre" value={formData.nombre} />
                         <ReviewItem label="DNI/NIE" value={formData.dni} />
                         <ReviewItem label="Fecha de nacimiento" value={formData.fechaNacimiento} />
-                        <ReviewItem label="Direcci\u00f3n" value={`${formData.calle} ${formData.numero}, ${formData.codigoPostal} ${formData.localidad}`} />
-                        <ReviewItem label="Tel\u00e9fono" value={formData.telefono} />
+                        <ReviewItem label="Dirección" value={`${formData.calle} ${formData.numero}, ${formData.codigoPostal} ${formData.localidad}`} />
+                        <ReviewItem label="Teléfono" value={formData.telefono} />
                         <ReviewItem label="Email" value={formData.email} />
                         <ReviewItem label="Caballo" value={formData.nombreCaballo} />
                         <ReviewItem label="Microchip" value={formData.microchip || 'No tiene'} />
@@ -648,7 +648,7 @@ export default function SegurosCaballosPage() {
                       <div className="border-t border-navy-200 pt-4 mt-4">
                         <div className="flex justify-between items-center">
                           <span className="font-medium text-navy-700">Plan seleccionado</span>
-                          <span className="font-bold text-navy-800">{selectedPlan?.price}\u20ac/a\u00f1o</span>
+                          <span className="font-bold text-navy-800">{selectedPlan?.price}€/año</span>
                         </div>
                         <p className="text-navy-600 mt-1">{selectedPlan?.title}</p>
                       </div>
@@ -669,7 +669,7 @@ export default function SegurosCaballosPage() {
                     onClick={handleFormBack}
                     className="text-navy-500 hover:text-navy-700 text-sm font-medium"
                   >
-                    Atr\u00e1s
+                    Atrás
                   </button>
 
                   {FORM_STEPS[formStep].key === 'review' ? (
@@ -678,7 +678,7 @@ export default function SegurosCaballosPage() {
                       disabled={isSubmitting}
                       className="btn-primary !px-8 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? 'Enviando...' : 'Finalizar contrataci\u00f3n'}
+                      {isSubmitting ? 'Enviando...' : 'Finalizar contratación'}
                     </button>
                   ) : (
                     <button
@@ -707,17 +707,17 @@ export default function SegurosCaballosPage() {
               </svg>
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-navy-800 mb-4">
-              Solicitud de contrataci\u00f3n enviada
+              Solicitud de contratación enviada
             </h2>
             <p className="text-navy-600 mb-2">
-              Nos pondremos en contacto contigo en un plazo m\u00e1ximo de 24 horas para confirmar tu p\u00f3liza.
+              Nos pondremos en contacto contigo en un plazo máximo de 24 horas para confirmar tu póliza.
             </p>
             <p className="text-navy-600 mb-8">
-              Recibir\u00e1s toda la documentaci\u00f3n en tu email.
+              Recibirás toda la documentación en tu email.
             </p>
             <div className="bg-navy-50 rounded-xl p-6 text-sm text-navy-700">
               <p className="font-medium mb-2">Si tienes alguna duda:</p>
-              <p>Tel\u00e9fono: 982 XXX XXX</p>
+              <p>Teléfono: 986 651 478</p>
               <p>WhatsApp: 600 XXX XXX</p>
             </div>
           </div>
