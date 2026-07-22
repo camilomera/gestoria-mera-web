@@ -381,14 +381,14 @@ export default function SegurosPage() {
   // Hero
   if (step === 0) {
     return (
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-[#0a0f1a]">
         <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1200&q=80"
             alt="Caballo en el campo"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-slate-900/70" />
+          <div className="absolute inset-0 bg-[#0a0f1a]/75" />
           <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
             <h1 className="text-3xl md:text-5xl font-bold text-white max-w-3xl leading-tight">
               Seguro de Responsabilidad Civil para Caballos
@@ -398,7 +398,7 @@ export default function SegurosPage() {
             </p>
             <button
               onClick={() => setStep(1)}
-              className="mt-8 px-8 py-4 bg-white text-slate-900 font-semibold text-lg rounded-lg hover:bg-slate-100 transition-colors shadow-lg"
+              className="mt-8 px-8 py-4 bg-[#0a0f1a] text-white font-semibold text-lg rounded-lg hover:bg-[#131b2a] transition-colors shadow-lg"
             >
               Contratar ahora
             </button>
@@ -406,36 +406,36 @@ export default function SegurosPage() {
         </section>
 
         <section className="max-w-4xl mx-auto py-16 px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">
             ¿Por qué contratar con nosotros?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center p-6">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-                <svg className="w-7 h-7 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#131b2a] flex items-center justify-center">
+                <svg className="w-7 h-7 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Cobertura completa</h3>
-              <p className="text-slate-600 text-sm">Responsabilidad civil desde 150.000€ hasta 306.000€ de cobertura.</p>
+              <h3 className="font-semibold text-white mb-2">Cobertura completa</h3>
+              <p className="text-slate-300 text-sm">Responsabilidad civil desde 150.000€ hasta 306.000€ de cobertura.</p>
             </div>
             <div className="text-center p-6">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-                <svg className="w-7 h-7 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#131b2a] flex items-center justify-center">
+                <svg className="w-7 h-7 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Mejor precio</h3>
-              <p className="text-slate-600 text-sm">Desde solo 48,27€ al año. Sin sorpresas ni costes ocultos.</p>
+              <h3 className="font-semibold text-white mb-2">Mejor precio</h3>
+              <p className="text-slate-300 text-sm">Desde solo 48,27€ al año. Sin sorpresas ni costes ocultos.</p>
             </div>
             <div className="text-center p-6">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
-                <svg className="w-7 h-7 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#131b2a] flex items-center justify-center">
+                <svg className="w-7 h-7 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-slate-900 mb-2">Atención personal</h3>
-              <p className="text-slate-600 text-sm">Contacto directo por WhatsApp. Respuesta en menos de 2 horas.</p>
+              <h3 className="font-semibold text-white mb-2">Atención personal</h3>
+              <p className="text-slate-300 text-sm">Contacto directo por WhatsApp. Respuesta en menos de 2 horas.</p>
             </div>
           </div>
         </section>
@@ -446,45 +446,45 @@ export default function SegurosPage() {
   // Step 1: Age Selection
   if (step === 1) {
     return (
-      <main className="min-h-screen bg-slate-50 py-12 px-6">
+      <main className="min-h-screen bg-[#0f1520] py-12 px-6">
         <div className="max-w-3xl mx-auto">
-          <button onClick={() => setStep(0)} className="text-slate-600 hover:text-slate-900 text-sm mb-8 flex items-center gap-1">
+          <button onClick={() => setStep(0)} className="text-slate-300 hover:text-white text-sm mb-8 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
             Selecciona la edad de tu caballo
           </h2>
-          <p className="text-slate-500 text-center mb-10">Elige la opción que corresponda para ver los planes disponibles.</p>
+          <p className="text-slate-400 text-center mb-10">Elige la opción que corresponda para ver los planes disponibles.</p>
 
           <div className="grid md:grid-cols-2 gap-6">
             <button
               onClick={() => { setAgeGroup('under15'); setStep(2) }}
-              className="group p-8 bg-white rounded-xl border border-slate-200 hover:border-slate-400 hover:shadow-lg transition-all text-left"
+              className="group p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 hover:border-teal-500/30 transition-all text-left"
             >
-              <div className="w-12 h-12 rounded-lg bg-slate-100 group-hover:bg-slate-200 flex items-center justify-center mb-4 transition-colors">
-                <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 rounded-lg bg-[#131b2a] group-hover:bg-white/10 flex items-center justify-center mb-4 transition-colors">
+                <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">Caballos menores de 15 años</h3>
-              <p className="text-slate-500 text-sm mb-4">Más opciones de cobertura disponibles</p>
-              <p className="text-lg font-bold text-slate-900">Desde 53,94€/año</p>
+              <h3 className="text-xl font-semibold text-white mb-2">Caballos menores de 15 años</h3>
+              <p className="text-slate-400 text-sm mb-4">Más opciones de cobertura disponibles</p>
+              <p className="text-lg font-bold text-white">Desde 53,94€/año</p>
             </button>
 
             <button
               onClick={() => { setAgeGroup('over15'); setStep(2) }}
-              className="group p-8 bg-white rounded-xl border border-slate-200 hover:border-slate-400 hover:shadow-lg transition-all text-left"
+              className="group p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 hover:border-teal-500/30 transition-all text-left"
             >
-              <div className="w-12 h-12 rounded-lg bg-slate-100 group-hover:bg-slate-200 flex items-center justify-center mb-4 transition-colors">
-                <svg className="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 rounded-lg bg-[#131b2a] group-hover:bg-white/10 flex items-center justify-center mb-4 transition-colors">
+                <svg className="w-6 h-6 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-slate-900 mb-2">Caballos mayores de 15 años</h3>
-              <p className="text-slate-500 text-sm mb-4">Plan de responsabilidad civil</p>
-              <p className="text-lg font-bold text-slate-900">48,27€/año</p>
+              <h3 className="text-xl font-semibold text-white mb-2">Caballos mayores de 15 años</h3>
+              <p className="text-slate-400 text-sm mb-4">Plan de responsabilidad civil</p>
+              <p className="text-lg font-bold text-white">48,27€/año</p>
             </button>
           </div>
         </div>
@@ -495,40 +495,40 @@ export default function SegurosPage() {
   // Step 2: Coverage Selection
   if (step === 2) {
     return (
-      <main className="min-h-screen bg-slate-50 py-12 px-6">
+      <main className="min-h-screen bg-[#0f1520] py-12 px-6">
         <div className="max-w-4xl mx-auto">
-          <button onClick={() => setStep(1)} className="text-slate-600 hover:text-slate-900 text-sm mb-8 flex items-center gap-1">
+          <button onClick={() => setStep(1)} className="text-slate-300 hover:text-white text-sm mb-8 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
             Elige tu plan de cobertura
           </h2>
-          <p className="text-slate-500 text-center mb-10">Selecciona el nivel de protección que mejor se adapte a tus necesidades.</p>
+          <p className="text-slate-400 text-center mb-10">Selecciona el nivel de protección que mejor se adapte a tus necesidades.</p>
 
           {ageGroup === 'over15' ? (
             <div className="max-w-md mx-auto">
-              <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
-                <h3 className="text-xl font-bold text-slate-900 mb-4">{planOver15.title}</h3>
+              <div className="bg-[#0a0f1a] rounded-xl border border-white/10 p-8 shadow-sm">
+                <h3 className="text-xl font-bold text-white mb-4">{planOver15.title}</h3>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-slate-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                    <span className="text-slate-700">{planOver15.coverage}</span>
+                    <svg className="w-5 h-5 text-slate-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <span className="text-slate-200">{planOver15.coverage}</span>
                   </div>
                   {planOver15.extras.map((extra, i) => (
                     <div key={i} className="flex items-start gap-2">
                       <svg className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
-                      <span className="text-slate-500">{extra}</span>
+                      <span className="text-slate-400">{extra}</span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-slate-100 pt-4 mb-6">
-                  <p className="text-3xl font-bold text-slate-900">48,27€ <span className="text-base font-normal text-slate-500">al año</span></p>
+                <div className="border-t border-white/5 pt-4 mb-6">
+                  <p className="text-3xl font-bold text-white">48,27€ <span className="text-base font-normal text-slate-400">al año</span></p>
                 </div>
                 <button
                   onClick={() => { setSelectedPlan(planOver15); setStep(3) }}
-                  className="w-full py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors"
+                  className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors"
                 >
                   Contratar este seguro
                 </button>
@@ -537,26 +537,26 @@ export default function SegurosPage() {
           ) : (
             <div className="grid md:grid-cols-3 gap-6">
               {plansUnder15.map((plan) => (
-                <div key={plan.id} className="bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col">
-                  <h3 className="text-lg font-bold text-slate-900 mb-4">{plan.title}</h3>
+                <div key={plan.id} className="bg-[#0a0f1a] rounded-xl border border-white/10 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                  <h3 className="text-lg font-bold text-white mb-4">{plan.title}</h3>
                   <div className="space-y-3 mb-6 flex-1">
                     <div className="flex items-start gap-2">
-                      <svg className="w-5 h-5 text-slate-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                      <span className="text-slate-700 text-sm">{plan.coverage}</span>
+                      <svg className="w-5 h-5 text-slate-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-slate-200 text-sm">{plan.coverage}</span>
                     </div>
                     {plan.extras.map((extra, i) => (
                       <div key={i} className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-slate-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                        <span className="text-slate-700 text-sm">{extra}</span>
+                        <svg className="w-5 h-5 text-slate-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                        <span className="text-slate-200 text-sm">{extra}</span>
                       </div>
                     ))}
                   </div>
-                  <div className="border-t border-slate-100 pt-4 mb-4">
-                    <p className="text-2xl font-bold text-slate-900">{plan.price}</p>
+                  <div className="border-t border-white/5 pt-4 mb-4">
+                    <p className="text-2xl font-bold text-white">{plan.price}</p>
                   </div>
                   <button
                     onClick={() => { setSelectedPlan(plan); setStep(3) }}
-                    className="w-full py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors"
+                    className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors"
                   >
                     Seleccionar
                   </button>
@@ -572,33 +572,33 @@ export default function SegurosPage() {
   // Step 3: Summary before form
   if (step === 3 && selectedPlan) {
     return (
-      <main className="min-h-screen bg-slate-50 py-12 px-6">
+      <main className="min-h-screen bg-[#0f1520] py-12 px-6">
         <div className="max-w-2xl mx-auto">
-          <button onClick={() => setStep(2)} className="text-slate-600 hover:text-slate-900 text-sm mb-8 flex items-center gap-1">
+          <button onClick={() => setStep(2)} className="text-slate-300 hover:text-white text-sm mb-8 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">
             Resumen del plan seleccionado
           </h2>
 
-          <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-sm mb-8">
-            <h3 className="text-xl font-bold text-slate-900 mb-4">{selectedPlan.title}</h3>
+          <div className="bg-[#0a0f1a] rounded-xl border border-white/10 p-8 shadow-sm mb-8">
+            <h3 className="text-xl font-bold text-white mb-4">{selectedPlan.title}</h3>
             <div className="space-y-2 mb-6">
-              <p className="text-slate-700">{selectedPlan.coverage}</p>
+              <p className="text-slate-200">{selectedPlan.coverage}</p>
               {selectedPlan.extras.map((extra, i) => (
-                <p key={i} className="text-slate-600 text-sm">{extra}</p>
+                <p key={i} className="text-slate-300 text-sm">{extra}</p>
               ))}
             </div>
-            <div className="border-t border-slate-100 pt-4">
-              <p className="text-3xl font-bold text-slate-900">{selectedPlan.price}</p>
+            <div className="border-t border-white/5 pt-4">
+              <p className="text-3xl font-bold text-white">{selectedPlan.price}</p>
             </div>
           </div>
 
           <button
             onClick={() => { setStep(4); setFormSection(0) }}
-            className="w-full py-4 bg-slate-900 text-white font-semibold text-lg rounded-lg hover:bg-slate-800 transition-colors"
+            className="w-full py-4 bg-teal-600 text-white font-semibold text-lg rounded-lg hover:bg-teal-700 transition-colors"
           >
             Continuar con la contratación
           </button>
@@ -610,15 +610,15 @@ export default function SegurosPage() {
   // Step 4: Progressive Form
   if (step === 4) {
     return (
-      <main className="min-h-screen bg-slate-50 py-8 px-6">
+      <main className="min-h-screen bg-[#0f1520] py-8 px-6">
         <div className="max-w-2xl mx-auto">
           {/* Progress bar */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-slate-500 mb-2">
+            <div className="flex justify-between text-xs text-slate-400 mb-2">
               <span>Paso {formSection + 1} de {totalFormSections}</span>
               <span>{progressPercent}%</span>
             </div>
-            <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
               <div
                 className="h-full bg-slate-700 rounded-full transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
@@ -626,7 +626,7 @@ export default function SegurosPage() {
             </div>
           </div>
 
-          <button onClick={handlePrevSection} className="text-slate-600 hover:text-slate-900 text-sm mb-6 flex items-center gap-1">
+          <button onClick={handlePrevSection} className="text-slate-300 hover:text-white text-sm mb-6 flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
@@ -634,52 +634,52 @@ export default function SegurosPage() {
           {/* Section 0: Owner Data */}
           {formSection === 0 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Datos del propietario</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Datos del propietario</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Nombre</label>
                   <input
                     type="text"
                     value={ownerData.nombre}
                     onChange={(e) => setOwnerData({ ...ownerData, nombre: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.nombre && <p className="text-red-600 text-sm mt-1">{errors.nombre}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Primer apellido</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Primer apellido</label>
                   <input
                     type="text"
                     value={ownerData.primerApellido}
                     onChange={(e) => setOwnerData({ ...ownerData, primerApellido: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.primerApellido && <p className="text-red-600 text-sm mt-1">{errors.primerApellido}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Segundo apellido</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Segundo apellido</label>
                   <input
                     type="text"
                     value={ownerData.segundoApellido}
                     onChange={(e) => setOwnerData({ ...ownerData, segundoApellido: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.segundoApellido && <p className="text-red-600 text-sm mt-1">{errors.segundoApellido}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Fecha de nacimiento</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Fecha de nacimiento</label>
                   <input
                     type="text"
                     placeholder="DD/MM/AAAA"
                     value={ownerData.fechaNacimiento}
                     onChange={(e) => setOwnerData({ ...ownerData, fechaNacimiento: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.fechaNacimiento && (
                     <div className="text-red-600 text-sm mt-1">
                       <p>{errors.fechaNacimiento}</p>
                       {errors.fechaNacimiento.includes('mayor de 18') && (
-                        <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="underline text-slate-700 hover:text-slate-900">
+                        <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="underline text-slate-200 hover:text-white">
                           Contactar por WhatsApp
                         </a>
                       )}
@@ -687,18 +687,18 @@ export default function SegurosPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">DNI/NIE</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">DNI/NIE</label>
                   <input
                     type="text"
                     placeholder="12345678A o X1234567A"
                     value={ownerData.dni}
                     onChange={(e) => setOwnerData({ ...ownerData, dni: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.dni && <p className="text-red-600 text-sm mt-1">{errors.dni}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -707,60 +707,60 @@ export default function SegurosPage() {
           {/* Section 1: Address */}
           {formSection === 1 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">¿Cuál es tu dirección?</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">¿Cuál es tu dirección?</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Calle</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Calle</label>
                   <input
                     type="text"
                     value={addressData.calle}
                     onChange={(e) => setAddressData({ ...addressData, calle: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.calle && <p className="text-red-600 text-sm mt-1">{errors.calle}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Número</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Número</label>
                   <input
                     type="text"
                     value={addressData.numero}
                     onChange={(e) => setAddressData({ ...addressData, numero: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.numero && <p className="text-red-600 text-sm mt-1">{errors.numero}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Código postal</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Código postal</label>
                   <input
                     type="text"
                     value={addressData.codigoPostal}
                     onChange={(e) => setAddressData({ ...addressData, codigoPostal: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.codigoPostal && <p className="text-red-600 text-sm mt-1">{errors.codigoPostal}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Localidad</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Localidad</label>
                   <input
                     type="text"
                     value={addressData.localidad}
                     onChange={(e) => setAddressData({ ...addressData, localidad: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.localidad && <p className="text-red-600 text-sm mt-1">{errors.localidad}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Provincia</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Provincia</label>
                   <input
                     type="text"
                     value={addressData.provincia}
                     onChange={(e) => setAddressData({ ...addressData, provincia: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.provincia && <p className="text-red-600 text-sm mt-1">{errors.provincia}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -769,41 +769,41 @@ export default function SegurosPage() {
           {/* Section 2: Contact */}
           {formSection === 2 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Datos de contacto</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Datos de contacto</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Teléfono móvil</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Teléfono móvil</label>
                   <input
                     type="tel"
                     placeholder="612345678"
                     value={contactData.telefono}
                     onChange={(e) => setContactData({ ...contactData, telefono: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.telefono && <p className="text-red-600 text-sm mt-1">{errors.telefono}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Email</label>
                   <input
                     type="email"
                     value={contactData.email}
                     onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Repetir email</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Repetir email</label>
                   <input
                     type="email"
                     value={contactData.emailRepetir}
                     onChange={(e) => setContactData({ ...contactData, emailRepetir: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.emailRepetir && <p className="text-red-600 text-sm mt-1">{errors.emailRepetir}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -812,44 +812,44 @@ export default function SegurosPage() {
           {/* Section 3: Horse Data */}
           {formSection === 3 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Datos de tu caballo</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Datos de tu caballo</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del caballo</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Nombre del caballo</label>
                   <input
                     type="text"
                     value={horseData.nombre}
                     onChange={(e) => setHorseData({ ...horseData, nombre: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.horseNombre && <p className="text-red-600 text-sm mt-1">{errors.horseNombre}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Raza del caballo</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Raza del caballo</label>
                   <input
                     type="text"
                     value={horseData.raza}
                     onChange={(e) => setHorseData({ ...horseData, raza: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.horseRaza && <p className="text-red-600 text-sm mt-1">{errors.horseRaza}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Color del caballo</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Color del caballo</label>
                   <input
                     type="text"
                     value={horseData.color}
                     onChange={(e) => setHorseData({ ...horseData, color: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.horseColor && <p className="text-red-600 text-sm mt-1">{errors.horseColor}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Sexo</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Sexo</label>
                   <select
                     value={horseData.sexo}
                     onChange={(e) => setHorseData({ ...horseData, sexo: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all bg-white"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all bg-[#0a0f1a]"
                   >
                     <option value="">Selecciona una opción</option>
                     <option value="Caballo">Caballo</option>
@@ -859,18 +859,18 @@ export default function SegurosPage() {
                   {errors.horseSexo && <p className="text-red-600 text-sm mt-1">{errors.horseSexo}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Número de microchip</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">Número de microchip</label>
                   <input
                     type="text"
                     placeholder="15 dígitos"
                     value={horseData.microchip}
                     onChange={(e) => setHorseData({ ...horseData, microchip: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.horseMicrochip && <p className="text-red-600 text-sm mt-1">{errors.horseMicrochip}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -879,21 +879,21 @@ export default function SegurosPage() {
           {/* Section 4: Photo Upload (Optional) */}
           {formSection === 4 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">Foto de la cartilla sanitaria</h2>
-              <p className="text-slate-600 mb-6">Adjunta una foto de la cartilla sanitaria de tu caballo donde aparezcan todos los datos.</p>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Foto de la cartilla sanitaria</h2>
+              <p className="text-slate-300 mb-6">Adjunta una foto de la cartilla sanitaria de tu caballo donde aparezcan todos los datos.</p>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 flex flex-col items-center justify-center text-center">
+                <div className="border-2 border-dashed border-white/15 rounded-lg p-6 flex flex-col items-center justify-center text-center">
                   <svg className="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <p className="text-xs text-slate-500">Ejemplo 1: Foto de la portada de la cartilla</p>
+                  <p className="text-xs text-slate-400">Ejemplo 1: Foto de la portada de la cartilla</p>
                 </div>
-                <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 flex flex-col items-center justify-center text-center">
+                <div className="border-2 border-dashed border-white/15 rounded-lg p-6 flex flex-col items-center justify-center text-center">
                   <svg className="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <p className="text-xs text-slate-500">Ejemplo 2: Foto de la página con los datos del caballo</p>
+                  <p className="text-xs text-slate-400">Ejemplo 2: Foto de la página con los datos del caballo</p>
                 </div>
               </div>
 
@@ -903,24 +903,24 @@ export default function SegurosPage() {
                   accept="image/jpeg,image/png,image/heic"
                   multiple
                   onChange={handleFileChange}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg text-sm text-slate-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200"
+                  className="w-full px-4 py-3 border border-white/15 rounded-lg text-sm text-slate-200 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-[#131b2a] file:text-slate-200 hover:file:bg-white/10"
                 />
               </div>
 
               {uploadedFiles.length > 0 && (
-                <div className="mb-4 p-3 bg-slate-100 rounded-lg">
-                  <p className="text-sm text-slate-700 font-medium">{uploadedFiles.length} archivo(s) seleccionado(s):</p>
+                <div className="mb-4 p-3 bg-[#131b2a] rounded-lg">
+                  <p className="text-sm text-slate-200 font-medium">{uploadedFiles.length} archivo(s) seleccionado(s):</p>
                   {uploadedFiles.map((file, i) => (
-                    <p key={i} className="text-sm text-slate-600">{file.name}</p>
+                    <p key={i} className="text-sm text-slate-300">{file.name}</p>
                   ))}
                 </div>
               )}
 
-              <p className="text-sm text-slate-500 mb-8">
+              <p className="text-sm text-slate-400 mb-8">
                 Este paso no es obligatorio. Si no la tienes ahora, puedes enviarla después por WhatsApp.
               </p>
 
-              <button onClick={handleNextSection} className="w-full py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -929,22 +929,22 @@ export default function SegurosPage() {
           {/* Section 5: Bank Data */}
           {formSection === 5 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">Datos bancarios</h2>
-              <p className="text-slate-600 mb-6">¿Cuál es el IBAN de la cuenta para domiciliar el pago?</p>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Datos bancarios</h2>
+              <p className="text-slate-300 mb-6">¿Cuál es el IBAN de la cuenta para domiciliar el pago?</p>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">IBAN</label>
+                  <label className="block text-sm font-medium text-slate-200 mb-1">IBAN</label>
                   <input
                     type="text"
                     placeholder="ES12 1234 5678 9012 3456 7890"
                     value={bankData.iban}
                     onChange={(e) => setBankData({ ...bankData, iban: e.target.value })}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-500 focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   />
                   {errors.iban && <p className="text-red-600 text-sm mt-1">{errors.iban}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -953,29 +953,29 @@ export default function SegurosPage() {
           {/* Section 6: Legal */}
           {formSection === 6 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Condiciones legales</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Condiciones legales</h2>
               <div className="space-y-4">
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={legalData.condiciones}
                     onChange={(e) => setLegalData({ ...legalData, condiciones: e.target.checked })}
-                    className="mt-1 w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-500"
+                    className="mt-1 w-5 h-5 rounded border-white/15 text-white focus:ring-teal-500"
                   />
-                  <span className="text-slate-700">Acepto las condiciones de contratación</span>
+                  <span className="text-slate-200">Acepto las condiciones de contratación</span>
                 </label>
                 <label className="flex items-start gap-3 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={legalData.datos}
                     onChange={(e) => setLegalData({ ...legalData, datos: e.target.checked })}
-                    className="mt-1 w-5 h-5 rounded border-slate-300 text-slate-900 focus:ring-slate-500"
+                    className="mt-1 w-5 h-5 rounded border-white/15 text-white focus:ring-teal-500"
                   />
-                  <span className="text-slate-700">Acepto el tratamiento de mis datos personales</span>
+                  <span className="text-slate-200">Acepto el tratamiento de mis datos personales</span>
                 </label>
               </div>
               {errors.legal && <p className="text-red-600 text-sm mt-3">{errors.legal}</p>}
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors">
+              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
                 Siguiente
               </button>
             </div>
@@ -984,86 +984,86 @@ export default function SegurosPage() {
           {/* Section 7: Review */}
           {formSection === 7 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Revisa tus datos</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Revisa tus datos</h2>
 
               <div className="space-y-6">
                 {/* Plan */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Plan seleccionado</h3>
-                    <button onClick={() => setStep(2)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Plan seleccionado</h3>
+                    <button onClick={() => setStep(2)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
-                  <p className="text-slate-700">{selectedPlan?.title} — {selectedPlan?.price}</p>
+                  <p className="text-slate-200">{selectedPlan?.title} — {selectedPlan?.price}</p>
                 </div>
 
                 {/* Owner */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Datos del propietario</h3>
-                    <button onClick={() => setFormSection(0)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Datos del propietario</h3>
+                    <button onClick={() => setFormSection(0)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p className="text-slate-500">Nombre:</p>
-                    <p className="text-slate-800">{ownerData.nombre} {ownerData.primerApellido} {ownerData.segundoApellido}</p>
-                    <p className="text-slate-500">Fecha de nacimiento:</p>
-                    <p className="text-slate-800">{ownerData.fechaNacimiento}</p>
-                    <p className="text-slate-500">DNI/NIE:</p>
-                    <p className="text-slate-800">{ownerData.dni}</p>
+                    <p className="text-slate-400">Nombre:</p>
+                    <p className="text-slate-100">{ownerData.nombre} {ownerData.primerApellido} {ownerData.segundoApellido}</p>
+                    <p className="text-slate-400">Fecha de nacimiento:</p>
+                    <p className="text-slate-100">{ownerData.fechaNacimiento}</p>
+                    <p className="text-slate-400">DNI/NIE:</p>
+                    <p className="text-slate-100">{ownerData.dni}</p>
                   </div>
                 </div>
 
                 {/* Address */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Dirección</h3>
-                    <button onClick={() => setFormSection(1)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Dirección</h3>
+                    <button onClick={() => setFormSection(1)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
-                  <p className="text-sm text-slate-800">
+                  <p className="text-sm text-slate-100">
                     {addressData.calle} {addressData.numero}, {addressData.codigoPostal} {addressData.localidad}, {addressData.provincia}
                   </p>
                 </div>
 
                 {/* Contact */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Contacto</h3>
-                    <button onClick={() => setFormSection(2)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Contacto</h3>
+                    <button onClick={() => setFormSection(2)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p className="text-slate-500">Teléfono:</p>
-                    <p className="text-slate-800">{contactData.telefono}</p>
-                    <p className="text-slate-500">Email:</p>
-                    <p className="text-slate-800">{contactData.email}</p>
+                    <p className="text-slate-400">Teléfono:</p>
+                    <p className="text-slate-100">{contactData.telefono}</p>
+                    <p className="text-slate-400">Email:</p>
+                    <p className="text-slate-100">{contactData.email}</p>
                   </div>
                 </div>
 
                 {/* Horse */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Datos del caballo</h3>
-                    <button onClick={() => setFormSection(3)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Datos del caballo</h3>
+                    <button onClick={() => setFormSection(3)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p className="text-slate-500">Nombre:</p>
-                    <p className="text-slate-800">{horseData.nombre}</p>
-                    <p className="text-slate-500">Raza:</p>
-                    <p className="text-slate-800">{horseData.raza}</p>
-                    <p className="text-slate-500">Color:</p>
-                    <p className="text-slate-800">{horseData.color}</p>
-                    <p className="text-slate-500">Sexo:</p>
-                    <p className="text-slate-800">{horseData.sexo}</p>
-                    <p className="text-slate-500">Microchip:</p>
-                    <p className="text-slate-800">{horseData.microchip}</p>
+                    <p className="text-slate-400">Nombre:</p>
+                    <p className="text-slate-100">{horseData.nombre}</p>
+                    <p className="text-slate-400">Raza:</p>
+                    <p className="text-slate-100">{horseData.raza}</p>
+                    <p className="text-slate-400">Color:</p>
+                    <p className="text-slate-100">{horseData.color}</p>
+                    <p className="text-slate-400">Sexo:</p>
+                    <p className="text-slate-100">{horseData.sexo}</p>
+                    <p className="text-slate-400">Microchip:</p>
+                    <p className="text-slate-100">{horseData.microchip}</p>
                   </div>
                 </div>
 
                 {/* Files */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Cartilla sanitaria</h3>
-                    <button onClick={() => setFormSection(4)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Cartilla sanitaria</h3>
+                    <button onClick={() => setFormSection(4)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
-                  <p className="text-sm text-slate-800">
+                  <p className="text-sm text-slate-100">
                     {uploadedFiles.length > 0
                       ? `${uploadedFiles.length} archivo(s) adjuntado(s)`
                       : 'No se adjuntaron fotos'}
@@ -1071,12 +1071,12 @@ export default function SegurosPage() {
                 </div>
 
                 {/* Bank */}
-                <div className="bg-white rounded-lg border border-slate-200 p-5">
+                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-slate-900">Datos bancarios</h3>
-                    <button onClick={() => setFormSection(5)} className="text-sm text-slate-500 hover:text-slate-700 underline">Editar</button>
+                    <h3 className="font-semibold text-white">Datos bancarios</h3>
+                    <button onClick={() => setFormSection(5)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
                   </div>
-                  <p className="text-sm text-slate-800">{bankData.iban}</p>
+                  <p className="text-sm text-slate-100">{bankData.iban}</p>
                 </div>
               </div>
 
@@ -1094,7 +1094,7 @@ export default function SegurosPage() {
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full mt-8 py-4 bg-slate-900 text-white font-semibold text-lg rounded-lg hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full mt-8 py-4 bg-teal-600 text-white font-semibold text-lg rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {submitting ? 'Enviando...' : 'Finalizar contratación'}
               </button>
@@ -1108,7 +1108,7 @@ export default function SegurosPage() {
   // Step 5: Confirmation
   if (step === 5) {
     return (
-      <main className="min-h-screen bg-slate-50 flex items-center justify-center py-12 px-6">
+      <main className="min-h-screen bg-[#0f1520] flex items-center justify-center py-12 px-6">
         <div className="max-w-lg mx-auto text-center">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
             <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1116,23 +1116,23 @@ export default function SegurosPage() {
             </svg>
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             Solicitud de contratación enviada
           </h2>
 
-          <div className="space-y-4 text-slate-600">
+          <div className="space-y-4 text-slate-300">
             <p>
               Nos pondremos en contacto contigo en un plazo máximo de 2 horas (de lunes a viernes) para confirmar tu póliza.
             </p>
             <p>
               Recibirás toda la documentación en tu email.
             </p>
-            <p className="pt-4 text-slate-700 font-medium">Si tienes alguna duda:</p>
+            <p className="pt-4 text-slate-200 font-medium">Si tienes alguna duda:</p>
             <a
               href="https://wa.me/34667755976"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-slate-900 font-semibold hover:underline"
+              className="inline-flex items-center gap-2 text-white font-semibold hover:underline"
             >
               WhatsApp: 667 755 976
             </a>

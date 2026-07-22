@@ -1,325 +1,228 @@
-import Link from 'next/link';
-import type { Metadata } from 'next';
+import Image from 'next/image'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Seguros para Perros — PPP, Compañía, Caza y Criadores | Gestoría Mera',
-  description:
-    'Seguros de responsabilidad civil para perros desde 20,40€/año. PPP, perros de compañía, perros de caza, criadores y adiestradores. Gestoría Mera, A Cañiza.',
-};
+  title: 'Seguros para Perros — Gestoría Mera',
+  description: 'Seguros de Responsabilidad Civil para perros. PPP, perros de compañía, caza, criadores y adiestradores. Desde 20,40€/año con AXA.',
+}
 
 export default function SegurosPerrosPage() {
+  const products = [
+    {
+      title: 'Perros Potencialmente Peligrosos',
+      subtitle: 'Obligatorio por ley para razas PPP',
+      price: '30€',
+      period: '/año',
+      features: [
+        'Responsabilidad Civil obligatoria',
+        'Cobertura de daños a terceros',
+        'Válido para la licencia PPP',
+        'Todas las razas catalogadas',
+        'Cobertura en toda España',
+      ],
+      highlight: true,
+    },
+    {
+      title: 'Perros de Compañía',
+      subtitle: 'Para perros no catalogados como peligrosos',
+      price: '20,40€',
+      period: '/año',
+      features: [
+        'Responsabilidad Civil completa',
+        'Daños a terceros cubiertos',
+        'Cualquier raza no PPP',
+        'Ideal para perros domésticos',
+        'Tranquilidad todo el año',
+      ],
+      highlight: false,
+    },
+    {
+      title: 'Perros de Caza',
+      subtitle: 'Cobertura específica para perros de caza',
+      price: '32€',
+      period: '/año (2 perros)',
+      features: [
+        'Responsabilidad Civil en actividad cinegética',
+        'Cubre 2 perros por póliza',
+        'Daños durante la caza',
+        'Complemento a licencia de caza',
+        'Válido en toda España',
+      ],
+      highlight: false,
+    },
+    {
+      title: 'Criadores y Adiestradores',
+      subtitle: 'Para profesionales del sector canino',
+      price: '58,75€',
+      period: '/trimestre',
+      features: [
+        'Responsabilidad Civil profesional',
+        'Cobertura de múltiples animales',
+        'Actividad profesional cubierta',
+        'Daños en instalaciones',
+        'Adaptado a tu actividad',
+      ],
+      highlight: false,
+    },
+  ]
+
   return (
-    <>
-      {/* Page Hero */}
-      <section className="hero-gradient pattern-overlay relative">
-        <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
-              <span className="text-2xl">🐕</span>
-              <span className="text-white/90 text-sm font-medium">Seguros especializados para perros</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-6">
-              Seguros para{' '}
-              <span className="text-amber-400">Perros</span>
+    <div className="pt-16 sm:pt-20">
+      {/* Hero */}
+      <section className="relative min-h-[50vh] flex items-center">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1400&q=80"
+            alt="Perro"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-dark-900/95 via-dark-900/80 to-dark-900/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent" />
+        </div>
+
+        <div className="relative container-custom mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl font-bold text-light-100 leading-tight">
+              Seguros para Perros
             </h1>
-            <p className="text-lg text-navy-200 max-w-2xl mx-auto leading-relaxed">
-              Responsabilidad civil obligatoria y voluntaria para todo tipo de perros. 
-              Cumple la normativa y protege tu patrimonio desde solo 20,40€ al año.
+            <p className="mt-4 text-lg text-light-300 leading-relaxed">
+              Protege a tu perro con un seguro de Responsabilidad Civil adaptado a sus necesidades. 
+              Coberturas completas con AXA desde solo 20,40€ al año.
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 60V30C360 0 720 60 1080 30C1260 15 1380 20 1440 30V60H0Z" fill="#fefdfb" />
-          </svg>
-        </div>
       </section>
 
-      {/* Insurance Types */}
-      <section className="section-padding bg-cream-50">
+      {/* Products */}
+      <section className="section-padding">
         <div className="container-custom mx-auto">
-          <div className="max-w-5xl mx-auto space-y-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-light-100">
+              Nuestros seguros
+            </h2>
+            <p className="mt-4 text-light-400 text-lg max-w-2xl mx-auto">
+              Elige el seguro que mejor se adapta a tu situación. Todos incluyen Responsabilidad Civil completa.
+            </p>
+          </div>
 
-            {/* PPP */}
-            <div className="card-highlight" id="ppp">
-              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
-                      <span className="text-2xl">🐕‍🦺</span>
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-navy-900">PPP — Perros Potencialmente Peligrosos</h2>
-                      <p className="text-sm text-navy-500">Seguro obligatorio por ley</p>
-                    </div>
+          <div className="grid sm:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {products.map((product, index) => (
+              <div
+                key={index}
+                className={`relative rounded-2xl p-6 sm:p-8 border transition-all duration-300 ${
+                  product.highlight
+                    ? 'bg-dark-600/70 border-accent/40 shadow-lg shadow-accent/5'
+                    : 'bg-dark-600/50 border-light-300/10 hover:border-accent/20'
+                }`}
+              >
+                {product.highlight && (
+                  <div className="absolute -top-3 left-6 px-3 py-1 bg-accent text-dark-900 text-xs font-semibold rounded-full">
+                    Más solicitado
                   </div>
-                  <p className="text-navy-600 leading-relaxed mb-4">
-                    Seguro de responsabilidad civil obligatorio para razas catalogadas como potencialmente peligrosas (PPP). 
-                    Imprescindible para la licencia y registro de tu perro. Cumple con el Real Decreto 287/2002 y la Ley 50/1999.
+                )}
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-light-100">
+                    {product.title}
+                  </h3>
+                  <p className="mt-1 text-light-400 text-sm">
+                    {product.subtitle}
                   </p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Cobertura mínima de 120.000€ en RC
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Válido para renovación de licencia
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Incluye daños a terceros y sus bienes
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Asistencia veterinaria de urgencia
-                    </li>
-                  </ul>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="bg-navy-100 text-navy-700 text-xs font-medium px-3 py-1 rounded-full">American Pit Bull</span>
-                    <span className="bg-navy-100 text-navy-700 text-xs font-medium px-3 py-1 rounded-full">Rottweiler</span>
-                    <span className="bg-navy-100 text-navy-700 text-xs font-medium px-3 py-1 rounded-full">Staffordshire</span>
-                    <span className="bg-navy-100 text-navy-700 text-xs font-medium px-3 py-1 rounded-full">Dogo Argentino</span>
-                    <span className="bg-navy-100 text-navy-700 text-xs font-medium px-3 py-1 rounded-full">Akita Inu</span>
-                    <span className="bg-navy-100 text-navy-700 text-xs font-medium px-3 py-1 rounded-full">+ otras razas</span>
-                  </div>
                 </div>
-                <div className="lg:w-64 flex-shrink-0">
-                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-300 rounded-2xl p-6 text-center">
-                    <p className="text-sm text-navy-600 mb-1">Desde</p>
-                    <p className="text-4xl font-extrabold text-navy-900">30€</p>
-                    <p className="text-sm text-navy-600 mt-1">al año</p>
-                    <a
-                      href="https://wa.me/34986651478?text=Hola%2C%20me%20interesa%20el%20seguro%20PPP%20para%20mi%20perro"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary !text-sm !px-6 !py-3 w-full mt-4"
-                    >
-                      Solicitar info
-                    </a>
-                  </div>
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-light-100">
+                    Desde {product.price}
+                  </span>
+                  <span className="text-light-400 text-sm ml-1">
+                    {product.period}
+                  </span>
                 </div>
+                <ul className="space-y-3 mb-8">
+                  {product.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-start gap-3">
+                      <svg className="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-light-300 text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="https://wa.me/34667755976"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full text-center ${
+                    product.highlight ? 'btn-primary' : 'btn-secondary'
+                  }`}
+                >
+                  Contactar para contratar
+                </a>
               </div>
-            </div>
-
-            {/* No PPP */}
-            <div className="card" id="no-ppp">
-              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                      <span className="text-2xl">🐶</span>
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-navy-900">No PPP — Perros de Compañía</h2>
-                      <p className="text-sm text-navy-500">Para cualquier raza no catalogada como peligrosa</p>
-                    </div>
-                  </div>
-                  <p className="text-navy-600 leading-relaxed mb-4">
-                    Seguro de responsabilidad civil voluntario para perros de compañía de cualquier raza no incluida en el listado PPP. 
-                    Aunque no es obligatorio, es altamente recomendable para proteger tu patrimonio frente a posibles daños causados por tu mascota.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Cobertura de RC por daños a terceros
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Defensa jurídica incluida
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Sin límite de edad del animal
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Protección ante mordeduras y escapes
-                    </li>
-                  </ul>
-                </div>
-                <div className="lg:w-64 flex-shrink-0">
-                  <div className="bg-gradient-to-br from-cream-100 to-cream-200 border-2 border-cream-300 rounded-2xl p-6 text-center">
-                    <p className="text-sm text-navy-600 mb-1">Desde</p>
-                    <p className="text-4xl font-extrabold text-navy-900">20,40€</p>
-                    <p className="text-sm text-navy-600 mt-1">al año</p>
-                    <a
-                      href="https://wa.me/34986651478?text=Hola%2C%20me%20interesa%20el%20seguro%20para%20perro%20de%20compa%C3%B1%C3%ADa"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary !text-sm !px-6 !py-3 w-full mt-4"
-                    >
-                      Solicitar info
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Perros de Caza */}
-            <div className="card" id="caza">
-              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                      <span className="text-2xl">🌲</span>
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-navy-900">Perros de Caza</h2>
-                      <p className="text-sm text-navy-500">Descuentos por pack de perros</p>
-                    </div>
-                  </div>
-                  <p className="text-navy-600 leading-relaxed mb-4">
-                    Seguro especial para perros de caza con precios reducidos por pack. Ideal para cazadores con varios perros que necesitan 
-                    cobertura de RC durante la actividad cinegética y en el día a día.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> 2 perros por 32€/año
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Cada perro adicional solo 6€
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Cobertura durante actividad cinegética
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> RC todo el año, no solo en temporada
-                    </li>
-                  </ul>
-
-                  <div className="bg-cream-100 rounded-xl p-4 border border-cream-300">
-                    <p className="text-sm font-semibold text-navy-800 mb-2">💡 Ejemplo de ahorro:</p>
-                    <p className="text-sm text-navy-600">
-                      5 perros de caza = 32€ (primeros 2) + 18€ (3 × 6€) = <strong className="text-navy-900">50€/año total</strong>
-                    </p>
-                  </div>
-                </div>
-                <div className="lg:w-64 flex-shrink-0">
-                  <div className="bg-gradient-to-br from-cream-100 to-cream-200 border-2 border-cream-300 rounded-2xl p-6 text-center">
-                    <p className="text-sm text-navy-600 mb-1">2 perros desde</p>
-                    <p className="text-4xl font-extrabold text-navy-900">32€</p>
-                    <p className="text-sm text-navy-600 mt-1">al año</p>
-                    <p className="text-xs text-navy-500 mt-2 border-t border-cream-300 pt-2">
-                      Siguientes: 6€/perro
-                    </p>
-                    <a
-                      href="https://wa.me/34986651478?text=Hola%2C%20me%20interesa%20el%20seguro%20para%20perros%20de%20caza"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary !text-sm !px-6 !py-3 w-full mt-4"
-                    >
-                      Solicitar info
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Criadores y Adiestradores */}
-            <div className="card" id="criadores">
-              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                      <span className="text-2xl">🏆</span>
-                    </div>
-                    <div>
-                      <h2 className="text-2xl font-bold text-navy-900">Criadores y Adiestradores</h2>
-                      <p className="text-sm text-navy-500">Para profesionales del sector canino</p>
-                    </div>
-                  </div>
-                  <p className="text-navy-600 leading-relaxed mb-4">
-                    Seguro de responsabilidad civil profesional para criadores, adiestradores y centros caninos. 
-                    Cubre los daños que puedan causar los animales bajo tu cuidado profesional.
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> RC profesional completa
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Cobertura para animales de terceros
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Daños en instalaciones propias
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-navy-700">
-                      <span className="text-amber-500 font-bold">✓</span> Apto para nucleo zoológico
-                    </li>
-                  </ul>
-                </div>
-                <div className="lg:w-64 flex-shrink-0">
-                  <div className="bg-gradient-to-br from-cream-100 to-cream-200 border-2 border-cream-300 rounded-2xl p-6 text-center">
-                    <p className="text-sm text-navy-600 mb-1">Desde</p>
-                    <p className="text-4xl font-extrabold text-navy-900">58,75€</p>
-                    <p className="text-sm text-navy-600 mt-1">al trimestre</p>
-                    <a
-                      href="https://wa.me/34986651478?text=Hola%2C%20soy%20criador%2Fadiestrador%20y%20me%20interesa%20el%20seguro%20profesional"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary !text-sm !px-6 !py-3 w-full mt-4"
-                    >
-                      Solicitar info
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ / Info Section */}
-      <section className="section-padding bg-white">
+      {/* Info Section */}
+      <section className="section-padding bg-dark-800/50">
         <div className="container-custom mx-auto max-w-4xl">
-          <h2 className="text-3xl font-extrabold text-navy-900 text-center mb-10">
-            Preguntas Frecuentes
-          </h2>
-          <div className="space-y-6">
-            <div className="bg-cream-50 rounded-xl p-6 border border-cream-200">
-              <h3 className="font-bold text-navy-900 mb-2">¿Es obligatorio el seguro para mi perro?</h3>
-              <p className="text-navy-600 text-sm leading-relaxed">
-                Si tu perro está catalogado como PPP (potencialmente peligroso), sí, es obligatorio por ley. 
-                Para el resto de perros, la nueva Ley de Bienestar Animal (Ley 7/2023) establece la obligatoriedad 
-                de un seguro de RC para todos los perros, aunque su desarrollo reglamentario está pendiente. 
-                Te recomendamos contratarlo en cualquier caso.
-              </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="card-dark-static">
+              <h3 className="text-lg font-semibold text-light-100 mb-3">
+                ¿Qué cubre el seguro?
+              </h3>
+              <ul className="space-y-2 text-light-400 text-sm">
+                <li>Daños corporales a terceras personas</li>
+                <li>Daños materiales causados por tu perro</li>
+                <li>Gastos de defensa jurídica</li>
+                <li>Fianzas judiciales</li>
+                <li>Asistencia veterinaria de urgencia</li>
+              </ul>
             </div>
-            <div className="bg-cream-50 rounded-xl p-6 border border-cream-200">
-              <h3 className="font-bold text-navy-900 mb-2">¿Qué documentación necesito?</h3>
-              <p className="text-navy-600 text-sm leading-relaxed">
-                Generalmente necesitas: DNI del propietario, chip del animal y, en caso de PPP, 
-                la licencia administrativa vigente. Nosotros te indicamos exactamente qué necesitas según tu caso.
-              </p>
-            </div>
-            <div className="bg-cream-50 rounded-xl p-6 border border-cream-200">
-              <h3 className="font-bold text-navy-900 mb-2">¿Cuánto tarda la tramitación?</h3>
-              <p className="text-navy-600 text-sm leading-relaxed">
-                En la mayoría de los casos, tu póliza estará lista en 24-48 horas. 
-                Para casos urgentes, contacta por teléfono y haremos todo lo posible por agilizar el proceso.
-              </p>
+            <div className="card-dark-static">
+              <h3 className="text-lg font-semibold text-light-100 mb-3">
+                ¿Cómo contratar?
+              </h3>
+              <ol className="space-y-2 text-light-400 text-sm list-decimal list-inside">
+                <li>Contacta con nosotros por WhatsApp o teléfono</li>
+                <li>Cuéntanos qué tipo de perro tienes</li>
+                <li>Te enviamos presupuesto sin compromiso</li>
+                <li>Si te interesa, formalizamos la póliza</li>
+                <li>Recibes tu certificado en 24 horas</li>
+              </ol>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-navy-900 pattern-overlay">
-        <div className="container-custom mx-auto text-center">
-          <h2 className="text-3xl font-extrabold text-white mb-4">
-            ¿Listo para proteger a tu perro?
+      <section className="section-padding">
+        <div className="container-custom mx-auto text-center max-w-2xl">
+          <h2 className="text-2xl sm:text-3xl font-bold text-light-100">
+            ¿Tienes dudas? Te ayudamos
           </h2>
-          <p className="text-navy-300 text-lg mb-8 max-w-xl mx-auto">
-            Contacta con nosotros y te haremos un presupuesto personalizado sin compromiso.
+          <p className="mt-4 text-light-400">
+            Escríbenos por WhatsApp y te asesoramos sobre el seguro más adecuado para tu perro. Sin compromiso.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:986651478" className="btn-primary">
-              📞 986 651 478
-            </a>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://wa.me/34986651478?text=Hola%2C%20quiero%20contratar%20un%20seguro%20para%20mi%20perro"
+              href="https://wa.me/34667755976"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline !border-amber-400 !text-amber-400 hover:!bg-amber-400 hover:!text-navy-900"
+              className="btn-whatsapp"
             >
-              💬 Pedir presupuesto por WhatsApp
+              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Escribir por WhatsApp
+            </a>
+            <a href="tel:986651478" className="btn-secondary">
+              Llamar: 986 651 478
             </a>
           </div>
         </div>
       </section>
-    </>
-  );
+    </div>
+  )
 }
