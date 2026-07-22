@@ -10,45 +10,39 @@
   }
 
   body {
-    @apply bg-cream-50 text-navy-900 antialiased;
+    @apply bg-white text-navy-800 antialiased;
   }
 
   ::selection {
-    @apply bg-amber-200 text-navy-900;
+    @apply bg-navy-600 text-white;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-amber-500 text-navy-900 font-bold text-lg rounded-xl
-    hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/25 hover:-translate-y-0.5
+    @apply inline-flex items-center justify-center px-8 py-4 bg-navy-800 text-white font-semibold text-base rounded-lg
+    hover:bg-navy-700 hover:shadow-lg hover:-translate-y-0.5
     active:translate-y-0 active:shadow-md
     transition-all duration-200 ease-out;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-navy-800 text-white font-bold text-lg rounded-xl
-    hover:bg-navy-700 hover:shadow-lg hover:shadow-navy-800/25 hover:-translate-y-0.5
-    active:translate-y-0 active:shadow-md
+    @apply inline-flex items-center justify-center px-8 py-4 bg-white text-navy-800 font-semibold text-base rounded-lg border border-navy-200
+    hover:border-navy-400 hover:shadow-md hover:-translate-y-0.5
+    active:translate-y-0 active:shadow-sm
     transition-all duration-200 ease-out;
   }
 
-  .btn-outline {
-    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-navy-800 text-navy-800 font-bold text-lg rounded-xl
-    hover:bg-navy-800 hover:text-white hover:shadow-lg hover:-translate-y-0.5
+  .btn-white {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-white text-navy-800 font-semibold text-base rounded-lg
+    hover:bg-navy-50 hover:shadow-lg hover:-translate-y-0.5
     active:translate-y-0 active:shadow-md
     transition-all duration-200 ease-out;
   }
 
   .card {
-    @apply bg-white rounded-2xl p-8 shadow-sm border border-cream-300
-    hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1
-    transition-all duration-300 ease-out;
-  }
-
-  .card-highlight {
-    @apply bg-white rounded-2xl p-8 shadow-md border-2 border-amber-400
-    hover:shadow-xl hover:shadow-amber-500/10 hover:-translate-y-1
+    @apply bg-white rounded-xl p-8 shadow-sm border border-navy-100
+    hover:shadow-lg hover:-translate-y-1
     transition-all duration-300 ease-out;
   }
 
@@ -58,14 +52,6 @@
 
   .container-custom {
     @apply max-w-7xl mx-auto;
-  }
-
-  .gradient-text {
-    @apply bg-gradient-to-r from-navy-800 via-navy-700 to-navy-600 bg-clip-text text-transparent;
-  }
-
-  .price-tag {
-    @apply inline-flex items-baseline gap-1 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2;
   }
 }
 
@@ -81,7 +67,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-cream-100;
+  @apply bg-navy-50;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -107,15 +93,4 @@
 
 .whatsapp-pulse {
   animation: whatsapp-pulse 2s infinite;
-}
-
-/* Hero gradient background */
-.hero-gradient {
-  background: linear-gradient(135deg, #102a43 0%, #1f3a5f 50%, #334e68 100%);
-}
-
-/* Subtle pattern overlay */
-.pattern-overlay {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 40px 40px;
 }
