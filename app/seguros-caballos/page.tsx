@@ -101,6 +101,14 @@ export default function SegurosPage() {
 
   const plansUnder15: PlanOption[] = [
     {
+      id: 0,
+      title: 'Plan Económico',
+      coverage: 'Responsabilidad Civil 150.000€',
+      extras: [],
+      price: '48,27€/año',
+      priceNum: 48.27,
+    },
+    {
       id: 1,
       title: 'Plan Básico',
       coverage: 'Responsabilidad Civil 150.000€',
@@ -469,8 +477,8 @@ export default function SegurosPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">Caballos menores de 15 años</h3>
-              <p className="text-slate-400 text-sm mb-4">Más opciones de cobertura disponibles</p>
-              <p className="text-lg font-bold text-white">Desde 53,94€/año</p>
+              <p className="text-slate-400 text-sm mb-4">4 planes de cobertura disponibles</p>
+              <p className="text-lg font-bold text-white">Desde 48,27€/año</p>
             </button>
 
             <button
@@ -535,33 +543,79 @@ export default function SegurosPage() {
               </div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-3 gap-6">
-              {plansUnder15.map((plan) => (
-                <div key={plan.id} className="bg-[#0a0f1a] rounded-xl border border-white/10 p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col">
-                  <h3 className="text-lg font-bold text-white mb-4">{plan.title}</h3>
-                  <div className="space-y-3 mb-6 flex-1">
-                    <div className="flex items-start gap-2">
-                      <svg className="w-5 h-5 text-slate-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                      <span className="text-slate-200 text-sm">{plan.coverage}</span>
-                    </div>
-                    {plan.extras.map((extra, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-slate-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                        <span className="text-slate-200 text-sm">{extra}</span>
-                      </div>
+            <div className="overflow-x-auto">
+              {/* Comparison Table */}
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr>
+                    <th className="text-left p-4 text-slate-400 text-sm font-medium border-b border-white/10 w-[200px]">Cobertura</th>
+                    {plansUnder15.map((plan) => (
+                      <th key={plan.id} className={`p-4 text-center border-b border-white/10 ${plan.id === 2 ? 'bg-teal-500/10 border-x border-teal-500/30' : ''}`}>
+                        <div className={`text-base font-bold ${plan.id === 2 ? 'text-teal-400' : 'text-white'}`}>{plan.title}</div>
+                        {plan.id === 2 && <span className="text-xs text-teal-400 font-medium">Recomendado</span>}
+                      </th>
                     ))}
-                  </div>
-                  <div className="border-t border-white/5 pt-4 mb-4">
-                    <p className="text-2xl font-bold text-white">{plan.price}</p>
-                  </div>
-                  <button
-                    onClick={() => { setSelectedPlan(plan); setStep(3) }}
-                    className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors"
-                  >
-                    Seleccionar
-                  </button>
-                </div>
-              ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Responsabilidad Civil */}
+                  <tr>
+                    <td className="p-4 text-slate-300 text-sm border-b border-white/5">Responsabilidad Civil</td>
+                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">150.000€</span></td>
+                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">150.000€</span></td>
+                    <td className="p-4 text-center border-b border-white/5 bg-teal-500/10 border-x border-teal-500/30"><span className="text-white font-medium">306.000€</span></td>
+                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">306.000€</span></td>
+                  </tr>
+                  {/* Retirada de cadáveres */}
+                  <tr>
+                    <td className="p-4 text-slate-300 text-sm border-b border-white/5">Retirada de cadáveres</td>
+                    <td className="p-4 text-center border-b border-white/5">
+                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    </td>
+                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">300€</span></td>
+                    <td className="p-4 text-center border-b border-white/5 bg-teal-500/10 border-x border-teal-500/30">
+                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    </td>
+                    <td className="p-4 text-center border-b border-white/5">
+                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    </td>
+                  </tr>
+                  {/* Cobertura por fallecimiento */}
+                  <tr>
+                    <td className="p-4 text-slate-300 text-sm border-b border-white/5">Cobertura por fallecimiento</td>
+                    <td className="p-4 text-center border-b border-white/5">
+                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    </td>
+                    <td className="p-4 text-center border-b border-white/5">
+                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    </td>
+                    <td className="p-4 text-center border-b border-white/5 bg-teal-500/10 border-x border-teal-500/30"><span className="text-white font-medium">300€</span></td>
+                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">1.000€</span></td>
+                  </tr>
+                  {/* Precio */}
+                  <tr>
+                    <td className="p-4 text-slate-300 text-sm font-medium">Precio</td>
+                    <td className="p-4 text-center"><span className="text-xl font-bold text-white">48,27€</span><span className="text-slate-400 text-xs block">al año</span></td>
+                    <td className="p-4 text-center"><span className="text-xl font-bold text-white">53,94€</span><span className="text-slate-400 text-xs block">al año</span></td>
+                    <td className="p-4 text-center bg-teal-500/10 border-x border-teal-500/30"><span className="text-xl font-bold text-teal-400">62,62€</span><span className="text-teal-400/70 text-xs block">al año</span></td>
+                    <td className="p-4 text-center"><span className="text-xl font-bold text-white">91,03€</span><span className="text-slate-400 text-xs block">al año</span></td>
+                  </tr>
+                  {/* Botones */}
+                  <tr>
+                    <td className="p-4"></td>
+                    {plansUnder15.map((plan) => (
+                      <td key={plan.id} className={`p-4 text-center ${plan.id === 2 ? 'bg-teal-500/10 border-x border-b border-teal-500/30 rounded-b-xl' : ''}`}>
+                        <button
+                          onClick={() => { setSelectedPlan(plan); setStep(3) }}
+                          className={`w-full py-3 font-semibold rounded-lg transition-colors ${plan.id === 2 ? 'bg-teal-500 text-white hover:bg-teal-600' : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'}`}
+                        >
+                          Contratar
+                        </button>
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
             </div>
           )}
         </div>
