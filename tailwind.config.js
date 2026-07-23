@@ -38,6 +38,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Merriweather', 'Georgia', 'serif'],
+        display: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'sans-serif'],
       },
       fontSize: {
         '5xl': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],

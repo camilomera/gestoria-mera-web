@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Merriweather } from 'next/font/google'
+import { Merriweather, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -9,6 +9,12 @@ const merriweather = Merriweather({
   subsets: ['latin'],
   weight: ['300', '400', '700', '900'],
   variable: '--font-merriweather',
+})
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['700', '800'],
+  variable: '--font-jakarta',
 })
 
 export const metadata: Metadata = {
@@ -23,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={merriweather.variable}>
+    <html lang="es" className={`${merriweather.variable} ${plusJakarta.variable}`}>
       <head>
         <meta name="theme-color" content="#F2EEC4" />
       </head>
