@@ -25,14 +25,8 @@ export default function Header() {
           {/* Centered content: logo + separator + nav */}
           <div className="flex items-center gap-5 sm:gap-8">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 sm:gap-3">
-              <img
-                src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784830463/ChatGPT_Image_Jul_23_2026_08_10_01_PM_j4wlsg.png"
-                alt="Gestoría Mera"
-                className="h-9 sm:h-11 w-auto"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
-              <span className="text-lg sm:text-2xl font-black text-white whitespace-nowrap">
+            <Link href="/" className="flex items-center">
+              <span className="text-xl sm:text-2xl font-black text-white whitespace-nowrap">
                 Gestoría Mera
               </span>
             </Link>

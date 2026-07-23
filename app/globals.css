@@ -252,3 +252,51 @@
   80% { width: 85%; }
   100% { width: 100%; }
 }
+
+/* Stronger glow text animation for "mañana" */
+.animate-glow-text-strong {
+  animation: glow-strong 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-strong {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 165, 0, 0.9), 0 0 40px rgba(255, 165, 0, 0.6), 0 0 60px rgba(255, 165, 0, 0.3);
+  }
+}
+
+/* 3D Gold button with shine sweep */
+.btn-3d-gold {
+  background: linear-gradient(180deg, #ffb833 0%, #ffa500 40%, #e69500 100%);
+  box-shadow: 0 4px 0 #cc8400, 0 6px 20px rgba(255, 165, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-3d-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: btn-shine 3s ease-in-out infinite;
+}
+
+.btn-3d-gold:hover {
+  background: linear-gradient(180deg, #ffc44d 0%, #ffb833 40%, #ffa500 100%);
+  box-shadow: 0 6px 0 #cc8400, 0 10px 30px rgba(255, 165, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-3d-gold:active {
+  box-shadow: 0 2px 0 #cc8400, 0 3px 10px rgba(255, 165, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(2px);
+}
+
+@keyframes btn-shine {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}

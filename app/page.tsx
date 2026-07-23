@@ -312,24 +312,19 @@ export default function HomePage() {
           <div className="text-center reveal-on-scroll max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
               Contrata ahora y ten tu póliza activa{' '}
-              <span className="relative inline-block">
-                <span className="animate-glow-text text-orange">mañana</span>
-                <span className="absolute -bottom-1 left-0 right-0 h-1 bg-orange/50 rounded-full" />
-              </span>
+              <span className="animate-glow-text-strong text-orange">mañana</span>
             </h2>
-            <p className="mt-6 text-white/60 text-lg max-w-xl mx-auto">
-              Sin papeleos. Sin desplazamientos. Todo desde tu móvil.
-            </p>
+
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/seguros-perros"
-                className="inline-flex items-center justify-center gap-3 bg-orange hover:bg-orange-light text-midnight font-black text-lg px-10 py-5 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-orange/30 hover:-translate-y-0.5"
+                className="btn-3d-gold inline-flex items-center justify-center gap-3 bg-orange text-midnight font-black text-lg px-10 py-5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange/40 relative overflow-hidden"
               >
                 Asegurar a mi perro
               </Link>
               <Link
                 href="/seguros-caballos"
-                className="inline-flex items-center justify-center gap-3 bg-orange hover:bg-orange-light text-midnight font-black text-lg px-10 py-5 rounded-xl transition-all duration-300 hover:shadow-xl hover:shadow-orange/30 hover:-translate-y-0.5"
+                className="btn-3d-gold inline-flex items-center justify-center gap-3 bg-orange text-midnight font-black text-lg px-10 py-5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange/40 relative overflow-hidden"
               >
                 Asegurar a mi caballo
               </Link>
