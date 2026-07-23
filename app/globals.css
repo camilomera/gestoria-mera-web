@@ -132,8 +132,7 @@
   color: #191970;
 }
 
-.title-shine-words,
-.title-shine-words-delayed {
+.title-shine-words {
   background: linear-gradient(
     90deg,
     #191970 0%,
@@ -149,10 +148,6 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: metallic-shift 12s linear infinite;
-}
-
-.title-shine-words-delayed {
-  animation-delay: -4s;
 }
 
 @keyframes metallic-shift {
