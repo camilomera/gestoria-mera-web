@@ -81,76 +81,66 @@ export default function HomePage() {
             {/* Dogs Card */}
             <Link
               href="/seguros-perros"
-              className="group relative overflow-hidden rounded-3xl flex flex-col bg-white/95 backdrop-blur-sm border border-midnight/5 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up shadow-lg"
+              className="group relative overflow-hidden rounded-3xl bg-white/95 backdrop-blur-sm border border-midnight/5 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up shadow-lg"
             >
-              <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden bg-[#f0f4f2]">
+              <div className="relative h-60 sm:h-72 lg:h-80 overflow-hidden">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798481/pexels-miami302-23383658_ytcubu.jpg"
                   alt="Perro Boyero de Berna"
                   className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4 inline-flex items-center bg-orange text-midnight font-black text-xs px-4 py-2 rounded-full shadow-lg">
-                  Desde 20,40 €/año
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-midnight/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                  <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+                    Seguros para perros
+                  </h2>
+                  <p className="mt-2 text-white/75 text-sm">
+                    PPP · Compañía · Caza · Criadores
+                  </p>
                 </div>
               </div>
               
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-midnight leading-tight">
-                    Seguros para perros
-                  </h2>
-                  <p className="mt-3 text-midnight/55 text-sm sm:text-base leading-relaxed">
-                    Contratación 100% online en 3 minutos.<br />
-                    Asesoramiento personal por teléfono o WhatsApp.
-                  </p>
-                </div>
-                
-                <div className="mt-6">
-                  <span className="inline-flex items-center justify-center w-full gap-2 bg-midnight hover:bg-midnight-light text-white font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-midnight/20 group-hover:gap-3">
-                    Calcular mi seguro
-                    <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </span>
-                </div>
+              <div className="p-5 sm:p-6 flex items-center justify-between gap-4">
+                <span className="text-midnight font-black text-lg sm:text-xl">Desde 20,40 €<span className="text-midnight/50 font-bold text-sm">/año</span></span>
+                <span className="inline-flex items-center gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-sm sm:text-base px-5 py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/20 group-hover:gap-3 shrink-0">
+                  Ver opciones y contratar
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
               </div>
             </Link>
 
             {/* Horses Card */}
             <Link
               href="/seguros-caballos"
-              className="group relative overflow-hidden rounded-3xl flex flex-col bg-white/95 backdrop-blur-sm border border-midnight/5 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up delay-150 shadow-lg"
+              className="group relative overflow-hidden rounded-3xl bg-white/95 backdrop-blur-sm border border-midnight/5 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up delay-150 shadow-lg"
             >
-              <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden bg-[#f0f4f2]">
+              <div className="relative h-60 sm:h-72 lg:h-80 overflow-hidden">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784808037/pexels-mographe-10942929_wcxh7z.jpg"
                   alt="Caballo"
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute top-4 left-4 inline-flex items-center bg-orange text-midnight font-black text-xs px-4 py-2 rounded-full shadow-lg">
-                  Desde 48,27 €/año
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-midnight/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                  <h2 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+                    Seguros para caballos
+                  </h2>
+                  <p className="mt-2 text-white/75 text-sm">
+                    Contratación inmediata · 100% online
+                  </p>
                 </div>
               </div>
               
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <h2 className="text-2xl sm:text-3xl font-black text-midnight leading-tight">
-                    Seguros para caballos
-                  </h2>
-                  <p className="mt-3 text-midnight/55 text-sm sm:text-base leading-relaxed">
-                    Contratación 100% online en 3 minutos.<br />
-                    Asesoramiento personal por teléfono o WhatsApp.
-                  </p>
-                </div>
-                
-                <div className="mt-6">
-                  <span className="inline-flex items-center justify-center w-full gap-2 bg-midnight hover:bg-midnight-light text-white font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-midnight/20 group-hover:gap-3">
-                    Calcular mi seguro
-                    <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </span>
-                </div>
+              <div className="p-5 sm:p-6 flex items-center justify-between gap-4">
+                <span className="text-midnight font-black text-lg sm:text-xl">Desde 48,27 €<span className="text-midnight/50 font-bold text-sm">/año</span></span>
+                <span className="inline-flex items-center gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-sm sm:text-base px-5 py-3 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/20 group-hover:gap-3 shrink-0">
+                  Ver opciones y contratar
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </span>
               </div>
             </Link>
           </div>
