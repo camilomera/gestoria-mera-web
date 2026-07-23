@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 
-const dmSans = DM_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-dm-sans',
+  variable: '--font-space-grotesk',
 })
 
 export const metadata: Metadata = {
@@ -23,11 +23,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={dmSans.variable}>
+    <html lang="es" className={spaceGrotesk.variable}>
       <head>
         <meta name="theme-color" content="#0a0f1a" />
       </head>
-      <body className={`${dmSans.className} bg-dark-900 text-light-100 min-h-screen`}>
+      <body className={`${spaceGrotesk.className} bg-dark-900 text-light-100 min-h-screen`}>
         <Header />
         <main className="min-h-screen">
           {children}

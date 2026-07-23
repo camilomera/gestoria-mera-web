@@ -32,7 +32,11 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        '6xl': ['3.75rem', { lineHeight: '1.05', letterSpacing: '-0.025em' }],
       },
       animation: {
         fadeIn: 'fadeIn 0.6s ease-out forwards',

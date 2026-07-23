@@ -8,10 +8,10 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto w-full">
           {/* Title */}
           <div className="text-center mb-8 sm:mb-10">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-100 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-light-100 tracking-tight">
               Seguros de Responsabilidad Civil
             </h1>
-            <p className="mt-3 text-light-400 text-base sm:text-lg">
+            <p className="mt-4 text-light-400 text-lg sm:text-xl">
               Elige tu seguro y contrata online en minutos
             </p>
           </div>
@@ -24,7 +24,7 @@ export default function HomePage() {
               className="group relative overflow-hidden rounded-3xl aspect-[4/3] sm:aspect-[3/2] flex items-end border border-white/5 hover:border-accent/40 transition-all duration-300"
             >
               <img
-                src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80"
+                src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798481/pexels-miami302-23383658_ytcubu.jpg"
                 alt="Perro"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
@@ -54,7 +54,7 @@ export default function HomePage() {
               className="group relative overflow-hidden rounded-3xl aspect-[4/3] sm:aspect-[3/2] flex items-end border border-white/5 hover:border-accent/40 transition-all duration-300"
             >
               <img
-                src="https://images.unsplash.com/photo-1534307671554-9a6d81f4d629?w=800&q=80"
+                src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798482/pexels-fernando-mamberti-198266521-12653427_ri5whr.jpg"
                 alt="Caballo"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
