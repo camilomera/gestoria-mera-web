@@ -186,10 +186,9 @@ export default function HomePage() {
         <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-28">
           <div className="animate-run-dog">
             <img
-              src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784818189/perro_yt4bqw.gif"
+              src="https://res.cloudinary.com/r5v8fzlu/image/upload/e_replace_color:191970:50/v1784818189/perro_yt4bqw.gif"
               alt=""
-              className="w-36 h-28 object-contain mix-blend-screen"
-
+              className="w-36 h-28 object-contain"
             />
           </div>
         </div>
