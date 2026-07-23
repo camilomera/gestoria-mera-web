@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, useEffect, useCallback, FormEvent } from 'react'
 
 interface OwnerData {
   nombre: string
@@ -146,7 +146,51 @@ export default function SegurosPage() {
   const totalFormSections = 8
   const progressPercent = Math.round(((formSection + 1) / totalFormSections) * 100)
 
+  // ==================== BROWSER HISTORY (BUG FIX #1) ====================
 
+  // Replace initial history state on mount
+  useEffect(() => {
+    window.history.replaceState({ step: 0, formSection: 0 }, '')
+  }, [])
+
+  // Go back handler
+  const goBack = useCallback(() => {
+    setErrors({})
+    if (step === 4 && formSection > 0) {
+      setFormSection((prev) => prev - 1)
+    } else if (step === 4 && formSection === 0) {
+      setStep(3)
+    } else if (step === 3) {
+      setStep(2)
+    } else if (step === 2) {
+      setStep(1)
+    } else if (step === 1) {
+      setStep(0)
+    }
+  }, [step, formSection])
+
+  // Listen for browser back button
+  useEffect(() => {
+    const handlePopState = () => {
+      goBack()
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [goBack])
+
+  // Push history state when advancing steps
+  function advanceStep(newStep: number) {
+    window.history.pushState({ step: newStep, formSection: 0 }, '')
+    setStep(newStep)
+  }
+
+  // Push history state when advancing form sections
+  function advanceFormSection(newSection: number) {
+    window.history.pushState({ step: 4, formSection: newSection }, '')
+    setFormSection(newSection)
+  }
+
+  // ==================== VALIDATION ====================
 
   function validateDNI(value: string): boolean {
     const dniRegex = /^[0-9]{8}[A-Za-z]$/
@@ -296,7 +340,7 @@ export default function SegurosPage() {
     }
     if (valid) {
       if (formSection < totalFormSections - 1) {
-        setFormSection(formSection + 1)
+        advanceFormSection(formSection + 1)
       }
     }
   }
@@ -379,19 +423,19 @@ export default function SegurosPage() {
     }
   }
 
-  function goBack() {
-    setErrors({})
-    if (step === 1) setStep(0)
-    else if (step === 2) setStep(1)
-    else if (step === 3) handlePrevSection()
-  }
+  // ==================== SHARED STYLES ====================
+
+  const inputClass = 'w-full px-4 py-3 bg-white border-2 border-mint-300 rounded-xl text-midnight placeholder-midnight/40 focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition-all'
+  const selectClass = 'w-full px-4 py-3 bg-white border-2 border-mint-300 rounded-xl text-midnight focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 transition-all'
+  const primaryBtnClass = 'w-full py-4 bg-midnight text-white font-black text-lg rounded-2xl hover:bg-midnight-light transition-all duration-300 shadow-lg hover:shadow-xl'
+  const secondaryBtnClass = 'text-midnight hover:text-orange font-medium text-sm flex items-center gap-1 transition-colors'
 
   // ==================== RENDER ====================
 
-  // Hero
+  // Step 0: Hero
   if (step === 0) {
     return (
-      <main className="min-h-screen bg-[#0a0f1a]">
+      <main className="min-h-screen bg-midnight">
         <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
           <video
             autoPlay
@@ -402,17 +446,17 @@ export default function SegurosPage() {
           >
             <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/12509081_1920_1080_60fps_unug5q.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-[#0a0f1a]/75" />
+          <div className="absolute inset-0 bg-midnight/75" />
           <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-            <h1 className="text-3xl md:text-5xl font-bold text-white max-w-3xl leading-tight">
+            <h1 className="text-3xl md:text-5xl font-black text-white max-w-3xl leading-tight font-serif">
               Seguro de Responsabilidad Civil para Caballos
             </h1>
-            <p className="mt-4 text-xl md:text-2xl text-slate-200 font-medium">
+            <p className="mt-4 text-xl md:text-2xl text-white/90 font-medium">
               Desde 48,27€ al año
             </p>
             <button
-              onClick={() => setStep(1)}
-              className="mt-8 px-8 py-4 bg-[#0a0f1a] text-white font-semibold text-lg rounded-lg hover:bg-[#131b2a] transition-colors shadow-lg"
+              onClick={() => advanceStep(1)}
+              className="mt-8 px-10 py-5 bg-orange text-midnight font-black text-lg rounded-2xl hover:bg-orange-light transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
             >
               Contratar ahora
             </button>
@@ -420,36 +464,36 @@ export default function SegurosPage() {
         </section>
 
         <section className="max-w-4xl mx-auto py-16 px-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-black text-white text-center mb-10 font-serif">
             ¿Por qué contratar con nosotros?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#131b2a] flex items-center justify-center">
-                <svg className="w-7 h-7 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-6 bg-midnight-light rounded-3xl border border-white/10">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange/20 flex items-center justify-center">
+                <svg className="w-7 h-7 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-white mb-2">Cobertura completa</h3>
-              <p className="text-slate-300 text-sm">Responsabilidad civil desde 150.000€ hasta 306.000€ de cobertura.</p>
+              <h3 className="font-black text-white mb-2">Cobertura completa</h3>
+              <p className="text-white/70 text-sm">Responsabilidad civil desde 150.000€ hasta 306.000€ de cobertura.</p>
             </div>
-            <div className="text-center p-6">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#131b2a] flex items-center justify-center">
-                <svg className="w-7 h-7 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-6 bg-midnight-light rounded-3xl border border-white/10">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange/20 flex items-center justify-center">
+                <svg className="w-7 h-7 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-white mb-2">Mejor precio</h3>
-              <p className="text-slate-300 text-sm">Desde solo 48,27€ al año. Sin sorpresas ni costes ocultos.</p>
+              <h3 className="font-black text-white mb-2">Mejor precio</h3>
+              <p className="text-white/70 text-sm">Desde solo 48,27€ al año. Sin sorpresas ni costes ocultos.</p>
             </div>
-            <div className="text-center p-6">
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#131b2a] flex items-center justify-center">
-                <svg className="w-7 h-7 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-6 bg-midnight-light rounded-3xl border border-white/10">
+              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-orange/20 flex items-center justify-center">
+                <svg className="w-7 h-7 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-white mb-2">Atención personal</h3>
-              <p className="text-slate-300 text-sm">Contacto directo por WhatsApp. Respuesta en menos de 2 horas.</p>
+              <h3 className="font-black text-white mb-2">Atención personal</h3>
+              <p className="text-white/70 text-sm">Contacto directo por WhatsApp. Respuesta en menos de 2 horas.</p>
             </div>
           </div>
         </section>
@@ -460,31 +504,39 @@ export default function SegurosPage() {
   // Step 1: Age Selection
   if (step === 1) {
     return (
-      <main className="min-h-screen bg-[#0f1520] py-12 px-6">
+      <main className="min-h-screen bg-mint-50 py-12 px-6">
         <div className="max-w-3xl mx-auto">
-          <button onClick={() => setStep(0)} className="text-slate-300 hover:text-white text-sm mb-8 flex items-center gap-1">
+          <button onClick={() => { setStep(0) }} className={secondaryBtnClass + ' mb-8'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+          <h2 className="text-2xl md:text-3xl font-black text-midnight text-center mb-2 font-serif">
             Selecciona la edad de tu caballo
           </h2>
-          
+          <p className="text-midnight/60 text-center mb-10">Elige el rango de edad para ver los planes disponibles.</p>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
             <button
-              onClick={() => { setAgeGroup('under15'); setStep(2) }}
-              className="p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 transition-all text-center"
+              onClick={() => { setAgeGroup('under15'); advanceStep(2) }}
+              className="p-8 bg-white border-2 border-mint-300 rounded-3xl hover:border-orange hover:shadow-xl transition-all duration-300 text-center group"
             >
-              <h3 className="text-xl font-semibold text-white">Menos de 15 años</h3>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-50 flex items-center justify-center group-hover:bg-orange/20 transition-colors">
+                <span className="text-2xl">🐴</span>
+              </div>
+              <h3 className="text-xl font-black text-midnight">Menos de 15 años</h3>
+              <p className="text-midnight/50 text-sm mt-2">4 planes disponibles</p>
             </button>
 
             <button
-              onClick={() => { setAgeGroup('over15'); setStep(2) }}
-              className="p-8 bg-[#0a0f1a] rounded-xl border border-white/10 hover:border-teal-500/50 transition-all text-center"
+              onClick={() => { setAgeGroup('over15'); advanceStep(2) }}
+              className="p-8 bg-white border-2 border-mint-300 rounded-3xl hover:border-orange hover:shadow-xl transition-all duration-300 text-center group"
             >
-              <h3 className="text-xl font-semibold text-white">15 años o más</h3>
+              <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-50 flex items-center justify-center group-hover:bg-orange/20 transition-colors">
+                <span className="text-2xl">🐎</span>
+              </div>
+              <h3 className="text-xl font-black text-midnight">15 años o más</h3>
+              <p className="text-midnight/50 text-sm mt-2">1 plan disponible</p>
             </button>
           </div>
         </div>
@@ -495,40 +547,40 @@ export default function SegurosPage() {
   // Step 2: Coverage Selection
   if (step === 2) {
     return (
-      <main className="min-h-screen bg-[#0f1520] py-12 px-6">
+      <main className="min-h-screen bg-mint-50 py-12 px-6">
         <div className="max-w-4xl mx-auto">
-          <button onClick={() => setStep(1)} className="text-slate-300 hover:text-white text-sm mb-8 flex items-center gap-1">
+          <button onClick={() => { setStep(1) }} className={secondaryBtnClass + ' mb-8'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-2">
+          <h2 className="text-2xl md:text-3xl font-black text-midnight text-center mb-2 font-serif">
             Elige tu plan de cobertura
           </h2>
-          <p className="text-slate-400 text-center mb-10">Selecciona el nivel de protección que mejor se adapte a tus necesidades.</p>
+          <p className="text-midnight/60 text-center mb-10">Selecciona el nivel de protección que mejor se adapte a tus necesidades.</p>
 
           {ageGroup === 'over15' ? (
             <div className="max-w-md mx-auto">
-              <div className="bg-[#0a0f1a] rounded-xl border border-white/10 p-8 shadow-sm">
-                <h3 className="text-xl font-bold text-white mb-4">{planOver15.title}</h3>
+              <div className="bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+                <h3 className="text-xl font-black text-midnight mb-4">{planOver15.title}</h3>
                 <div className="space-y-3 mb-6">
                   <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-slate-300 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                    <span className="text-slate-200">{planOver15.coverage}</span>
+                    <svg className="w-5 h-5 text-orange mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    <span className="text-midnight">{planOver15.coverage}</span>
                   </div>
                   {planOver15.extras.map((extra, i) => (
                     <div key={i} className="flex items-start gap-2">
-                      <svg className="w-5 h-5 text-slate-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
-                      <span className="text-slate-400">{extra}</span>
+                      <svg className="w-5 h-5 text-midnight/30 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                      <span className="text-midnight/60">{extra}</span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-white/5 pt-4 mb-6">
-                  <p className="text-3xl font-bold text-white">48,27€ <span className="text-base font-normal text-slate-400">al año</span></p>
+                <div className="border-t border-mint-200 pt-4 mb-6">
+                  <p className="text-3xl font-black text-midnight">48,27€ <span className="text-base font-normal text-midnight/50">al año</span></p>
                 </div>
                 <button
-                  onClick={() => { setSelectedPlan(planOver15); setStep(3) }}
-                  className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors"
+                  onClick={() => { setSelectedPlan(planOver15); advanceStep(3) }}
+                  className="w-full py-4 bg-orange text-midnight font-black rounded-2xl hover:bg-orange-light transition-all duration-300 shadow-lg text-lg"
                 >
                   Contratar este seguro
                 </button>
@@ -537,14 +589,14 @@ export default function SegurosPage() {
           ) : (
             <div className="overflow-x-auto">
               {/* Comparison Table */}
-              <table className="w-full border-collapse">
+              <table className="w-full border-collapse bg-white rounded-3xl overflow-hidden shadow-lg border-2 border-mint-300">
                 <thead>
                   <tr>
-                    <th className="text-left p-4 text-slate-400 text-sm font-medium border-b border-white/10 w-[200px]">Cobertura</th>
+                    <th className="text-left p-4 text-midnight/60 text-sm font-medium border-b border-mint-200 w-[200px]">Cobertura</th>
                     {plansUnder15.map((plan) => (
-                      <th key={plan.id} className={`p-4 text-center border-b border-white/10 ${plan.id === 2 ? 'bg-teal-500/10 border-x border-teal-500/30' : ''}`}>
-                        <div className={`text-base font-bold ${plan.id === 2 ? 'text-teal-400' : 'text-white'}`}>{plan.title}</div>
-                        {plan.id === 2 && <span className="text-xs text-teal-400 font-medium">Recomendado</span>}
+                      <th key={plan.id} className={`p-4 text-center border-b border-mint-200 ${plan.id === 2 ? 'bg-orange-50 border-x-2 border-orange' : ''}`}>
+                        <div className={`text-base font-black ${plan.id === 2 ? 'text-orange' : 'text-midnight'}`}>{plan.title}</div>
+                        {plan.id === 2 && <span className="text-xs text-orange font-bold">Recomendado</span>}
                       </th>
                     ))}
                   </tr>
@@ -552,54 +604,54 @@ export default function SegurosPage() {
                 <tbody>
                   {/* Responsabilidad Civil */}
                   <tr>
-                    <td className="p-4 text-slate-300 text-sm border-b border-white/5">Responsabilidad Civil</td>
-                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">150.000€</span></td>
-                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">150.000€</span></td>
-                    <td className="p-4 text-center border-b border-white/5 bg-teal-500/10 border-x border-teal-500/30"><span className="text-white font-medium">306.000€</span></td>
-                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">306.000€</span></td>
+                    <td className="p-4 text-midnight/70 text-sm border-b border-mint-100">Responsabilidad Civil</td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-midnight font-medium">150.000€</span></td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-midnight font-medium">150.000€</span></td>
+                    <td className="p-4 text-center border-b border-mint-100 bg-orange-50 border-x-2 border-orange"><span className="text-midnight font-medium">306.000€</span></td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-midnight font-medium">306.000€</span></td>
                   </tr>
                   {/* Retirada de cadáveres */}
                   <tr>
-                    <td className="p-4 text-slate-300 text-sm border-b border-white/5">Retirada de cadáveres</td>
-                    <td className="p-4 text-center border-b border-white/5">
-                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    <td className="p-4 text-midnight/70 text-sm border-b border-mint-100">Retirada de cadáveres</td>
+                    <td className="p-4 text-center border-b border-mint-100">
+                      <svg className="w-5 h-5 text-midnight/20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
                     </td>
-                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">300€</span></td>
-                    <td className="p-4 text-center border-b border-white/5 bg-teal-500/10 border-x border-teal-500/30">
-                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-midnight font-medium">300€</span></td>
+                    <td className="p-4 text-center border-b border-mint-100 bg-orange-50 border-x-2 border-orange">
+                      <svg className="w-5 h-5 text-midnight/20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
                     </td>
-                    <td className="p-4 text-center border-b border-white/5">
-                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    <td className="p-4 text-center border-b border-mint-100">
+                      <svg className="w-5 h-5 text-midnight/20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
                     </td>
                   </tr>
                   {/* Cobertura por fallecimiento */}
                   <tr>
-                    <td className="p-4 text-slate-300 text-sm border-b border-white/5">Cobertura por fallecimiento</td>
-                    <td className="p-4 text-center border-b border-white/5">
-                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    <td className="p-4 text-midnight/70 text-sm border-b border-mint-100">Cobertura por fallecimiento</td>
+                    <td className="p-4 text-center border-b border-mint-100">
+                      <svg className="w-5 h-5 text-midnight/20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
                     </td>
-                    <td className="p-4 text-center border-b border-white/5">
-                      <svg className="w-5 h-5 text-slate-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
+                    <td className="p-4 text-center border-b border-mint-100">
+                      <svg className="w-5 h-5 text-midnight/20 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" /></svg>
                     </td>
-                    <td className="p-4 text-center border-b border-white/5 bg-teal-500/10 border-x border-teal-500/30"><span className="text-white font-medium">300€</span></td>
-                    <td className="p-4 text-center border-b border-white/5"><span className="text-white font-medium">1.000€</span></td>
+                    <td className="p-4 text-center border-b border-mint-100 bg-orange-50 border-x-2 border-orange"><span className="text-midnight font-medium">300€</span></td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-midnight font-medium">1.000€</span></td>
                   </tr>
                   {/* Precio */}
                   <tr>
-                    <td className="p-4 text-slate-300 text-sm font-medium">Precio</td>
-                    <td className="p-4 text-center"><span className="text-xl font-bold text-white">48,27€</span><span className="text-slate-400 text-xs block">al año</span></td>
-                    <td className="p-4 text-center"><span className="text-xl font-bold text-white">53,94€</span><span className="text-slate-400 text-xs block">al año</span></td>
-                    <td className="p-4 text-center bg-teal-500/10 border-x border-teal-500/30"><span className="text-xl font-bold text-teal-400">62,62€</span><span className="text-teal-400/70 text-xs block">al año</span></td>
-                    <td className="p-4 text-center"><span className="text-xl font-bold text-white">91,03€</span><span className="text-slate-400 text-xs block">al año</span></td>
+                    <td className="p-4 text-midnight/70 text-sm font-medium border-b border-mint-100">Precio</td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-xl font-black text-midnight">48,27€</span><span className="text-midnight/50 text-xs block">al año</span></td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-xl font-black text-midnight">53,94€</span><span className="text-midnight/50 text-xs block">al año</span></td>
+                    <td className="p-4 text-center border-b border-mint-100 bg-orange-50 border-x-2 border-orange"><span className="text-xl font-black text-orange">62,62€</span><span className="text-orange/70 text-xs block">al año</span></td>
+                    <td className="p-4 text-center border-b border-mint-100"><span className="text-xl font-black text-midnight">91,03€</span><span className="text-midnight/50 text-xs block">al año</span></td>
                   </tr>
                   {/* Botones */}
                   <tr>
                     <td className="p-4"></td>
                     {plansUnder15.map((plan) => (
-                      <td key={plan.id} className={`p-4 text-center ${plan.id === 2 ? 'bg-teal-500/10 border-x border-b border-teal-500/30 rounded-b-xl' : ''}`}>
+                      <td key={plan.id} className={`p-4 text-center ${plan.id === 2 ? 'bg-orange-50 border-x-2 border-b-2 border-orange rounded-b-xl' : ''}`}>
                         <button
-                          onClick={() => { setSelectedPlan(plan); setStep(3) }}
-                          className={`w-full py-3 font-semibold rounded-lg transition-colors ${plan.id === 2 ? 'bg-teal-500 text-white hover:bg-teal-600' : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'}`}
+                          onClick={() => { setSelectedPlan(plan); advanceStep(3) }}
+                          className={`w-full py-3 font-bold rounded-xl transition-all duration-300 ${plan.id === 2 ? 'bg-orange text-midnight hover:bg-orange-light shadow-lg' : 'bg-midnight text-white hover:bg-midnight-light'}`}
                         >
                           Contratar
                         </button>
@@ -618,33 +670,39 @@ export default function SegurosPage() {
   // Step 3: Summary before form
   if (step === 3 && selectedPlan) {
     return (
-      <main className="min-h-screen bg-[#0f1520] py-12 px-6">
+      <main className="min-h-screen bg-mint-50 py-12 px-6">
         <div className="max-w-2xl mx-auto">
-          <button onClick={() => setStep(2)} className="text-slate-300 hover:text-white text-sm mb-8 flex items-center gap-1">
+          <button onClick={() => { setStep(2) }} className={secondaryBtnClass + ' mb-8'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-black text-midnight text-center mb-8 font-serif">
             Resumen del plan seleccionado
           </h2>
 
-          <div className="bg-[#0a0f1a] rounded-xl border border-white/10 p-8 shadow-sm mb-8">
-            <h3 className="text-xl font-bold text-white mb-4">{selectedPlan.title}</h3>
+          <div className="bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg mb-8">
+            <h3 className="text-xl font-black text-midnight mb-4">{selectedPlan.title}</h3>
             <div className="space-y-2 mb-6">
-              <p className="text-slate-200">{selectedPlan.coverage}</p>
+              <div className="flex items-center gap-2">
+                <svg className="w-5 h-5 text-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                <p className="text-midnight">{selectedPlan.coverage}</p>
+              </div>
               {selectedPlan.extras.map((extra, i) => (
-                <p key={i} className="text-slate-300 text-sm">{extra}</p>
+                <div key={i} className="flex items-center gap-2">
+                  <svg className="w-5 h-5 text-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  <p className="text-midnight/70 text-sm">{extra}</p>
+                </div>
               ))}
             </div>
-            <div className="border-t border-white/5 pt-4">
-              <p className="text-3xl font-bold text-white">{selectedPlan.price}</p>
+            <div className="border-t border-mint-200 pt-4">
+              <p className="text-3xl font-black text-midnight">{selectedPlan.price}</p>
             </div>
           </div>
 
           <button
-            onClick={() => { setStep(4); setFormSection(0) }}
-            className="w-full py-4 bg-teal-600 text-white font-semibold text-lg rounded-lg hover:bg-teal-700 transition-colors"
+            onClick={() => { advanceStep(4); setFormSection(0) }}
+            className={primaryBtnClass}
           >
             Continuar con la contratación
           </button>
@@ -656,76 +714,76 @@ export default function SegurosPage() {
   // Step 4: Progressive Form
   if (step === 4) {
     return (
-      <main className="min-h-screen bg-[#0f1520] py-8 px-6">
+      <main className="min-h-screen bg-mint-50 py-8 px-6">
         <div className="max-w-2xl mx-auto">
           {/* Progress bar */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-slate-400 mb-2">
+            <div className="flex justify-between text-xs text-midnight/60 mb-2 font-medium">
               <span>Paso {formSection + 1} de {totalFormSections}</span>
               <span>{progressPercent}%</span>
             </div>
-            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="w-full h-3 bg-mint-200 rounded-full overflow-hidden">
               <div
-                className="h-full bg-slate-700 rounded-full transition-all duration-500"
+                className="h-full bg-orange rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
 
-          <button onClick={handlePrevSection} className="text-slate-300 hover:text-white text-sm mb-6 flex items-center gap-1">
+          <button onClick={handlePrevSection} className={secondaryBtnClass + ' mb-6'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Volver atrás
           </button>
 
           {/* Section 0: Owner Data */}
           {formSection === 0 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Datos del propietario</h2>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-6 font-serif">Datos del propietario</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Nombre</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Nombre</label>
                   <input
                     type="text"
                     value={ownerData.nombre}
                     onChange={(e) => setOwnerData({ ...ownerData, nombre: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.nombre && <p className="text-red-600 text-sm mt-1">{errors.nombre}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Primer apellido</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Primer apellido</label>
                   <input
                     type="text"
                     value={ownerData.primerApellido}
                     onChange={(e) => setOwnerData({ ...ownerData, primerApellido: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.primerApellido && <p className="text-red-600 text-sm mt-1">{errors.primerApellido}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Segundo apellido</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Segundo apellido</label>
                   <input
                     type="text"
                     value={ownerData.segundoApellido}
                     onChange={(e) => setOwnerData({ ...ownerData, segundoApellido: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.segundoApellido && <p className="text-red-600 text-sm mt-1">{errors.segundoApellido}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Fecha de nacimiento</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Fecha de nacimiento</label>
                   <input
                     type="text"
                     placeholder="DD/MM/AAAA"
                     value={ownerData.fechaNacimiento}
                     onChange={(e) => setOwnerData({ ...ownerData, fechaNacimiento: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.fechaNacimiento && (
                     <div className="text-red-600 text-sm mt-1">
                       <p>{errors.fechaNacimiento}</p>
                       {errors.fechaNacimiento.includes('mayor de 18') && (
-                        <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="underline text-slate-200 hover:text-white">
+                        <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="underline text-orange hover:text-orange-dark font-medium">
                           Contactar por WhatsApp
                         </a>
                       )}
@@ -733,18 +791,18 @@ export default function SegurosPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">DNI/NIE</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">DNI/NIE</label>
                   <input
                     type="text"
                     placeholder="12345678A o X1234567A"
                     value={ownerData.dni}
                     onChange={(e) => setOwnerData({ ...ownerData, dni: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.dni && <p className="text-red-600 text-sm mt-1">{errors.dni}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass + ' mt-8'}>
                 Siguiente
               </button>
             </div>
@@ -752,61 +810,61 @@ export default function SegurosPage() {
 
           {/* Section 1: Address */}
           {formSection === 1 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">¿Cuál es tu dirección?</h2>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-6 font-serif">¿Cuál es tu dirección?</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Calle</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Calle</label>
                   <input
                     type="text"
                     value={addressData.calle}
                     onChange={(e) => setAddressData({ ...addressData, calle: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.calle && <p className="text-red-600 text-sm mt-1">{errors.calle}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Número</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Número</label>
                   <input
                     type="text"
                     value={addressData.numero}
                     onChange={(e) => setAddressData({ ...addressData, numero: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.numero && <p className="text-red-600 text-sm mt-1">{errors.numero}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Código postal</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Código postal</label>
                   <input
                     type="text"
                     value={addressData.codigoPostal}
                     onChange={(e) => setAddressData({ ...addressData, codigoPostal: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.codigoPostal && <p className="text-red-600 text-sm mt-1">{errors.codigoPostal}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Localidad</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Localidad</label>
                   <input
                     type="text"
                     value={addressData.localidad}
                     onChange={(e) => setAddressData({ ...addressData, localidad: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.localidad && <p className="text-red-600 text-sm mt-1">{errors.localidad}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Provincia</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Provincia</label>
                   <input
                     type="text"
                     value={addressData.provincia}
                     onChange={(e) => setAddressData({ ...addressData, provincia: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.provincia && <p className="text-red-600 text-sm mt-1">{errors.provincia}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass + ' mt-8'}>
                 Siguiente
               </button>
             </div>
@@ -814,42 +872,42 @@ export default function SegurosPage() {
 
           {/* Section 2: Contact */}
           {formSection === 2 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Datos de contacto</h2>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-6 font-serif">Datos de contacto</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Teléfono móvil</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Teléfono móvil</label>
                   <input
                     type="tel"
                     placeholder="612345678"
                     value={contactData.telefono}
                     onChange={(e) => setContactData({ ...contactData, telefono: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.telefono && <p className="text-red-600 text-sm mt-1">{errors.telefono}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Email</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Email</label>
                   <input
                     type="email"
                     value={contactData.email}
                     onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Repetir email</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Repetir email</label>
                   <input
                     type="email"
                     value={contactData.emailRepetir}
                     onChange={(e) => setContactData({ ...contactData, emailRepetir: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.emailRepetir && <p className="text-red-600 text-sm mt-1">{errors.emailRepetir}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass + ' mt-8'}>
                 Siguiente
               </button>
             </div>
@@ -857,45 +915,45 @@ export default function SegurosPage() {
 
           {/* Section 3: Horse Data */}
           {formSection === 3 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Datos de tu caballo</h2>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-6 font-serif">Datos de tu caballo</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Nombre del caballo</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Nombre del caballo</label>
                   <input
                     type="text"
                     value={horseData.nombre}
                     onChange={(e) => setHorseData({ ...horseData, nombre: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.horseNombre && <p className="text-red-600 text-sm mt-1">{errors.horseNombre}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Raza del caballo</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Raza del caballo</label>
                   <input
                     type="text"
                     value={horseData.raza}
                     onChange={(e) => setHorseData({ ...horseData, raza: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.horseRaza && <p className="text-red-600 text-sm mt-1">{errors.horseRaza}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Color del caballo</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Color del caballo</label>
                   <input
                     type="text"
                     value={horseData.color}
                     onChange={(e) => setHorseData({ ...horseData, color: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.horseColor && <p className="text-red-600 text-sm mt-1">{errors.horseColor}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Sexo</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Sexo</label>
                   <select
                     value={horseData.sexo}
                     onChange={(e) => setHorseData({ ...horseData, sexo: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all bg-[#0a0f1a]"
+                    className={selectClass}
                   >
                     <option value="">Selecciona una opción</option>
                     <option value="Caballo">Caballo</option>
@@ -905,18 +963,18 @@ export default function SegurosPage() {
                   {errors.horseSexo && <p className="text-red-600 text-sm mt-1">{errors.horseSexo}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">Número de microchip</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">Número de microchip</label>
                   <input
                     type="text"
                     placeholder="15 dígitos"
                     value={horseData.microchip}
                     onChange={(e) => setHorseData({ ...horseData, microchip: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.horseMicrochip && <p className="text-red-600 text-sm mt-1">{errors.horseMicrochip}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass + ' mt-8'}>
                 Siguiente
               </button>
             </div>
@@ -924,22 +982,22 @@ export default function SegurosPage() {
 
           {/* Section 4: Photo Upload (Optional) */}
           {formSection === 4 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Foto de la cartilla sanitaria</h2>
-              <p className="text-slate-300 mb-6">Adjunta una foto de la cartilla sanitaria de tu caballo donde aparezcan todos los datos.</p>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-2 font-serif">Foto de la cartilla sanitaria</h2>
+              <p className="text-midnight/60 mb-6">Adjunta una foto de la cartilla sanitaria de tu caballo donde aparezcan todos los datos.</p>
 
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="border-2 border-dashed border-white/15 rounded-lg p-6 flex flex-col items-center justify-center text-center">
-                  <svg className="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="border-2 border-dashed border-mint-300 rounded-2xl p-6 flex flex-col items-center justify-center text-center bg-mint-50">
+                  <svg className="w-8 h-8 text-midnight/30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <p className="text-xs text-slate-400">Ejemplo 1: Foto de la portada de la cartilla</p>
+                  <p className="text-xs text-midnight/50">Ejemplo 1: Foto de la portada de la cartilla</p>
                 </div>
-                <div className="border-2 border-dashed border-white/15 rounded-lg p-6 flex flex-col items-center justify-center text-center">
-                  <svg className="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="border-2 border-dashed border-mint-300 rounded-2xl p-6 flex flex-col items-center justify-center text-center bg-mint-50">
+                  <svg className="w-8 h-8 text-midnight/30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <p className="text-xs text-slate-400">Ejemplo 2: Foto de la página con los datos del caballo</p>
+                  <p className="text-xs text-midnight/50">Ejemplo 2: Foto de la página con los datos del caballo</p>
                 </div>
               </div>
 
@@ -949,24 +1007,27 @@ export default function SegurosPage() {
                   accept="image/jpeg,image/png,image/heic"
                   multiple
                   onChange={handleFileChange}
-                  className="w-full px-4 py-3 border border-white/15 rounded-lg text-sm text-slate-200 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-[#131b2a] file:text-slate-200 hover:file:bg-white/10"
+                  className="w-full px-4 py-3 border-2 border-mint-300 rounded-xl text-sm text-midnight file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-orange-50 file:text-midnight hover:file:bg-orange-100 transition-all"
                 />
               </div>
 
               {uploadedFiles.length > 0 && (
-                <div className="mb-4 p-3 bg-[#131b2a] rounded-lg">
-                  <p className="text-sm text-slate-200 font-medium">{uploadedFiles.length} archivo(s) seleccionado(s):</p>
+                <div className="mb-4 p-3 bg-orange-50 border border-orange/20 rounded-xl">
+                  <p className="text-sm text-midnight font-bold">{uploadedFiles.length} archivo(s) seleccionado(s):</p>
                   {uploadedFiles.map((file, i) => (
-                    <p key={i} className="text-sm text-slate-300">{file.name}</p>
+                    <p key={i} className="text-sm text-midnight/70">{file.name}</p>
                   ))}
                 </div>
               )}
 
-              <p className="text-sm text-slate-400 mb-8">
-                Este paso no es obligatorio. Si no la tienes ahora, puedes enviarla después por WhatsApp.
+              <p className="text-sm text-midnight/50 mb-8">
+                Este paso no es obligatorio. Si no la tienes ahora, puedes enviarla después por WhatsApp al{' '}
+                <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="text-orange font-bold hover:underline">
+                  667 755 976
+                </a>.
               </p>
 
-              <button onClick={handleNextSection} className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass}>
                 Siguiente
               </button>
             </div>
@@ -974,23 +1035,23 @@ export default function SegurosPage() {
 
           {/* Section 5: Bank Data */}
           {formSection === 5 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">Datos bancarios</h2>
-              <p className="text-slate-300 mb-6">¿Cuál es el IBAN de la cuenta para domiciliar el pago?</p>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-2 font-serif">Datos bancarios</h2>
+              <p className="text-midnight/60 mb-6">¿Cuál es el IBAN de la cuenta para domiciliar el pago?</p>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-200 mb-1">IBAN</label>
+                  <label className="block text-sm font-bold text-midnight mb-1">IBAN</label>
                   <input
                     type="text"
                     placeholder="ES12 1234 5678 9012 3456 7890"
                     value={bankData.iban}
                     onChange={(e) => setBankData({ ...bankData, iban: e.target.value })}
-                    className="w-full px-4 py-3 border border-white/15 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
+                    className={inputClass}
                   />
                   {errors.iban && <p className="text-red-600 text-sm mt-1">{errors.iban}</p>}
                 </div>
               </div>
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass + ' mt-8'}>
                 Siguiente
               </button>
             </div>
@@ -998,30 +1059,30 @@ export default function SegurosPage() {
 
           {/* Section 6: Legal */}
           {formSection === 6 && (
-            <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Condiciones legales</h2>
+            <div className="animate-fadeIn bg-white border-2 border-mint-300 rounded-3xl p-8 shadow-lg">
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-6 font-serif">Condiciones legales</h2>
               <div className="space-y-4">
-                <label className="flex items-start gap-3 cursor-pointer">
+                <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl border-2 border-mint-200 hover:border-orange/50 transition-colors">
                   <input
                     type="checkbox"
                     checked={legalData.condiciones}
                     onChange={(e) => setLegalData({ ...legalData, condiciones: e.target.checked })}
-                    className="mt-1 w-5 h-5 rounded border-white/15 text-white focus:ring-teal-500"
+                    className="mt-1 w-5 h-5 rounded border-mint-300 text-orange focus:ring-orange accent-orange"
                   />
-                  <span className="text-slate-200">Acepto las condiciones de contratación</span>
+                  <span className="text-midnight">Acepto las condiciones de contratación</span>
                 </label>
-                <label className="flex items-start gap-3 cursor-pointer">
+                <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl border-2 border-mint-200 hover:border-orange/50 transition-colors">
                   <input
                     type="checkbox"
                     checked={legalData.datos}
                     onChange={(e) => setLegalData({ ...legalData, datos: e.target.checked })}
-                    className="mt-1 w-5 h-5 rounded border-white/15 text-white focus:ring-teal-500"
+                    className="mt-1 w-5 h-5 rounded border-mint-300 text-orange focus:ring-orange accent-orange"
                   />
-                  <span className="text-slate-200">Acepto el tratamiento de mis datos personales</span>
+                  <span className="text-midnight">Acepto el tratamiento de mis datos personales</span>
                 </label>
               </div>
               {errors.legal && <p className="text-red-600 text-sm mt-3">{errors.legal}</p>}
-              <button onClick={handleNextSection} className="w-full mt-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors">
+              <button onClick={handleNextSection} className={primaryBtnClass + ' mt-8'}>
                 Siguiente
               </button>
             </div>
@@ -1030,86 +1091,86 @@ export default function SegurosPage() {
           {/* Section 7: Review */}
           {formSection === 7 && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-6">Revisa tus datos</h2>
+              <h2 className="text-xl md:text-2xl font-black text-midnight mb-6 font-serif">Revisa tus datos</h2>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {/* Plan */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Plan seleccionado</h3>
-                    <button onClick={() => setStep(2)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Plan seleccionado</h3>
+                    <button onClick={() => setStep(2)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
-                  <p className="text-slate-200">{selectedPlan?.title} — {selectedPlan?.price}</p>
+                  <p className="text-midnight/80">{selectedPlan?.title} — {selectedPlan?.price}</p>
                 </div>
 
                 {/* Owner */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Datos del propietario</h3>
-                    <button onClick={() => setFormSection(0)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Datos del propietario</h3>
+                    <button onClick={() => setFormSection(0)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p className="text-slate-400">Nombre:</p>
-                    <p className="text-slate-100">{ownerData.nombre} {ownerData.primerApellido} {ownerData.segundoApellido}</p>
-                    <p className="text-slate-400">Fecha de nacimiento:</p>
-                    <p className="text-slate-100">{ownerData.fechaNacimiento}</p>
-                    <p className="text-slate-400">DNI/NIE:</p>
-                    <p className="text-slate-100">{ownerData.dni}</p>
+                    <p className="text-midnight/50">Nombre:</p>
+                    <p className="text-midnight">{ownerData.nombre} {ownerData.primerApellido} {ownerData.segundoApellido}</p>
+                    <p className="text-midnight/50">Fecha de nacimiento:</p>
+                    <p className="text-midnight">{ownerData.fechaNacimiento}</p>
+                    <p className="text-midnight/50">DNI/NIE:</p>
+                    <p className="text-midnight">{ownerData.dni}</p>
                   </div>
                 </div>
 
                 {/* Address */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Dirección</h3>
-                    <button onClick={() => setFormSection(1)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Dirección</h3>
+                    <button onClick={() => setFormSection(1)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
-                  <p className="text-sm text-slate-100">
+                  <p className="text-sm text-midnight">
                     {addressData.calle} {addressData.numero}, {addressData.codigoPostal} {addressData.localidad}, {addressData.provincia}
                   </p>
                 </div>
 
                 {/* Contact */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Contacto</h3>
-                    <button onClick={() => setFormSection(2)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Contacto</h3>
+                    <button onClick={() => setFormSection(2)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p className="text-slate-400">Teléfono:</p>
-                    <p className="text-slate-100">{contactData.telefono}</p>
-                    <p className="text-slate-400">Email:</p>
-                    <p className="text-slate-100">{contactData.email}</p>
+                    <p className="text-midnight/50">Teléfono:</p>
+                    <p className="text-midnight">{contactData.telefono}</p>
+                    <p className="text-midnight/50">Email:</p>
+                    <p className="text-midnight">{contactData.email}</p>
                   </div>
                 </div>
 
                 {/* Horse */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Datos del caballo</h3>
-                    <button onClick={() => setFormSection(3)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Datos del caballo</h3>
+                    <button onClick={() => setFormSection(3)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-sm">
-                    <p className="text-slate-400">Nombre:</p>
-                    <p className="text-slate-100">{horseData.nombre}</p>
-                    <p className="text-slate-400">Raza:</p>
-                    <p className="text-slate-100">{horseData.raza}</p>
-                    <p className="text-slate-400">Color:</p>
-                    <p className="text-slate-100">{horseData.color}</p>
-                    <p className="text-slate-400">Sexo:</p>
-                    <p className="text-slate-100">{horseData.sexo}</p>
-                    <p className="text-slate-400">Microchip:</p>
-                    <p className="text-slate-100">{horseData.microchip}</p>
+                    <p className="text-midnight/50">Nombre:</p>
+                    <p className="text-midnight">{horseData.nombre}</p>
+                    <p className="text-midnight/50">Raza:</p>
+                    <p className="text-midnight">{horseData.raza}</p>
+                    <p className="text-midnight/50">Color:</p>
+                    <p className="text-midnight">{horseData.color}</p>
+                    <p className="text-midnight/50">Sexo:</p>
+                    <p className="text-midnight">{horseData.sexo}</p>
+                    <p className="text-midnight/50">Microchip:</p>
+                    <p className="text-midnight">{horseData.microchip}</p>
                   </div>
                 </div>
 
                 {/* Files */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Cartilla sanitaria</h3>
-                    <button onClick={() => setFormSection(4)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Cartilla sanitaria</h3>
+                    <button onClick={() => setFormSection(4)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
-                  <p className="text-sm text-slate-100">
+                  <p className="text-sm text-midnight">
                     {uploadedFiles.length > 0
                       ? `${uploadedFiles.length} archivo(s) adjuntado(s)`
                       : 'No se adjuntaron fotos'}
@@ -1117,20 +1178,20 @@ export default function SegurosPage() {
                 </div>
 
                 {/* Bank */}
-                <div className="bg-[#0a0f1a] rounded-lg border border-white/10 p-5">
+                <div className="bg-white border-2 border-mint-300 rounded-2xl p-5">
                   <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-white">Datos bancarios</h3>
-                    <button onClick={() => setFormSection(5)} className="text-sm text-slate-400 hover:text-slate-200 underline">Editar</button>
+                    <h3 className="font-black text-midnight">Datos bancarios</h3>
+                    <button onClick={() => setFormSection(5)} className="text-sm text-orange hover:text-orange-dark font-bold underline">Editar</button>
                   </div>
-                  <p className="text-sm text-slate-100">{bankData.iban}</p>
+                  <p className="text-sm text-midnight">{bankData.iban}</p>
                 </div>
               </div>
 
               {submitError && (
-                <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="mt-6 p-4 bg-red-50 border-2 border-red-200 rounded-2xl">
                   <p className="text-red-800 text-sm">
-                    Ha ocurrido un error. Por favor, llámanos al 986 651 478 o escríbenos por WhatsApp al{' '}
-                    <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="underline font-medium">
+                    Ha ocurrido un error. Por favor, escríbenos por WhatsApp al{' '}
+                    <a href="https://wa.me/34667755976" target="_blank" rel="noopener noreferrer" className="underline font-bold text-orange">
                       667 755 976
                     </a>
                   </p>
@@ -1140,7 +1201,7 @@ export default function SegurosPage() {
               <button
                 onClick={handleSubmit}
                 disabled={submitting}
-                className="w-full mt-8 py-4 bg-teal-600 text-white font-semibold text-lg rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`${primaryBtnClass} mt-8 disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {submitting ? 'Enviando...' : 'Finalizar contratación'}
               </button>
@@ -1154,32 +1215,36 @@ export default function SegurosPage() {
   // Step 5: Confirmation
   if (step === 5) {
     return (
-      <main className="min-h-screen bg-[#0f1520] flex items-center justify-center py-12 px-6">
+      <main className="min-h-screen bg-mint-50 flex items-center justify-center py-12 px-6">
         <div className="max-w-lg mx-auto text-center">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
-            <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-orange-50 flex items-center justify-center border-2 border-orange">
+            <svg className="w-10 h-10 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
 
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-black text-midnight mb-4 font-serif">
             Solicitud de contratación enviada
           </h2>
 
-          <div className="space-y-4 text-slate-300">
+          <div className="space-y-4 text-midnight/70">
             <p>
               Nos pondremos en contacto contigo en un plazo máximo de 2 horas (de lunes a viernes) para confirmar tu póliza.
             </p>
             <p>
               Recibirás toda la documentación en tu email.
             </p>
-            <p className="pt-4 text-slate-200 font-medium">Si tienes alguna duda:</p>
+            <p className="pt-4 text-midnight font-bold">Si tienes alguna duda:</p>
             <a
               href="https://wa.me/34667755976"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white font-semibold hover:underline"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white font-black rounded-2xl hover:bg-green-600 transition-all shadow-lg"
             >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.593-.839-6.311-2.236l-.44-.366-3.146 1.054 1.054-3.146-.366-.44A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+              </svg>
               WhatsApp: 667 755 976
             </a>
           </div>
