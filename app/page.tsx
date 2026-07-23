@@ -122,9 +122,9 @@ export default function HomePage() {
             >
               <div className="relative h-56 sm:h-64 lg:h-72 overflow-hidden bg-[#f0f4f2]">
                 <img
-                  src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798481/pexels-bertellifotografia-31853325_fiwbud.jpg"
-                  alt="Caballo negro"
-                  className="w-full h-full object-contain bg-[#e8ede9] transition-transform duration-700 group-hover:scale-105"
+                  src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784808037/pexels-mographe-10942929_wcxh7z.jpg"
+                  alt="Caballo"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute top-4 left-4 inline-flex items-center bg-orange text-midnight font-black text-xs px-4 py-2 rounded-full shadow-lg">
                   Desde 48,27 €/año
