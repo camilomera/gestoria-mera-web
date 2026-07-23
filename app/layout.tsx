@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
-import { Space_Grotesk } from 'next/font/google'
+import { Merriweather } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 
-const spaceGrotesk = Space_Grotesk({
+const merriweather = Merriweather({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-space-grotesk',
+  weight: ['300', '400', '700', '900'],
+  variable: '--font-merriweather',
 })
 
 export const metadata: Metadata = {
@@ -23,11 +23,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={spaceGrotesk.variable}>
+    <html lang="es" className={merriweather.variable}>
       <head>
-        <meta name="theme-color" content="#fffdf8" />
+        <meta name="theme-color" content="#f5fffa" />
       </head>
-      <body className={`${spaceGrotesk.className} bg-cream-50 text-dark-900 min-h-screen`}>
+      <body className={`${merriweather.className} bg-mint-50 text-midnight min-h-screen`}>
         <Header />
         <main className="min-h-screen">
           {children}

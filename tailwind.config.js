@@ -8,47 +8,42 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        dark: {
-          900: '#1a1a1a',
-          800: '#2d2d2d',
-          700: '#3d3d3d',
-          600: '#4a4a4a',
-          500: '#5c5c5c',
-          400: '#7a7a7a',
+        midnight: {
+          DEFAULT: '#191970',
+          light: '#2a2a8a',
+          dark: '#0f0f50',
+          50: 'rgba(25, 25, 112, 0.05)',
+          100: 'rgba(25, 25, 112, 0.1)',
+          200: 'rgba(25, 25, 112, 0.2)',
         },
-        accent: {
-          DEFAULT: '#e8a838',
-          light: '#f0be5c',
-          dark: '#c8882a',
-          50: 'rgba(232, 168, 56, 0.1)',
-          100: 'rgba(232, 168, 56, 0.2)',
+        mint: {
+          DEFAULT: '#f5fff5',
+          50: '#f5fffa',
+          100: '#e8fff0',
+          200: '#d4f5e0',
+          300: '#b8e8cc',
         },
-        cream: {
-          50: '#fffdf8',
-          100: '#fdf8ef',
-          200: '#f5ede0',
-          300: '#e8ddd0',
-        },
-        light: {
-          100: '#ffffff',
-          200: '#f8f6f3',
-          300: '#e8e4df',
-          400: '#9a9590',
-          500: '#6b6560',
+        orange: {
+          DEFAULT: '#ffa500',
+          light: '#ffb833',
+          dark: '#e69500',
+          50: 'rgba(255, 165, 0, 0.1)',
+          100: 'rgba(255, 165, 0, 0.2)',
         },
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['Merriweather', 'Georgia', 'serif'],
       },
       fontSize: {
-        '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        '6xl': ['3.75rem', { lineHeight: '1.05', letterSpacing: '-0.025em' }],
-        '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.03em' }],
+        '5xl': ['3rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        '6xl': ['3.75rem', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+        '7xl': ['4.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
       },
       animation: {
         fadeIn: 'fadeIn 0.6s ease-out forwards',
         slideUp: 'slideUp 0.6s ease-out forwards',
-        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        bounce: 'bounce 2s infinite',
+        glow: 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {
         fadeIn: {
@@ -58,6 +53,10 @@ module.exports = {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        glow: {
+          '0%': { textShadow: '0 0 5px rgba(255, 165, 0, 0.5)' },
+          '100%': { textShadow: '0 0 20px rgba(255, 165, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.4)' },
         },
       },
       backdropBlur: {

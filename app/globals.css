@@ -8,52 +8,46 @@
   }
 
   body {
-    @apply bg-cream-50 text-dark-900 font-sans antialiased;
+    @apply bg-mint-50 text-midnight font-sans antialiased;
   }
 
   ::selection {
-    background-color: rgba(232, 168, 56, 0.3);
-    color: #1a1a1a;
+    background-color: rgba(255, 165, 0, 0.3);
+    color: #191970;
   }
 }
 
 @layer components {
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 
-           bg-dark-900 text-white font-semibold rounded-full 
+           bg-midnight text-white font-bold rounded-full 
            transition-all duration-300 
-           hover:bg-dark-700 hover:shadow-lg 
+           hover:bg-midnight-light hover:shadow-lg hover:shadow-midnight/20 
            active:scale-95;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 
-           border-2 border-dark-900 text-dark-900 font-medium rounded-full 
+           border-2 border-midnight text-midnight font-bold rounded-full 
            transition-all duration-300 
-           hover:bg-dark-900 hover:text-white 
+           hover:bg-midnight hover:text-white 
            active:scale-95;
   }
 
   .btn-whatsapp {
     @apply inline-flex items-center justify-center px-6 py-3 
-           bg-[#25D366] text-white font-semibold rounded-full 
+           bg-[#25D366] text-white font-bold rounded-full 
            transition-all duration-300 
            hover:bg-[#20bd5a] hover:shadow-lg hover:shadow-[#25D366]/20 
            active:scale-95;
   }
 
-  .btn-accent {
+  .btn-orange {
     @apply inline-flex items-center justify-center px-6 py-3 
-           bg-accent text-dark-900 font-bold rounded-full 
+           bg-orange text-midnight font-bold rounded-full 
            transition-all duration-300 
-           hover:bg-accent-light hover:shadow-lg hover:shadow-accent/20 
+           hover:bg-orange-light hover:shadow-lg hover:shadow-orange/30 
            active:scale-95;
-  }
-
-  .card-light {
-    @apply bg-white border border-cream-300/50 
-           rounded-2xl p-6 transition-all duration-300 
-           hover:shadow-xl hover:shadow-dark-900/5 hover:-translate-y-1;
   }
 
   .section-padding {
@@ -64,14 +58,10 @@
     @apply max-w-7xl mx-auto;
   }
 
-  .text-gradient {
-    @apply bg-gradient-to-r from-accent-dark to-accent bg-clip-text text-transparent;
-  }
-
-  .input-light {
-    @apply w-full px-4 py-3 bg-white border border-cream-300 rounded-xl 
-           text-dark-900 placeholder-light-400 
-           focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 
+  .input-field {
+    @apply w-full px-4 py-3 bg-white border border-mint-300 rounded-xl 
+           text-midnight placeholder-midnight/40 
+           focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 
            transition-all duration-300;
   }
 }
@@ -93,9 +83,15 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
+@keyframes glow-text {
+  0%, 100% { 
+    color: #ffa500;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.6), 0 0 30px rgba(255, 165, 0, 0.3);
+  }
+  50% { 
+    color: #ffb833;
+    text-shadow: 0 0 20px rgba(255, 165, 0, 0.8), 0 0 50px rgba(255, 165, 0, 0.5);
+  }
 }
 
 .animate-fade-in {
@@ -107,8 +103,8 @@
   animation: slide-up 0.8s ease-out forwards;
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
+.animate-glow-text {
+  animation: glow-text 2s ease-in-out infinite;
 }
 
 .delay-150 {
@@ -117,10 +113,6 @@
 
 .delay-300 {
   animation-delay: 300ms;
-}
-
-.delay-1000 {
-  animation-delay: 1000ms;
 }
 
 /* Scroll reveal */
