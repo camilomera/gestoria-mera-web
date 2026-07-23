@@ -181,9 +181,9 @@ export default function HomePage() {
       </section>
 
       {/* ========== HOW IT WORKS ========== */}
-      <section className="section-padding pb-28 bg-midnight relative overflow-hidden">
+      <section className="py-16 sm:py-20 bg-midnight relative overflow-hidden">
         {/* Running dog GIF animation - overlapping cards */}
-        <div className="absolute -bottom-4 left-0 right-0 pointer-events-none overflow-hidden h-40 z-0">
+        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-40 z-0">
           <div className="animate-run-dog">
             <img
               src="https://res.cloudinary.com/r5v8fzlu/image/upload/e_replace_color:191970:50/v1784818189/perro_yt4bqw.gif"
@@ -358,7 +358,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== FINAL CTA ========== */}
-      <section className="section-padding pb-28 bg-midnight relative overflow-hidden">
+      <section className="py-16 sm:py-20 bg-midnight relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-midnight-dark via-midnight to-midnight-light opacity-80" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
