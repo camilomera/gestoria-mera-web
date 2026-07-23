@@ -182,147 +182,18 @@ export default function HomePage() {
 
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
-        {/* Dog paw prints trail - left side, bottom to top, getting smaller and more transparent */}
-        <div className="absolute inset-0 pointer-events-none">
-          <svg className="absolute bottom-[5%] left-[4%] w-14 h-14 text-orange opacity-50 rotate-[20deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[14%] left-[8%] w-13 h-13 text-orange opacity-45 rotate-[10deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[24%] left-[5%] w-12 h-12 text-orange opacity-38 rotate-[25deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[34%] left-[9%] w-11 h-11 text-orange opacity-30 rotate-[15deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[44%] left-[5%] w-10 h-10 text-orange opacity-25 rotate-[22deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[54%] left-[8%] w-9 h-9 text-orange opacity-20 rotate-[12deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[63%] left-[4%] w-8 h-8 text-orange opacity-15 rotate-[28deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[72%] left-[7%] w-7 h-7 text-orange opacity-12 rotate-[18deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-          <svg className="absolute bottom-[82%] left-[4%] w-6 h-6 text-orange opacity-8 rotate-[25deg]" viewBox="0 0 50 50" fill="currentColor">
-            <ellipse cx="25" cy="34" rx="10" ry="12"/>
-            <circle cx="15" cy="17" r="5.5"/>
-            <circle cx="25" cy="12" r="5.5"/>
-            <circle cx="35" cy="17" r="5.5"/>
-            <circle cx="10" cy="26" r="4.5"/>
-          </svg>
-
-          {/* Horseshoe trail - right side, bottom to top, getting smaller and more transparent */}
-          <svg className="absolute bottom-[3%] right-[4%] w-16 h-16 text-orange opacity-50 rotate-[5deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="15" cy="22" r="2.5" fill="#191970"/>
-            <circle cx="22" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="28" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="35" cy="22" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[12%] right-[9%] w-15 h-15 text-orange opacity-45 rotate-[-5deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="15" cy="22" r="2.5" fill="#191970"/>
-            <circle cx="22" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="28" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="35" cy="22" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[22%] right-[5%] w-14 h-14 text-orange opacity-38 rotate-[10deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="15" cy="22" r="2.5" fill="#191970"/>
-            <circle cx="28" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="35" cy="22" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[32%] right-[10%] w-13 h-13 text-orange opacity-30 rotate-[0deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="22" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="28" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[42%] right-[6%] w-12 h-12 text-orange opacity-25 rotate-[8deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="22" cy="14" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[52%] right-[10%] w-11 h-11 text-orange opacity-20 rotate-[-3deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[61%] right-[6%] w-10 h-10 text-orange opacity-15 rotate-[12deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[70%] right-[9%] w-9 h-9 text-orange opacity-12 rotate-[-8deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-            <circle cx="13" cy="32" r="2.5" fill="#191970"/>
-            <circle cx="37" cy="32" r="2.5" fill="#191970"/>
-          </svg>
-          <svg className="absolute bottom-[78%] right-[5%] w-8 h-8 text-orange opacity-10 rotate-[5deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-          </svg>
-          <svg className="absolute bottom-[86%] right-[8%] w-7 h-7 text-orange opacity-8 rotate-[-5deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-          </svg>
-          <svg className="absolute bottom-[92%] right-[5%] w-6 h-6 text-orange opacity-5 rotate-[10deg]" viewBox="0 0 50 50" fill="currentColor">
-            <path d="M10 40 C10 15, 25 5, 40 15 L40 22 C40 22, 32 14, 25 14 C18 14, 10 22, 10 32 Z"/>
-            <path d="M40 40 C40 15, 25 5, 10 15 L10 22 C10 22, 18 14, 25 14 C32 14, 40 22, 40 32 Z"/>
-          </svg>
+        {/* Running dog silhouette animation */}
+        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden">
+          <div className="animate-run-dog">
+            <svg className="w-20 h-14 text-orange" viewBox="0 0 120 80" fill="currentColor">
+              {/* Dog running silhouette */}
+              <path d="M95 35c3-1 6-3 8-6 2-4 1-8-1-10-2-1-4-1-5 1l-3 4c-1 1-3 2-4 1l-8-5c-3-2-6-3-9-2l-12 3c-4 1-8 0-11-2L38 10c-3-2-6-2-9 0l-5 4c-2 2-2 4 0 6l8 6-12 2c-3 1-5 3-5 6 0 3 2 5 5 5h6l-8 10c-2 3-1 6 2 7 2 1 4 0 6-2l10-14h8l-4 15c-1 3 1 6 4 6 2 0 4-2 5-4l6-18h10l4 16c1 3 3 5 6 4 3-1 4-3 3-6l-4-15 12 1 6 12c1 3 4 4 6 3 3-1 4-4 2-7l-5-10 4-1z"/>
+              {/* Ear */}
+              <ellipse cx="88" cy="22" rx="4" ry="6" transform="rotate(-20 88 22)"/>
+              {/* Tail */}
+              <path d="M18 18c-4-2-8-1-10 2-1 2 0 4 2 4 3 0 6-1 8-3l2-1" />
+            </svg>
+          </div>
         </div>
         
         <div className="container-custom mx-auto relative z-10">

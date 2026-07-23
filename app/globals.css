@@ -168,3 +168,13 @@
 .animate-ping-slow {
   animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+/* Running dog animation */
+.animate-run-dog {
+  animation: run-dog 12s linear infinite;
+}
+
+@keyframes run-dog {
+  0% { transform: translateX(-120px); }
+  100% { transform: translateX(calc(100vw + 120px)); }
+}
