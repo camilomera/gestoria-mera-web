@@ -9,26 +9,32 @@ module.exports = {
     extend: {
       colors: {
         dark: {
-          900: '#0a0f1a',
-          800: '#0f1520',
-          700: '#131b2a',
-          600: '#1a2332',
-          500: '#1e2a3a',
-          400: '#253344',
+          900: '#1a1a1a',
+          800: '#2d2d2d',
+          700: '#3d3d3d',
+          600: '#4a4a4a',
+          500: '#5c5c5c',
+          400: '#7a7a7a',
         },
         accent: {
-          DEFAULT: '#3b9b8f',
-          light: '#4db5a4',
-          dark: '#2d7a70',
-          50: 'rgba(59, 155, 143, 0.1)',
-          100: 'rgba(59, 155, 143, 0.2)',
+          DEFAULT: '#e8a838',
+          light: '#f0be5c',
+          dark: '#c8882a',
+          50: 'rgba(232, 168, 56, 0.1)',
+          100: 'rgba(232, 168, 56, 0.2)',
+        },
+        cream: {
+          50: '#fffdf8',
+          100: '#fdf8ef',
+          200: '#f5ede0',
+          300: '#e8ddd0',
         },
         light: {
           100: '#ffffff',
-          200: '#f0f2f5',
-          300: '#d1d5db',
-          400: '#9ca3af',
-          500: '#6b7280',
+          200: '#f8f6f3',
+          300: '#e8e4df',
+          400: '#9a9590',
+          500: '#6b6560',
         },
       },
       fontFamily: {
@@ -37,6 +43,7 @@ module.exports = {
       fontSize: {
         '5xl': ['3rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
         '6xl': ['3.75rem', { lineHeight: '1.05', letterSpacing: '-0.025em' }],
+        '7xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.03em' }],
       },
       animation: {
         fadeIn: 'fadeIn 0.6s ease-out forwards',

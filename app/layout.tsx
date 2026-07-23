@@ -25,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="es" className={spaceGrotesk.variable}>
       <head>
-        <meta name="theme-color" content="#0a0f1a" />
+        <meta name="theme-color" content="#fffdf8" />
       </head>
-      <body className={`${spaceGrotesk.className} bg-dark-900 text-light-100 min-h-screen`}>
+      <body className={`${spaceGrotesk.className} bg-cream-50 text-dark-900 min-h-screen`}>
         <Header />
         <main className="min-h-screen">
           {children}
