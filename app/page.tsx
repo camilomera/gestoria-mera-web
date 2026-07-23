@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <div ref={scrollRef} className="pt-20">
       {/* ========== HERO ========== */}
-      <section className="relative min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         {/* Video background - grass */}
         <div className="absolute inset-0 z-0 animate-fade-in">
           <video
