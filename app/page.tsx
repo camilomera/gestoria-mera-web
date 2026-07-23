@@ -182,13 +182,13 @@ export default function HomePage() {
 
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
-        {/* Running dog GIF animation */}
-        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-28">
+        {/* Running dog GIF animation - overlapping cards */}
+        <div className="absolute bottom-12 left-0 right-0 pointer-events-none overflow-hidden h-40 z-20">
           <div className="animate-run-dog">
             <img
               src="https://res.cloudinary.com/r5v8fzlu/image/upload/e_replace_color:191970:50/v1784818189/perro_yt4bqw.gif"
               alt=""
-              className="w-36 h-28 object-contain"
+              className="w-48 h-40 object-contain"
             />
           </div>
         </div>
