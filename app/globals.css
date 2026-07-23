@@ -178,3 +178,35 @@
   0% { transform: translateX(-120px); }
   100% { transform: translateX(calc(100vw + 120px)); }
 }
+
+/* Dog leg animations */
+.animate-legs-front {
+  animation: legs-front 0.3s ease-in-out infinite alternate;
+  transform-origin: center top;
+}
+
+.animate-legs-back {
+  animation: legs-back 0.3s ease-in-out infinite alternate;
+  transform-origin: center top;
+}
+
+@keyframes legs-front {
+  0% { transform: rotate(-15deg); }
+  100% { transform: rotate(15deg); }
+}
+
+@keyframes legs-back {
+  0% { transform: rotate(15deg); }
+  100% { transform: rotate(-15deg); }
+}
+
+/* Tail wag */
+.animate-wag {
+  animation: wag 0.4s ease-in-out infinite alternate;
+  transform-origin: 55px 40px;
+}
+
+@keyframes wag {
+  0% { transform: rotate(-10deg); }
+  100% { transform: rotate(15deg); }
+}

@@ -182,17 +182,15 @@ export default function HomePage() {
 
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
-        {/* Running dog silhouette animation */}
-        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden">
+        {/* Running dog GIF animation */}
+        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-20">
           <div className="animate-run-dog">
-            <svg className="w-20 h-14 text-orange" viewBox="0 0 120 80" fill="currentColor">
-              {/* Dog running silhouette */}
-              <path d="M95 35c3-1 6-3 8-6 2-4 1-8-1-10-2-1-4-1-5 1l-3 4c-1 1-3 2-4 1l-8-5c-3-2-6-3-9-2l-12 3c-4 1-8 0-11-2L38 10c-3-2-6-2-9 0l-5 4c-2 2-2 4 0 6l8 6-12 2c-3 1-5 3-5 6 0 3 2 5 5 5h6l-8 10c-2 3-1 6 2 7 2 1 4 0 6-2l10-14h8l-4 15c-1 3 1 6 4 6 2 0 4-2 5-4l6-18h10l4 16c1 3 3 5 6 4 3-1 4-3 3-6l-4-15 12 1 6 12c1 3 4 4 6 3 3-1 4-4 2-7l-5-10 4-1z"/>
-              {/* Ear */}
-              <ellipse cx="88" cy="22" rx="4" ry="6" transform="rotate(-20 88 22)"/>
-              {/* Tail */}
-              <path d="M18 18c-4-2-8-1-10 2-1 2 0 4 2 4 3 0 6-1 8-3l2-1" />
-            </svg>
+            <img
+              src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784818189/perro_yt4bqw.gif"
+              alt=""
+              className="w-24 h-20 object-contain"
+              style={{ filter: 'brightness(1.3) sepia(1) saturate(3) hue-rotate(10deg)' }}
+            />
           </div>
         </div>
         
