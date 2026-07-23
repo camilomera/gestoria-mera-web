@@ -41,29 +41,55 @@ export default function SegurosPerrosPage() {
     }, 3500)
   }
 
-  // Placeholder products for PPP (will be customized later)
-  const pppProducts = [
+  // All PPP products
+  const allPppProducts = [
     {
-      name: 'Plan Básico PPP',
-      price: '30€/año',
-      features: ['Responsabilidad Civil 150.000€', 'Cobertura en toda España', 'Certificado inmediato'],
+      id: '120k',
+      name: 'Plan Básico',
+      price: 'XX€/año',
+      coverage: '120.000€',
+      features: ['Responsabilidad Civil 120.000€', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
-      name: 'Plan Estándar PPP',
-      price: '45€/año',
-      features: ['Responsabilidad Civil 300.000€', 'Defensa jurídica', 'Asistencia veterinaria urgente'],
+      id: '150k',
+      name: 'Plan Estándar',
+      price: 'XX€/año',
+      coverage: '150.500€',
+      features: ['Responsabilidad Civil 150.500€', 'Defensa jurídica', 'Certificado en 24h'],
     },
     {
-      name: 'Plan Premium PPP',
-      price: '65€/año',
-      features: ['Responsabilidad Civil 600.000€', 'Defensa jurídica completa', 'Asistencia veterinaria', 'Robo y extravío'],
+      id: '200k',
+      name: 'Plan Plus',
+      price: 'XX€/año',
+      coverage: '200.000€',
+      features: ['Responsabilidad Civil 200.000€', 'Defensa jurídica', 'Asistencia veterinaria'],
     },
     {
-      name: 'Plan Profesional PPP',
-      price: '90€/año',
-      features: ['Responsabilidad Civil 1.000.000€', 'Todo incluido', 'Múltiples perros', 'Cobertura internacional'],
+      id: '350k',
+      name: 'Plan Premium',
+      price: 'XX€/año',
+      coverage: '350.000€',
+      features: ['Responsabilidad Civil 350.000€', 'Defensa jurídica completa', 'Asistencia veterinaria', 'Máxima cobertura'],
     },
   ]
+
+  // CCAA product availability
+  const ccaaProducts: Record<string, string[]> = {
+    'Canarias': ['200k', '350k'],
+    'Castilla y León': ['200k', '350k'],
+    'Navarra': ['200k', '350k'],
+    'Andalucía': ['200k', '350k'],
+    'Cataluña': ['150k', '200k', '350k'],
+    'Galicia': ['150k', '200k', '350k'],
+  }
+
+  // Get products for selected CCAA (default: all 4)
+  const getProductsForCCAA = (ccaa: string) => {
+    const availableIds = ccaaProducts[ccaa] || ['120k', '150k', '200k', '350k']
+    return allPppProducts.filter(p => availableIds.includes(p.id))
+  }
+
+  const pppProducts = getProductsForCCAA(selectedCCAA)
 
   // Products for No PPP
   const nopppProducts = [
@@ -158,7 +184,7 @@ export default function SegurosPerrosPage() {
                     <span className="text-2xl font-black text-midnight">Desde 30€</span>
                     <span className="text-midnight/60 text-sm">/año</span>
                   </div>
-                  <div className="mt-4 w-full bg-orange text-white font-bold text-center py-3 rounded-full btn-shine relative overflow-hidden group-hover:bg-orange-dark transition-colors flex items-center justify-center gap-2">
+                  <div className="mt-4 w-full btn-cta bg-orange text-midnight font-black text-center py-3 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     Ver opciones y contratar
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -203,7 +229,7 @@ export default function SegurosPerrosPage() {
                     <span className="text-2xl font-black text-midnight">Desde 20,40€</span>
                     <span className="text-midnight/60 text-sm">/año</span>
                   </div>
-                  <div className="mt-4 w-full bg-orange text-white font-bold text-center py-3 rounded-full btn-shine btn-shine-delay relative overflow-hidden group-hover:bg-orange-dark transition-colors flex items-center justify-center gap-2">
+                  <div className="mt-4 w-full btn-cta bg-orange text-midnight font-black text-center py-3 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     Ver opciones y contratar
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -326,24 +352,25 @@ export default function SegurosPerrosPage() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            <div className={`grid gap-5 max-w-6xl mx-auto ${pppProducts.length === 2 ? 'sm:grid-cols-2 max-w-3xl' : pppProducts.length === 3 ? 'sm:grid-cols-3 max-w-4xl' : 'sm:grid-cols-2 lg:grid-cols-4'}`}>
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
                   className={`relative bg-white rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                    index === 1 ? 'ring-2 ring-orange shadow-lg shadow-orange/10' : 'shadow-sm hover:shadow-lg'
+                    index === pppProducts.length - 1 ? 'ring-2 ring-orange shadow-lg shadow-orange/10' : 'shadow-sm hover:shadow-lg'
                   }`}
                 >
-                  {index === 1 && (
+                  {index === pppProducts.length - 1 && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-orange text-white text-xs font-bold rounded-full whitespace-nowrap">
-                      Más popular
+                      Máxima cobertura
                     </div>
                   )}
-                  <h3 className="text-lg font-black text-midnight mb-2">{product.name}</h3>
-                  <div className="mb-5">
+                  <h3 className="text-lg font-black text-midnight mb-1">{product.name}</h3>
+                  <p className="text-orange font-bold text-sm mb-3">RC {product.coverage}</p>
+                  <div className="mb-4">
                     <span className="text-2xl font-black text-midnight">{product.price}</span>
                   </div>
-                  <ul className="space-y-2.5 mb-6">
+                  <ul className="space-y-2 mb-5">
                     {product.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-2">
                         <span className="text-orange font-bold mt-0.5">✓</span>
@@ -352,13 +379,9 @@ export default function SegurosPerrosPage() {
                     ))}
                   </ul>
                   <button
-                    className={`block w-full text-center rounded-full py-3 font-bold transition-all duration-300 text-sm ${
-                      index === 1
-                        ? 'bg-orange text-white hover:bg-orange-dark hover:shadow-lg'
-                        : 'bg-midnight text-white hover:bg-midnight-light'
-                    }`}
+                    className="block w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3 text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
                   >
-                    Contratar
+                    Contratar →
                   </button>
                 </div>
               ))}

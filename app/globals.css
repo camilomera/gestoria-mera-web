@@ -267,24 +267,12 @@
   }
 }
 
-/* Shine sweep effect for buttons */
-.btn-shine::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-  animation: btn-shine 4s ease-in-out infinite;
+/* CTA button with subtle glow */
+.btn-cta {
+  box-shadow: 0 4px 14px rgba(255, 165, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-shine-delay::after {
-  animation-delay: 1.5s;
-}
-
-@keyframes btn-shine {
-  0% { left: -100%; }
-  40% { left: 100%; }
-  100% { left: 100%; }
+.btn-cta:hover {
+  box-shadow: 0 8px 25px rgba(255, 165, 0, 0.4), 0 0 0 3px rgba(255, 165, 0, 0.1);
 }
