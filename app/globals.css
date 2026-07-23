@@ -129,22 +129,43 @@
 
 /* Title shine effect */
 .title-shine {
+  position: relative;
+  display: inline-block;
   background: linear-gradient(
     120deg,
     #191970 0%,
-    #191970 40%,
-    #ffa500 50%,
-    #191970 60%,
+    #191970 35%,
+    #ffa500 45%,
+    #191970 55%,
     #191970 100%
   );
-  background-size: 200% 100%;
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 3s ease-in-out infinite;
+  animation: shine 8s ease-in-out infinite;
+  text-shadow: none;
+}
+
+.title-shine::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ffa500, transparent);
+  border-radius: 2px;
+  opacity: 0;
+  animation: underline-pulse 8s ease-in-out infinite;
 }
 
 @keyframes shine {
-  0%, 100% { background-position: 200% center; }
-  50% { background-position: -200% center; }
+  0%, 100% { background-position: 300% center; }
+  40%, 60% { background-position: -300% center; }
+}
+
+@keyframes underline-pulse {
+  0%, 30%, 100% { opacity: 0; transform: scaleX(0.3); }
+  45%, 55% { opacity: 0.7; transform: scaleX(1); }
 }
