@@ -183,7 +183,7 @@ export default function HomePage() {
       {/* ========== HOW IT WORKS ========== */}
       <section className="py-16 sm:py-20 bg-midnight relative overflow-hidden">
         {/* Running dog GIF animation - overlapping cards */}
-        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-40 z-0">
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 pointer-events-none overflow-hidden h-40 z-0">
           <div className="animate-run-dog">
             <img
               src="https://res.cloudinary.com/r5v8fzlu/image/upload/e_replace_color:191970:50/v1784818189/perro_yt4bqw.gif"
@@ -204,7 +204,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 sm:gap-0 items-center max-w-5xl mx-auto">
             {/* Step 1 */}
             <div className="reveal-on-scroll">
-              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
+              <div className="relative bg-[#1e1e6e] border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-[#252580] hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">1</div>
                 <div className="text-4xl mb-5 mt-2 text-center">📋</div>
                 <h3 className="text-xl font-black text-white mb-3 text-center">Elige tu seguro</h3>
@@ -229,7 +229,7 @@ export default function HomePage() {
 
             {/* Step 2 */}
             <div className="reveal-on-scroll" style={{ transitionDelay: '150ms' }}>
-              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
+              <div className="relative bg-[#1e1e6e] border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-[#252580] hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">2</div>
                 <div className="text-4xl mb-5 mt-2 text-center">✏️</div>
                 <h3 className="text-xl font-black text-white mb-3 text-center">Rellena el formulario</h3>
@@ -254,7 +254,7 @@ export default function HomePage() {
 
             {/* Step 3 */}
             <div className="reveal-on-scroll" style={{ transitionDelay: '300ms' }}>
-              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
+              <div className="relative bg-[#1e1e6e] border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-[#252580] hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">3</div>
                 <div className="text-4xl mb-5 mt-2 text-center">🛡️</div>
                 <h3 className="text-xl font-black text-white mb-3 text-center">Póliza activa</h3>
