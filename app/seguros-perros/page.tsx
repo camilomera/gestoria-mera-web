@@ -25,8 +25,16 @@ const comunidades = [
 ]
 
 export default function SegurosPerrosPage() {
-  const [step, setStep] = useState<'choice' | 'ppp' | 'noppp' | 'ppp-products'>('choice')
+  const [step, setStep] = useState<'choice' | 'ppp' | 'noppp' | 'ppp-products' | 'loading'>('choice')
   const [selectedCCAA, setSelectedCCAA] = useState('')
+
+  const handleCCAASelect = (ccaa: string) => {
+    setSelectedCCAA(ccaa)
+    setStep('loading')
+    setTimeout(() => {
+      setStep('ppp-products')
+    }, 1200)
+  }
 
   // Placeholder products for PPP (will be customized later)
   const pppProducts = [
@@ -215,8 +223,7 @@ export default function SegurosPerrosPage() {
                 <select
                   value={selectedCCAA}
                   onChange={(e) => {
-                    setSelectedCCAA(e.target.value)
-                    if (e.target.value) setStep('ppp-products')
+                    if (e.target.value) handleCCAASelect(e.target.value)
                   }}
                   className="w-full appearance-none bg-white border-2 border-midnight/10 rounded-2xl pl-14 pr-12 py-5 text-lg font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-sm"
                 >
@@ -232,6 +239,35 @@ export default function SegurosPerrosPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+
+      {/* Step: Loading */}
+      {step === 'loading' && (
+        <section className="py-16 sm:py-20">
+          <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="max-w-md mx-auto">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange/10 mb-4">
+                  <svg className="w-8 h-8 text-orange animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                </div>
+              </div>
+              <h2 className="text-2xl font-black text-midnight mb-3">
+                Buscando seguros para {selectedCCAA}...
+              </h2>
+              <p className="text-midnight/70">
+                Consultando las mejores opciones disponibles
+              </p>
+              {/* Progress bar */}
+              <div className="mt-8 w-full h-1.5 bg-midnight/10 rounded-full overflow-hidden">
+                <div className="h-full bg-orange rounded-full animate-loading-bar" />
               </div>
             </div>
           </div>
