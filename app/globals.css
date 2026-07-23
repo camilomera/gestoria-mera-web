@@ -242,7 +242,7 @@
 
 /* Loading bar animation */
 .animate-loading-bar {
-  animation: loading-bar 1.2s ease-in-out forwards;
+  animation: loading-bar 3.5s ease-in-out forwards;
 }
 
 @keyframes loading-bar {

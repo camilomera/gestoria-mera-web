@@ -2,38 +2,43 @@
 
 import { useState } from 'react'
 
-const comunidades = [
-  'Andalucía',
-  'Aragón',
-  'Asturias',
-  'Islas Baleares',
-  'Canarias',
-  'Cantabria',
-  'Castilla-La Mancha',
-  'Castilla y León',
-  'Cataluña',
-  'Extremadura',
-  'Galicia',
-  'La Rioja',
-  'Madrid',
-  'Murcia',
-  'Navarra',
-  'País Vasco',
-  'Comunidad Valenciana',
-  'Ceuta',
-  'Melilla',
+const comunidades: { name: string; joke: string }[] = [
+  { name: 'Andalucía', joke: 'Esto tardará menos que freír un pescaíto' },
+  { name: 'Aragón', joke: 'Más rápido que el cierzo bajando por el Ebro' },
+  { name: 'Asturias', joke: 'Tardará menos que sidra en caer al vaso' },
+  { name: 'Islas Baleares', joke: 'Más rápido que encontrar cala virgen en agosto... bueno, casi' },
+  { name: 'Canarias', joke: 'Esto va más rápido que un plátano madurando al sol' },
+  { name: 'Cantabria', joke: 'Tardará menos que un día de sol en Santander' },
+  { name: 'Castilla-La Mancha', joke: 'Más rápido que Sancho corriendo detrás de Don Quijote' },
+  { name: 'Castilla y León', joke: 'Tardará menos que un cordero lechal en el horno' },
+  { name: 'Cataluña', joke: 'Més ràpid que un calçot a la brasa' },
+  { name: 'Extremadura', joke: 'Esto va más rápido que el jamón desapareciendo de la mesa' },
+  { name: 'Galicia', joke: 'Tardará menos que una tortilla de Betanzos en acabarse' },
+  { name: 'La Rioja', joke: 'Más rápido que descorchar un Reserva' },
+  { name: 'Madrid', joke: 'Más rápido que pillar mesa en una terraza un domingo' },
+  { name: 'Murcia', joke: 'Esto va más rápido que un limón cayendo del árbol' },
+  { name: 'Navarra', joke: 'Tardará menos que un encierro en San Fermín' },
+  { name: 'País Vasco', joke: 'Más rápido que pinchar un pintxo en el Casco Viejo' },
+  { name: 'Comunidad Valenciana', joke: 'Esto tardará menos que una mascletà' },
+  { name: 'Ceuta', joke: 'Más rápido que cruzar el Estrecho en ferry' },
+  { name: 'Melilla', joke: 'Tardará menos que un paseo por el Parque Hernández' },
 ]
 
 export default function SegurosPerrosPage() {
   const [step, setStep] = useState<'choice' | 'ppp' | 'noppp' | 'ppp-products' | 'loading'>('choice')
   const [selectedCCAA, setSelectedCCAA] = useState('')
 
+  const getJoke = (ccaa: string) => {
+    const found = comunidades.find(c => c.name === ccaa)
+    return found ? found.joke : 'Buscando las mejores opciones...'
+  }
+
   const handleCCAASelect = (ccaa: string) => {
     setSelectedCCAA(ccaa)
     setStep('loading')
     setTimeout(() => {
       setStep('ppp-products')
-    }, 1200)
+    }, 3500)
   }
 
   // Placeholder products for PPP (will be customized later)
@@ -229,8 +234,8 @@ export default function SegurosPerrosPage() {
                 >
                   <option value="">Selecciona tu comunidad autónoma...</option>
                   {comunidades.map((ccaa) => (
-                    <option key={ccaa} value={ccaa}>
-                      {ccaa}
+                    <option key={ccaa.name} value={ccaa.name}>
+                      {ccaa.name}
                     </option>
                   ))}
                 </select>
@@ -262,8 +267,8 @@ export default function SegurosPerrosPage() {
               <h2 className="text-2xl font-black text-midnight mb-3">
                 Buscando seguros para {selectedCCAA}...
               </h2>
-              <p className="text-midnight/70">
-                Consultando las mejores opciones disponibles
+              <p className="text-midnight/70 italic">
+                {getJoke(selectedCCAA)}
               </p>
               {/* Progress bar */}
               <div className="mt-8 w-full h-1.5 bg-midnight/10 rounded-full overflow-hidden">
