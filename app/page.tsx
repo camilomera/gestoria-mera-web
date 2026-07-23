@@ -182,32 +182,48 @@ export default function HomePage() {
 
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
-        {/* Decorative paw prints */}
-        <svg className="absolute bottom-8 left-8 w-24 h-24 text-orange/15 rotate-[-15deg]" viewBox="0 0 100 100" fill="currentColor">
-          <ellipse cx="50" cy="65" rx="18" ry="22"/>
-          <ellipse cx="28" cy="35" rx="10" ry="12" transform="rotate(-10 28 35)"/>
-          <ellipse cx="50" cy="25" rx="10" ry="12"/>
-          <ellipse cx="72" cy="35" rx="10" ry="12" transform="rotate(10 72 35)"/>
-        </svg>
-        <svg className="absolute top-10 right-10 w-20 h-20 text-orange/15 rotate-[20deg]" viewBox="0 0 100 100" fill="currentColor">
-          <ellipse cx="50" cy="65" rx="18" ry="22"/>
-          <ellipse cx="28" cy="35" rx="10" ry="12" transform="rotate(-10 28 35)"/>
-          <ellipse cx="50" cy="25" rx="10" ry="12"/>
-          <ellipse cx="72" cy="35" rx="10" ry="12" transform="rotate(10 72 35)"/>
-        </svg>
-        {/* Horseshoe prints */}
-        <svg className="absolute top-1/2 left-6 w-16 h-16 text-orange/12 -translate-y-1/2 rotate-[-25deg]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8">
-          <path d="M25 75 C25 35, 50 15, 75 35" strokeLinecap="round"/>
-          <path d="M75 75 C75 35, 50 15, 25 35" strokeLinecap="round"/>
-          <circle cx="25" cy="78" r="6" fill="currentColor"/>
-          <circle cx="75" cy="78" r="6" fill="currentColor"/>
-        </svg>
-        <svg className="absolute bottom-12 right-12 w-20 h-20 text-orange/12 rotate-[15deg]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8">
-          <path d="M25 75 C25 35, 50 15, 75 35" strokeLinecap="round"/>
-          <path d="M75 75 C75 35, 50 15, 25 35" strokeLinecap="round"/>
-          <circle cx="25" cy="78" r="6" fill="currentColor"/>
-          <circle cx="75" cy="78" r="6" fill="currentColor"/>
-        </svg>
+        {/* Decorative paw prints - dog (3 prints walking) */}
+        <div className="absolute bottom-6 left-6 sm:left-12 flex gap-6 rotate-[25deg]">
+          <svg className="w-10 h-10 text-orange opacity-60" viewBox="0 0 100 100" fill="currentColor">
+            <ellipse cx="50" cy="68" rx="16" ry="20"/>
+            <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
+            <ellipse cx="50" cy="28" rx="9" ry="11"/>
+            <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
+          </svg>
+          <svg className="w-10 h-10 text-orange opacity-45 translate-y-2" viewBox="0 0 100 100" fill="currentColor">
+            <ellipse cx="50" cy="68" rx="16" ry="20"/>
+            <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
+            <ellipse cx="50" cy="28" rx="9" ry="11"/>
+            <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
+          </svg>
+          <svg className="w-10 h-10 text-orange opacity-30 translate-y-4" viewBox="0 0 100 100" fill="currentColor">
+            <ellipse cx="50" cy="68" rx="16" ry="20"/>
+            <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
+            <ellipse cx="50" cy="28" rx="9" ry="11"/>
+            <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
+          </svg>
+        </div>
+        {/* Decorative horseshoe prints (3 prints walking) */}
+        <div className="absolute top-6 right-6 sm:right-12 flex gap-5 rotate-[-20deg]">
+          <svg className="w-11 h-11 text-orange opacity-60" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
+            <path d="M30 80 C30 40, 50 20, 70 40"/>
+            <path d="M70 80 C70 40, 50 20, 30 40"/>
+            <circle cx="30" cy="82" r="5" fill="currentColor"/>
+            <circle cx="70" cy="82" r="5" fill="currentColor"/>
+          </svg>
+          <svg className="w-11 h-11 text-orange opacity-45 translate-y-3" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
+            <path d="M30 80 C30 40, 50 20, 70 40"/>
+            <path d="M70 80 C70 40, 50 20, 30 40"/>
+            <circle cx="30" cy="82" r="5" fill="currentColor"/>
+            <circle cx="70" cy="82" r="5" fill="currentColor"/>
+          </svg>
+          <svg className="w-11 h-11 text-orange opacity-30 translate-y-6" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
+            <path d="M30 80 C30 40, 50 20, 70 40"/>
+            <path d="M70 80 C70 40, 50 20, 30 40"/>
+            <circle cx="30" cy="82" r="5" fill="currentColor"/>
+            <circle cx="70" cy="82" r="5" fill="currentColor"/>
+          </svg>
+        </div>
         
         <div className="container-custom mx-auto relative z-10">
           <div className="text-center mb-14 reveal-on-scroll">
@@ -223,47 +239,35 @@ export default function HomePage() {
                 step: '1',
                 title: 'Elige tu seguro',
                 description: 'Selecciona perro o caballo y la cobertura que necesitas.',
-                icon: (
-                  <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                  </svg>
-                ),
+                emoji: '📋',
               },
               {
                 step: '2',
                 title: 'Rellena el formulario',
                 description: 'Solo pedimos los datos imprescindibles. Tardas menos de 3 minutos.',
-                icon: (
-                  <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                  </svg>
-                ),
+                emoji: '✏️',
               },
               {
                 step: '3',
                 title: 'Póliza activa',
                 description: 'Tu seguro activado en menos de 24 horas. Sin papeleos, te lo mandamos al WhatsApp.',
-                icon: (
-                  <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                ),
+                emoji: '🛡️',
               },
             ].map((item, index) => (
               <div key={index} className="reveal-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
-                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full">
                   {/* Step number */}
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">
                     {item.step}
                   </div>
-                  {/* Icon */}
-                  <div className="w-16 h-16 mx-auto rounded-2xl bg-orange/10 border border-orange/20 flex items-center justify-center mb-5 mt-2">
-                    {item.icon}
+                  {/* Emoji icon */}
+                  <div className="text-4xl mb-5 mt-2">
+                    {item.emoji}
                   </div>
-                  <h3 className="text-xl font-black text-white mb-3">
+                  <h3 className="text-xl font-black text-white mb-3 text-left">
                     {item.title}
                   </h3>
-                  <p className="text-white/60 text-sm leading-relaxed">
+                  <p className="text-white/80 text-sm leading-relaxed text-left">
                     {item.description}
                   </p>
                 </div>
