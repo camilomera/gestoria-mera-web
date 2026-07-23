@@ -188,7 +188,7 @@ export default function HomePage() {
             <img
               src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784818189/perro_yt4bqw.gif"
               alt=""
-              className="w-36 h-28 object-contain"
+              className="w-36 h-28 object-contain mix-blend-screen"
 
             />
           </div>
@@ -205,7 +205,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 sm:gap-0 items-center max-w-5xl mx-auto">
             {/* Step 1 */}
             <div className="reveal-on-scroll">
-              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">1</div>
                 <div className="text-4xl mb-5 mt-2 text-center">📋</div>
                 <h3 className="text-xl font-black text-white mb-3 text-center">Elige tu seguro</h3>
@@ -213,20 +213,21 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Arrow 1 */}
-            <div className="hidden sm:flex items-center justify-center px-3">
-              <div className="animate-bounce-x">
-                <svg className="w-10 h-10 text-orange drop-shadow-[0_0_8px_rgba(255,165,0,0.5)]" fill="none" viewBox="0 0 24 24">
-                  <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="19" cy="12" r="2" fill="currentColor" className="animate-ping-slow"/>
-                </svg>
+            {/* Arrow */}
+            <div className="hidden sm:flex items-center justify-center px-4">
+              <div className="animate-bounce-x relative">
+                <div className="w-12 h-12 rounded-full bg-orange/20 border border-orange/40 flex items-center justify-center backdrop-blur-sm">
+                  <svg className="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+                <div className="absolute inset-0 rounded-full bg-orange/10 animate-ping-slow" />
               </div>
             </div>
 
             {/* Step 2 */}
             <div className="reveal-on-scroll" style={{ transitionDelay: '150ms' }}>
-              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">2</div>
                 <div className="text-4xl mb-5 mt-2 text-center">✏️</div>
                 <h3 className="text-xl font-black text-white mb-3 text-center">Rellena el formulario</h3>
@@ -234,20 +235,21 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Arrow 2 */}
-            <div className="hidden sm:flex items-center justify-center px-3">
+            {/* Arrow */}
+            <div className="hidden sm:flex items-center justify-center px-4">
               <div className="animate-bounce-x" style={{ animationDelay: '0.5s' }}>
-                <svg className="w-10 h-10 text-orange drop-shadow-[0_0_8px_rgba(255,165,0,0.5)]" fill="none" viewBox="0 0 24 24">
-                  <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="19" cy="12" r="2" fill="currentColor" className="animate-ping-slow"/>
-                </svg>
+                <div className="w-12 h-12 rounded-full bg-orange/20 border border-orange/40 flex items-center justify-center backdrop-blur-sm">
+                  <svg className="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </div>
+                <div className="absolute inset-0 rounded-full bg-orange/10 animate-ping-slow" style={{ animationDelay: '0.5s' }} />
               </div>
             </div>
 
             {/* Step 3 */}
             <div className="reveal-on-scroll" style={{ transitionDelay: '300ms' }}>
-              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[280px] flex flex-col">
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">3</div>
                 <div className="text-4xl mb-5 mt-2 text-center">🛡️</div>
                 <h3 className="text-xl font-black text-white mb-3 text-center">Póliza activa</h3>
