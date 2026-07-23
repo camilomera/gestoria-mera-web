@@ -43,18 +43,15 @@ export default function HomePage() {
             <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/e_loop:2/13711342_1080_1920_30fps_pkk24w.mp4" type="video/mp4" />
           </video>
           {/* Subtle overlay - grass clearly visible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-midnight/80 via-midnight/60 to-midnight/30" />
+          <div className="absolute inset-0 bg-[#F2EEC4]/55" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16">
           {/* Title with inline animal icons */}
           <div className="text-center mb-12 sm:mb-16 animate-fade-in">
-            <h1 className="font-black tracking-tight leading-[1.1]">
-              <span className="block text-white/90 text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-3 font-bold">Seguros para</span>
-              <span className="relative inline-block text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl" style={{ fontFamily: 'var(--font-jakarta), sans-serif' }}>
-                perros y caballos
-                <span className="absolute -bottom-2 left-0 h-1 sm:h-1.5 bg-orange rounded-full animate-draw-underline" />
-              </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.15]" style={{ fontFamily: 'var(--font-jakarta), sans-serif' }}>
+              <span className="text-midnight">Seguros para </span>
+              <span className="text-orange">perros y caballos</span>
             </h1>
           </div>
 
