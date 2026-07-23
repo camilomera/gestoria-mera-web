@@ -135,19 +135,19 @@
 .title-shine-words {
   background: linear-gradient(
     90deg,
-    #191970 0%,
-    #191970 35%,
-    #4545b8 42%,
-    #ffa500 50%,
-    #4545b8 58%,
-    #191970 65%,
-    #191970 100%
+    #ffa500 0%,
+    #ffa500 40%,
+    #ffcc44 48%,
+    #fff2cc 50%,
+    #ffcc44 52%,
+    #ffa500 60%,
+    #ffa500 100%
   );
-  background-size: 400% 100%;
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: metallic-shift 12s linear infinite;
+  animation: metallic-shift 8s ease-in-out infinite;
 }
 
 @keyframes metallic-shift {
