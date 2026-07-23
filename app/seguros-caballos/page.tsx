@@ -393,11 +393,15 @@ export default function SegurosPage() {
     return (
       <main className="min-h-screen bg-[#0a0f1a]">
         <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1200&q=80"
-            alt="Caballo en el campo"
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             className="absolute inset-0 w-full h-full object-cover"
-          />
+          >
+            <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/12509081_1920_1080_60fps_unug5q.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-[#0a0f1a]/75" />
           <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
             <h1 className="text-3xl md:text-5xl font-bold text-white max-w-3xl leading-tight">
