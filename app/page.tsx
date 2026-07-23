@@ -27,7 +27,7 @@ export default function HomePage() {
   const scrollRef = useScrollReveal()
 
   return (
-    <div ref={scrollRef} className="pt-20">
+    <div ref={scrollRef} className="">
       {/* ========== HERO ========== */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         {/* Video background - grass */}
