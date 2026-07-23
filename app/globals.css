@@ -129,6 +129,10 @@
 
 /* Title shine effect */
 .title-shine {
+  color: #191970;
+}
+
+.title-shine-words {
   background: linear-gradient(
     90deg,
     #191970 0%,
@@ -143,33 +147,10 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: metallic-shift 12s linear infinite, title-entrance 1.2s ease-out forwards;
-  opacity: 0;
-  transform: translateY(15px) scale(0.97);
+  animation: metallic-shift 12s linear infinite;
 }
 
 @keyframes metallic-shift {
   0% { background-position: 100% center; }
   100% { background-position: -100% center; }
-}
-
-@keyframes title-entrance {
-  0% {
-    opacity: 0;
-    transform: translateY(15px) scale(0.97);
-    filter: blur(8px);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-2px) scale(1.01);
-    filter: blur(0px);
-  }
-  80% {
-    transform: translateY(1px) scale(0.998);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0px);
-  }
 }
