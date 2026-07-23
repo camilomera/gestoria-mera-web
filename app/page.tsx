@@ -183,20 +183,20 @@ export default function HomePage() {
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
         {/* Decorative paw prints - dog (3 prints walking) */}
-        <div className="absolute bottom-6 left-6 sm:left-12 flex gap-6 rotate-[25deg]">
-          <svg className="w-10 h-10 text-orange opacity-60" viewBox="0 0 100 100" fill="currentColor">
+        <div className="absolute bottom-8 left-8 sm:left-16 flex gap-8 rotate-[25deg]">
+          <svg className="w-14 h-14 text-orange opacity-50" viewBox="0 0 100 100" fill="currentColor">
             <ellipse cx="50" cy="68" rx="16" ry="20"/>
             <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
             <ellipse cx="50" cy="28" rx="9" ry="11"/>
             <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
           </svg>
-          <svg className="w-10 h-10 text-orange opacity-45 translate-y-2" viewBox="0 0 100 100" fill="currentColor">
+          <svg className="w-14 h-14 text-orange opacity-35 translate-y-3" viewBox="0 0 100 100" fill="currentColor">
             <ellipse cx="50" cy="68" rx="16" ry="20"/>
             <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
             <ellipse cx="50" cy="28" rx="9" ry="11"/>
             <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
           </svg>
-          <svg className="w-10 h-10 text-orange opacity-30 translate-y-4" viewBox="0 0 100 100" fill="currentColor">
+          <svg className="w-14 h-14 text-orange opacity-20 translate-y-6" viewBox="0 0 100 100" fill="currentColor">
             <ellipse cx="50" cy="68" rx="16" ry="20"/>
             <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
             <ellipse cx="50" cy="28" rx="9" ry="11"/>
@@ -204,20 +204,20 @@ export default function HomePage() {
           </svg>
         </div>
         {/* Decorative horseshoe prints (3 prints walking) */}
-        <div className="absolute top-6 right-6 sm:right-12 flex gap-5 rotate-[-20deg]">
-          <svg className="w-11 h-11 text-orange opacity-60" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
+        <div className="absolute top-8 right-8 sm:right-16 flex gap-7 rotate-[-20deg]">
+          <svg className="w-14 h-14 text-orange opacity-50" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
             <path d="M30 80 C30 40, 50 20, 70 40"/>
             <path d="M70 80 C70 40, 50 20, 30 40"/>
             <circle cx="30" cy="82" r="5" fill="currentColor"/>
             <circle cx="70" cy="82" r="5" fill="currentColor"/>
           </svg>
-          <svg className="w-11 h-11 text-orange opacity-45 translate-y-3" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
+          <svg className="w-14 h-14 text-orange opacity-35 translate-y-4" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
             <path d="M30 80 C30 40, 50 20, 70 40"/>
             <path d="M70 80 C70 40, 50 20, 30 40"/>
             <circle cx="30" cy="82" r="5" fill="currentColor"/>
             <circle cx="70" cy="82" r="5" fill="currentColor"/>
           </svg>
-          <svg className="w-11 h-11 text-orange opacity-30 translate-y-6" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
+          <svg className="w-14 h-14 text-orange opacity-20 translate-y-8" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
             <path d="M30 80 C30 40, 50 20, 70 40"/>
             <path d="M70 80 C70 40, 50 20, 30 40"/>
             <circle cx="30" cy="82" r="5" fill="currentColor"/>
@@ -250,29 +250,42 @@ export default function HomePage() {
               {
                 step: '3',
                 title: 'Póliza activa',
-                description: 'Tu seguro activado en menos de 24 horas. Sin papeleos, te lo mandamos al WhatsApp.',
+                description: 'Tu seguro activado en menos de 24 horas. Te enviamos todo al WhatsApp.',
                 emoji: '🛡️',
               },
             ].map((item, index) => (
               <div key={index} className="reveal-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
-                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full">
+                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
                   {/* Step number */}
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">
                     {item.step}
                   </div>
-                  {/* Emoji icon */}
-                  <div className="text-4xl mb-5 mt-2">
+                  {/* Emoji icon - centered */}
+                  <div className="text-4xl mb-5 mt-2 text-center">
                     {item.emoji}
                   </div>
-                  <h3 className="text-xl font-black text-white mb-3 text-left">
+                  <h3 className="text-xl font-black text-white mb-3 text-center">
                     {item.title}
                   </h3>
-                  <p className="text-white/80 text-sm leading-relaxed text-left">
+                  <p className="text-white/80 text-sm leading-relaxed text-center flex-1">
                     {item.description}
                   </p>
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Flow arrows between cards - desktop only */}
+          <div className="hidden sm:flex justify-center items-center gap-0 max-w-5xl mx-auto -mt-[170px] mb-[120px] pointer-events-none">
+            <div className="flex-1" />
+            <svg className="w-8 h-8 text-orange/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+            <div className="flex-1" />
+            <svg className="w-8 h-8 text-orange/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+            <div className="flex-1" />
           </div>
         </div>
       </section>
