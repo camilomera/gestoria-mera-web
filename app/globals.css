@@ -276,3 +276,14 @@
 .btn-cta:hover {
   box-shadow: 0 8px 25px rgba(255, 165, 0, 0.4), 0 0 0 3px rgba(255, 165, 0, 0.1);
 }
+
+/* Animated underline draw effect */
+.animate-draw-underline {
+  animation: draw-underline 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  width: 0;
+}
+
+@keyframes draw-underline {
+  from { width: 0; }
+  to { width: 100%; }
+}

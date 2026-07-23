@@ -21,7 +21,7 @@ export default function Header() {
         
         <div className="relative flex items-center justify-center h-16 sm:h-[4.5rem]">
           {/* All content centered together */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center justify-center gap-8 w-full">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <span className="text-2xl font-black text-white whitespace-nowrap">
