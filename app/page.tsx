@@ -183,13 +183,13 @@ export default function HomePage() {
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
         {/* Running dog GIF animation */}
-        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-20">
+        <div className="absolute bottom-6 left-0 right-0 pointer-events-none overflow-hidden h-28">
           <div className="animate-run-dog">
             <img
               src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784818189/perro_yt4bqw.gif"
               alt=""
-              className="w-24 h-20 object-contain"
-              style={{ filter: 'brightness(1.3) sepia(1) saturate(3) hue-rotate(10deg)' }}
+              className="w-36 h-28 object-contain"
+
             />
           </div>
         </div>
