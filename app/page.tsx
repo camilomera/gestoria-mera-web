@@ -83,28 +83,34 @@ export default function HomePage() {
               href="/seguros-perros"
               className="group overflow-hidden rounded-3xl bg-white backdrop-blur-sm border border-midnight/8 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up shadow-lg"
             >
-              {/* Photo - no overlay, face fully visible */}
               <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#f5f5f0]">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798481/pexels-miami302-23383658_ytcubu.jpg"
                   alt="Perro Boyero de Berna"
-                  className="w-full h-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              {/* Content */}
               <div className="p-6 sm:p-7">
                 <h2 className="text-2xl sm:text-[1.7rem] font-black text-midnight leading-tight">
                   Seguros para perros
                 </h2>
-                <p className="mt-2 text-midnight/50 text-sm leading-relaxed">
-                  Todas las modalidades: compañía, PPP, caza y criadores. Responsabilidad Civil completa.
-                </p>
-                <div className="mt-5 flex items-center gap-4">
-                  <span className="text-orange font-black text-2xl">20,40 €<span className="text-midnight/40 font-bold text-sm">/año</span></span>
+                <ul className="mt-3 space-y-1.5">
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Compañía, PPP, caza y criadores
+                  </li>
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Responsabilidad Civil completa
+                  </li>
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Asesoramiento personal por WhatsApp
+                  </li>
+                </ul>
+                <div className="mt-5">
+                  <span className="text-orange font-black text-2xl">Desde 20,40 €<span className="text-orange font-bold text-sm">/año</span></span>
                 </div>
                 <div className="mt-4">
-                  <span className="inline-flex items-center justify-center w-full gap-2 bg-midnight hover:bg-midnight-light text-white font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-midnight/20 group-hover:gap-3">
-                  Ver opciones y contratar
+                  <span className="inline-flex items-center justify-center w-full gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
+                    Ver opciones y contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -118,28 +124,34 @@ export default function HomePage() {
               href="/seguros-caballos"
               className="group overflow-hidden rounded-3xl bg-white backdrop-blur-sm border border-midnight/8 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up delay-150 shadow-lg"
             >
-              {/* Photo - no overlay, face fully visible */}
               <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#f5f5f0]">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784808037/pexels-mographe-10942929_wcxh7z.jpg"
                   alt="Caballo"
-                  className="w-full h-full object-cover object-[center_25%] transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              {/* Content */}
               <div className="p-6 sm:p-7">
                 <h2 className="text-2xl sm:text-[1.7rem] font-black text-midnight leading-tight">
                   Seguros para caballos
                 </h2>
-                <p className="mt-2 text-midnight/50 text-sm leading-relaxed">
-                  Contratación inmediata, 100% online. Diferentes planes de cobertura adaptados a tu caballo.
-                </p>
-                <div className="mt-5 flex items-center gap-4">
-                  <span className="text-orange font-black text-2xl">48,27 €<span className="text-midnight/40 font-bold text-sm">/año</span></span>
+                <ul className="mt-3 space-y-1.5">
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Contratación inmediata, 100% online
+                  </li>
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Diferentes planes de cobertura
+                  </li>
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Asesoramiento personal por WhatsApp
+                  </li>
+                </ul>
+                <div className="mt-5">
+                  <span className="text-orange font-black text-2xl">Desde 48,27 €<span className="text-orange font-bold text-sm">/año</span></span>
                 </div>
                 <div className="mt-4">
-                  <span className="inline-flex items-center justify-center w-full gap-2 bg-midnight hover:bg-midnight-light text-white font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-midnight/20 group-hover:gap-3">
-                  Ver opciones y contratar
+                  <span className="inline-flex items-center justify-center w-full gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
+                    Ver opciones y contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
