@@ -458,8 +458,8 @@ export default function SegurosPerrosPage() {
         </section>
       )}
 
-      {/* CTA final */}
-      <section className="py-10 sm:py-12">
+      {/* CTA final - hide during loading */}
+      {step !== 'loading' && <section className="py-10 sm:py-12">
         <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-xl">
           <h2 className="text-xl sm:text-2xl font-black text-midnight">
             ¿Tienes dudas?
@@ -481,7 +481,7 @@ export default function SegurosPerrosPage() {
             </a>
           </div>
         </div>
-      </section>
+      </section>}
     </div>
   )
 }
