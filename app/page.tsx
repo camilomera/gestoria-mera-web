@@ -76,6 +76,26 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Banner - applies to both */}
+          <div className="max-w-5xl mx-auto mb-8 animate-fade-in">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-5 bg-white/80 backdrop-blur-sm border border-orange/20 rounded-2xl px-6 py-4 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-orange text-lg">⚡</span>
+                <span className="text-midnight text-sm font-bold">Contratación inmediata</span>
+              </div>
+              <div className="hidden sm:block w-px h-5 bg-midnight/10"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-orange text-lg">💻</span>
+                <span className="text-midnight text-sm font-bold">100% online en 3 minutos</span>
+              </div>
+              <div className="hidden sm:block w-px h-5 bg-midnight/10"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#25D366] text-lg">💬</span>
+                <span className="text-midnight text-sm font-bold">Asesoramiento por WhatsApp</span>
+              </div>
+            </div>
+          </div>
+
           {/* Dual Cards */}
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
             {/* Dogs Card */}
@@ -102,11 +122,11 @@ export default function HomePage() {
                     <span className="text-orange text-base">✓</span> Responsabilidad Civil completa
                   </li>
                   <li className="flex items-center gap-2 text-midnight/60 text-sm">
-                    <span className="text-orange text-base">✓</span> Asesoramiento personal por WhatsApp
+                    <span className="text-orange text-base">✓</span> Cobertura en toda España
                   </li>
                 </ul>
                 <div className="mt-5">
-                  <span className="text-orange font-black text-2xl">Desde 20,40 €<span className="text-orange font-bold text-sm">/año</span></span>
+                  <span className="text-midnight font-black text-2xl">Desde 20,40 €<span className="text-midnight font-bold text-sm">/año</span></span>
                 </div>
                 <div className="mt-4">
                   <span className="inline-flex items-center justify-center w-full gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
@@ -128,7 +148,7 @@ export default function HomePage() {
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784808037/pexels-mographe-10942929_wcxh7z.jpg"
                   alt="Caballo"
-                  className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
               <div className="p-6 sm:p-7">
@@ -137,17 +157,17 @@ export default function HomePage() {
                 </h2>
                 <ul className="mt-3 space-y-1.5">
                   <li className="flex items-center gap-2 text-midnight/60 text-sm">
-                    <span className="text-orange text-base">✓</span> Contratación inmediata, 100% online
-                  </li>
-                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
                     <span className="text-orange text-base">✓</span> Diferentes planes de cobertura
                   </li>
                   <li className="flex items-center gap-2 text-midnight/60 text-sm">
-                    <span className="text-orange text-base">✓</span> Asesoramiento personal por WhatsApp
+                    <span className="text-orange text-base">✓</span> Responsabilidad Civil hasta 306.000€
+                  </li>
+                  <li className="flex items-center gap-2 text-midnight/60 text-sm">
+                    <span className="text-orange text-base">✓</span> Cobertura por fallecimiento incluida
                   </li>
                 </ul>
                 <div className="mt-5">
-                  <span className="text-orange font-black text-2xl">Desde 48,27 €<span className="text-orange font-bold text-sm">/año</span></span>
+                  <span className="text-midnight font-black text-2xl">Desde 48,27 €<span className="text-midnight font-bold text-sm">/año</span></span>
                 </div>
                 <div className="mt-4">
                   <span className="inline-flex items-center justify-center w-full gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
