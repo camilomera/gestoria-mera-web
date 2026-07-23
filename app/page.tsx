@@ -49,27 +49,7 @@ export default function HomePage() {
           {/* Title with inline animal icons */}
           <div className="text-center mb-12 sm:mb-16 animate-fade-in">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-midnight tracking-tight leading-[1.15]">
-              Seguros para{' '}
-              <span className="inline-flex items-center gap-2">
-                perros
-                <svg className="w-8 h-8 sm:w-10 sm:h-10 inline-block" viewBox="0 0 64 64" fill="none">
-                  <path d="M32 56c-8-4-20-14-20-28C12 16 20 8 32 8s20 8 20 20c0 14-12 24-20 28z" fill="#191970" opacity="0.08"/>
-                  <path d="M20 30c-2-6 0-12 4-14s8 1 8 6M44 30c2-6 0-12-4-14s-8 1-8 6" stroke="#191970" strokeWidth="2.5" strokeLinecap="round"/>
-                  <circle cx="26" cy="36" r="2.5" fill="#191970"/>
-                  <circle cx="38" cy="36" r="2.5" fill="#191970"/>
-                  <ellipse cx="32" cy="42" rx="4" ry="3" fill="#191970" opacity="0.7"/>
-                  <path d="M28 46c2 2 6 2 8 0" stroke="#191970" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </span>
-              {' '}y{' '}
-              <span className="inline-flex items-center gap-2">
-                caballos
-                <svg className="w-8 h-8 sm:w-10 sm:h-10 inline-block" viewBox="0 0 64 64" fill="none">
-                  <path d="M20 52V36c0-8 4-16 12-18 4-1 8 0 12 2l4-8 4 2-2 10c2 4 2 8 0 12l-2 16" stroke="#191970" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M36 20c2-4 6-8 10-8" stroke="#191970" strokeWidth="2.5" strokeLinecap="round"/>
-                  <circle cx="40" cy="28" r="2" fill="#191970"/>
-                </svg>
-              </span>
+              <span className="title-shine">Seguros para perros y caballos</span>
             </h1>
           </div>
 

@@ -126,3 +126,25 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Title shine effect */
+.title-shine {
+  background: linear-gradient(
+    120deg,
+    #191970 0%,
+    #191970 40%,
+    #ffa500 50%,
+    #191970 60%,
+    #191970 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% { background-position: 200% center; }
+  50% { background-position: -200% center; }
+}
