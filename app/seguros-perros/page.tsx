@@ -131,9 +131,9 @@ export default function SegurosPerrosPage() {
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
                   <img
-                    src="https://images.unsplash.com/photo-1567752881298-894bb81f9379?w=800&q=80"
+                    src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784824746/pexels-adriendrj-14682199_aqa2kq.jpg"
                     alt="Rottweiler"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute bottom-4 left-4">
                     <span className="inline-block px-4 py-1.5 bg-orange text-white text-xs font-bold rounded-full shadow-lg">
@@ -165,9 +165,9 @@ export default function SegurosPerrosPage() {
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
                   <img
-                    src="https://images.unsplash.com/photo-1612195583950-b8fd34c87093?w=800&q=80"
+                    src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784824659/pexels-blanco-studio-2147970603-29985319_frztvu.jpg"
                     alt="Jack Russell Terrier"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute bottom-4 left-4">
                     <span className="inline-block px-4 py-1.5 bg-midnight text-white text-xs font-bold rounded-full shadow-lg">
