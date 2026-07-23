@@ -31,18 +31,19 @@ export default function HomePage() {
       {/* ========== HERO ========== */}
       <section className="relative min-h-[calc(100vh-5rem)] flex flex-col justify-center overflow-hidden">
         {/* Video background - grass */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 animate-fade-in">
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-opacity duration-1000"
+            style={{ filter: 'brightness(1.05) saturate(1.1)' }}
           >
-            <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/13711342_1080_1920_30fps_pkk24w.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/e_loop:2/13711342_1080_1920_30fps_pkk24w.mp4" type="video/mp4" />
           </video>
-          {/* Lighter overlay so grass texture is visible */}
-          <div className="absolute inset-0 bg-[#f5fffa]/70" />
+          {/* Subtle overlay - grass clearly visible */}
+          <div className="absolute inset-0 bg-[#f5fffa]/50" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
