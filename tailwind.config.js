@@ -17,16 +17,16 @@ module.exports = {
           200: 'rgba(25, 25, 112, 0.2)',
         },
         mintcream: {
-          DEFAULT: '#f5fffa',
-          light: '#f8fff9',
-          dark: '#e8f5ee',
+          DEFAULT: '#F2EEC4',
+          light: '#F7F4D6',
+          dark: '#E8E4B0',
         },
         // Alias 'mint' to 'mintcream' so existing classes (mint-50, mint-100, etc.) resolve
         mint: {
-          50: '#f5fffa',
-          100: '#edfff5',
-          200: '#ddf5ea',
-          300: '#c5e8d6',
+          50: '#F2EEC4',
+          100: '#F5F1CC',
+          200: '#EDE9B8',
+          300: '#E5E0A5',
         },
         orange: {
           DEFAULT: '#ffa500',

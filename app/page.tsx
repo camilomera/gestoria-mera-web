@@ -43,7 +43,7 @@ export default function HomePage() {
             <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/e_loop:2/13711342_1080_1920_30fps_pkk24w.mp4" type="video/mp4" />
           </video>
           {/* Subtle overlay - grass clearly visible */}
-          <div className="absolute inset-0 bg-[#f5fffa]/50" />
+          <div className="absolute inset-0 bg-[#F2EEC4]/50" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">

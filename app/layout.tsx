@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={merriweather.variable}>
       <head>
-        <meta name="theme-color" content="#f5fffa" />
+        <meta name="theme-color" content="#F2EEC4" />
       </head>
       <body className={`${merriweather.className} bg-mintcream text-midnight min-h-screen`}>
         <Header />
