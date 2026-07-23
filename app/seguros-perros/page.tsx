@@ -96,7 +96,7 @@ export default function SegurosPerrosPage() {
       {step === 'choice' && (
         <section className="py-16 sm:py-20">
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                 ¿Qué tipo de perro tienes?
               </h2>
@@ -104,6 +104,24 @@ export default function SegurosPerrosPage() {
                 Selecciona la categoría de tu perro para ver las opciones disponibles.
               </p>
             </div>
+
+            {/* Banner informativo PPP */}
+            <a
+              href="/que-es-ppp"
+              className="block max-w-3xl mx-auto mb-12 group"
+            >
+              <div className="bg-midnight/5 border-2 border-midnight/10 rounded-2xl px-6 py-4 flex items-center justify-between gap-4 hover:border-orange hover:bg-orange/5 transition-all duration-300">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">🐕‍🦺</span>
+                  <p className="text-midnight font-semibold text-sm sm:text-base">
+                    ¿Qué es un perro potencialmente peligroso? <span className="text-orange">Toda la información aquí</span>
+                  </p>
+                </div>
+                <svg className="w-5 h-5 text-orange shrink-0 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* PPP Card */}
