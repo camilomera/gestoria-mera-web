@@ -193,7 +193,7 @@ export default function HomePage() {
           </div>
         </div>
         
-        <div className="container-custom mx-auto relative z-10">
+        <div className="container-custom mx-auto px-6 sm:px-8 relative z-10">
           <div className="text-center mb-14 reveal-on-scroll">
             <p className="text-orange font-black text-sm uppercase tracking-widest mb-3">Proceso simple</p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
@@ -267,7 +267,7 @@ export default function HomePage() {
 
       {/* ========== WHY CHOOSE US ========== */}
       <section className="py-12 sm:py-16 relative overflow-hidden">
-        <div className="container-custom mx-auto">
+        <div className="container-custom mx-auto px-6 sm:px-8">
           <div className="text-center mb-10 reveal-on-scroll">
             <h2 className="text-2xl sm:text-3xl font-black text-midnight tracking-tight">
               ¿Por qué elegirnos?
@@ -276,11 +276,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
             {[
-              { emoji: '💰', title: 'Mejor precio', description: 'Desde 20,40 €/año' },
+              { emoji: '👋', title: 'Atención cercana', description: 'Hablas con personas, no con robots ni centralitas' },
               { emoji: '⚡', title: 'Contratación inmediata', description: 'Póliza activa en 24h' },
-              { emoji: '🏠', title: 'Empresa familiar', description: 'Gestoría gallega con presencia nacional' },
-              { emoji: '🐾', title: 'Especialistas en animales', description: 'Solo perros y caballos' },
-              { emoji: '💬', title: 'Atención por WhatsApp', description: 'Sin esperas, sin centralitas' },
+              { emoji: '❤️', title: 'Empresa familiar', description: 'Gestoría gallega con presencia nacional' },
+              { emoji: '🐶🐴', title: 'Expertos en perros y caballos', description: 'Es lo único que hacemos' },
+              { emoji: '📱', title: 'WhatsApp', description: 'Fácil y rápido' },
               { emoji: '🛡️', title: 'Respaldados por Caser', description: 'Aseguradora líder en España' },
             ].map((item, index) => (
               <div
@@ -300,7 +300,7 @@ export default function HomePage() {
       {/* ========== FINAL CTA ========== */}
       <section className="py-16 sm:py-20 bg-midnight relative overflow-hidden">
         
-        <div className="container-custom mx-auto relative z-10">
+        <div className="container-custom mx-auto px-6 sm:px-8 relative z-10">
           <div className="text-center reveal-on-scroll max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
               Contrata ahora y ten tu póliza activa{' '}
