@@ -181,23 +181,27 @@ export default function HomePage() {
       </section>
 
       {/* ========== HOW IT WORKS ========== */}
-      <section className="section-padding bg-white relative overflow-hidden">
-        <div className="container-custom mx-auto">
+      <section className="section-padding bg-midnight relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-orange/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-orange/5 rounded-full blur-3xl" />
+        
+        <div className="container-custom mx-auto relative z-10">
           <div className="text-center mb-14 reveal-on-scroll">
             <p className="text-orange font-black text-sm uppercase tracking-widest mb-3">Proceso simple</p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-midnight tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
               Así de fácil
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-0 max-w-5xl mx-auto relative">
+          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {[
               {
                 step: '1',
                 title: 'Elige tu seguro',
-                description: 'Selecciona perro o caballo y la cobertura que mejor se adapte a tus necesidades.',
+                description: 'Selecciona perro o caballo y la cobertura que necesitas.',
                 icon: (
-                  <svg className="w-10 h-10 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                   </svg>
                 ),
@@ -205,9 +209,9 @@ export default function HomePage() {
               {
                 step: '2',
                 title: 'Rellena el formulario',
-                description: 'Solo los datos imprescindibles. Tus datos y los de tu animal en pocos minutos.',
+                description: 'Solo los datos imprescindibles. En menos de 3 minutos.',
                 icon: (
-                  <svg className="w-10 h-10 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                   </svg>
                 ),
@@ -215,37 +219,31 @@ export default function HomePage() {
               {
                 step: '3',
                 title: 'Póliza activa',
-                description: 'Tu seguro activado en menos de 24 horas. Sin papeleos ni desplazamientos.',
+                description: 'Tu seguro activado en menos de 24 horas. Sin papeleos.',
                 icon: (
-                  <svg className="w-10 h-10 text-midnight" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 ),
               },
             ].map((item, index) => (
-              <div key={index} className="reveal-on-scroll relative flex flex-col items-center text-center px-6 py-8" style={{ transitionDelay: `${index * 150}ms` }}>
-                {/* Arrow between steps */}
-                {index < 2 && (
-                  <div className="hidden sm:flex absolute top-1/3 -right-4 z-10 items-center">
-                    <svg className="w-8 h-8 text-orange animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
+              <div key={index} className="reveal-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
+                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full">
+                  {/* Step number */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">
+                    {item.step}
                   </div>
-                )}
-                
-                {/* Step number */}
-                <div className="w-14 h-14 rounded-2xl bg-orange/10 border-2 border-orange/20 flex items-center justify-center mb-5">
-                  {item.icon}
+                  {/* Icon */}
+                  <div className="w-16 h-16 mx-auto rounded-2xl bg-orange/10 border border-orange/20 flex items-center justify-center mb-5 mt-2">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-black text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <div className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-orange text-midnight font-black text-xs mb-4 shadow-md">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-black text-midnight mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-midnight/50 text-sm leading-relaxed max-w-[240px]">
-                  {item.description}
-                </p>
               </div>
             ))}
           </div>
