@@ -131,45 +131,22 @@
 .title-shine {
   background: linear-gradient(
     135deg,
-    #191970 0%,
-    #2a2a8a 25%,
-    #191970 50%,
-    #2a2a8a 75%,
-    #191970 100%
+    #0f0f50 0%,
+    #191970 20%,
+    #2a2a8a 40%,
+    #3535a0 50%,
+    #2a2a8a 60%,
+    #191970 80%,
+    #0f0f50 100%
   );
-  background-size: 200% 200%;
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: metallic-shift 20s ease-in-out infinite;
+  animation: metallic-shift 25s ease-in-out infinite;
 }
 
 @keyframes metallic-shift {
-  0%, 100% { background-position: 0% 0%; }
-  25% { background-position: 100% 50%; }
-  50% { background-position: 200% 100%; }
-  75% { background-position: 100% 50%; }
-}
-
-/* Pulsing words effect */
-.title-shine span {
-  display: inline-block;
-  animation: word-pulse 6s ease-in-out infinite;
-}
-
-.title-shine .pulse-delay-1 {
-  animation-delay: 0s;
-}
-
-.title-shine .pulse-delay-2 {
-  animation-delay: 2s;
-}
-
-.title-shine .pulse-delay-3 {
-  animation-delay: 4s;
-}
-
-@keyframes word-pulse {
-  0%, 100% { opacity: 0.85; }
-  50% { opacity: 1; }
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 300% center; }
 }

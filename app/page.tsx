@@ -49,9 +49,7 @@ export default function HomePage() {
           {/* Title with inline animal icons */}
           <div className="text-center mb-12 sm:mb-16 animate-fade-in">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-midnight tracking-tight leading-[1.15]">
-              <span className="title-shine">
-                <span className="pulse-delay-1">Seguros para </span><span className="pulse-delay-2">perros </span><span className="pulse-delay-3">y caballos</span>
-              </span>
+              <span className="title-shine">Seguros para perros y caballos</span>
             </h1>
           </div>
 
