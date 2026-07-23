@@ -100,9 +100,7 @@ export default function SegurosPerrosPage() {
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                 ¿Qué tipo de perro tienes?
               </h2>
-              <p className="mt-3 text-midnight/70 text-lg">
-                Selecciona la categoría de tu perro para ver las opciones disponibles.
-              </p>
+
             </div>
 
             {/* Banner informativo PPP */}
@@ -131,8 +129,8 @@ export default function SegurosPerrosPage() {
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
                   <img
-                    src="https://res.cloudinary.com/r5v8fzlu/image/upload/c_fill,g_auto,w_800,h_600/v1784824659/pexels-blanco-studio-2147970603-29985319_frztvu.jpg"
-                    alt="Rottweiler"
+                    src="https://res.cloudinary.com/r5v8fzlu/image/upload/c_fill,g_auto,w_1200,h_800/v1784824659/pexels-blanco-studio-2147970603-29985319_frztvu.jpg"
+                    alt="Perro potencialmente peligroso"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute bottom-4 left-4">
@@ -141,17 +139,28 @@ export default function SegurosPerrosPage() {
                     </span>
                   </div>
                 </div>
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-2xl font-black text-midnight">
+                <div className="p-6 sm:p-7">
+                  <h2 className="text-2xl font-black text-midnight leading-tight">
                     Perros Potencialmente Peligrosos
-                  </h3>
-                  <p className="mt-1 text-sm font-bold text-orange">PPP</p>
-                  <p className="mt-3 text-midnight/70 text-sm leading-relaxed">
-                    Rottweiler, Pit Bull, American Staffordshire, Dogo Argentino, Fila Brasileiro, Tosa Inu, Akita Inu y mestizos.
-                  </p>
-                  <div className="mt-5 flex items-center gap-2 text-orange font-bold text-lg">
-                    <span>Desde 30€/año</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  </h2>
+                  <ul className="mt-3 space-y-1.5">
+                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
+                      <span className="text-orange font-bold">✓</span> Rottweiler, Pit Bull, Am. Staffordshire
+                    </li>
+                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
+                      <span className="text-orange font-bold">✓</span> Dogo Argentino, Fila Brasileiro, Tosa Inu
+                    </li>
+                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
+                      <span className="text-orange font-bold">✓</span> Responsabilidad Civil obligatoria
+                    </li>
+                  </ul>
+                  <div className="mt-4">
+                    <span className="text-2xl font-black text-midnight">Desde 30€</span>
+                    <span className="text-midnight/60 text-sm">/año</span>
+                  </div>
+                  <div className="mt-4 w-full bg-orange text-white font-bold text-center py-3 rounded-full btn-shine relative overflow-hidden group-hover:bg-orange-dark transition-colors flex items-center justify-center gap-2">
+                    Ver opciones y contratar
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </div>
@@ -165,8 +174,8 @@ export default function SegurosPerrosPage() {
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
                   <img
-                    src="https://res.cloudinary.com/r5v8fzlu/image/upload/c_fill,g_auto,w_800,h_600/v1784824746/pexels-adriendrj-14682199_aqa2kq.jpg"
-                    alt="Jack Russell Terrier"
+                    src="https://res.cloudinary.com/r5v8fzlu/image/upload/c_fill,g_auto,w_1200,h_800,e_improve,e_auto_brightness/v1784824746/pexels-adriendrj-14682199_aqa2kq.jpg"
+                    alt="Perro no peligroso"
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute bottom-4 left-4">
@@ -175,17 +184,28 @@ export default function SegurosPerrosPage() {
                     </span>
                   </div>
                 </div>
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-2xl font-black text-midnight">
+                <div className="p-6 sm:p-7">
+                  <h2 className="text-2xl font-black text-midnight leading-tight">
                     Perros <span className="text-orange underline decoration-4 underline-offset-4">No</span> Peligrosos
-                  </h3>
-                  <p className="mt-1 text-sm font-semibold text-midnight/60">Compañía, caza, criadores</p>
-                  <p className="mt-3 text-midnight/70 text-sm leading-relaxed">
-                    Todas las razas no catalogadas como peligrosas. Perros de compañía, caza, criadores y adiestradores.
-                  </p>
-                  <div className="mt-5 flex items-center gap-2 text-orange font-bold text-lg">
-                    <span>Desde 20,40€/año</span>
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  </h2>
+                  <ul className="mt-3 space-y-1.5">
+                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
+                      <span className="text-orange font-bold">✓</span> Compañía, caza y criadores
+                    </li>
+                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
+                      <span className="text-orange font-bold">✓</span> Responsabilidad Civil completa
+                    </li>
+                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
+                      <span className="text-orange font-bold">✓</span> Cobertura en toda España
+                    </li>
+                  </ul>
+                  <div className="mt-4">
+                    <span className="text-2xl font-black text-midnight">Desde 20,40€</span>
+                    <span className="text-midnight/60 text-sm">/año</span>
+                  </div>
+                  <div className="mt-4 w-full bg-orange text-white font-bold text-center py-3 rounded-full btn-shine btn-shine-delay relative overflow-hidden group-hover:bg-orange-dark transition-colors flex items-center justify-center gap-2">
+                    Ver opciones y contratar
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </div>

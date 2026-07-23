@@ -126,7 +126,7 @@ export default function HomePage() {
                   <span className="text-midnight font-black text-2xl">Desde 20,40 €<span className="text-midnight font-bold text-sm">/año</span></span>
                 </div>
                 <div className="mt-4">
-                  <span className="inline-flex items-center justify-center w-full gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
+                  <span className="inline-flex items-center justify-center w-full gap-2 btn-shine relative overflow-hidden bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
                     Ver opciones y contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -167,7 +167,7 @@ export default function HomePage() {
                   <span className="text-midnight font-black text-2xl">Desde 48,27 €<span className="text-midnight font-bold text-sm">/año</span></span>
                 </div>
                 <div className="mt-4">
-                  <span className="inline-flex items-center justify-center w-full gap-2 bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
+                  <span className="inline-flex items-center justify-center w-full gap-2 btn-shine relative overflow-hidden bg-orange hover:bg-orange-light text-midnight font-black text-base px-6 py-4 rounded-xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-orange/30 group-hover:gap-3">
                     Ver opciones y contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -318,15 +318,21 @@ export default function HomePage() {
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 href="/seguros-perros"
-                className="btn-3d-gold inline-flex items-center justify-center gap-3 bg-orange text-midnight font-black text-lg px-10 py-5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange/40 relative overflow-hidden"
+                className="btn-shine inline-flex items-center justify-center gap-3 bg-orange text-midnight font-black text-lg px-10 py-5 rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange/30 relative overflow-hidden"
               >
                 Asegurar a mi perro
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Link>
               <Link
                 href="/seguros-caballos"
-                className="btn-3d-gold inline-flex items-center justify-center gap-3 bg-orange text-midnight font-black text-lg px-10 py-5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange/40 relative overflow-hidden"
+                className="btn-shine btn-shine-delay inline-flex items-center justify-center gap-3 bg-orange text-midnight font-black text-lg px-10 py-5 rounded-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange/30 relative overflow-hidden"
               >
                 Asegurar a mi caballo
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
               </Link>
             </div>
           </div>
