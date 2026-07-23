@@ -48,8 +48,8 @@ export default function HomePage() {
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           {/* Title with inline animal icons */}
           <div className="text-center mb-12 sm:mb-16 animate-fade-in">
-            <h1 className="text-5xl sm:text-6xl lg:text-[4.75rem] font-black tracking-tight leading-[1.1]">
-              <span className="title-shine">Seguros para <span className="title-shine-words">perros</span> y <span className="title-shine-words">caballos</span></span>
+            <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.1] whitespace-nowrap">
+              <span className="title-shine">Seguros para <span className="title-shine-words">perros</span> y <span className="title-shine-words-delayed">caballos</span></span>
             </h1>
           </div>
 
