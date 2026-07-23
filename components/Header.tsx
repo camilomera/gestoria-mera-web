@@ -15,10 +15,9 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 p-3 sm:p-4">
-      {/* Dark backdrop behind pill to hide beige */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-transparent pointer-events-none" />
+
       
-      <div className="relative max-w-5xl mx-auto bg-midnight/80 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] px-5 sm:px-8">
+      <div className="relative max-w-5xl mx-auto bg-midnight backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] px-5 sm:px-8">
         {/* Subtle glow */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange/5 via-transparent to-orange/5 pointer-events-none" />
         
@@ -31,7 +30,7 @@ export default function Header() {
                 src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784830463/ChatGPT_Image_Jul_23_2026_08_10_01_PM_j4wlsg.png"
                 alt="Gestoría Mera"
                 className="h-9 sm:h-11 w-auto"
-                style={{ filter: 'invert(1) brightness(2)' }}
+                style={{ filter: 'brightness(0) invert(1)' }}
               />
               <span className="text-lg sm:text-2xl font-black text-white whitespace-nowrap">
                 Gestoría Mera
