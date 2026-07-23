@@ -181,9 +181,9 @@ export default function HomePage() {
       </section>
 
       {/* ========== HOW IT WORKS ========== */}
-      <section className="section-padding bg-midnight relative overflow-hidden">
+      <section className="section-padding pb-28 bg-midnight relative overflow-hidden">
         {/* Running dog GIF animation - overlapping cards */}
-        <div className="absolute bottom-12 left-0 right-0 pointer-events-none overflow-hidden h-40 z-20">
+        <div className="absolute -bottom-4 left-0 right-0 pointer-events-none overflow-hidden h-40 z-20">
           <div className="animate-run-dog">
             <img
               src="https://res.cloudinary.com/r5v8fzlu/image/upload/e_replace_color:191970:50/v1784818189/perro_yt4bqw.gif"
@@ -212,15 +212,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Arrow */}
-            <div className="hidden sm:flex items-center justify-center px-4">
-              <div className="animate-bounce-x relative">
-                <div className="w-12 h-12 rounded-full bg-orange/20 border border-orange/40 flex items-center justify-center backdrop-blur-sm">
-                  <svg className="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </div>
-                <div className="absolute inset-0 rounded-full bg-orange/10 animate-ping-slow" />
+            {/* Neon Chevron Arrow */}
+            <div className="hidden sm:flex items-center justify-center px-2">
+              <div className="flex items-center gap-1">
+                <svg className="w-8 h-8 neon-chevron" style={{ animationDelay: '0s' }} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 4l8 8-8 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <svg className="w-8 h-8 neon-chevron" style={{ animationDelay: '0.2s' }} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 4l8 8-8 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <svg className="w-8 h-8 neon-chevron" style={{ animationDelay: '0.4s' }} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 4l8 8-8 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
             </div>
 
@@ -234,15 +237,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Arrow */}
-            <div className="hidden sm:flex items-center justify-center px-4">
-              <div className="animate-bounce-x" style={{ animationDelay: '0.5s' }}>
-                <div className="w-12 h-12 rounded-full bg-orange/20 border border-orange/40 flex items-center justify-center backdrop-blur-sm">
-                  <svg className="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </div>
-                <div className="absolute inset-0 rounded-full bg-orange/10 animate-ping-slow" style={{ animationDelay: '0.5s' }} />
+            {/* Neon Chevron Arrow */}
+            <div className="hidden sm:flex items-center justify-center px-2">
+              <div className="flex items-center gap-1">
+                <svg className="w-8 h-8 neon-chevron" style={{ animationDelay: '0.6s' }} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 4l8 8-8 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <svg className="w-8 h-8 neon-chevron" style={{ animationDelay: '0.8s' }} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 4l8 8-8 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <svg className="w-8 h-8 neon-chevron" style={{ animationDelay: '1.0s' }} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 4l8 8-8 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
             </div>
 
@@ -352,7 +358,7 @@ export default function HomePage() {
       </section>
 
       {/* ========== FINAL CTA ========== */}
-      <section className="section-padding bg-midnight relative overflow-hidden">
+      <section className="section-padding pb-28 bg-midnight relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-midnight-dark via-midnight to-midnight-light opacity-80" />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
