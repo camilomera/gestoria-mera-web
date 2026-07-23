@@ -27,7 +27,7 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#f5fffa" />
       </head>
-      <body className={`${merriweather.className} bg-mint-50 text-midnight min-h-screen`}>
+      <body className={`${merriweather.className} bg-mintcream text-midnight min-h-screen`}>
         <Header />
         <main className="min-h-screen">
           {children}

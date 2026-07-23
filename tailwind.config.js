@@ -16,12 +16,17 @@ module.exports = {
           100: 'rgba(25, 25, 112, 0.1)',
           200: 'rgba(25, 25, 112, 0.2)',
         },
+        mintcream: {
+          DEFAULT: '#f5fffa',
+          light: '#f8fff9',
+          dark: '#e8f5ee',
+        },
+        // Alias 'mint' to 'mintcream' so existing classes (mint-50, mint-100, etc.) resolve
         mint: {
-          DEFAULT: '#f5fff5',
           50: '#f5fffa',
-          100: '#e8fff0',
-          200: '#d4f5e0',
-          300: '#b8e8cc',
+          100: '#edfff5',
+          200: '#ddf5ea',
+          300: '#c5e8d6',
         },
         orange: {
           DEFAULT: '#ffa500',
@@ -42,7 +47,6 @@ module.exports = {
       animation: {
         fadeIn: 'fadeIn 0.6s ease-out forwards',
         slideUp: 'slideUp 0.6s ease-out forwards',
-        bounce: 'bounce 2s infinite',
         glow: 'glow 2s ease-in-out infinite alternate',
       },
       keyframes: {

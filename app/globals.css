@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply bg-mint-50 text-midnight font-sans antialiased;
+    @apply bg-mintcream text-midnight font-sans antialiased;
   }
 
   ::selection {
@@ -59,7 +59,7 @@
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-white border border-mint-300 rounded-xl 
+    @apply w-full px-4 py-3 bg-white border-2 border-mint-300 rounded-xl 
            text-midnight placeholder-midnight/40 
            focus:outline-none focus:border-orange focus:ring-2 focus:ring-orange/20 
            transition-all duration-300;

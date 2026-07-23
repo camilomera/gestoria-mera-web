@@ -28,9 +28,24 @@ export default function HomePage() {
 
   return (
     <div ref={scrollRef} className="pt-16 sm:pt-20">
-      {/* Hero */}
-      <section className="min-h-[calc(100vh-5rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto w-full">
+      {/* Hero with video background */}
+      <section className="min-h-[calc(100vh-5rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative overflow-hidden">
+        {/* Video background - placeholder until user uploads */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster=""
+          >
+            <source src="https://res.cloudinary.com/r5v8fzlu/video/upload/13711342_1080_1920_30fps_pkk24w.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-mintcream/85" />
+        </div>
+
+        <div className="max-w-6xl mx-auto w-full relative z-10">
           {/* Title */}
           <div className="text-center mb-10 sm:mb-14 animate-fade-in">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-midnight tracking-tight leading-tight">
@@ -54,7 +69,7 @@ export default function HomePage() {
             {/* Dogs Card */}
             <Link
               href="/seguros-perros"
-              className="group relative overflow-hidden rounded-3xl flex flex-col bg-white border-2 border-mint-300 hover:border-orange transition-all duration-500 hover:shadow-2xl hover:shadow-orange/10 hover:-translate-y-2 animate-slide-up shadow-lg"
+              className="group relative overflow-hidden rounded-3xl flex flex-col bg-white border-2 border-mintcream hover:border-orange transition-all duration-500 hover:shadow-2xl hover:shadow-orange/10 hover:-translate-y-2 animate-slide-up shadow-lg"
             >
               <div className="relative h-64 sm:h-72 lg:h-80 overflow-hidden">
                 <img
@@ -73,14 +88,17 @@ export default function HomePage() {
                   <h2 className="text-2xl sm:text-3xl font-black text-midnight">
                     Seguros para Perros
                   </h2>
-                  <p className="mt-2 text-midnight/50 text-sm sm:text-base">
-                    Compañía, PPP, caza y criadores
+                  <p className="mt-2 text-midnight/60 text-sm sm:text-base">
+                    Contratación 100% Online en 3 minutos.
+                  </p>
+                  <p className="mt-1 text-midnight/60 text-sm sm:text-base">
+                    Asesoración personal por teléfono o WhatsApp.
                   </p>
                 </div>
                 
                 <div className="mt-6">
                   <span className="inline-flex items-center justify-center w-full gap-2 bg-midnight hover:bg-midnight-light text-white font-black text-base sm:text-lg px-6 py-4 rounded-2xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-midnight/20">
-                    Ver opciones
+                    Ver Opciones y Contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                     </svg>
@@ -92,13 +110,13 @@ export default function HomePage() {
             {/* Horses Card */}
             <Link
               href="/seguros-caballos"
-              className="group relative overflow-hidden rounded-3xl flex flex-col bg-white border-2 border-mint-300 hover:border-orange transition-all duration-500 hover:shadow-2xl hover:shadow-orange/10 hover:-translate-y-2 animate-slide-up delay-150 shadow-lg"
+              className="group relative overflow-hidden rounded-3xl flex flex-col bg-white border-2 border-mintcream hover:border-orange transition-all duration-500 hover:shadow-2xl hover:shadow-orange/10 hover:-translate-y-2 animate-slide-up delay-150 shadow-lg"
             >
               <div className="relative h-64 sm:h-72 lg:h-80 overflow-hidden">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798481/pexels-bertellifotografia-31853325_fiwbud.jpg"
                   alt="Caballo"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover object-[center_20%] transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-midnight/60 via-transparent to-transparent" />
                 <div className="absolute top-4 left-4 inline-flex items-center bg-orange text-midnight font-black text-xs sm:text-sm px-4 py-2 rounded-full shadow-lg">
@@ -111,14 +129,17 @@ export default function HomePage() {
                   <h2 className="text-2xl sm:text-3xl font-black text-midnight">
                     Seguros para Caballos
                   </h2>
-                  <p className="mt-2 text-midnight/50 text-sm sm:text-base">
-                    Contratación 100% online
+                  <p className="mt-2 text-midnight/60 text-sm sm:text-base">
+                    Contratación 100% Online en 3 minutos.
+                  </p>
+                  <p className="mt-1 text-midnight/60 text-sm sm:text-base">
+                    Asesoración personal por teléfono o WhatsApp.
                   </p>
                 </div>
                 
                 <div className="mt-6">
                   <span className="inline-flex items-center justify-center w-full gap-2 bg-midnight hover:bg-midnight-light text-white font-black text-base sm:text-lg px-6 py-4 rounded-2xl transition-all duration-300 group-hover:shadow-lg group-hover:shadow-midnight/20">
-                    Ver opciones
+                    Ver Opciones y Contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                     </svg>
@@ -171,7 +192,7 @@ export default function HomePage() {
               },
             ].map((item, index) => (
               <div key={index} className="reveal-on-scroll text-center relative" style={{ transitionDelay: `${index * 150}ms` }}>
-                <div className="relative bg-mint-50 border-2 border-mint-300 rounded-3xl p-8 sm:p-10 hover:border-orange transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange/5">
+                <div className="relative bg-mintcream border-2 border-mintcream rounded-3xl p-8 sm:p-10 hover:border-orange transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange/5">
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 inline-flex items-center justify-center w-9 h-9 rounded-full bg-orange text-midnight font-black text-sm shadow-lg shadow-orange/30">
                     {item.step}
                   </div>
@@ -243,7 +264,7 @@ export default function HomePage() {
                 className="reveal-on-scroll group"
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="h-full bg-white border-2 border-mint-300 rounded-3xl p-7 sm:p-8 hover:border-orange transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange/5 flex flex-col items-center text-center">
+                <div className="h-full bg-white border-2 border-mintcream rounded-3xl p-7 sm:p-8 hover:border-orange transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange/5 flex flex-col items-center text-center">
                   <div className="text-4xl sm:text-5xl mb-5 group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
@@ -282,7 +303,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/seguros-caballos"
-                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-mint-100 text-midnight font-black text-lg px-10 py-5 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-3 bg-white hover:bg-mintcream text-midnight font-black text-lg px-10 py-5 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
               >
                 🐴 Seguros para Caballos
               </Link>
