@@ -182,9 +182,32 @@ export default function HomePage() {
 
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-orange/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-orange/5 rounded-full blur-3xl" />
+        {/* Decorative paw prints */}
+        <svg className="absolute bottom-8 left-8 w-24 h-24 text-orange/15 rotate-[-15deg]" viewBox="0 0 100 100" fill="currentColor">
+          <ellipse cx="50" cy="65" rx="18" ry="22"/>
+          <ellipse cx="28" cy="35" rx="10" ry="12" transform="rotate(-10 28 35)"/>
+          <ellipse cx="50" cy="25" rx="10" ry="12"/>
+          <ellipse cx="72" cy="35" rx="10" ry="12" transform="rotate(10 72 35)"/>
+        </svg>
+        <svg className="absolute top-10 right-10 w-20 h-20 text-orange/15 rotate-[20deg]" viewBox="0 0 100 100" fill="currentColor">
+          <ellipse cx="50" cy="65" rx="18" ry="22"/>
+          <ellipse cx="28" cy="35" rx="10" ry="12" transform="rotate(-10 28 35)"/>
+          <ellipse cx="50" cy="25" rx="10" ry="12"/>
+          <ellipse cx="72" cy="35" rx="10" ry="12" transform="rotate(10 72 35)"/>
+        </svg>
+        {/* Horseshoe prints */}
+        <svg className="absolute top-1/2 left-6 w-16 h-16 text-orange/12 -translate-y-1/2 rotate-[-25deg]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8">
+          <path d="M25 75 C25 35, 50 15, 75 35" strokeLinecap="round"/>
+          <path d="M75 75 C75 35, 50 15, 25 35" strokeLinecap="round"/>
+          <circle cx="25" cy="78" r="6" fill="currentColor"/>
+          <circle cx="75" cy="78" r="6" fill="currentColor"/>
+        </svg>
+        <svg className="absolute bottom-12 right-12 w-20 h-20 text-orange/12 rotate-[15deg]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="8">
+          <path d="M25 75 C25 35, 50 15, 75 35" strokeLinecap="round"/>
+          <path d="M75 75 C75 35, 50 15, 25 35" strokeLinecap="round"/>
+          <circle cx="25" cy="78" r="6" fill="currentColor"/>
+          <circle cx="75" cy="78" r="6" fill="currentColor"/>
+        </svg>
         
         <div className="container-custom mx-auto relative z-10">
           <div className="text-center mb-14 reveal-on-scroll">
@@ -209,7 +232,7 @@ export default function HomePage() {
               {
                 step: '2',
                 title: 'Rellena el formulario',
-                description: 'Solo los datos imprescindibles. En menos de 3 minutos.',
+                description: 'Solo pedimos los datos imprescindibles. Tardas menos de 3 minutos.',
                 icon: (
                   <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -219,7 +242,7 @@ export default function HomePage() {
               {
                 step: '3',
                 title: 'Póliza activa',
-                description: 'Tu seguro activado en menos de 24 horas. Sin papeleos.',
+                description: 'Tu seguro activado en menos de 24 horas. Sin papeleos, te lo mandamos al WhatsApp.',
                 icon: (
                   <svg className="w-8 h-8 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
