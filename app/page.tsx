@@ -182,46 +182,168 @@ export default function HomePage() {
 
       {/* ========== HOW IT WORKS ========== */}
       <section className="section-padding bg-midnight relative overflow-hidden">
-        {/* Decorative paw prints - dog (3 prints walking) */}
-        <div className="absolute bottom-8 left-8 sm:left-16 flex gap-8 rotate-[25deg]">
-          <svg className="w-14 h-14 text-orange opacity-50" viewBox="0 0 100 100" fill="currentColor">
-            <ellipse cx="50" cy="68" rx="16" ry="20"/>
-            <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
-            <ellipse cx="50" cy="28" rx="9" ry="11"/>
-            <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
+        {/* Dog paw prints - 9 prints scattered, realistic shape */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Dog paws - left side trail */}
+          <svg className="absolute bottom-[10%] left-[3%] w-10 h-10 text-orange opacity-40 rotate-[30deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
           </svg>
-          <svg className="w-14 h-14 text-orange opacity-35 translate-y-3" viewBox="0 0 100 100" fill="currentColor">
-            <ellipse cx="50" cy="68" rx="16" ry="20"/>
-            <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
-            <ellipse cx="50" cy="28" rx="9" ry="11"/>
-            <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
+          <svg className="absolute bottom-[18%] left-[7%] w-9 h-9 text-orange opacity-35 rotate-[25deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
           </svg>
-          <svg className="w-14 h-14 text-orange opacity-20 translate-y-6" viewBox="0 0 100 100" fill="currentColor">
-            <ellipse cx="50" cy="68" rx="16" ry="20"/>
-            <ellipse cx="30" cy="38" rx="9" ry="11" transform="rotate(-10 30 38)"/>
-            <ellipse cx="50" cy="28" rx="9" ry="11"/>
-            <ellipse cx="70" cy="38" rx="9" ry="11" transform="rotate(10 70 38)"/>
+          <svg className="absolute bottom-[28%] left-[4%] w-8 h-8 text-orange opacity-30 rotate-[35deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
           </svg>
-        </div>
-        {/* Decorative horseshoe prints (3 prints walking) */}
-        <div className="absolute top-8 right-8 sm:right-16 flex gap-7 rotate-[-20deg]">
-          <svg className="w-14 h-14 text-orange opacity-50" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
-            <path d="M30 80 C30 40, 50 20, 70 40"/>
-            <path d="M70 80 C70 40, 50 20, 30 40"/>
-            <circle cx="30" cy="82" r="5" fill="currentColor"/>
-            <circle cx="70" cy="82" r="5" fill="currentColor"/>
+          <svg className="absolute bottom-[38%] left-[8%] w-8 h-8 text-orange opacity-25 rotate-[20deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
           </svg>
-          <svg className="w-14 h-14 text-orange opacity-35 translate-y-4" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
-            <path d="M30 80 C30 40, 50 20, 70 40"/>
-            <path d="M70 80 C70 40, 50 20, 30 40"/>
-            <circle cx="30" cy="82" r="5" fill="currentColor"/>
-            <circle cx="70" cy="82" r="5" fill="currentColor"/>
+          <svg className="absolute bottom-[48%] left-[3%] w-7 h-7 text-orange opacity-20 rotate-[30deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
           </svg>
-          <svg className="w-14 h-14 text-orange opacity-20 translate-y-8" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round">
-            <path d="M30 80 C30 40, 50 20, 70 40"/>
-            <path d="M70 80 C70 40, 50 20, 30 40"/>
-            <circle cx="30" cy="82" r="5" fill="currentColor"/>
-            <circle cx="70" cy="82" r="5" fill="currentColor"/>
+          {/* More paws - right bottom */}
+          <svg className="absolute bottom-[5%] right-[25%] w-8 h-8 text-orange opacity-20 rotate-[-10deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
+          </svg>
+          <svg className="absolute bottom-[12%] right-[20%] w-7 h-7 text-orange opacity-15 rotate-[-20deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
+          </svg>
+          <svg className="absolute top-[15%] left-[15%] w-7 h-7 text-orange opacity-15 rotate-[40deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
+          </svg>
+          <svg className="absolute top-[25%] left-[12%] w-6 h-6 text-orange opacity-12 rotate-[45deg]" viewBox="0 0 50 50" fill="currentColor">
+            <ellipse cx="25" cy="35" rx="9" ry="11"/>
+            <ellipse cx="14" cy="18" rx="5" ry="6.5" transform="rotate(-15 14 18)"/>
+            <ellipse cx="25" cy="13" rx="5" ry="6"/>
+            <ellipse cx="36" cy="18" rx="5" ry="6.5" transform="rotate(15 36 18)"/>
+            <ellipse cx="19" cy="25" rx="3.5" ry="4.5" transform="rotate(-5 19 25)"/>
+            <ellipse cx="31" cy="25" rx="3.5" ry="4.5" transform="rotate(5 31 25)"/>
+          </svg>
+
+          {/* Horseshoe prints - 12, realistic U-shape with nail holes */}
+          <svg className="absolute top-[5%] right-[3%] w-12 h-12 text-orange opacity-45 rotate-[10deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="18" cy="18" r="2" fill="currentColor"/>
+            <circle cx="25" cy="14" r="2" fill="currentColor"/>
+            <circle cx="32" cy="18" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[12%] right-[8%] w-11 h-11 text-orange opacity-38 rotate-[5deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="18" cy="18" r="2" fill="currentColor"/>
+            <circle cx="25" cy="14" r="2" fill="currentColor"/>
+            <circle cx="32" cy="18" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[20%] right-[4%] w-10 h-10 text-orange opacity-30 rotate-[15deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="18" cy="18" r="2" fill="currentColor"/>
+            <circle cx="25" cy="14" r="2" fill="currentColor"/>
+            <circle cx="32" cy="18" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[30%] right-[9%] w-9 h-9 text-orange opacity-25 rotate-[0deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="25" cy="14" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[40%] right-[5%] w-8 h-8 text-orange opacity-20 rotate-[10deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="25" cy="14" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[50%] right-[10%] w-8 h-8 text-orange opacity-15 rotate-[5deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="25" cy="14" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          {/* More horseshoes scattered */}
+          <svg className="absolute bottom-[35%] right-[2%] w-7 h-7 text-orange opacity-15 rotate-[-10deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute bottom-[25%] right-[7%] w-7 h-7 text-orange opacity-12 rotate-[-5deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[8%] right-[20%] w-8 h-8 text-orange opacity-12 rotate-[20deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute bottom-[8%] left-[30%] w-7 h-7 text-orange opacity-10 rotate-[-15deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[60%] left-[20%] w-6 h-6 text-orange opacity-10 rotate-[25deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
+          </svg>
+          <svg className="absolute top-[70%] right-[15%] w-6 h-6 text-orange opacity-10 rotate-[30deg]" viewBox="0 0 50 50" fill="none" stroke="currentColor" strokeWidth="4">
+            <path d="M12 38 C12 18, 25 8, 38 18" strokeLinecap="round"/>
+            <path d="M38 38 C38 18, 25 8, 12 18" strokeLinecap="round"/>
+            <circle cx="14" cy="28" r="2" fill="currentColor"/>
+            <circle cx="36" cy="28" r="2" fill="currentColor"/>
           </svg>
         </div>
         
@@ -233,59 +355,58 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                step: '1',
-                title: 'Elige tu seguro',
-                description: 'Selecciona perro o caballo y la cobertura que necesitas.',
-                emoji: '📋',
-              },
-              {
-                step: '2',
-                title: 'Rellena el formulario',
-                description: 'Solo pedimos los datos imprescindibles. Tardas menos de 3 minutos.',
-                emoji: '✏️',
-              },
-              {
-                step: '3',
-                title: 'Póliza activa',
-                description: 'Tu seguro activado en menos de 24 horas. Te enviamos todo al WhatsApp.',
-                emoji: '🛡️',
-              },
-            ].map((item, index) => (
-              <div key={index} className="reveal-on-scroll" style={{ transitionDelay: `${index * 150}ms` }}>
-                <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
-                  {/* Step number */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">
-                    {item.step}
-                  </div>
-                  {/* Emoji icon - centered */}
-                  <div className="text-4xl mb-5 mt-2 text-center">
-                    {item.emoji}
-                  </div>
-                  <h3 className="text-xl font-black text-white mb-3 text-center">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/80 text-sm leading-relaxed text-center flex-1">
-                    {item.description}
-                  </p>
-                </div>
+          <div className="grid sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 sm:gap-0 items-center max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <div className="reveal-on-scroll">
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">1</div>
+                <div className="text-4xl mb-5 mt-2 text-center">📋</div>
+                <h3 className="text-xl font-black text-white mb-3 text-center">Elige tu seguro</h3>
+                <p className="text-white/80 text-sm leading-relaxed text-center flex-1">Selecciona perro o caballo y la cobertura que necesitas.</p>
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* Flow arrows between cards - desktop only */}
-          <div className="hidden sm:flex justify-center items-center gap-0 max-w-5xl mx-auto -mt-[170px] mb-[120px] pointer-events-none">
-            <div className="flex-1" />
-            <svg className="w-8 h-8 text-orange/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-            <div className="flex-1" />
-            <svg className="w-8 h-8 text-orange/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-            <div className="flex-1" />
+            {/* Arrow 1 */}
+            <div className="hidden sm:flex items-center justify-center px-3">
+              <div className="animate-bounce-x">
+                <svg className="w-10 h-10 text-orange drop-shadow-[0_0_8px_rgba(255,165,0,0.5)]" fill="none" viewBox="0 0 24 24">
+                  <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="19" cy="12" r="2" fill="currentColor" className="animate-ping-slow"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="reveal-on-scroll" style={{ transitionDelay: '150ms' }}>
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">2</div>
+                <div className="text-4xl mb-5 mt-2 text-center">✏️</div>
+                <h3 className="text-xl font-black text-white mb-3 text-center">Rellena el formulario</h3>
+                <p className="text-white/80 text-sm leading-relaxed text-center flex-1">Solo pedimos los datos imprescindibles. Tardas menos de 3 minutos.</p>
+              </div>
+            </div>
+
+            {/* Arrow 2 */}
+            <div className="hidden sm:flex items-center justify-center px-3">
+              <div className="animate-bounce-x" style={{ animationDelay: '0.5s' }}>
+                <svg className="w-10 h-10 text-orange drop-shadow-[0_0_8px_rgba(255,165,0,0.5)]" fill="none" viewBox="0 0 24 24">
+                  <path d="M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="19" cy="12" r="2" fill="currentColor" className="animate-ping-slow"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="reveal-on-scroll" style={{ transitionDelay: '300ms' }}>
+              <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 text-center hover:bg-white/10 hover:border-orange/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-orange text-midnight font-black text-sm flex items-center justify-center shadow-lg shadow-orange/30">3</div>
+                <div className="text-4xl mb-5 mt-2 text-center">🛡️</div>
+                <h3 className="text-xl font-black text-white mb-3 text-center">Póliza activa</h3>
+                <p className="text-white/80 text-sm leading-relaxed text-center flex-1">Tu seguro activado en menos de 24 horas. Te enviamos todo al WhatsApp.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
