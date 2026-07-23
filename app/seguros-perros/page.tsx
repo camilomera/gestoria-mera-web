@@ -127,33 +127,32 @@ export default function SegurosPerrosPage() {
               {/* PPP Card */}
               <button
                 onClick={() => setStep('ppp')}
-                className="group text-left bg-white border-2 border-midnight/10 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-orange focus:outline-none focus:ring-4 focus:ring-orange/30"
+                className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
                   <img
                     src="https://images.unsplash.com/photo-1567752881298-894bb81f9379?w=800&q=80"
                     alt="Rottweiler"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block px-3 py-1 bg-orange text-white text-xs font-bold rounded-full mb-2">
+                  <div className="absolute bottom-4 left-4">
+                    <span className="inline-block px-4 py-1.5 bg-orange text-white text-xs font-bold rounded-full shadow-lg">
                       Obligatorio por ley
                     </span>
                   </div>
                 </div>
                 <div className="p-6 sm:p-8">
-                  <h3 className="text-2xl font-black text-midnight group-hover:text-orange transition-colors">
+                  <h3 className="text-2xl font-black text-midnight">
                     Perros Potencialmente Peligrosos
                   </h3>
-                  <p className="mt-1 text-sm font-semibold text-orange">PPP</p>
+                  <p className="mt-1 text-sm font-bold text-orange">PPP</p>
                   <p className="mt-3 text-midnight/60 text-sm leading-relaxed">
                     Rottweiler, Pit Bull, American Staffordshire, Dogo Argentino, Fila Brasileiro, Tosa Inu, Akita Inu y mestizos.
                   </p>
-                  <div className="mt-5 flex items-center gap-2 text-orange font-semibold">
+                  <div className="mt-5 flex items-center gap-2 text-orange font-bold text-lg">
                     <span>Desde 30€/año</span>
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </div>
                 </div>
@@ -162,33 +161,32 @@ export default function SegurosPerrosPage() {
               {/* No PPP Card */}
               <button
                 onClick={() => setStep('noppp')}
-                className="group text-left bg-white border-2 border-midnight/10 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-orange focus:outline-none focus:ring-4 focus:ring-orange/30"
+                className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
                   <img
                     src="https://images.unsplash.com/photo-1612195583950-b8fd34c87093?w=800&q=80"
                     alt="Jack Russell Terrier"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block px-3 py-1 bg-midnight text-white text-xs font-bold rounded-full mb-2">
+                  <div className="absolute bottom-4 left-4">
+                    <span className="inline-block px-4 py-1.5 bg-midnight text-white text-xs font-bold rounded-full shadow-lg">
                       Recomendado
                     </span>
                   </div>
                 </div>
                 <div className="p-6 sm:p-8">
-                  <h3 className="text-2xl font-black text-midnight group-hover:text-orange transition-colors">
+                  <h3 className="text-2xl font-black text-midnight">
                     Perros <span className="text-orange underline decoration-4 underline-offset-4">No</span> Peligrosos
                   </h3>
                   <p className="mt-1 text-sm font-semibold text-midnight/50">Compañía, caza, criadores</p>
                   <p className="mt-3 text-midnight/60 text-sm leading-relaxed">
                     Todas las razas no catalogadas como peligrosas. Perros de compañía, caza, criadores y adiestradores.
                   </p>
-                  <div className="mt-5 flex items-center gap-2 text-orange font-semibold">
+                  <div className="mt-5 flex items-center gap-2 text-orange font-bold text-lg">
                     <span>Desde 20,40€/año</span>
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </div>
                 </div>
