@@ -26,6 +26,7 @@ const comunidades: { name: string; joke: string }[] = [
 
 export default function SegurosPerrosPage() {
   const [step, setStep] = useState<'choice' | 'ppp' | 'noppp' | 'ppp-products' | 'loading'>('choice')
+  const [showComparison, setShowComparison] = useState(false)
   const [selectedCCAA, setSelectedCCAA] = useState('')
 
   const getJoke = (ccaa: string) => {
@@ -41,35 +42,59 @@ export default function SegurosPerrosPage() {
     }, 3500)
   }
 
-  // All PPP products
+  // All PPP products - Lassie style tiers
   const allPppProducts = [
     {
       id: '120k',
-      name: 'Plan Básico',
-      price: '49€/año',
+      name: 'Bronce',
+      price: '49€',
+      period: '/año',
       coverage: '120.250€',
-      features: ['Responsabilidad Civil 120.250€', 'Cobertura en toda España', 'Certificado en 24h'],
+      subtitle: 'Cobertura básica obligatoria',
+      color: 'from-amber-700/10 to-amber-600/5',
+      borderColor: 'border-amber-700/30',
+      badgeColor: 'bg-amber-700 text-white',
+      iconColor: 'text-amber-700',
+      features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
       id: '150k',
-      name: 'Plan Estándar',
-      price: '50€/año',
+      name: 'Plata',
+      price: '50€',
+      period: '/año',
       coverage: '150.300€',
-      features: ['Responsabilidad Civil 150.300€', 'Cobertura en toda España', 'Certificado en 24h'],
+      subtitle: 'Protección intermedia',
+      color: 'from-gray-400/10 to-gray-300/5',
+      borderColor: 'border-gray-400/30',
+      badgeColor: 'bg-gray-500 text-white',
+      iconColor: 'text-gray-500',
+      features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
       id: '180k',
-      name: 'Plan Plus',
-      price: '53,99€/año',
+      name: 'Oro',
+      price: '53,99€',
+      period: '/año',
       coverage: '180.350€',
-      features: ['Responsabilidad Civil 180.350€', 'Cobertura en toda España', 'Certificado en 24h'],
+      subtitle: 'La opción más equilibrada',
+      color: 'from-yellow-500/10 to-amber-400/5',
+      borderColor: 'border-yellow-500/30',
+      badgeColor: 'bg-yellow-500 text-midnight',
+      iconColor: 'text-yellow-500',
+      features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
       id: '350k',
-      name: 'Plan Premium',
-      price: '55€/año',
+      name: 'Platino',
+      price: '55€',
+      period: '/año',
       coverage: '350.000€',
-      features: ['Responsabilidad Civil 350.000€', 'Máxima cobertura disponible', 'Cobertura en toda España', 'Certificado en 24h'],
+      subtitle: 'Máxima tranquilidad',
+      color: 'from-indigo-400/10 to-purple-300/5',
+      borderColor: 'border-indigo-400/30',
+      badgeColor: 'bg-indigo-500 text-white',
+      iconColor: 'text-indigo-500',
+      features: ['Responsabilidad Civil máxima', 'Cobertura en toda España', 'Certificado en 24h'],
     },
   ]
 
@@ -93,9 +118,11 @@ export default function SegurosPerrosPage() {
 
   // Product for No PPP (single option)
   const nopppProduct = {
-    name: 'Seguro Responsabilidad Civil',
-    price: '35€/año',
+    name: 'Oro',
+    price: '35€',
+    period: '/año',
     coverage: '350.000€',
+    subtitle: 'Máxima protección para tu perro',
     features: ['Responsabilidad Civil 350.000€', 'Todas las razas no peligrosas', 'Cobertura en toda España', 'Certificado en 24h'],
   }
 
@@ -339,32 +366,50 @@ export default function SegurosPerrosPage() {
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
-                  className={`relative bg-white rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                    index === pppProducts.length - 1 ? 'ring-2 ring-orange shadow-lg shadow-orange/10' : 'shadow-sm hover:shadow-lg'
-                  }`}
+                  className={`relative bg-gradient-to-b ${product.color} border ${product.borderColor} rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
                 >
-                  {index === pppProducts.length - 1 && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-orange text-white text-xs font-bold rounded-full whitespace-nowrap">
-                      Máxima cobertura
-                    </div>
-                  )}
-                  <h3 className="text-lg font-black text-midnight mb-1">{product.name}</h3>
-                  <p className="text-orange font-bold text-sm mb-3">RC {product.coverage}</p>
-                  <div className="mb-4">
-                    <span className="text-2xl font-black text-midnight">{product.price}</span>
+                  {/* Tier icon */}
+                  <div className={`w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 ${product.iconColor}`}>
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2L3 7v6c0 5.25 3.75 10.13 9 11.25 5.25-1.12 9-6 9-11.25V7l-9-5z"/>
+                    </svg>
                   </div>
-                  <ul className="space-y-2 mb-5">
+
+                  {/* Name + subtitle */}
+                  <h3 className="text-xl font-black text-midnight">{product.name}</h3>
+                  <p className="text-midnight/60 text-sm mt-1 mb-5">{product.subtitle}</p>
+
+                  {/* Coverage section */}
+                  <div className="mb-5 pb-5 border-b border-midnight/10">
+                    <p className="text-midnight/50 text-xs uppercase tracking-wide font-bold mb-1">Cobertura</p>
+                    <span className="text-2xl font-black text-midnight">{product.coverage}</span>
+                  </div>
+
+                  {/* Price */}
+                  <div className="mb-5">
+                    <span className="text-3xl font-black text-midnight">{product.price}</span>
+                    <span className="text-midnight/50 text-sm">{product.period}</span>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-2.5 mb-6">
                     {product.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-start gap-2">
-                        <span className="text-orange font-bold mt-0.5">✓</span>
+                      <li key={fIndex} className="flex items-center gap-2">
+                        <span className="text-green-500 text-sm">✓</span>
                         <span className="text-midnight/70 text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
-                  <button
-                    className="block w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3 text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
-                  >
+
+                  {/* Actions */}
+                  <button className="block w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3 text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 mb-3">
                     Contratar →
+                  </button>
+                  <button
+                    onClick={() => setShowComparison(true)}
+                    className="block w-full text-center text-midnight/60 hover:text-orange text-sm font-medium transition-colors"
+                  >
+                    Ver más &gt;
                   </button>
                 </div>
               ))}
@@ -394,23 +439,41 @@ export default function SegurosPerrosPage() {
               </h2>
             </div>
 
-            <div className="max-w-md mx-auto">
-              <div className="bg-white rounded-3xl p-8 shadow-lg ring-2 ring-orange shadow-orange/10 text-center">
-                <h3 className="text-xl font-black text-midnight mb-1">{nopppProduct.name}</h3>
-                <p className="text-orange font-bold text-sm mb-4">Responsabilidad Civil {nopppProduct.coverage}</p>
-                <div className="mb-5">
-                  <span className="text-4xl font-black text-midnight">35€</span>
-                  <span className="text-midnight/60 text-sm">/año</span>
+            <div className="max-w-sm mx-auto">
+              <div className="bg-gradient-to-b from-yellow-500/10 to-amber-400/5 border border-yellow-500/30 rounded-3xl p-8">
+                {/* Tier icon */}
+                <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-5 text-yellow-500">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L3 7v6c0 5.25 3.75 10.13 9 11.25 5.25-1.12 9-6 9-11.25V7l-9-5z"/>
+                  </svg>
                 </div>
-                <ul className="space-y-2.5 mb-6 text-left">
+
+                <h3 className="text-2xl font-black text-midnight">{nopppProduct.name}</h3>
+                <p className="text-midnight/60 text-sm mt-1 mb-6">{nopppProduct.subtitle}</p>
+
+                {/* Coverage */}
+                <div className="mb-5 pb-5 border-b border-midnight/10">
+                  <p className="text-midnight/50 text-xs uppercase tracking-wide font-bold mb-1">Cobertura</p>
+                  <span className="text-2xl font-black text-midnight">{nopppProduct.coverage}</span>
+                </div>
+
+                {/* Price */}
+                <div className="mb-6">
+                  <span className="text-4xl font-black text-midnight">{nopppProduct.price}</span>
+                  <span className="text-midnight/50 text-sm">{nopppProduct.period}</span>
+                </div>
+
+                {/* Features */}
+                <ul className="space-y-2.5 mb-6">
                   {nopppProduct.features.map((feature, fIndex) => (
-                    <li key={fIndex} className="flex items-start gap-2">
-                      <span className="text-orange font-bold mt-0.5">✓</span>
+                    <li key={fIndex} className="flex items-center gap-2">
+                      <span className="text-green-500 text-sm">✓</span>
                       <span className="text-midnight/70 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
-                <button className="w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3.5 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 flex items-center justify-center gap-2">
+
+                <button className="w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3.5 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5">
                   Contratar →
                 </button>
               </div>
@@ -443,6 +506,112 @@ export default function SegurosPerrosPage() {
           </div>
         </div>
       </section>}
+
+      {/* Comparison Table Modal */}
+      {showComparison && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={() => setShowComparison(false)}>
+          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-auto p-6 sm:p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            {/* Close button */}
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-2xl font-black text-midnight">Comparativa de planes PPP</h3>
+              <button
+                onClick={() => setShowComparison(false)}
+                className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-midnight/5 transition-colors"
+              >
+                <svg className="w-6 h-6 text-midnight/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Comparison table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-midnight/10">
+                    <th className="text-left py-3 pr-4 text-midnight/60 font-medium w-1/3"></th>
+                    <th className="py-3 px-3 text-center">
+                      <span className="text-amber-700 font-black">Bronce</span>
+                    </th>
+                    <th className="py-3 px-3 text-center">
+                      <span className="text-gray-500 font-black">Plata</span>
+                    </th>
+                    <th className="py-3 px-3 text-center">
+                      <span className="text-yellow-500 font-black">Oro</span>
+                    </th>
+                    <th className="py-3 px-3 text-center">
+                      <span className="text-indigo-500 font-black">Platino</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-midnight/5">
+                    <td className="py-4 pr-4 font-medium text-midnight">Cobertura RC</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">120.250€</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">150.300€</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">180.350€</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">350.000€</td>
+                  </tr>
+                  <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
+                    <td className="py-4 pr-4 font-medium text-midnight">Precio</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">49€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">50€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">53,99€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">55€/año</td>
+                  </tr>
+                  <tr className="border-b border-midnight/5">
+                    <td className="py-4 pr-4 font-medium text-midnight">Daños corporales</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                  </tr>
+                  <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
+                    <td className="py-4 pr-4 font-medium text-midnight">Daños materiales</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                  </tr>
+                  <tr className="border-b border-midnight/5">
+                    <td className="py-4 pr-4 font-medium text-midnight">Defensa jurídica</td>
+                    <td className="py-4 px-3 text-center text-red-400">✗</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                  </tr>
+                  <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
+                    <td className="py-4 pr-4 font-medium text-midnight">Fianzas judiciales</td>
+                    <td className="py-4 px-3 text-center text-red-400">✗</td>
+                    <td className="py-4 px-3 text-center text-red-400">✗</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                  </tr>
+                  <tr className="border-b border-midnight/5">
+                    <td className="py-4 pr-4 font-medium text-midnight">Asistencia veterinaria</td>
+                    <td className="py-4 px-3 text-center text-red-400">✗</td>
+                    <td className="py-4 px-3 text-center text-red-400">✗</td>
+                    <td className="py-4 px-3 text-center text-red-400">✗</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 pr-4 font-medium text-midnight">Cobertura en toda España</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                    <td className="py-4 px-3 text-center text-green-500">✓</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p className="mt-4 text-midnight/50 text-xs text-center">
+              Todos los planes incluyen certificado en 24 horas y cobertura inmediata.
+            </p>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }
