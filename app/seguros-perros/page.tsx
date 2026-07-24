@@ -380,9 +380,6 @@ export default function SegurosPerrosPage() {
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                 Elijamos el seguro de tu perro
               </h2>
-              <p className="mt-3 text-midnight/70 text-base">
-                La cobertura mínima obligatoria depende de tu comunidad autónoma.
-              </p>
             </div>
 
             {/* CCAA Selector - integrated */}
@@ -417,18 +414,7 @@ export default function SegurosPerrosPage() {
 
 
             <div className="relative">
-            {/* Overlay for CCAA selection */}
-            {!selectedCCAA && !ccaaLoading && (
-              <div className="absolute inset-0 z-20 flex items-start justify-center pt-8 bg-[#F2EEC4]/80 backdrop-blur-[3px] rounded-3xl">
-                <div className="text-center animate-bounce-subtle">
-                  <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md mx-4 border-2 border-orange/20">
-                    <p className="text-2xl mb-1">👆</p>
-                    <p className="text-midnight font-black text-lg mb-2">Selecciona tu comunidad</p>
-                    <p className="text-midnight/70 text-sm">Necesitamos saber dónde vives para mostrarte las opciones disponibles</p>
-                  </div>
-                </div>
-              </div>
-            )}
+
 
             {/* Loading overlay */}
             {ccaaLoading && (
@@ -456,15 +442,15 @@ export default function SegurosPerrosPage() {
                 >
                   {/* Unavailable overlay */}
                   {!isAvailable && selectedCCAA && (
-                    <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] rounded-2xl flex items-center justify-center z-10">
-                      <div className="text-center px-4">
-                        <div className="w-10 h-10 bg-midnight/10 rounded-full flex items-center justify-center mx-auto mb-2">
-                          <svg className="w-5 h-5 text-midnight/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] rounded-2xl flex items-center justify-center z-10">
+                      <div className="text-center px-5">
+                        <div className="w-14 h-14 bg-midnight/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <svg className="w-7 h-7 text-midnight/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                           </svg>
                         </div>
-                        <p className="text-midnight font-black text-sm">No disponible</p>
-                        <p className="text-midnight/70 text-xs mt-1 max-w-[180px] mx-auto leading-relaxed">La normativa de tu comunidad exige una cobertura mínima superior</p>
+                        <p className="text-midnight font-black text-base mb-1">No disponible</p>
+                        <p className="text-midnight/80 text-sm leading-snug max-w-[200px] mx-auto">Tu comunidad exige una cobertura mínima superior</p>
                       </div>
                     </div>
                   )}
