@@ -51,12 +51,9 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '120.250€',
       subtitle: 'Cobertura básica obligatoria',
-      color: 'from-white via-white to-amber-100',
-      borderColor: 'border-amber-600/40',
-      borderLeft: 'border-l-4 border-l-amber-600',
-      badgeColor: 'bg-amber-700 text-white',
+      color: 'from-amber-200/80 via-amber-100/40 to-white',
+      borderColor: 'border-amber-300/60',
       iconColor: 'text-amber-700',
-      shieldGradient: 'from-amber-600 to-amber-800',
       popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -67,12 +64,9 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '150.300€',
       subtitle: 'Protección intermedia',
-      color: 'from-white via-white to-slate-100',
-      borderColor: 'border-slate-400/40',
-      borderLeft: 'border-l-4 border-l-slate-400',
-      badgeColor: 'bg-slate-500 text-white',
-      iconColor: 'text-slate-500',
-      shieldGradient: 'from-slate-400 to-slate-600',
+      color: 'from-slate-200/80 via-slate-100/40 to-white',
+      borderColor: 'border-slate-300/60',
+      iconColor: 'text-slate-400',
       popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -83,12 +77,9 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '180.350€',
       subtitle: 'La opción más equilibrada',
-      color: 'from-white via-white to-yellow-100',
-      borderColor: 'border-yellow-500/40',
-      borderLeft: 'border-l-4 border-l-yellow-500',
-      badgeColor: 'bg-yellow-500 text-midnight',
-      iconColor: 'text-yellow-600',
-      shieldGradient: 'from-yellow-400 to-amber-600',
+      color: 'from-yellow-200/80 via-amber-100/40 to-white',
+      borderColor: 'border-yellow-300/60',
+      iconColor: 'text-yellow-500',
       popular: true,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -99,12 +90,9 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '350.000€',
       subtitle: 'Máxima tranquilidad',
-      color: 'from-white via-white to-slate-200',
-      borderColor: 'border-slate-500/40',
-      borderLeft: 'border-l-4 border-l-slate-500',
-      badgeColor: 'bg-slate-600 text-white',
-      iconColor: 'text-slate-600',
-      shieldGradient: 'from-slate-500 to-slate-700',
+      color: 'from-gray-300/80 via-gray-200/40 to-white',
+      borderColor: 'border-gray-300/60',
+      iconColor: 'text-gray-500',
       popular: false,
       features: ['Responsabilidad Civil máxima', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -379,51 +367,39 @@ export default function SegurosPerrosPage() {
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
-                  className={`relative bg-gradient-to-b ${product.color} border ${product.borderColor} ${product.borderLeft} rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl shadow-lg min-h-[450px] flex flex-col`}
+                  className={`relative bg-gradient-to-tr ${product.color} border ${product.borderColor} rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl shadow-xl flex flex-col`}
                 >
                   {/* Popular badge */}
                   {product.popular && (
-                    <div className="absolute -top-3 right-5 px-3 py-1 bg-orange text-white text-xs font-bold rounded-full shadow-md">
+                    <div className="absolute -top-3 right-4 px-3 py-1 bg-midnight text-white text-xs font-bold rounded-full shadow-md">
                       Popular
                     </div>
                   )}
 
-                  {/* Tier shield - centered, no white circle */}
-                  <div className="flex justify-center mb-5">
-                    <svg className={`w-10 h-10 ${product.iconColor} drop-shadow-md`} fill="currentColor" viewBox="0 0 24 24">
+                  {/* Tier shield */}
+                  <div className="mb-4">
+                    <svg className={`w-11 h-11 ${product.iconColor} drop-shadow-lg`} fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                      <path d="M12 3.18l7 3.12v4.7c0 4.83-3.4 9.16-7 10.32-3.6-1.16-7-5.49-7-10.32V6.3l7-3.12z" fill="currentColor" opacity="0.6"/>
-                      <path d="M10 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                      <path d="M12 3.18l7 3.12v4.7c0 4.83-3.4 9.16-7 10.32-3.6-1.16-7-5.49-7-10.32V6.3l7-3.12z" opacity="0.5"/>
+                      <path d="M10 12l2 2 4-4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                     </svg>
                   </div>
 
-                  {/* Name + subtitle - centered */}
-                  <div className="text-center mb-5">
-                    <h3 className="text-xl font-black text-midnight">{product.name}</h3>
-                    <p className="text-midnight/80 text-sm mt-1">{product.subtitle}</p>
-                  </div>
+                  {/* Name + subtitle */}
+                  <h3 className="text-xl font-black text-midnight">{product.name}</h3>
+                  <p className="text-midnight/70 text-sm mt-1 mb-5">{product.subtitle}</p>
 
-                  {/* Coverage section */}
-                  <div className="mb-5 pb-5 border-b border-midnight/10 text-center">
-                    <p className="text-midnight/70 text-xs tracking-wide font-bold mb-1">cobertura</p>
+                  {/* Coverage */}
+                  <div className="mb-4">
+                    <p className="text-midnight/60 text-xs font-semibold mb-0.5">cobertura</p>
                     <span className="text-2xl font-black text-midnight">{product.coverage}</span>
                   </div>
 
                   {/* Price */}
-                  <div className="mb-5 text-center">
+                  <div className="mb-6">
                     <span className="text-3xl font-black text-midnight">{product.price}</span>
-                    <span className="text-midnight/70 text-sm">{product.period}</span>
+                    <span className="text-midnight font-bold text-base">{product.period}</span>
                   </div>
-
-                  {/* Features */}
-                  <ul className="space-y-2.5 mb-6 flex-grow">
-                    {product.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-center gap-2">
-                        <span className="text-green-500 text-sm font-bold">✓</span>
-                        <span className="text-midnight/80 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
 
                   {/* Actions */}
                   <div className="mt-auto">
@@ -432,9 +408,9 @@ export default function SegurosPerrosPage() {
                     </button>
                     <button
                       onClick={() => setShowComparison(true)}
-                      className="block w-full text-center text-midnight font-bold text-sm hover:text-orange transition-colors underline underline-offset-2"
+                      className="block w-full text-center text-midnight/70 hover:text-orange text-sm font-semibold transition-colors"
                     >
-                      Ver más
+                      Leer más &gt;
                     </button>
                   </div>
                 </div>
