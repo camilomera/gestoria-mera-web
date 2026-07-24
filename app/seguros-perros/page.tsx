@@ -51,8 +51,8 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '120.250€',
       subtitle: 'Cobertura básica obligatoria',
-      color: 'from-white via-amber-100 to-amber-300',
-      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898592/ChatGPT_Image_Jul_24_2026_03_09_04_PM_2_ogoazg.png',
+      gradientColor: '#CD7F32',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898591/ChatGPT_Image_Jul_24_2026_03_09_02_PM_1_mwfgri.png',
       popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -63,8 +63,8 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '150.300€',
       subtitle: 'Protección intermedia',
-      color: 'from-white via-slate-100 to-slate-300',
-      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898592/ChatGPT_Image_Jul_24_2026_03_09_04_PM_3_i9ejwa.png',
+      gradientColor: '#C0C0C0',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898592/ChatGPT_Image_Jul_24_2026_03_09_04_PM_2_ogoazg.png',
       popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -75,8 +75,8 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '180.350€',
       subtitle: 'La opción más equilibrada',
-      color: 'from-white via-yellow-100 to-yellow-300',
-      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898590/ChatGPT_Image_Jul_24_2026_03_09_05_PM_4_co8grr.png',
+      gradientColor: '#FFD700',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898592/ChatGPT_Image_Jul_24_2026_03_09_04_PM_3_i9ejwa.png',
       popular: true,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -87,8 +87,8 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '350.000€',
       subtitle: 'Máxima tranquilidad',
-      color: 'from-white via-emerald-100 to-emerald-300',
-      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898591/ChatGPT_Image_Jul_24_2026_03_09_02_PM_1_mwfgri.png',
+      gradientColor: '#50C878',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/e_background_removal/v1784898590/ChatGPT_Image_Jul_24_2026_03_09_05_PM_4_co8grr.png',
       popular: false,
       features: ['Responsabilidad Civil máxima', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -363,7 +363,8 @@ export default function SegurosPerrosPage() {
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
-                  className={`relative bg-gradient-to-tr ${product.color} rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)] shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col`}
+                  className="relative rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)] shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col"
+                  style={{ background: `linear-gradient(to top right, white 40%, ${product.gradientColor}40 70%, ${product.gradientColor}80 100%)` }}
                 >
                   {/* Popular badge */}
                   {product.popular && (
