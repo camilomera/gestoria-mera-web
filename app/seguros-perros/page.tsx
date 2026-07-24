@@ -25,7 +25,7 @@ const comunidades: { name: string; joke: string }[] = [
 ]
 
 export default function SegurosPerrosPage() {
-  const [step, setStep] = useState<'choice' | 'ppp' | 'noppp' | 'ppp-products' | 'loading' | 'form' | 'confirmation'>('choice')
+  const [step, setStep] = useState<'choice' | 'noppp' | 'ppp-products' | 'form' | 'confirmation'>('choice')
   const [showComparison, setShowComparison] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState<any>(null)
   const [formSection, setFormSection] = useState(0)
@@ -33,10 +33,48 @@ export default function SegurosPerrosPage() {
     nombre: '', apellido1: '', apellido2: '', fechaNacimiento: '', dni: '',
     calle: '', numero: '', codigoPostal: '', localidad: '', provincia: '',
     telefono: '', email: '', emailRepeat: '',
-    nombrePerro: '', raza: '', microchip: '',
+    nombrePerro: '', razaPerro: '', sexoPerro: '', fechaNacimientoPerro: '', microchip: '',
     iban: '',
     aceptaCondiciones: false, aceptaProteccion: false,
   })
+  const [fotoCartilla, setFotoCartilla] = useState<File | null>(null)
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+
+  const validateSection = (section: number): boolean => {
+    const errors: Record<string, string> = {}
+    if (section === 0) {
+      if (!formData.nombre) errors.nombre = 'Requerido'
+      if (!formData.apellido1) errors.apellido1 = 'Requerido'
+      if (!formData.dni) errors.dni = 'Requerido'
+      if (!formData.fechaNacimiento) errors.fechaNacimiento = 'Requerido'
+    }
+    if (section === 1) {
+      if (!formData.calle) errors.calle = 'Requerido'
+      if (!formData.codigoPostal) errors.codigoPostal = 'Requerido'
+      if (!formData.localidad) errors.localidad = 'Requerido'
+      if (!formData.provincia) errors.provincia = 'Requerido'
+    }
+    if (section === 2) {
+      if (!formData.telefono || formData.telefono.replace(/\s/g, '').length !== 9) errors.telefono = 'Debe tener 9 dígitos'
+      if (!formData.email) errors.email = 'Requerido'
+      if (formData.email !== formData.emailRepeat) errors.emailRepeat = 'Los emails no coinciden'
+    }
+    if (section === 3) {
+      if (!formData.nombrePerro) errors.nombrePerro = 'Requerido'
+      if (!formData.razaPerro) errors.razaPerro = 'Requerido'
+      if (!formData.sexoPerro) errors.sexoPerro = 'Requerido'
+      if (!formData.microchip || formData.microchip.replace(/\s/g, '').length !== 15) errors.microchip = 'Debe tener 15 dígitos'
+    }
+    if (section === 4) {
+      if (!formData.iban || formData.iban.replace(/\s/g, '').length < 24) errors.iban = 'IBAN incompleto'
+    }
+    if (section === 5) {
+      if (!formData.aceptaCondiciones) errors.aceptaCondiciones = 'Obligatorio'
+      if (!formData.aceptaProteccion) errors.aceptaProteccion = 'Obligatorio'
+    }
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
 
   const formSections = [
     'Datos del propietario',
@@ -63,18 +101,7 @@ export default function SegurosPerrosPage() {
   }
   const [selectedCCAA, setSelectedCCAA] = useState('')
 
-  const getJoke = (ccaa: string) => {
-    const found = comunidades.find(c => c.name === ccaa)
-    return found ? found.joke : 'Buscando las mejores opciones...'
-  }
 
-  const handleCCAASelect = (ccaa: string) => {
-    setSelectedCCAA(ccaa)
-    setStep('loading')
-    setTimeout(() => {
-      setStep('ppp-products')
-    }, 3500)
-  }
 
   // All PPP products - Lassie style tiers
   const allPppProducts = [
@@ -190,7 +217,7 @@ export default function SegurosPerrosPage() {
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* PPP Card */}
               <button
-                onClick={() => setStep('ppp')}
+                onClick={() => setStep('ppp-products')}
                 className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
@@ -209,17 +236,7 @@ export default function SegurosPerrosPage() {
                   <h2 className="text-2xl font-black text-midnight leading-tight">
                     Perros Potencialmente Peligrosos
                   </h2>
-                  <ul className="mt-3 space-y-1.5">
-                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
-                      <span className="text-orange font-bold">✓</span> Rottweiler, Pit Bull, Am. Staffordshire
-                    </li>
-                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
-                      <span className="text-orange font-bold">✓</span> Dogo Argentino, Fila Brasileiro, Tosa Inu
-                    </li>
-                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
-                      <span className="text-orange font-bold">✓</span> Responsabilidad Civil obligatoria
-                    </li>
-                  </ul>
+                  
                   <div className="mt-4">
                     <span className="text-2xl font-black text-midnight">Desde 30€</span>
                     <span className="text-midnight/60 text-sm">/año</span>
@@ -254,17 +271,7 @@ export default function SegurosPerrosPage() {
                   <h2 className="text-2xl font-black text-midnight leading-tight">
                     Perros <span className="text-orange underline decoration-4 underline-offset-4">No</span> Peligrosos
                   </h2>
-                  <ul className="mt-3 space-y-1.5">
-                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
-                      <span className="text-orange font-bold">✓</span> Compañía, caza y criadores
-                    </li>
-                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
-                      <span className="text-orange font-bold">✓</span> Responsabilidad Civil completa
-                    </li>
-                    <li className="flex items-center gap-2 text-midnight/70 text-sm">
-                      <span className="text-orange font-bold">✓</span> Cobertura en toda España
-                    </li>
-                  </ul>
+                  
                   <div className="mt-4">
                     <span className="text-2xl font-black text-midnight">Desde 20,40€</span>
                     <span className="text-midnight/60 text-sm">/año</span>
@@ -282,13 +289,14 @@ export default function SegurosPerrosPage() {
         </section>
       )}
 
-      {/* Step: PPP - Select CCAA */}
-      {step === 'ppp' && (
+      
+            {/* Step: PPP Products */}
+      {step === 'ppp-products' && (
         <section className="py-16 sm:py-20">
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back button */}
             <button
-              onClick={() => setStep('choice')}
+              onClick={() => setStep('ppp-products')}
               className="mb-8 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -297,103 +305,42 @@ export default function SegurosPerrosPage() {
               Volver
             </button>
 
-            <div className="text-center mb-10">
+            <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
-                ¿En qué comunidad autónoma vives?
+                Seguros disponibles
               </h2>
-              <p className="mt-3 text-midnight/70 text-lg">
-                La normativa varía según tu comunidad. Selecciona la tuya para ver los productos disponibles.
+              <p className="mt-3 text-midnight/70 text-base">
+                La cobertura mínima obligatoria depende de tu comunidad autónoma.
               </p>
             </div>
 
-            <div className="max-w-lg mx-auto">
+            {/* CCAA Selector - integrated */}
+            <div className="max-w-md mx-auto mb-10">
               <div className="relative">
-                <div className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <span className="text-xl">📍</span>
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <span className="text-lg">📍</span>
                 </div>
                 <select
                   value={selectedCCAA}
-                  onChange={(e) => {
-                    if (e.target.value) handleCCAASelect(e.target.value)
-                  }}
-                  className="w-full appearance-none bg-white border-2 border-midnight/10 rounded-2xl pl-14 pr-12 py-5 text-lg font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-sm"
+                  onChange={(e) => setSelectedCCAA(e.target.value)}
+                  className="w-full appearance-none bg-white border-2 border-midnight/15 rounded-xl pl-12 pr-12 py-4 text-base font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-md"
                 >
-                  <option value="">Selecciona tu comunidad autónoma...</option>
+                  <option value="">Selecciona tu comunidad autónoma</option>
                   {comunidades.map((ccaa) => (
                     <option key={ccaa.name} value={ccaa.name}>
                       {ccaa.name}
                     </option>
                   ))}
                 </select>
-                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <svg className="w-6 h-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <svg className="w-5 h-5 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      )}
 
-
-      {/* Step: Loading */}
-      {step === 'loading' && (
-        <section className="py-16 sm:py-20">
-          <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="max-w-md mx-auto">
-              <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange/10 mb-4">
-                  <svg className="w-8 h-8 text-orange animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                </div>
-              </div>
-              <h2 className="text-2xl font-black text-midnight mb-3">
-                Buscando seguros para {selectedCCAA}...
-              </h2>
-              <p className="text-midnight/70 italic">
-                {getJoke(selectedCCAA)}
-              </p>
-              {/* Progress bar */}
-              <div className="mt-8 w-full h-1.5 bg-midnight/10 rounded-full overflow-hidden">
-                <div className="h-full bg-orange rounded-full animate-loading-bar" />
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Step: PPP Products */}
-      {step === 'ppp-products' && (
-        <section className="py-16 sm:py-20">
-          <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Back button */}
-            <button
-              onClick={() => setStep('ppp')}
-              className="mb-8 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Volver
-            </button>
-
-            <div className="text-center mb-12">
-              <span className="inline-block px-4 py-1.5 bg-orange/10 text-orange text-sm font-bold rounded-full mb-4">
-                📍 {selectedCCAA}
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-midnight">
-                Seguros disponibles
-              </h2>
-              <p className="mt-3 text-midnight/70 text-lg">
-                Elige el plan que mejor se adapte a tus necesidades.
-              </p>
-
-            </div>
-
-            <div className={`grid gap-5 max-w-6xl mx-auto ${pppProducts.length === 2 ? 'sm:grid-cols-2 max-w-3xl' : pppProducts.length === 3 ? 'sm:grid-cols-3 max-w-4xl' : 'sm:grid-cols-2 lg:grid-cols-4'}`}>
+            <div className={`grid gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA ? 'blur-sm opacity-50 pointer-events-none' : ''} ${pppProducts.length === 2 ? 'sm:grid-cols-2 max-w-3xl' : pppProducts.length === 3 ? 'sm:grid-cols-3 max-w-4xl' : 'sm:grid-cols-2 lg:grid-cols-4'}`}>
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
@@ -533,7 +480,7 @@ export default function SegurosPerrosPage() {
       )}
 
       {/* CTA final - hide during loading */}
-      {step !== 'loading' && step !== 'form' && step !== 'confirmation' && <section className="py-10 sm:py-12">
+      {step !== 'form' && step !== 'confirmation' && <section className="py-10 sm:py-12">
         <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-xl">
           <h2 className="text-xl sm:text-2xl font-black text-midnight">
             ¿Tienes dudas?
@@ -564,7 +511,7 @@ export default function SegurosPerrosPage() {
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
             {/* Back button */}
             <button
-              onClick={() => setStep(selectedCCAA ? 'ppp-products' : 'noppp')}
+              onClick={() => { setStep(selectedCCAA ? 'ppp-products' : 'noppp'); setFormSection(0) }}
               className="mb-6 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -634,9 +581,35 @@ export default function SegurosPerrosPage() {
               {formSection === 3 && (
                 <div className="space-y-4">
                   <h3 className="text-lg font-black text-midnight mb-4">Datos del perro</h3>
-                  <input type="text" placeholder="Nombre del perro" value={formData.nombrePerro} onChange={(e) => handleFormChange('nombrePerro', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Raza" value={formData.raza} onChange={(e) => handleFormChange('raza', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Número de microchip (15 dígitos)" value={formData.microchip} onChange={(e) => handleFormChange('microchip', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
+                  <div>
+                    <input type="text" placeholder="Nombre del perro" value={formData.nombrePerro} onChange={(e) => handleFormChange('nombrePerro', e.target.value)} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors ${formErrors.nombrePerro ? 'border-red-400' : 'border-midnight/10'}`} />
+                    {formErrors.nombrePerro && <p className="text-red-500 text-xs mt-1">{formErrors.nombrePerro}</p>}
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Raza" value={formData.razaPerro} onChange={(e) => handleFormChange('razaPerro', e.target.value)} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors ${formErrors.razaPerro ? 'border-red-400' : 'border-midnight/10'}`} />
+                    {formErrors.razaPerro && <p className="text-red-500 text-xs mt-1">{formErrors.razaPerro}</p>}
+                  </div>
+                  <div>
+                    <select value={formData.sexoPerro} onChange={(e) => handleFormChange('sexoPerro', e.target.value)} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight focus:border-orange focus:outline-none transition-colors ${formErrors.sexoPerro ? 'border-red-400' : 'border-midnight/10'} ${!formData.sexoPerro ? 'text-midnight/40' : ''}`}>
+                      <option value="">Sexo del perro</option>
+                      <option value="Macho">Macho</option>
+                      <option value="Hembra">Hembra</option>
+                    </select>
+                    {formErrors.sexoPerro && <p className="text-red-500 text-xs mt-1">{formErrors.sexoPerro}</p>}
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Fecha de nacimiento del perro (DD/MM/AAAA o aproximada)" value={formData.fechaNacimientoPerro} onChange={(e) => handleFormChange('fechaNacimientoPerro', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
+                    <p className="text-midnight/50 text-xs mt-1">Si no la sabes exactamente, aproxima</p>
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Microchip (15 dígitos)" value={formData.microchip} onChange={(e) => handleFormChange('microchip', e.target.value)} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors ${formErrors.microchip ? 'border-red-400' : 'border-midnight/10'}`} />
+                    {formErrors.microchip && <p className="text-red-500 text-xs mt-1">{formErrors.microchip}</p>}
+                  </div>
+                  <div>
+                    <label className="block text-midnight/80 text-sm font-medium mb-2">Foto de la cartilla sanitaria (opcional)</label>
+                    <input type="file" accept="image/*,.pdf" onChange={(e) => setFotoCartilla(e.target.files?.[0] || null)} className="w-full text-sm text-midnight/60 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange/10 file:text-orange hover:file:bg-orange/20 cursor-pointer" />
+                    {fotoCartilla && <p className="text-green-600 text-xs mt-1">✓ {fotoCartilla.name}</p>}
+                  </div>
                 </div>
               )}
 
@@ -691,7 +664,11 @@ export default function SegurosPerrosPage() {
                     </div>
                     <div className="flex justify-between py-2 border-b border-midnight/5">
                       <span className="text-midnight/60">Perro</span>
-                      <span className="text-midnight font-medium">{formData.nombrePerro} ({formData.raza})</span>
+                      <span className="text-midnight font-medium">{formData.nombrePerro} ({formData.razaPerro})</span>
+                    </div>
+                    <div className="flex justify-between py-2 border-b border-midnight/5">
+                      <span className="text-midnight/60">Sexo / Nacimiento</span>
+                      <span className="text-midnight font-medium">{formData.sexoPerro} — {formData.fechaNacimientoPerro}</span>
                     </div>
                     <div className="flex justify-between py-2 border-b border-midnight/5">
                       <span className="text-midnight/60">Microchip</span>
@@ -721,7 +698,7 @@ export default function SegurosPerrosPage() {
                 )}
                 {formSection < formSections.length - 1 ? (
                   <button
-                    onClick={() => setFormSection(prev => prev + 1)}
+                    onClick={() => { if (validateSection(formSection)) setFormSection(prev => prev + 1) }}
                     className="flex-1 btn-cta bg-orange text-midnight font-black py-3 rounded-full transition-all duration-300 hover:scale-[1.02]"
                   >
                     Siguiente →
@@ -745,7 +722,9 @@ export default function SegurosPerrosPage() {
                     <input type="hidden" name="Teléfono" value={formData.telefono} />
                     <input type="hidden" name="Email" value={formData.email} />
                     <input type="hidden" name="Nombre perro" value={formData.nombrePerro} />
-                    <input type="hidden" name="Raza" value={formData.raza} />
+                    <input type="hidden" name="Raza" value={formData.razaPerro} />
+                    <input type="hidden" name="Sexo" value={formData.sexoPerro} />
+                    <input type="hidden" name="Fecha nacimiento perro" value={formData.fechaNacimientoPerro} />
                     <input type="hidden" name="Microchip" value={formData.microchip} />
                     <input type="hidden" name="IBAN" value={formData.iban} />
                     <button

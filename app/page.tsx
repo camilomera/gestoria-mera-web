@@ -55,26 +55,32 @@ export default function HomePage() {
           </div>
 
           {/* Value props - scrolling ticker */}
-          <div className="w-screen relative left-1/2 -translate-x-1/2 mb-10 animate-fade-in overflow-hidden bg-midnight py-3.5">
-            <div className="animate-ticker flex items-center gap-8 whitespace-nowrap">
-              <span className="flex items-center gap-2 text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/30">•</span>
-              <span className="flex items-center gap-2 text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/30">•</span>
+          <div className="relative -mx-5 sm:-mx-8 mb-10 animate-fade-in overflow-hidden bg-midnight py-3" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
+            <div className="animate-ticker flex items-center gap-10 whitespace-nowrap pl-[100%]">
+              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
+              <span className="text-white/40">•</span>
+              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
+              <span className="text-white/40">•</span>
             </div>
           </div>
 

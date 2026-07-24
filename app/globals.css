@@ -300,10 +300,10 @@
 
 /* Scrolling ticker animation */
 .animate-ticker {
-  animation: ticker 20s linear infinite;
+  animation: ticker 25s linear infinite;
 }
 
 @keyframes ticker {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-66.66%); }
 }

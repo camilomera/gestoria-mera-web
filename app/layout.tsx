@@ -32,6 +32,7 @@ export default function RootLayout({
     <html lang="es" className={`${merriweather.variable} ${plusJakarta.variable}`}>
       <head>
         <meta name="theme-color" content="#F2EEC4" />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐶</text></svg>" />
       </head>
       <body className={`${merriweather.className} bg-mintcream text-midnight min-h-screen`}>
         <Header />
