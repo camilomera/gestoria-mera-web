@@ -113,7 +113,7 @@ export default function HomePage() {
                 </h2>
                 <ul className="mt-3 space-y-1.5">
                   <li className="flex items-center gap-2 text-midnight/60 text-sm">
-                    <span className="text-orange text-base">✓</span> Compañía, PPP, caza y criadores
+                    <span className="text-orange text-base">✓</span> Compañía, peligrosos, caza y criadores
                   </li>
                   <li className="flex items-center gap-2 text-midnight/60 text-sm">
                     <span className="text-orange text-base">✓</span> Responsabilidad Civil completa

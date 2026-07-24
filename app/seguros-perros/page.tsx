@@ -51,10 +51,12 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '120.250€',
       subtitle: 'Cobertura básica obligatoria',
-      color: 'from-amber-700/10 to-amber-600/5',
-      borderColor: 'border-amber-700/30',
+      color: 'from-amber-800/20 to-amber-600/10',
+      borderColor: 'border-amber-700/50',
+      borderLeft: 'border-l-4 border-l-amber-700',
       badgeColor: 'bg-amber-700 text-white',
       iconColor: 'text-amber-700',
+      popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
@@ -64,10 +66,12 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '150.300€',
       subtitle: 'Protección intermedia',
-      color: 'from-gray-400/10 to-gray-300/5',
-      borderColor: 'border-gray-400/30',
-      badgeColor: 'bg-gray-500 text-white',
-      iconColor: 'text-gray-500',
+      color: 'from-slate-300/25 to-slate-200/15',
+      borderColor: 'border-slate-400/50',
+      borderLeft: 'border-l-4 border-l-slate-400',
+      badgeColor: 'bg-slate-500 text-white',
+      iconColor: 'text-slate-500',
+      popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
@@ -77,10 +81,12 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '180.350€',
       subtitle: 'La opción más equilibrada',
-      color: 'from-yellow-500/10 to-amber-400/5',
-      borderColor: 'border-yellow-500/30',
+      color: 'from-yellow-400/25 to-amber-300/15',
+      borderColor: 'border-yellow-500/50',
+      borderLeft: 'border-l-4 border-l-yellow-500',
       badgeColor: 'bg-yellow-500 text-midnight',
-      iconColor: 'text-yellow-500',
+      iconColor: 'text-yellow-600',
+      popular: true,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
@@ -90,10 +96,12 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '350.000€',
       subtitle: 'Máxima tranquilidad',
-      color: 'from-indigo-400/10 to-purple-300/5',
-      borderColor: 'border-indigo-400/30',
-      badgeColor: 'bg-indigo-500 text-white',
-      iconColor: 'text-indigo-500',
+      color: 'from-slate-600/15 to-slate-400/10',
+      borderColor: 'border-slate-500/50',
+      borderLeft: 'border-l-4 border-l-slate-500',
+      badgeColor: 'bg-slate-600 text-white',
+      iconColor: 'text-slate-600',
+      popular: false,
       features: ['Responsabilidad Civil máxima', 'Cobertura en toda España', 'Certificado en 24h'],
     },
   ]
@@ -272,7 +280,7 @@ export default function SegurosPerrosPage() {
                 ¿En qué comunidad autónoma vives?
               </h2>
               <p className="mt-3 text-midnight/70 text-lg">
-                La normativa PPP varía según tu comunidad. Selecciona la tuya para ver los productos disponibles.
+                La normativa varía según tu comunidad. Selecciona la tuya para ver los productos disponibles.
               </p>
             </div>
 
@@ -355,44 +363,65 @@ export default function SegurosPerrosPage() {
                 📍 {selectedCCAA}
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
-                Seguros PPP disponibles
+                Seguros disponibles
               </h2>
               <p className="mt-3 text-midnight/70 text-lg">
                 Elige el plan que mejor se adapte a tus necesidades.
               </p>
+              <button
+                onClick={() => setShowComparison(true)}
+                className="mt-5 inline-flex items-center gap-2 text-orange hover:text-orange-dark font-bold text-sm transition-colors border border-orange/30 px-5 py-2 rounded-full hover:bg-orange/5"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Comparar planes
+              </button>
             </div>
 
             <div className={`grid gap-5 max-w-6xl mx-auto ${pppProducts.length === 2 ? 'sm:grid-cols-2 max-w-3xl' : pppProducts.length === 3 ? 'sm:grid-cols-3 max-w-4xl' : 'sm:grid-cols-2 lg:grid-cols-4'}`}>
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
-                  className={`relative bg-gradient-to-b ${product.color} border ${product.borderColor} rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl`}
+                  className={`relative bg-gradient-to-b ${product.color} border ${product.borderColor} ${product.borderLeft} rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl min-h-[420px] flex flex-col`}
                 >
-                  {/* Tier icon */}
-                  <div className={`w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center mb-4 ${product.iconColor}`}>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2L3 7v6c0 5.25 3.75 10.13 9 11.25 5.25-1.12 9-6 9-11.25V7l-9-5z"/>
-                    </svg>
+                  {/* Popular badge */}
+                  {product.popular && (
+                    <div className="absolute -top-3 right-5 px-3 py-1 bg-orange text-white text-xs font-bold rounded-full shadow-md">
+                      Popular
+                    </div>
+                  )}
+
+                  {/* Tier icon - centered */}
+                  <div className="flex justify-center mb-4">
+                    <div className={`w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center ${product.iconColor}`}>
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v5.7c0 4.83-3.4 9.16-7 10.32-3.6-1.16-7-5.49-7-10.32V6.3l7-3.12z"/>
+                        <path d="M12 5.5L7 7.72V11c0 3.31 2.13 6.36 5 7.46 2.87-1.1 5-4.15 5-7.46V7.72L12 5.5z" opacity="0.3"/>
+                      </svg>
+                    </div>
                   </div>
 
-                  {/* Name + subtitle */}
-                  <h3 className="text-xl font-black text-midnight">{product.name}</h3>
-                  <p className="text-midnight/60 text-sm mt-1 mb-5">{product.subtitle}</p>
+                  {/* Name + subtitle - centered */}
+                  <div className="text-center mb-5">
+                    <h3 className="text-xl font-black text-midnight">{product.name}</h3>
+                    <p className="text-midnight/60 text-sm mt-1">{product.subtitle}</p>
+                  </div>
 
                   {/* Coverage section */}
-                  <div className="mb-5 pb-5 border-b border-midnight/10">
-                    <p className="text-midnight/50 text-xs uppercase tracking-wide font-bold mb-1">Cobertura</p>
+                  <div className="mb-5 pb-5 border-b border-midnight/10 text-center">
+                    <p className="text-midnight/50 text-xs tracking-wide font-bold mb-1">cobertura</p>
                     <span className="text-2xl font-black text-midnight">{product.coverage}</span>
                   </div>
 
                   {/* Price */}
-                  <div className="mb-5">
+                  <div className="mb-5 text-center">
                     <span className="text-3xl font-black text-midnight">{product.price}</span>
                     <span className="text-midnight/50 text-sm">{product.period}</span>
                   </div>
 
                   {/* Features */}
-                  <ul className="space-y-2.5 mb-6">
+                  <ul className="space-y-2.5 mb-6 flex-grow">
                     {product.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-center gap-2">
                         <span className="text-green-500 text-sm">✓</span>
@@ -402,15 +431,17 @@ export default function SegurosPerrosPage() {
                   </ul>
 
                   {/* Actions */}
-                  <button className="block w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3 text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 mb-3">
-                    Contratar →
-                  </button>
-                  <button
-                    onClick={() => setShowComparison(true)}
-                    className="block w-full text-center text-midnight/60 hover:text-orange text-sm font-medium transition-colors"
-                  >
-                    Ver más &gt;
-                  </button>
+                  <div className="mt-auto">
+                    <button className="block w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3 text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 mb-3">
+                      Contratar →
+                    </button>
+                    <button
+                      onClick={() => setShowComparison(true)}
+                      className="block w-full text-center text-orange/80 hover:text-orange text-sm font-bold transition-colors"
+                    >
+                      Ver más &gt;
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -513,7 +544,7 @@ export default function SegurosPerrosPage() {
           <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-auto p-6 sm:p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             {/* Close button */}
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-black text-midnight">Comparativa de planes PPP</h3>
+              <h3 className="text-2xl font-black text-midnight">Comparativa de planes</h3>
               <button
                 onClick={() => setShowComparison(false)}
                 className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-midnight/5 transition-colors"
