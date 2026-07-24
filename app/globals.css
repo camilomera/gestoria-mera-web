@@ -287,3 +287,13 @@
   from { width: 0; }
   to { width: 100%; }
 }
+
+/* Subtle bounce for floating buttons */
+.animate-bounce-subtle {
+  animation: bounce-subtle 2.5s ease-in-out infinite;
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
