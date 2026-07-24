@@ -40,37 +40,97 @@ export default function SegurosPerrosPage() {
   const [fotoCartilla, setFotoCartilla] = useState<File | null>(null)
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
 
+  const inputClass = "w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none focus:ring-2 focus:ring-orange/20 transition-all"
+  const inputErrorClass = "w-full px-4 py-3 border-2 border-red-400 rounded-xl text-midnight placeholder-midnight/40 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 transition-all"
+  const labelClass = "block text-sm font-bold text-midnight mb-1.5"
+
+  function validateDNI(value: string): boolean {
+    const dniRegex = /^[0-9]{8}[A-Za-z]$/
+    const nieRegex = /^[XYZxyz][0-9]{7}[A-Za-z]$/
+    return dniRegex.test(value) || nieRegex.test(value)
+  }
+
+  function calculateAge(dateStr: string): number {
+    const parts = dateStr.split('/')
+    if (parts.length !== 3) return -1
+    const day = parseInt(parts[0], 10)
+    const month = parseInt(parts[1], 10) - 1
+    const year = parseInt(parts[2], 10)
+    if (isNaN(day) || isNaN(month) || isNaN(year)) return -1
+    const birth = new Date(year, month, day)
+    const today = new Date()
+    let age = today.getFullYear() - birth.getFullYear()
+    const monthDiff = today.getMonth() - birth.getMonth()
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--
+    }
+    return age
+  }
+
   const validateSection = (section: number): boolean => {
     const errors: Record<string, string> = {}
     if (section === 0) {
-      if (!formData.nombre) errors.nombre = 'Requerido'
-      if (!formData.apellido1) errors.apellido1 = 'Requerido'
-      if (!formData.dni) errors.dni = 'Requerido'
-      if (!formData.fechaNacimiento) errors.fechaNacimiento = 'Requerido'
+      if (!formData.nombre.trim()) errors.nombre = 'Campo obligatorio'
+      if (!formData.apellido1.trim()) errors.apellido1 = 'Campo obligatorio'
+      if (!formData.fechaNacimiento.trim()) {
+        errors.fechaNacimiento = 'Campo obligatorio'
+      } else {
+        const age = calculateAge(formData.fechaNacimiento)
+        if (age < 0) errors.fechaNacimiento = 'Formato incorrecto. Usa DD/MM/AAAA'
+        else if (age < 18) errors.fechaNacimiento = 'Debes ser mayor de 18 años para contratar'
+      }
+      if (!formData.dni.trim()) {
+        errors.dni = 'Campo obligatorio'
+      } else if (!validateDNI(formData.dni.trim())) {
+        errors.dni = 'Formato incorrecto. Ejemplo: 12345678A o X1234567A'
+      }
     }
     if (section === 1) {
-      if (!formData.calle) errors.calle = 'Requerido'
-      if (!formData.codigoPostal) errors.codigoPostal = 'Requerido'
-      if (!formData.localidad) errors.localidad = 'Requerido'
-      if (!formData.provincia) errors.provincia = 'Requerido'
+      if (!formData.calle.trim()) errors.calle = 'Campo obligatorio'
+      if (!formData.numero.trim()) errors.numero = 'Campo obligatorio'
+      if (!formData.codigoPostal.trim()) errors.codigoPostal = 'Campo obligatorio'
+      if (!formData.localidad.trim()) errors.localidad = 'Campo obligatorio'
+      if (!formData.provincia.trim()) errors.provincia = 'Campo obligatorio'
     }
     if (section === 2) {
-      if (!formData.telefono || formData.telefono.replace(/\s/g, '').length !== 9) errors.telefono = 'Debe tener 9 dígitos'
-      if (!formData.email) errors.email = 'Requerido'
-      if (formData.email !== formData.emailRepeat) errors.emailRepeat = 'Los emails no coinciden'
+      if (!formData.telefono.trim()) {
+        errors.telefono = 'Campo obligatorio'
+      } else if (!/^[0-9]{9}$/.test(formData.telefono.replace(/\s/g, ''))) {
+        errors.telefono = 'El teléfono debe tener 9 dígitos'
+      }
+      if (!formData.email.trim()) {
+        errors.email = 'Campo obligatorio'
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+        errors.email = 'El formato del email no es correcto'
+      }
+      if (!formData.emailRepeat.trim()) {
+        errors.emailRepeat = 'Campo obligatorio'
+      } else if (formData.email.trim() !== formData.emailRepeat.trim()) {
+        errors.emailRepeat = 'Los emails no coinciden'
+      }
     }
     if (section === 3) {
-      if (!formData.nombrePerro) errors.nombrePerro = 'Requerido'
-      if (!formData.razaPerro) errors.razaPerro = 'Requerido'
-      if (!formData.sexoPerro) errors.sexoPerro = 'Requerido'
-      if (!formData.microchip || formData.microchip.replace(/\s/g, '').length !== 15) errors.microchip = 'Debe tener 15 dígitos'
+      if (!formData.nombrePerro.trim()) errors.nombrePerro = 'Campo obligatorio'
+      if (!formData.razaPerro.trim()) errors.razaPerro = 'Campo obligatorio'
+      if (!formData.sexoPerro) errors.sexoPerro = 'Campo obligatorio'
+      if (!formData.microchip.trim()) {
+        errors.microchip = 'Campo obligatorio'
+      } else if (!/^[0-9]{15}$/.test(formData.microchip.replace(/\s/g, ''))) {
+        errors.microchip = 'El microchip debe tener exactamente 15 dígitos'
+      }
     }
     if (section === 4) {
-      if (!formData.iban || formData.iban.replace(/\s/g, '').length < 24) errors.iban = 'IBAN incompleto'
+      const cleanIban = formData.iban.replace(/\s/g, '').toUpperCase()
+      if (!cleanIban) {
+        errors.iban = 'Campo obligatorio'
+      } else if (!/^ES[0-9]{22}$/.test(cleanIban)) {
+        errors.iban = 'El IBAN debe tener formato español: ES + 22 dígitos'
+      }
     }
     if (section === 5) {
-      if (!formData.aceptaCondiciones) errors.aceptaCondiciones = 'Obligatorio'
-      if (!formData.aceptaProteccion) errors.aceptaProteccion = 'Obligatorio'
+      if (!formData.aceptaCondiciones || !formData.aceptaProteccion) {
+        errors.legal = 'Debes aceptar ambas condiciones para continuar'
+      }
     }
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -318,7 +378,7 @@ export default function SegurosPerrosPage() {
 
             <div className="text-center mb-8">
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
-                Seguros disponibles
+                Elijamos el seguro de tu perro
               </h2>
               <p className="mt-3 text-midnight/70 text-base">
                 La cobertura mínima obligatoria depende de tu comunidad autónoma.
@@ -354,34 +414,57 @@ export default function SegurosPerrosPage() {
               </p>
             </div>
 
-            {/* Loading spinner */}
-            {ccaaLoading && (
-              <div className="text-center py-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange/10 mb-3">
-                  <svg className="w-6 h-6 text-orange animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
+
+
+            <div className="relative">
+            {/* Overlay for CCAA selection */}
+            {!selectedCCAA && !ccaaLoading && (
+              <div className="absolute inset-0 z-20 flex items-start justify-center pt-8 bg-[#F2EEC4]/80 backdrop-blur-[3px] rounded-3xl">
+                <div className="text-center animate-bounce-subtle">
+                  <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md mx-4 border-2 border-orange/20">
+                    <p className="text-2xl mb-1">👆</p>
+                    <p className="text-midnight font-black text-lg mb-2">Selecciona tu comunidad</p>
+                    <p className="text-midnight/70 text-sm">Necesitamos saber dónde vives para mostrarte las opciones disponibles</p>
+                  </div>
                 </div>
-                <p className="text-midnight/70 text-sm font-medium">Buscando opciones disponibles...</p>
               </div>
             )}
 
-            <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA && !ccaaLoading ? 'blur-sm opacity-50 pointer-events-none' : ''} ${ccaaLoading ? 'blur-sm opacity-50 pointer-events-none' : ''}`}>
+            {/* Loading overlay */}
+            {ccaaLoading && (
+              <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#F2EEC4]/80 backdrop-blur-[3px] rounded-3xl">
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange/10 mb-3">
+                    <svg className="w-6 h-6 text-orange animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  </div>
+                  <p className="text-midnight font-bold text-sm">Buscando opciones...</p>
+                </div>
+              </div>
+            )}
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
               {pppProducts.map((product, index) => {
                 const isAvailable = availableIds.includes(product.id)
                 return (
                 <div
                   key={index}
-                  className={`relative rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col ${isAvailable ? 'hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)]' : 'opacity-60 grayscale'}`}
+                  className={`relative rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col ${isAvailable ? 'hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)]' : 'opacity-50 grayscale-[80%] scale-[0.97]'}`}
                   style={{ background: `linear-gradient(to top right, white 40%, ${product.gradientColor}40 70%, ${product.gradientColor}80 100%)` }}
                 >
                   {/* Unavailable overlay */}
                   {!isAvailable && selectedCCAA && (
-                    <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] rounded-2xl flex items-center justify-center z-10">
+                    <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] rounded-2xl flex items-center justify-center z-10">
                       <div className="text-center px-4">
-                        <p className="text-midnight/80 text-sm font-bold">No disponible</p>
-                        <p className="text-midnight/60 text-xs mt-1">Tu comunidad exige una cobertura superior</p>
+                        <div className="w-10 h-10 bg-midnight/10 rounded-full flex items-center justify-center mx-auto mb-2">
+                          <svg className="w-5 h-5 text-midnight/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                        </div>
+                        <p className="text-midnight font-black text-sm">No disponible</p>
+                        <p className="text-midnight/70 text-xs mt-1 max-w-[180px] mx-auto leading-relaxed">La normativa de tu comunidad exige una cobertura mínima superior</p>
                       </div>
                     </div>
                   )}
@@ -436,7 +519,9 @@ export default function SegurosPerrosPage() {
                 )
               })}
             </div>
-            {/* Comparar planes - floating blue button */}
+                        </div>
+
+{/* Comparar planes - floating blue button */}
             {selectedCCAA && !ccaaLoading && <div className="text-center mt-6">
               <button
                 onClick={() => setShowComparison(true)}
@@ -585,35 +670,92 @@ export default function SegurosPerrosPage() {
               
               {/* Section 0: Datos del propietario */}
               {formSection === 0 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-black text-midnight mb-4">Datos del propietario</h3>
-                  <input type="text" placeholder="Nombre" value={formData.nombre} onChange={(e) => handleFormChange('nombre', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Primer apellido" value={formData.apellido1} onChange={(e) => handleFormChange('apellido1', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Segundo apellido" value={formData.apellido2} onChange={(e) => handleFormChange('apellido2', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Fecha de nacimiento (DD/MM/AAAA)" value={formData.fechaNacimiento} onChange={(e) => handleFormChange('fechaNacimiento', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="DNI/NIE" value={formData.dni} onChange={(e) => handleFormChange('dni', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
+                <div className="space-y-5">
+                  <h3 className="text-lg font-black text-midnight mb-2">Datos del propietario</h3>
+                  <div>
+                    <label className={labelClass}>Nombre</label>
+                    <input type="text" value={formData.nombre} onChange={(e) => handleFormChange('nombre', e.target.value)} className={formErrors.nombre ? inputErrorClass : inputClass} />
+                    {formErrors.nombre && <p className="text-red-500 text-xs mt-1">{formErrors.nombre}</p>}
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className={labelClass}>Primer apellido</label>
+                      <input type="text" value={formData.apellido1} onChange={(e) => handleFormChange('apellido1', e.target.value)} className={formErrors.apellido1 ? inputErrorClass : inputClass} />
+                      {formErrors.apellido1 && <p className="text-red-500 text-xs mt-1">{formErrors.apellido1}</p>}
+                    </div>
+                    <div>
+                      <label className={labelClass}>Segundo apellido</label>
+                      <input type="text" value={formData.apellido2} onChange={(e) => handleFormChange('apellido2', e.target.value)} className={inputClass} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className={labelClass}>Fecha de nacimiento</label>
+                    <input type="text" placeholder="DD/MM/AAAA" value={formData.fechaNacimiento} onChange={(e) => handleFormChange('fechaNacimiento', e.target.value)} className={formErrors.fechaNacimiento ? inputErrorClass : inputClass} />
+                    {formErrors.fechaNacimiento && <p className="text-red-500 text-xs mt-1">{formErrors.fechaNacimiento}</p>}
+                  </div>
+                  <div>
+                    <label className={labelClass}>DNI o NIE</label>
+                    <input type="text" placeholder="12345678A o X1234567A" value={formData.dni} onChange={(e) => handleFormChange('dni', e.target.value.toUpperCase())} className={formErrors.dni ? inputErrorClass : inputClass} />
+                    {formErrors.dni && <p className="text-red-500 text-xs mt-1">{formErrors.dni}</p>}
+                  </div>
                 </div>
               )}
 
               {/* Section 1: Dirección */}
               {formSection === 1 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-black text-midnight mb-4">Dirección</h3>
-                  <input type="text" placeholder="Calle" value={formData.calle} onChange={(e) => handleFormChange('calle', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Número" value={formData.numero} onChange={(e) => handleFormChange('numero', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Código postal" value={formData.codigoPostal} onChange={(e) => handleFormChange('codigoPostal', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Localidad" value={formData.localidad} onChange={(e) => handleFormChange('localidad', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="text" placeholder="Provincia" value={formData.provincia} onChange={(e) => handleFormChange('provincia', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
+                <div className="space-y-5">
+                  <h3 className="text-lg font-black text-midnight mb-2">Dirección</h3>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="col-span-2">
+                      <label className={labelClass}>Calle</label>
+                      <input type="text" value={formData.calle} onChange={(e) => handleFormChange('calle', e.target.value)} className={formErrors.calle ? inputErrorClass : inputClass} />
+                      {formErrors.calle && <p className="text-red-500 text-xs mt-1">{formErrors.calle}</p>}
+                    </div>
+                    <div>
+                      <label className={labelClass}>Número</label>
+                      <input type="text" value={formData.numero} onChange={(e) => handleFormChange('numero', e.target.value)} className={formErrors.numero ? inputErrorClass : inputClass} />
+                      {formErrors.numero && <p className="text-red-500 text-xs mt-1">{formErrors.numero}</p>}
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className={labelClass}>Código postal</label>
+                      <input type="text" maxLength={5} value={formData.codigoPostal} onChange={(e) => handleFormChange('codigoPostal', e.target.value)} className={formErrors.codigoPostal ? inputErrorClass : inputClass} />
+                      {formErrors.codigoPostal && <p className="text-red-500 text-xs mt-1">{formErrors.codigoPostal}</p>}
+                    </div>
+                    <div>
+                      <label className={labelClass}>Localidad</label>
+                      <input type="text" value={formData.localidad} onChange={(e) => handleFormChange('localidad', e.target.value)} className={formErrors.localidad ? inputErrorClass : inputClass} />
+                      {formErrors.localidad && <p className="text-red-500 text-xs mt-1">{formErrors.localidad}</p>}
+                    </div>
+                  </div>
+                  <div>
+                    <label className={labelClass}>Provincia</label>
+                    <input type="text" value={formData.provincia} onChange={(e) => handleFormChange('provincia', e.target.value)} className={formErrors.provincia ? inputErrorClass : inputClass} />
+                    {formErrors.provincia && <p className="text-red-500 text-xs mt-1">{formErrors.provincia}</p>}
+                  </div>
                 </div>
               )}
 
               {/* Section 2: Datos de contacto */}
               {formSection === 2 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-black text-midnight mb-4">Datos de contacto</h3>
-                  <input type="tel" placeholder="Teléfono (9 dígitos)" value={formData.telefono} onChange={(e) => handleFormChange('telefono', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="email" placeholder="Email" value={formData.email} onChange={(e) => handleFormChange('email', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                  <input type="email" placeholder="Repetir email" value={formData.emailRepeat} onChange={(e) => handleFormChange('emailRepeat', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
+                <div className="space-y-5">
+                  <h3 className="text-lg font-black text-midnight mb-2">Datos de contacto</h3>
+                  <div>
+                    <label className={labelClass}>Teléfono móvil</label>
+                    <input type="tel" placeholder="Ej: 667755976" maxLength={9} value={formData.telefono} onChange={(e) => handleFormChange('telefono', e.target.value.replace(/[^0-9]/g, ''))} className={formErrors.telefono ? inputErrorClass : inputClass} />
+                    {formErrors.telefono && <p className="text-red-500 text-xs mt-1">{formErrors.telefono}</p>}
+                  </div>
+                  <div>
+                    <label className={labelClass}>Email</label>
+                    <input type="email" placeholder="tu@email.com" value={formData.email} onChange={(e) => handleFormChange('email', e.target.value)} className={formErrors.email ? inputErrorClass : inputClass} />
+                    {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
+                  </div>
+                  <div>
+                    <label className={labelClass}>Repetir email</label>
+                    <input type="email" placeholder="Repite tu email" value={formData.emailRepeat} onChange={(e) => handleFormChange('emailRepeat', e.target.value)} className={formErrors.emailRepeat ? inputErrorClass : inputClass} />
+                    {formErrors.emailRepeat && <p className="text-red-500 text-xs mt-1">{formErrors.emailRepeat}</p>}
+                  </div>
                 </div>
               )}
 
@@ -655,25 +797,33 @@ export default function SegurosPerrosPage() {
 
               {/* Section 4: Datos bancarios */}
               {formSection === 4 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-black text-midnight mb-4">Datos bancarios</h3>
-                  <p className="text-midnight/60 text-sm mb-2">Introduce tu IBAN para la domiciliación del pago.</p>
-                  <input type="text" placeholder="ES00 0000 0000 0000 0000 0000" value={formData.iban} onChange={(e) => handleFormChange('iban', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors font-mono" />
+                <div className="space-y-5">
+                  <h3 className="text-lg font-black text-midnight mb-2">Datos bancarios</h3>
+                  <p className="text-midnight/60 text-sm">Introduce tu IBAN para la domiciliación del pago anual.</p>
+                  <div>
+                    <label className={labelClass}>IBAN</label>
+                    <input type="text" placeholder="ES12 1234 5678 9012 3456 7890" value={formData.iban} onChange={(e) => handleFormChange('iban', e.target.value.toUpperCase())} className={`${formErrors.iban ? inputErrorClass : inputClass} font-mono tracking-wider`} />
+                    {formErrors.iban && <p className="text-red-500 text-xs mt-1">{formErrors.iban}</p>}
+                    <p className="text-midnight/40 text-xs mt-1.5">Formato: ES + 22 dígitos</p>
+                  </div>
                 </div>
               )}
 
               {/* Section 5: Condiciones legales */}
               {formSection === 5 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-black text-midnight mb-4">Condiciones legales</h3>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" checked={formData.aceptaCondiciones} onChange={(e) => handleFormChange('aceptaCondiciones', e.target.checked)} className="mt-1 w-5 h-5 rounded border-midnight/20 text-orange focus:ring-orange" />
-                    <span className="text-midnight/80 text-sm">Acepto las condiciones generales del seguro y la política de privacidad.</span>
-                  </label>
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" checked={formData.aceptaProteccion} onChange={(e) => handleFormChange('aceptaProteccion', e.target.checked)} className="mt-1 w-5 h-5 rounded border-midnight/20 text-orange focus:ring-orange" />
-                    <span className="text-midnight/80 text-sm">Autorizo el tratamiento de mis datos personales conforme al RGPD.</span>
-                  </label>
+                <div className="space-y-5">
+                  <h3 className="text-lg font-black text-midnight mb-2">Condiciones legales</h3>
+                  <div className="space-y-4">
+                    <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl border-2 border-midnight/5 hover:border-orange/30 transition-colors">
+                      <input type="checkbox" checked={formData.aceptaCondiciones} onChange={(e) => handleFormChange('aceptaCondiciones', e.target.checked)} className="mt-0.5 w-5 h-5 rounded border-midnight/20 text-orange focus:ring-orange accent-orange" />
+                      <span className="text-midnight/80 text-sm leading-relaxed">Acepto las condiciones generales del seguro y la política de privacidad.</span>
+                    </label>
+                    <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl border-2 border-midnight/5 hover:border-orange/30 transition-colors">
+                      <input type="checkbox" checked={formData.aceptaProteccion} onChange={(e) => handleFormChange('aceptaProteccion', e.target.checked)} className="mt-0.5 w-5 h-5 rounded border-midnight/20 text-orange focus:ring-orange accent-orange" />
+                      <span className="text-midnight/80 text-sm leading-relaxed">Autorizo el tratamiento de mis datos personales conforme al Reglamento General de Protección de Datos (RGPD).</span>
+                    </label>
+                  </div>
+                  {formErrors.legal && <p className="text-red-500 text-sm font-medium mt-2">{formErrors.legal}</p>}
                 </div>
               )}
 
@@ -730,7 +880,7 @@ export default function SegurosPerrosPage() {
               <div className="flex gap-3 mt-8">
                 {formSection > 0 && (
                   <button
-                    onClick={() => setFormSection(prev => prev - 1)}
+                    onClick={() => { setFormErrors({}); setFormSection(prev => prev - 1) }}
                     className="flex-1 py-3 border-2 border-midnight/10 rounded-full text-midnight font-bold hover:bg-midnight/5 transition-colors"
                   >
                     ← Anterior
