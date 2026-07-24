@@ -100,6 +100,17 @@ export default function SegurosPerrosPage() {
     setStep('confirmation')
   }
   const [selectedCCAA, setSelectedCCAA] = useState('')
+  const [ccaaLoading, setCcaaLoading] = useState(false)
+
+  const handleCCAAChange = (ccaa: string) => {
+    if (!ccaa) return
+    setCcaaLoading(true)
+    setSelectedCCAA('')
+    setTimeout(() => {
+      setSelectedCCAA(ccaa)
+      setCcaaLoading(false)
+    }, 1500)
+  }
 
 
 
@@ -165,13 +176,13 @@ export default function SegurosPerrosPage() {
     'Galicia': ['150k', '180k', '350k'],
   }
 
-  // Get products for selected CCAA (default: all 4)
-  const getProductsForCCAA = (ccaa: string) => {
-    const availableIds = ccaaProducts[ccaa] || ['120k', '150k', '180k', '350k']
-    return allPppProducts.filter(p => availableIds.includes(p.id))
+  // Get available product IDs for selected CCAA
+  const getAvailableIds = (ccaa: string): string[] => {
+    return ccaaProducts[ccaa] || ['120k', '150k', '180k', '350k']
   }
 
-  const pppProducts = getProductsForCCAA(selectedCCAA)
+  const availableIds = selectedCCAA ? getAvailableIds(selectedCCAA) : ['120k', '150k', '180k', '350k']
+  const pppProducts = allPppProducts // Always show all 4
 
   // Product for No PPP (single option)
   const nopppProduct = {
@@ -315,14 +326,14 @@ export default function SegurosPerrosPage() {
             </div>
 
             {/* CCAA Selector - integrated */}
-            <div className="max-w-md mx-auto mb-10">
+            <div className="max-w-lg mx-auto mb-10">
               <div className="relative">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
                   <span className="text-lg">📍</span>
                 </div>
                 <select
                   value={selectedCCAA}
-                  onChange={(e) => setSelectedCCAA(e.target.value)}
+                  onChange={(e) => handleCCAAChange(e.target.value)}
                   className="w-full appearance-none bg-white border-2 border-midnight/15 rounded-xl pl-12 pr-12 py-4 text-base font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-md"
                 >
                   <option value="">Selecciona tu comunidad autónoma</option>
@@ -338,15 +349,42 @@ export default function SegurosPerrosPage() {
                   </svg>
                 </div>
               </div>
+              <p className="text-midnight/60 text-xs text-center mt-3">
+                La cobertura mínima obligatoria varía según la normativa de cada comunidad autónoma.
+              </p>
             </div>
 
-            <div className={`grid gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA ? 'blur-sm opacity-50 pointer-events-none' : ''} ${pppProducts.length === 2 ? 'sm:grid-cols-2 max-w-3xl' : pppProducts.length === 3 ? 'sm:grid-cols-3 max-w-4xl' : 'sm:grid-cols-2 lg:grid-cols-4'}`}>
-              {pppProducts.map((product, index) => (
+            {/* Loading spinner */}
+            {ccaaLoading && (
+              <div className="text-center py-10">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange/10 mb-3">
+                  <svg className="w-6 h-6 text-orange animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                </div>
+                <p className="text-midnight/70 text-sm font-medium">Buscando opciones disponibles...</p>
+              </div>
+            )}
+
+            <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA && !ccaaLoading ? 'blur-sm opacity-50 pointer-events-none' : ''} ${ccaaLoading ? 'blur-sm opacity-50 pointer-events-none' : ''}`}>
+              {pppProducts.map((product, index) => {
+                const isAvailable = availableIds.includes(product.id)
+                return (
                 <div
                   key={index}
-                  className="relative rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)] shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col"
+                  className={`relative rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col ${isAvailable ? 'hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)]' : 'opacity-60 grayscale'}`}
                   style={{ background: `linear-gradient(to top right, white 40%, ${product.gradientColor}40 70%, ${product.gradientColor}80 100%)` }}
                 >
+                  {/* Unavailable overlay */}
+                  {!isAvailable && selectedCCAA && (
+                    <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] rounded-2xl flex items-center justify-center z-10">
+                      <div className="text-center px-4">
+                        <p className="text-midnight/80 text-sm font-bold">No disponible</p>
+                        <p className="text-midnight/60 text-xs mt-1">Tu comunidad exige una cobertura superior</p>
+                      </div>
+                    </div>
+                  )}
                   {/* Popular badge */}
                   {product.popular && (
                     <div className="absolute -top-3 right-4 px-3 py-1 bg-midnight text-white text-xs font-bold rounded-full shadow-md">
@@ -382,8 +420,9 @@ export default function SegurosPerrosPage() {
                   {/* Actions */}
                   <div className="mt-auto">
                     <button 
-                      onClick={() => handleContratarClick(product)}
-                      className="block w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3 text-sm transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 mb-3">
+                      onClick={() => isAvailable && handleContratarClick(product)}
+                      disabled={!isAvailable}
+                      className={`block w-full text-center rounded-full py-3 text-sm font-black transition-all duration-300 mb-3 ${isAvailable ? 'btn-cta bg-orange text-midnight hover:scale-[1.02] hover:-translate-y-0.5' : 'bg-midnight/10 text-midnight/40 cursor-not-allowed'}`}>
                       Contratar →
                     </button>
                     <button
@@ -394,10 +433,11 @@ export default function SegurosPerrosPage() {
                     </button>
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
             {/* Comparar planes - floating blue button */}
-            <div className="text-center mt-6">
+            {selectedCCAA && !ccaaLoading && <div className="text-center mt-6">
               <button
                 onClick={() => setShowComparison(true)}
                 className="inline-flex items-center gap-2 bg-midnight text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-midnight/30 hover:shadow-xl hover:shadow-midnight/40 transition-all duration-300 hover:-translate-y-0.5 animate-bounce-subtle"
@@ -407,7 +447,7 @@ export default function SegurosPerrosPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
-            </div>
+            </div>}
 
           </div>
         </section>

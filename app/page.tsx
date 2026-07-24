@@ -48,39 +48,27 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16">
           {/* Title with inline animal icons */}
-          <div className="text-center mb-12 sm:mb-16 animate-fade-in">
+          <div className="text-center mb-12 sm:mb-16 animate-fade-in max-w-5xl mx-auto">
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.15] text-midnight">
               Seguros para perros y caballos
             </h1>
           </div>
 
-          {/* Value props - scrolling ticker */}
-          <div className="relative -mx-5 sm:-mx-8 mb-10 animate-fade-in overflow-hidden bg-midnight py-3" style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
-            <div className="animate-ticker flex items-center gap-10 whitespace-nowrap pl-[100%]">
-              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">⚡ Contrata online en 3 minutos</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">🛡️ Póliza activa en 24 horas</span>
-              <span className="text-white/40">•</span>
-              <span className="text-white font-bold text-sm">💬 Asesoramiento por WhatsApp</span>
-              <span className="text-white/40">•</span>
+          {/* Value props */}
+          <div className="max-w-5xl mx-auto mb-10 animate-fade-in text-center">
+            <p className="text-midnight/70 text-base sm:text-lg mb-4">
+              Contrata online en 3 minutos. Póliza activa en 24 horas.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <span className="inline-flex items-center gap-1.5 bg-midnight text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                ⚡ 100% online
+              </span>
+              <span className="inline-flex items-center gap-1.5 bg-midnight text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                🛡️ Activa en 24h
+              </span>
+              <span className="inline-flex items-center gap-1.5 bg-midnight text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                💬 WhatsApp
+              </span>
             </div>
           </div>
 
