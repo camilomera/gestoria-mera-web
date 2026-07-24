@@ -46,75 +46,58 @@ export default function SegurosPerrosPage() {
     {
       id: '120k',
       name: 'Plan Básico',
-      price: 'XX€/año',
-      coverage: '120.000€',
-      features: ['Responsabilidad Civil 120.000€', 'Cobertura en toda España', 'Certificado en 24h'],
+      price: '49€/año',
+      coverage: '120.250€',
+      features: ['Responsabilidad Civil 120.250€', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
       id: '150k',
       name: 'Plan Estándar',
-      price: 'XX€/año',
-      coverage: '150.500€',
-      features: ['Responsabilidad Civil 150.500€', 'Defensa jurídica', 'Certificado en 24h'],
+      price: '50€/año',
+      coverage: '150.300€',
+      features: ['Responsabilidad Civil 150.300€', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
-      id: '200k',
+      id: '180k',
       name: 'Plan Plus',
-      price: 'XX€/año',
-      coverage: '200.000€',
-      features: ['Responsabilidad Civil 200.000€', 'Defensa jurídica', 'Asistencia veterinaria'],
+      price: '53,99€/año',
+      coverage: '180.350€',
+      features: ['Responsabilidad Civil 180.350€', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
       id: '350k',
       name: 'Plan Premium',
-      price: 'XX€/año',
+      price: '55€/año',
       coverage: '350.000€',
-      features: ['Responsabilidad Civil 350.000€', 'Defensa jurídica completa', 'Asistencia veterinaria', 'Máxima cobertura'],
+      features: ['Responsabilidad Civil 350.000€', 'Máxima cobertura disponible', 'Cobertura en toda España', 'Certificado en 24h'],
     },
   ]
 
   // CCAA product availability
   const ccaaProducts: Record<string, string[]> = {
-    'Canarias': ['200k', '350k'],
-    'Castilla y León': ['200k', '350k'],
-    'Navarra': ['200k', '350k'],
-    'Andalucía': ['200k', '350k'],
-    'Cataluña': ['150k', '200k', '350k'],
-    'Galicia': ['150k', '200k', '350k'],
+    'Canarias': ['180k', '350k'],
+    'Castilla y León': ['180k', '350k'],
+    'Navarra': ['180k', '350k'],
+    'Andalucía': ['180k', '350k'],
+    'Cataluña': ['150k', '180k', '350k'],
+    'Galicia': ['150k', '180k', '350k'],
   }
 
   // Get products for selected CCAA (default: all 4)
   const getProductsForCCAA = (ccaa: string) => {
-    const availableIds = ccaaProducts[ccaa] || ['120k', '150k', '200k', '350k']
+    const availableIds = ccaaProducts[ccaa] || ['120k', '150k', '180k', '350k']
     return allPppProducts.filter(p => availableIds.includes(p.id))
   }
 
   const pppProducts = getProductsForCCAA(selectedCCAA)
 
-  // Products for No PPP
-  const nopppProducts = [
-    {
-      name: 'Plan Compañía',
-      price: '20,40€/año',
-      features: ['Responsabilidad Civil completa', 'Perros domésticos no PPP', 'Certificado en 24h'],
-    },
-    {
-      name: 'Plan Caza',
-      price: '32€/año',
-      subtitle: '(2 perros incluidos)',
-      features: ['Responsabilidad Civil cinegética', '2 perros por póliza', '+6€ por perro adicional', 'Complemento licencia de caza'],
-    },
-    {
-      name: 'Plan Criadores',
-      price: '58,75€/trimestre',
-      features: ['Responsabilidad Civil profesional', 'Múltiples animales', 'Actividad profesional cubierta', 'Adaptado a tu actividad'],
-    },
-    {
-      name: 'Plan Adiestradores',
-      price: '58,75€/trimestre',
-      features: ['Responsabilidad Civil profesional', 'Cobertura durante sesiones', 'Daños en instalaciones', 'Seguro de accidentes'],
-    },
-  ]
+  // Product for No PPP (single option)
+  const nopppProduct = {
+    name: 'Seguro Responsabilidad Civil',
+    price: '35€/año',
+    coverage: '350.000€',
+    features: ['Responsabilidad Civil 350.000€', 'Todas las razas no peligrosas', 'Cobertura en toda España', 'Certificado en 24h'],
+  }
 
   return (
     <div className="pt-16 sm:pt-20">
@@ -390,7 +373,7 @@ export default function SegurosPerrosPage() {
         </section>
       )}
 
-      {/* Step: No PPP Products */}
+      {/* Step: No PPP Product */}
       {step === 'noppp' && (
         <section className="py-16 sm:py-20">
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
@@ -405,54 +388,32 @@ export default function SegurosPerrosPage() {
               Volver
             </button>
 
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
-                Seguros para perros <span className="text-orange underline decoration-4 underline-offset-4">no</span> peligrosos
+                Seguro para perros <span className="text-orange underline decoration-4 underline-offset-4">no</span> peligrosos
               </h2>
-              <p className="mt-3 text-midnight/70 text-lg">
-                Elige el seguro que mejor se adapta a tu situación.
-              </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
-              {nopppProducts.map((product, index) => (
-                <div
-                  key={index}
-                  className={`relative bg-white rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
-                    index === 0 ? 'ring-2 ring-orange shadow-lg shadow-orange/10' : 'shadow-sm hover:shadow-lg'
-                  }`}
-                >
-                  {index === 0 && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-orange text-white text-xs font-bold rounded-full whitespace-nowrap">
-                      Más popular
-                    </div>
-                  )}
-                  <h3 className="text-lg font-black text-midnight mb-1">{product.name}</h3>
-                  {product.subtitle && (
-                    <p className="text-midnight/60 text-xs font-medium mb-2">{product.subtitle}</p>
-                  )}
-                  <div className="mb-5">
-                    <span className="text-2xl font-black text-midnight">{product.price}</span>
-                  </div>
-                  <ul className="space-y-2.5 mb-6">
-                    {product.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-start gap-2">
-                        <span className="text-orange font-bold mt-0.5">✓</span>
-                        <span className="text-midnight/70 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    className={`block w-full text-center rounded-full py-3 font-bold transition-all duration-300 text-sm ${
-                      index === 0
-                        ? 'bg-orange text-white hover:bg-orange-dark hover:shadow-lg'
-                        : 'bg-midnight text-white hover:bg-midnight-light'
-                    }`}
-                  >
-                    Contratar
-                  </button>
+            <div className="max-w-md mx-auto">
+              <div className="bg-white rounded-3xl p-8 shadow-lg ring-2 ring-orange shadow-orange/10 text-center">
+                <h3 className="text-xl font-black text-midnight mb-1">{nopppProduct.name}</h3>
+                <p className="text-orange font-bold text-sm mb-4">Responsabilidad Civil {nopppProduct.coverage}</p>
+                <div className="mb-5">
+                  <span className="text-4xl font-black text-midnight">35€</span>
+                  <span className="text-midnight/60 text-sm">/año</span>
                 </div>
-              ))}
+                <ul className="space-y-2.5 mb-6 text-left">
+                  {nopppProduct.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-start gap-2">
+                      <span className="text-orange font-bold mt-0.5">✓</span>
+                      <span className="text-midnight/70 text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button className="w-full btn-cta bg-orange text-midnight font-black text-center rounded-full py-3.5 transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                  Contratar →
+                </button>
+              </div>
             </div>
           </div>
         </section>
