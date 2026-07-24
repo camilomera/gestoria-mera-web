@@ -25,9 +25,9 @@ const comunidades = [
 ]
 
 export default function SegurosPerrosPage() {
-  const [step, setStep] = useState<'choice' | 'noppp' | 'ppp-products' | 'form' | 'confirmation'>('choice')
+  const [step, setStep] = useState('choice')
   const [showComparison, setShowComparison] = useState(false)
-  const [selectedPlan, setSelectedPlan] = useState<any>(null)
+  const [selectedPlan, setSelectedPlan] = useState(null)
   const [formSection, setFormSection] = useState(0)
   const [formData, setFormData] = useState({
     nombre: '', apellido1: '', apellido2: '', fechaNacimiento: '', dni: '',
@@ -37,20 +37,20 @@ export default function SegurosPerrosPage() {
     iban: '',
     aceptaCondiciones: false, aceptaProteccion: false,
   })
-  const [fotoCartilla, setFotoCartilla] = useState<File | null>(null)
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+  const [fotoCartilla, setFotoCartilla] = useState(null)
+  const [formErrors, setFormErrors] = useState({})
 
   const inputClass = "w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none focus:ring-2 focus:ring-orange/20 transition-all"
   const inputErrorClass = "w-full px-4 py-3 border-2 border-red-400 rounded-xl text-midnight placeholder-midnight/40 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 transition-all"
   const labelClass = "block text-sm font-bold text-midnight mb-1.5"
 
-  const validateDNI = (value: string) => {
+  const validateDNI = (value) => {
     const dniRegex = /^[0-9]{8}[A-Za-z]$/
     const nieRegex = /^[XYZxyz][0-9]{7}[A-Za-z]$/
     return dniRegex.test(value) || nieRegex.test(value)
   }
 
-  const calculateAge = (dateStr: string) => {
+  const calculateAge = (dateStr) => {
     const parts = dateStr.split('/')
     if (parts.length !== 3) return -1
     const day = parseInt(parts[0], 10)
@@ -67,8 +67,8 @@ export default function SegurosPerrosPage() {
     return age
   }
 
-  const validateSection = (section: number): boolean => {
-    const errors: Record<string, string> = {}
+  const validateSection = (section) => {
+    const errors = {}
     if (section === 0) {
       if (!formData.nombre.trim()) errors.nombre = 'Campo obligatorio'
       if (!formData.apellido1.trim()) errors.apellido1 = 'Campo obligatorio'
@@ -146,13 +146,13 @@ export default function SegurosPerrosPage() {
     'Revisa tus datos',
   ]
 
-  const handleContratarClick = (product: any) => {
+  const handleContratarClick = (product) => {
     setSelectedPlan(product)
     setStep('form')
     setFormSection(0)
   }
 
-  const handleFormChange = (field: string, value: string | boolean) => {
+  const handleFormChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
@@ -162,7 +162,7 @@ export default function SegurosPerrosPage() {
   const [selectedCCAA, setSelectedCCAA] = useState('')
   const [ccaaLoading, setCcaaLoading] = useState(false)
 
-  const handleCCAAChange = (ccaa: string) => {
+  const handleCCAAChange = (ccaa) => {
     if (!ccaa) return
     setCcaaLoading(true)
     setSelectedCCAA('')
@@ -237,7 +237,7 @@ export default function SegurosPerrosPage() {
   }
 
   // Get available product IDs for selected CCAA
-  const getAvailableIds = (ccaa: string) => {
+  const getAvailableIds = (ccaa) => {
     return ccaaProducts[ccaa] || ['120k', '150k', '180k', '350k']
   }
 
