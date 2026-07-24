@@ -81,7 +81,7 @@ export default function SegurosPerrosPage() {
     {
       id: '120k',
       name: 'Bronce',
-      price: '49€',
+      price: '51,45€',
       period: '/año',
       coverage: '120.250€',
       subtitle: 'Cobertura básica obligatoria',
@@ -93,7 +93,7 @@ export default function SegurosPerrosPage() {
     {
       id: '150k',
       name: 'Plata',
-      price: '50€',
+      price: '52,49€',
       period: '/año',
       coverage: '150.300€',
       subtitle: 'Protección intermedia',
@@ -105,7 +105,7 @@ export default function SegurosPerrosPage() {
     {
       id: '180k',
       name: 'Oro',
-      price: '53,99€',
+      price: '56,69€',
       period: '/año',
       coverage: '180.350€',
       subtitle: 'La opción más equilibrada',
@@ -117,7 +117,7 @@ export default function SegurosPerrosPage() {
     {
       id: '350k',
       name: 'Esmeralda',
-      price: '55€',
+      price: '57,75€',
       period: '/año',
       coverage: '350.000€',
       subtitle: 'Máxima tranquilidad',
@@ -149,7 +149,7 @@ export default function SegurosPerrosPage() {
   // Product for No PPP (single option)
   const nopppProduct = {
     name: 'Oro',
-    price: '35€',
+    price: '36,77€',
     period: '/año',
     coverage: '350.000€',
     subtitle: 'Máxima protección para tu perro',
@@ -839,10 +839,10 @@ export default function SegurosPerrosPage() {
                   </tr>
                   <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
                     <td className="py-4 pr-4 font-medium text-midnight">Precio</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">49€/año</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">50€/año</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">53,99€/año</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">55€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">51,45€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">52,49€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">56,69€/año</td>
+                    <td className="py-4 px-3 text-center font-bold text-midnight">57,75€/año</td>
                   </tr>
                   <tr className="border-b border-midnight/5">
                     <td className="py-4 pr-4 font-medium text-midnight">Daños corporales</td>
