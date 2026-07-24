@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-const comunidades: { name: string; joke: string }[] = [
+const comunidades = [
   { name: 'Andalucía', joke: 'Esto tardará menos que freír un pescaíto' },
   { name: 'Aragón', joke: 'Más rápido que el cierzo bajando por el Ebro' },
   { name: 'Asturias', joke: 'Tardará menos que sidra en caer al vaso' },
@@ -44,13 +44,13 @@ export default function SegurosPerrosPage() {
   const inputErrorClass = "w-full px-4 py-3 border-2 border-red-400 rounded-xl text-midnight placeholder-midnight/40 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 transition-all"
   const labelClass = "block text-sm font-bold text-midnight mb-1.5"
 
-  function validateDNI(value: string): boolean {
+  const validateDNI = (value: string) => {
     const dniRegex = /^[0-9]{8}[A-Za-z]$/
     const nieRegex = /^[XYZxyz][0-9]{7}[A-Za-z]$/
     return dniRegex.test(value) || nieRegex.test(value)
   }
 
-  function calculateAge(dateStr: string): number {
+  const calculateAge = (dateStr: string) => {
     const parts = dateStr.split('/')
     if (parts.length !== 3) return -1
     const day = parseInt(parts[0], 10)
@@ -227,7 +227,7 @@ export default function SegurosPerrosPage() {
   ]
 
   // CCAA product availability
-  const ccaaProducts: Record<string, string[]> = {
+  const ccaaProducts = {
     'Canarias': ['180k', '350k'],
     'Castilla y León': ['180k', '350k'],
     'Navarra': ['180k', '350k'],
@@ -237,7 +237,7 @@ export default function SegurosPerrosPage() {
   }
 
   // Get available product IDs for selected CCAA
-  const getAvailableIds = (ccaa: string): string[] => {
+  const getAvailableIds = (ccaa: string) => {
     return ccaaProducts[ccaa] || ['120k', '150k', '180k', '350k']
   }
 
