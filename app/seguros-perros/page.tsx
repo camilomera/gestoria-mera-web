@@ -51,9 +51,8 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '120.250€',
       subtitle: 'Cobertura básica obligatoria',
-      color: 'from-amber-200/80 via-amber-100/40 to-white',
-      borderColor: 'border-amber-300/60',
-      iconColor: 'text-amber-700',
+      color: 'from-white via-amber-50 to-amber-200/80',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/v1784898592/ChatGPT_Image_Jul_24_2026_03_09_04_PM_2_ogoazg.png',
       popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -64,9 +63,8 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '150.300€',
       subtitle: 'Protección intermedia',
-      color: 'from-slate-200/80 via-slate-100/40 to-white',
-      borderColor: 'border-slate-300/60',
-      iconColor: 'text-slate-400',
+      color: 'from-white via-slate-50 to-slate-200/80',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/v1784898592/ChatGPT_Image_Jul_24_2026_03_09_04_PM_3_i9ejwa.png',
       popular: false,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -77,22 +75,20 @@ export default function SegurosPerrosPage() {
       period: '/año',
       coverage: '180.350€',
       subtitle: 'La opción más equilibrada',
-      color: 'from-yellow-200/80 via-amber-100/40 to-white',
-      borderColor: 'border-yellow-300/60',
-      iconColor: 'text-yellow-500',
+      color: 'from-white via-yellow-50 to-yellow-200/80',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/v1784898590/ChatGPT_Image_Jul_24_2026_03_09_05_PM_4_co8grr.png',
       popular: true,
       features: ['Responsabilidad Civil', 'Cobertura en toda España', 'Certificado en 24h'],
     },
     {
       id: '350k',
-      name: 'Platino',
+      name: 'Esmeralda',
       price: '55€',
       period: '/año',
       coverage: '350.000€',
       subtitle: 'Máxima tranquilidad',
-      color: 'from-gray-300/80 via-gray-200/40 to-white',
-      borderColor: 'border-gray-300/60',
-      iconColor: 'text-gray-500',
+      color: 'from-white via-emerald-50 to-emerald-200/80',
+      shieldImg: 'https://res.cloudinary.com/r5v8fzlu/image/upload/v1784898591/ChatGPT_Image_Jul_24_2026_03_09_02_PM_1_mwfgri.png',
       popular: false,
       features: ['Responsabilidad Civil máxima', 'Cobertura en toda España', 'Certificado en 24h'],
     },
@@ -367,7 +363,7 @@ export default function SegurosPerrosPage() {
               {pppProducts.map((product, index) => (
                 <div
                   key={index}
-                  className={`relative bg-gradient-to-tr ${product.color} border ${product.borderColor} rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl shadow-xl flex flex-col`}
+                  className={`relative bg-gradient-to-tr ${product.color} rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] shadow-[0_10px_40px_rgba(0,0,0,0.1)] flex flex-col`}
                 >
                   {/* Popular badge */}
                   {product.popular && (
@@ -376,27 +372,27 @@ export default function SegurosPerrosPage() {
                     </div>
                   )}
 
-                  {/* Tier shield */}
-                  <div className="mb-4">
-                    <svg className={`w-11 h-11 ${product.iconColor} drop-shadow-lg`} fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                      <path d="M12 3.18l7 3.12v4.7c0 4.83-3.4 9.16-7 10.32-3.6-1.16-7-5.49-7-10.32V6.3l7-3.12z" opacity="0.5"/>
-                      <path d="M10 12l2 2 4-4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                    </svg>
+                  {/* Tier shield - centered */}
+                  <div className="flex justify-center mb-5">
+                    <img
+                      src={product.shieldImg}
+                      alt={product.name}
+                      className="w-14 h-14 object-contain drop-shadow-lg"
+                    />
                   </div>
 
                   {/* Name + subtitle */}
-                  <h3 className="text-xl font-black text-midnight">{product.name}</h3>
-                  <p className="text-midnight/70 text-sm mt-1 mb-5">{product.subtitle}</p>
+                  <h3 className="text-xl font-black text-midnight text-center">{product.name}</h3>
+                  <p className="text-midnight text-sm mt-1 mb-5 text-center">{product.subtitle}</p>
 
                   {/* Coverage */}
-                  <div className="mb-4">
-                    <p className="text-midnight/60 text-xs font-semibold mb-0.5">cobertura</p>
+                  <div className="mb-4 text-center">
+                    <p className="text-midnight text-xs font-semibold mb-0.5">cobertura</p>
                     <span className="text-2xl font-black text-midnight">{product.coverage}</span>
                   </div>
 
                   {/* Price */}
-                  <div className="mb-6">
+                  <div className="mb-6 text-center">
                     <span className="text-3xl font-black text-midnight">{product.price}</span>
                     <span className="text-midnight font-bold text-base">{product.period}</span>
                   </div>
@@ -408,7 +404,7 @@ export default function SegurosPerrosPage() {
                     </button>
                     <button
                       onClick={() => setShowComparison(true)}
-                      className="block w-full text-center text-midnight/70 hover:text-orange text-sm font-semibold transition-colors"
+                      className="block w-full text-center text-midnight hover:text-orange text-sm font-semibold transition-colors"
                     >
                       Leer más &gt;
                     </button>
@@ -555,7 +551,7 @@ export default function SegurosPerrosPage() {
                       <span className="text-yellow-500 font-black">Oro</span>
                     </th>
                     <th className="py-3 px-3 text-center">
-                      <span className="text-indigo-500 font-black">Platino</span>
+                      <span className="text-emerald-600 font-black">Esmeralda</span>
                     </th>
                   </tr>
                 </thead>
