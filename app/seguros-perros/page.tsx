@@ -376,40 +376,38 @@ export default function SegurosPerrosPage() {
               Volver
             </button>
 
-            <div className="text-center mb-8">
-              <h2 className="text-3xl sm:text-4xl font-black text-midnight">
-                Elijamos el seguro de tu perro
-              </h2>
-            </div>
-
-            {/* CCAA Selector - integrated */}
-            <div className="max-w-lg mx-auto mb-10">
-              <div className="relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <span className="text-lg">📍</span>
-                </div>
-                <select
-                  value={selectedCCAA}
-                  onChange={(e) => handleCCAAChange(e.target.value)}
-                  className="w-full appearance-none bg-white border-2 border-midnight/15 rounded-xl pl-12 pr-12 py-4 text-base font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-md"
-                >
-                  <option value="">Selecciona tu comunidad autónoma</option>
-                  {comunidades.map((ccaa) => (
-                    <option key={ccaa.name} value={ccaa.name}>
-                      {ccaa.name}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <svg className="w-5 h-5 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+            {/* Header when CCAA is selected */}
+            {selectedCCAA && (
+              <div className="text-center mb-8">
+                <h2 className="text-3xl sm:text-4xl font-black text-midnight">
+                  Elijamos el seguro de tu perro
+                </h2>
+                <div className="max-w-lg mx-auto mt-4">
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <span className="text-lg">📍</span>
+                    </div>
+                    <select
+                      value={selectedCCAA}
+                      onChange={(e) => handleCCAAChange(e.target.value)}
+                      className="w-full appearance-none bg-white border-2 border-midnight/15 rounded-xl pl-12 pr-12 py-3 text-sm font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-sm"
+                    >
+                      <option value="">Selecciona tu comunidad autónoma</option>
+                      {comunidades.map((ccaa) => (
+                        <option key={ccaa.name} value={ccaa.name}>
+                          {ccaa.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg className="w-5 h-5 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <p className="text-midnight/60 text-xs text-center mt-3">
-                La cobertura mínima obligatoria varía según la normativa de cada comunidad autónoma.
-              </p>
-            </div>
+            )}
 
 
 
@@ -431,7 +429,44 @@ export default function SegurosPerrosPage() {
               </div>
             )}
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+            <div className="relative min-h-[400px]">
+            {/* CCAA Overlay when not selected - positioned over blurred cards */}
+            {!selectedCCAA && !ccaaLoading && (
+              <div className="absolute inset-0 z-30 flex items-center justify-center">
+                <div className="text-center bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-8 mx-4 max-w-lg w-full border border-orange/20 animate-pulse-subtle">
+                  <h2 className="text-2xl sm:text-3xl font-black text-midnight mb-3">
+                    Elijamos el seguro de tu perro
+                  </h2>
+                  <div className="relative mb-3">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                      <span className="text-lg">📍</span>
+                    </div>
+                    <select
+                      value={selectedCCAA}
+                      onChange={(e) => handleCCAAChange(e.target.value)}
+                      className="w-full appearance-none bg-white border-2 border-orange/30 rounded-xl pl-12 pr-12 py-4 text-base font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange shadow-sm relative z-20"
+                    >
+                      <option value="">Selecciona tu comunidad autónoma</option>
+                      {comunidades.map((ccaa) => (
+                        <option key={ccaa.name} value={ccaa.name}>
+                          {ccaa.name}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                      <svg className="w-5 h-5 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="text-midnight/60 text-xs">
+                    La cobertura mínima obligatoria varía según la normativa de cada comunidad autónoma.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA ? 'blur-md opacity-30 pointer-events-none' : ''}`}>
               {pppProducts.map((product, index) => {
                 const isAvailable = availableIds.includes(product.id)
                 return (
@@ -442,15 +477,13 @@ export default function SegurosPerrosPage() {
                 >
                   {/* Unavailable overlay */}
                   {!isAvailable && selectedCCAA && (
-                    <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] rounded-2xl flex items-center justify-center z-10">
-                      <div className="text-center px-5">
-                        <div className="w-14 h-14 bg-midnight/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                          <svg className="w-7 h-7 text-midnight/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                          </svg>
-                        </div>
-                        <p className="text-midnight font-black text-base mb-1">No disponible</p>
-                        <p className="text-midnight/80 text-sm leading-snug max-w-[200px] mx-auto">Tu comunidad exige una cobertura mínima superior</p>
+                    <div className="absolute inset-0 bg-white/85 backdrop-blur-[2px] rounded-2xl flex items-center justify-center z-10">
+                      <div className="bg-midnight/90 rounded-2xl px-6 py-5 text-center shadow-lg max-w-[220px]">
+                        <svg className="w-8 h-8 text-white/90 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <p className="text-white font-black text-sm mb-1">No disponible</p>
+                        <p className="text-white/80 text-xs leading-snug">Tu comunidad exige una cobertura mínima superior</p>
                       </div>
                     </div>
                   )}

@@ -307,3 +307,13 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-66.66%); }
 }
+
+/* Pulse subtle for CCAA selector attention */
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { box-shadow: 0 10px 40px rgba(255, 165, 0, 0.1); transform: scale(1); }
+  50% { box-shadow: 0 10px 40px rgba(255, 165, 0, 0.25); transform: scale(1.01); }
+}
