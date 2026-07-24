@@ -1,19 +1,6 @@
 "use client"
 
-imp
-            {/* Comparar planes - floating blue button */}
-            <div className="text-center mt-10">
-              <button
-                onClick={() => setShowComparison(true)}
-                className="inline-flex items-center gap-2 bg-midnight text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-midnight/30 hover:shadow-xl hover:shadow-midnight/40 transition-all duration-300 hover:-translate-y-0.5 animate-bounce-subtle"
-              >
-                Comparar planes
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-ort { useState } from 'react'
+import { useState } from 'react'
 
 const comunidades: { name: string; joke: string }[] = [
   { name: 'Andalucía', joke: 'Esto tardará menos que freír un pescaíto' },
@@ -453,6 +440,19 @@ export default function SegurosPerrosPage() {
                 </div>
               ))}
             </div>
+            {/* Comparar planes - floating blue button */}
+            <div className="text-center mt-10">
+              <button
+                onClick={() => setShowComparison(true)}
+                className="inline-flex items-center gap-2 bg-midnight text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-midnight/30 hover:shadow-xl hover:shadow-midnight/40 transition-all duration-300 hover:-translate-y-0.5 animate-bounce-subtle"
+              >
+                Comparar planes
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
           </div>
         </section>
       )}
