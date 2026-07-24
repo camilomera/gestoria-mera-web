@@ -2,29 +2,29 @@
 
 import { useState } from 'react'
 
-const comunidades = [
-  { name: 'Andalucía', joke: 'Esto tardará menos que freír un pescaíto' },
-  { name: 'Aragón', joke: 'Más rápido que el cierzo bajando por el Ebro' },
-  { name: 'Asturias', joke: 'Tardará menos que sidra en caer al vaso' },
-  { name: 'Islas Baleares', joke: 'Más rápido que encontrar cala virgen en agosto... bueno, casi' },
-  { name: 'Canarias', joke: 'Esto va más rápido que un plátano madurando al sol' },
-  { name: 'Cantabria', joke: 'Tardará menos que un día de sol en Santander' },
-  { name: 'Castilla-La Mancha', joke: 'Más rápido que Sancho corriendo detrás de Don Quijote' },
-  { name: 'Castilla y León', joke: 'Tardará menos que un cordero lechal en el horno' },
-  { name: 'Cataluña', joke: 'Més ràpid que un calçot a la brasa' },
-  { name: 'Extremadura', joke: 'Esto va más rápido que el jamón desapareciendo de la mesa' },
-  { name: 'Galicia', joke: 'Tardará menos que una tortilla de Betanzos en acabarse' },
-  { name: 'La Rioja', joke: 'Más rápido que descorchar un Reserva' },
-  { name: 'Madrid', joke: 'Más rápido que pillar mesa en una terraza un domingo' },
-  { name: 'Murcia', joke: 'Esto va más rápido que un limón cayendo del árbol' },
-  { name: 'Navarra', joke: 'Tardará menos que un encierro en San Fermín' },
-  { name: 'País Vasco', joke: 'Más rápido que pinchar un pintxo en el Casco Viejo' },
-  { name: 'Comunidad Valenciana', joke: 'Esto tardará menos que una mascletà' },
-  { name: 'Ceuta', joke: 'Más rápido que cruzar el Estrecho en ferry' },
-  { name: 'Melilla', joke: 'Tardará menos que un paseo por el Parque Hernández' },
-]
-
 export default function SegurosPerrosPage() {
+  const comunidades = [
+  { name: 'Andalucía', joke: 'Esto tardará menos que freír un pescaíto' },
+    { name: 'Aragón', joke: 'Más rápido que el cierzo bajando por el Ebro' },
+    { name: 'Asturias', joke: 'Tardará menos que sidra en caer al vaso' },
+    { name: 'Islas Baleares', joke: 'Más rápido que encontrar cala virgen en agosto... bueno, casi' },
+    { name: 'Canarias', joke: 'Esto va más rápido que un plátano madurando al sol' },
+    { name: 'Cantabria', joke: 'Tardará menos que un día de sol en Santander' },
+    { name: 'Castilla-La Mancha', joke: 'Más rápido que Sancho corriendo detrás de Don Quijote' },
+    { name: 'Castilla y León', joke: 'Tardará menos que un cordero lechal en el horno' },
+    { name: 'Cataluña', joke: 'Més ràpid que un calçot a la brasa' },
+    { name: 'Extremadura', joke: 'Esto va más rápido que el jamón desapareciendo de la mesa' },
+    { name: 'Galicia', joke: 'Tardará menos que una tortilla de Betanzos en acabarse' },
+    { name: 'La Rioja', joke: 'Más rápido que descorchar un Reserva' },
+    { name: 'Madrid', joke: 'Más rápido que pillar mesa en una terraza un domingo' },
+    { name: 'Murcia', joke: 'Esto va más rápido que un limón cayendo del árbol' },
+    { name: 'Navarra', joke: 'Tardará menos que un encierro en San Fermín' },
+    { name: 'País Vasco', joke: 'Más rápido que pinchar un pintxo en el Casco Viejo' },
+    { name: 'Comunidad Valenciana', joke: 'Esto tardará menos que una mascletà' },
+    { name: 'Ceuta', joke: 'Más rápido que cruzar el Estrecho en ferry' },
+    { name: 'Melilla', joke: 'Tardará menos que un paseo por el Parque Hernández' },
+  ]
+
   const [step, setStep] = useState('choice')
   const [showComparison, setShowComparison] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState(null)
