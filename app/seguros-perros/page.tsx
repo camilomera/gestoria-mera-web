@@ -500,8 +500,8 @@ export default function SegurosPerrosPage() {
                   onClick={() => isAvailable && setSelectedPlan(product)}
                   disabled={!isAvailable}
                   aria-pressed={isSelected}
-                  className={`relative overflow-hidden rounded-2xl border-2 border-t-4 bg-white p-5 sm:p-6 text-left transition-all duration-300 flex flex-col min-h-[210px] sm:min-h-[230px] focus:outline-none focus:ring-4 focus:ring-orange/20 ${isSelected ? 'border-orange shadow-[0_14px_40px_rgba(255,165,0,0.22)] -translate-y-1' : 'border-midnight/10 shadow-[0_10px_30px_rgba(25,25,112,0.08)]'} ${isAvailable ? 'hover:-translate-y-1 hover:border-orange/60 hover:shadow-[0_14px_40px_rgba(25,25,112,0.12)] cursor-pointer' : 'opacity-50 grayscale-[80%] cursor-not-allowed'}`}
-                  style={{ borderTopColor: product.gradientColor }}
+                  className={`relative overflow-hidden rounded-2xl border-2 p-5 sm:p-6 text-center transition-all duration-300 flex flex-col min-h-[310px] sm:min-h-[340px] focus:outline-none focus:ring-4 focus:ring-orange/20 ${isSelected ? 'border-orange shadow-[0_18px_45px_rgba(255,165,0,0.28)] -translate-y-1' : 'border-white/70 shadow-[0_10px_35px_rgba(25,25,112,0.10)]'} ${isAvailable ? 'hover:-translate-y-1 hover:border-orange/60 hover:shadow-[0_16px_45px_rgba(25,25,112,0.14)] cursor-pointer' : 'opacity-50 grayscale-[80%] cursor-not-allowed'}`}
+                  style={{ background: `linear-gradient(to bottom right, white 45%, ${product.gradientColor}35 100%)` }}
                 >
                   {/* Unavailable overlay */}
                   {!isAvailable && selectedCCAA && (
@@ -523,13 +523,31 @@ export default function SegurosPerrosPage() {
                     </span>
                   )}
 
-                  <div>
-                    <span className="block text-2xl sm:text-3xl font-black text-midnight tracking-tight">{product.coverage}</span>
-                    <span className="block mt-1 text-xs sm:text-sm text-midnight/55">de cobertura</span>
+                  <img
+                    src={product.shieldImg}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-16 h-16 sm:w-20 sm:h-20 object-contain mx-auto drop-shadow-lg"
+                  />
+
+                  <h3 className="mt-3 text-lg sm:text-xl font-black text-midnight">
+                    {product.name}
+                  </h3>
+
+                  <div className="mt-5 rounded-xl bg-white/70 border border-white px-3 py-3">
+                    <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] text-midnight/50">
+                      Cobertura RC
+                    </span>
+                    <span className="block mt-1 text-lg sm:text-xl font-black text-midnight">
+                      {product.coverage}
+                    </span>
                   </div>
 
-                  <div className="mt-auto pt-5 border-t border-midnight/10 w-full">
-                    <span className="text-2xl sm:text-3xl font-black text-midnight">{product.price}</span>
+                  <div className="mt-auto pt-5 w-full">
+                    <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] text-midnight/50">
+                      Precio anual
+                    </span>
+                    <span className="mt-1 inline-block text-3xl sm:text-4xl font-black text-midnight">{product.price}</span>
                     <span className="text-midnight/60 font-semibold text-sm">{product.period}</span>
                   </div>
                 </button>
