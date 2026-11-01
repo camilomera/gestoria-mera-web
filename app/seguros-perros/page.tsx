@@ -473,22 +473,15 @@ export default function SegurosPerrosPage() {
             {/* Mandatory first step, floating above a preview of the plans */}
             {!selectedCCAA && !ccaaLoading && (
               <div className="absolute inset-0 z-30 flex items-center justify-center px-2 pb-8 sm:pb-12">
-                <div className="relative text-center bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_28px_80px_rgba(25,25,112,0.25)] p-6 sm:p-10 max-w-xl w-full border-2 border-white ring-1 ring-orange/25">
+                <div className="relative text-center bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_28px_80px_rgba(25,25,112,0.25)] p-6 sm:p-8 max-w-lg w-full border-2 border-white ring-1 ring-orange/25">
                   <div className="absolute inset-x-10 -top-px h-px bg-gradient-to-r from-transparent via-orange to-transparent" />
-                  <span className="inline-flex items-center gap-2 rounded-full bg-orange/15 px-4 py-1.5 text-xs sm:text-sm font-black uppercase tracking-[0.14em] text-midnight mb-4">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange text-midnight text-xs">1</span>
-                    Paso obligatorio
-                  </span>
                   <h2 className="text-2xl sm:text-4xl font-black text-midnight leading-tight">
-                    ¿Dónde resides?
+                    ¿Dónde vives?
                   </h2>
-                  <p className="mt-3 mb-6 text-sm sm:text-base text-midnight/65 max-w-md mx-auto">
-                    Selecciona tu comunidad o ciudad autónoma para mostrarte únicamente los planes que puedes contratar.
-                  </p>
                   <label htmlFor="ccaa-first-step" className="sr-only">
                     Comunidad o ciudad autónoma
                   </label>
-                  <div className="relative mb-4">
+                  <div className="relative mt-6">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
                       <span className="text-xl" aria-hidden="true">📍</span>
                     </div>
@@ -505,15 +498,12 @@ export default function SegurosPerrosPage() {
                         </option>
                       ))}
                     </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none z-30" aria-hidden="true">
                       <svg className="w-5 h-5 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </div>
-                  <p className="text-midnight/55 text-xs sm:text-sm">
-                    Los planes permanecerán bloqueados hasta completar este paso.
-                  </p>
                 </div>
               </div>
             )}
