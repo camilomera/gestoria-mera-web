@@ -197,16 +197,9 @@ export default function SegurosPerrosPage() {
     setStep('confirmation')
   }
   const [selectedCCAA, setSelectedCCAA] = useState('')
-  const [ccaaLoading, setCcaaLoading] = useState(false)
 
   const handleCCAAChange = (ccaa: string) => {
-    if (!ccaa) return
-    setCcaaLoading(true)
-    setSelectedCCAA('')
-    setTimeout(() => {
-      setSelectedCCAA(ccaa)
-      setCcaaLoading(false)
-    }, 1500)
+    setSelectedCCAA(ccaa)
   }
 
 
@@ -454,24 +447,9 @@ export default function SegurosPerrosPage() {
             <div className="relative">
 
 
-            {/* Loading overlay */}
-            {ccaaLoading && (
-              <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#F2EEC4]/80 backdrop-blur-[3px] rounded-3xl">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange/10 mb-3">
-                    <svg className="w-6 h-6 text-orange animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                  </div>
-                  <p className="text-midnight font-bold text-sm">Buscando opciones...</p>
-                </div>
-              </div>
-            )}
-
             <div className="relative min-h-[520px] sm:min-h-[560px]">
             {/* Mandatory first step, floating above a preview of the plans */}
-            {!selectedCCAA && !ccaaLoading && (
+            {!selectedCCAA && (
               <div className="absolute inset-0 z-30 flex items-center justify-center px-2 pb-8 sm:pb-12">
                 <div className="relative text-center bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_28px_80px_rgba(25,25,112,0.25)] p-6 sm:p-8 max-w-lg w-full border-2 border-white ring-1 ring-orange/25">
                   <div className="absolute inset-x-10 -top-px h-px bg-gradient-to-r from-transparent via-orange to-transparent" />
@@ -510,7 +488,7 @@ export default function SegurosPerrosPage() {
 
             <div
               aria-hidden={!selectedCCAA}
-              className={`grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-6xl mx-auto transition-all duration-700 ${!selectedCCAA ? 'blur-[7px] sm:blur-[9px] opacity-45 scale-[0.97] pointer-events-none select-none' : 'blur-0 opacity-100 scale-100'}`}
+              className={`grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA ? 'blur-[7px] sm:blur-[9px] opacity-45 scale-[0.97] pointer-events-none select-none' : 'blur-0 opacity-100 scale-100'}`}
             >
               {pppProducts.map((product, index) => {
                 const isAvailable = availableIds.includes(product.id)
@@ -586,7 +564,7 @@ export default function SegurosPerrosPage() {
                         </div>
 
 {/* Comparar planes - floating blue button */}
-            {selectedCCAA && !ccaaLoading && <div className="text-center mt-6">
+            {selectedCCAA && <div className="text-center mt-6">
               <button
                 onClick={() => setShowComparison(true)}
                 className="inline-flex items-center gap-2 bg-midnight text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-midnight/30 hover:shadow-xl hover:shadow-midnight/40 transition-all duration-300 hover:-translate-y-0.5 animate-bounce-subtle"
