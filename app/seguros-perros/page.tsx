@@ -363,12 +363,12 @@ export default function SegurosPerrosPage() {
       
             {/* Step: PPP Products */}
       {step === 'ppp-products' && (
-        <section className="py-16 sm:py-20">
+        <section className="py-10 sm:py-14">
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back button */}
             <button
-              onClick={() => setStep('ppp-products')}
-              className="mb-8 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
+              onClick={() => { setStep('choice'); setSelectedCCAA('') }}
+              className="mb-5 sm:mb-7 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -376,13 +376,16 @@ export default function SegurosPerrosPage() {
               Volver
             </button>
 
-            {/* Header when CCAA is selected */}
+            {/* Compact header shown after completing the mandatory first step */}
             {selectedCCAA && (
-              <div className="text-center mb-8">
+              <div className="text-center mb-7 animate-fade-in">
                 <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                   Elijamos el seguro de tu perro
                 </h2>
-                <div className="max-w-lg mx-auto mt-4">
+                <p className="mt-2 text-sm text-midnight/60">
+                  Opciones disponibles para <strong className="text-midnight">{selectedCCAA}</strong>
+                </p>
+                <div className="max-w-md mx-auto mt-4">
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <span className="text-lg">📍</span>
@@ -392,7 +395,7 @@ export default function SegurosPerrosPage() {
                       onChange={(e) => handleCCAAChange(e.target.value)}
                       className="w-full appearance-none bg-white border-2 border-midnight/15 rounded-xl pl-12 pr-12 py-3 text-sm font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange/50 shadow-sm"
                     >
-                      <option value="">Selecciona tu comunidad autónoma</option>
+                      <option value="">Selecciona tu comunidad o ciudad autónoma</option>
                       {comunidades.map((ccaa) => (
                         <option key={ccaa.name} value={ccaa.name}>
                           {ccaa.name}
@@ -429,24 +432,36 @@ export default function SegurosPerrosPage() {
               </div>
             )}
 
-            <div className="relative min-h-[400px]">
-            {/* CCAA Overlay when not selected - positioned over blurred cards */}
+            <div className="relative min-h-[520px] sm:min-h-[560px]">
+            {/* Mandatory first step, floating above a preview of the plans */}
             {!selectedCCAA && !ccaaLoading && (
-              <div className="absolute inset-0 z-30 flex items-center justify-center">
-                <div className="text-center bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-8 mx-4 max-w-lg w-full border border-orange/20 animate-pulse-subtle">
-                  <h2 className="text-2xl sm:text-3xl font-black text-midnight mb-3">
-                    Elijamos el seguro de tu perro
+              <div className="absolute inset-0 z-30 flex items-center justify-center px-2 pb-8 sm:pb-12">
+                <div className="relative text-center bg-white/90 backdrop-blur-xl rounded-[2rem] shadow-[0_28px_80px_rgba(25,25,112,0.25)] p-6 sm:p-10 max-w-xl w-full border-2 border-white ring-1 ring-orange/25">
+                  <div className="absolute inset-x-10 -top-px h-px bg-gradient-to-r from-transparent via-orange to-transparent" />
+                  <span className="inline-flex items-center gap-2 rounded-full bg-orange/15 px-4 py-1.5 text-xs sm:text-sm font-black uppercase tracking-[0.14em] text-midnight mb-4">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-orange text-midnight text-xs">1</span>
+                    Paso obligatorio
+                  </span>
+                  <h2 className="text-2xl sm:text-4xl font-black text-midnight leading-tight">
+                    ¿Dónde resides?
                   </h2>
-                  <div className="relative mb-3">
+                  <p className="mt-3 mb-6 text-sm sm:text-base text-midnight/65 max-w-md mx-auto">
+                    Selecciona tu comunidad o ciudad autónoma para mostrarte únicamente los planes que puedes contratar.
+                  </p>
+                  <label htmlFor="ccaa-first-step" className="sr-only">
+                    Comunidad o ciudad autónoma
+                  </label>
+                  <div className="relative mb-4">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none z-10">
-                      <span className="text-lg">📍</span>
+                      <span className="text-xl" aria-hidden="true">📍</span>
                     </div>
                     <select
+                      id="ccaa-first-step"
                       value={selectedCCAA}
                       onChange={(e) => handleCCAAChange(e.target.value)}
-                      className="w-full appearance-none bg-white border-2 border-orange/30 rounded-xl pl-12 pr-12 py-4 text-base font-semibold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/20 transition-all cursor-pointer hover:border-orange shadow-sm relative z-20"
+                      className="w-full appearance-none bg-white border-2 border-orange/50 rounded-2xl pl-12 pr-12 py-4 sm:py-5 text-base sm:text-lg font-bold text-midnight focus:outline-none focus:border-orange focus:ring-4 focus:ring-orange/25 transition-all cursor-pointer hover:border-orange shadow-[0_10px_30px_rgba(25,25,112,0.10)] relative z-20"
                     >
-                      <option value="">Selecciona tu comunidad autónoma</option>
+                      <option value="">Selecciona una opción</option>
                       {comunidades.map((ccaa) => (
                         <option key={ccaa.name} value={ccaa.name}>
                           {ccaa.name}
@@ -459,14 +474,17 @@ export default function SegurosPerrosPage() {
                       </svg>
                     </div>
                   </div>
-                  <p className="text-midnight/60 text-xs">
-                    La cobertura mínima obligatoria varía según la normativa de cada comunidad autónoma.
+                  <p className="text-midnight/55 text-xs sm:text-sm">
+                    Los planes permanecerán bloqueados hasta completar este paso.
                   </p>
                 </div>
               </div>
             )}
 
-            <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto transition-all duration-500 ${!selectedCCAA ? 'blur-md opacity-30 pointer-events-none' : ''}`}>
+            <div
+              aria-hidden={!selectedCCAA}
+              className={`grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 max-w-6xl mx-auto transition-all duration-700 ${!selectedCCAA ? 'blur-[7px] sm:blur-[9px] opacity-45 scale-[0.97] pointer-events-none select-none' : 'blur-0 opacity-100 scale-100'}`}
+            >
               {pppProducts.map((product, index) => {
                 const isAvailable = availableIds.includes(product.id)
                 return (
