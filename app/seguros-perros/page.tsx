@@ -2,6 +2,43 @@
 
 import { useState } from 'react'
 
+type PageStep = 'choice' | 'ppp-products' | 'noppp' | 'form' | 'confirmation'
+
+interface PlanProduct {
+  name: string
+  price: string
+  period: string
+  coverage: string
+  subtitle: string
+  features: string[]
+}
+
+interface DogFormData {
+  nombre: string
+  apellido1: string
+  apellido2: string
+  fechaNacimiento: string
+  dni: string
+  calle: string
+  numero: string
+  codigoPostal: string
+  localidad: string
+  provincia: string
+  telefono: string
+  email: string
+  emailRepeat: string
+  nombrePerro: string
+  razaPerro: string
+  sexoPerro: string
+  fechaNacimientoPerro: string
+  microchip: string
+  iban: string
+  aceptaCondiciones: boolean
+  aceptaProteccion: boolean
+}
+
+type FormErrors = Partial<Record<keyof DogFormData | 'legal', string>>
+
 export default function SegurosPerrosPage() {
   const comunidades = [
   { name: 'Andalucía', joke: 'Esto tardará menos que freír un pescaíto' },
@@ -25,11 +62,11 @@ export default function SegurosPerrosPage() {
     { name: 'Melilla', joke: 'Tardará menos que un paseo por el Parque Hernández' },
   ]
 
-  const [step, setStep] = useState('choice')
+  const [step, setStep] = useState<PageStep>('choice')
   const [showComparison, setShowComparison] = useState(false)
-  const [selectedPlan, setSelectedPlan] = useState(null)
+  const [selectedPlan, setSelectedPlan] = useState<PlanProduct | null>(null)
   const [formSection, setFormSection] = useState(0)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<DogFormData>({
     nombre: '', apellido1: '', apellido2: '', fechaNacimiento: '', dni: '',
     calle: '', numero: '', codigoPostal: '', localidad: '', provincia: '',
     telefono: '', email: '', emailRepeat: '',
@@ -37,20 +74,20 @@ export default function SegurosPerrosPage() {
     iban: '',
     aceptaCondiciones: false, aceptaProteccion: false,
   })
-  const [fotoCartilla, setFotoCartilla] = useState(null)
-  const [formErrors, setFormErrors] = useState({})
+  const [fotoCartilla, setFotoCartilla] = useState<File | null>(null)
+  const [formErrors, setFormErrors] = useState<FormErrors>({})
 
   const inputClass = "w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none focus:ring-2 focus:ring-orange/20 transition-all"
   const inputErrorClass = "w-full px-4 py-3 border-2 border-red-400 rounded-xl text-midnight placeholder-midnight/40 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 transition-all"
   const labelClass = "block text-sm font-bold text-midnight mb-1.5"
 
-  const validateDNI = (value) => {
+  const validateDNI = (value: string) => {
     const dniRegex = /^[0-9]{8}[A-Za-z]$/
     const nieRegex = /^[XYZxyz][0-9]{7}[A-Za-z]$/
     return dniRegex.test(value) || nieRegex.test(value)
   }
 
-  const calculateAge = (dateStr) => {
+  const calculateAge = (dateStr: string) => {
     const parts = dateStr.split('/')
     if (parts.length !== 3) return -1
     const day = parseInt(parts[0], 10)
@@ -67,8 +104,8 @@ export default function SegurosPerrosPage() {
     return age
   }
 
-  const validateSection = (section) => {
-    const errors = {}
+  const validateSection = (section: number) => {
+    const errors: FormErrors = {}
     if (section === 0) {
       if (!formData.nombre.trim()) errors.nombre = 'Campo obligatorio'
       if (!formData.apellido1.trim()) errors.apellido1 = 'Campo obligatorio'
@@ -146,13 +183,13 @@ export default function SegurosPerrosPage() {
     'Revisa tus datos',
   ]
 
-  const handleContratarClick = (product) => {
+  const handleContratarClick = (product: PlanProduct) => {
     setSelectedPlan(product)
     setStep('form')
     setFormSection(0)
   }
 
-  const handleFormChange = (field, value) => {
+  const handleFormChange = <K extends keyof DogFormData,>(field: K, value: DogFormData[K]) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
@@ -162,7 +199,7 @@ export default function SegurosPerrosPage() {
   const [selectedCCAA, setSelectedCCAA] = useState('')
   const [ccaaLoading, setCcaaLoading] = useState(false)
 
-  const handleCCAAChange = (ccaa) => {
+  const handleCCAAChange = (ccaa: string) => {
     if (!ccaa) return
     setCcaaLoading(true)
     setSelectedCCAA('')
@@ -227,7 +264,7 @@ export default function SegurosPerrosPage() {
   ]
 
   // CCAA product availability
-  const ccaaProducts = {
+  const ccaaProducts: Record<string, string[]> = {
     'Canarias': ['180k', '350k'],
     'Castilla y León': ['180k', '350k'],
     'Navarra': ['180k', '350k'],
@@ -237,7 +274,7 @@ export default function SegurosPerrosPage() {
   }
 
   // Get available product IDs for selected CCAA
-  const getAvailableIds = (ccaa) => {
+  const getAvailableIds = (ccaa: string) => {
     return ccaaProducts[ccaa] || ['120k', '150k', '180k', '350k']
   }
 
@@ -571,6 +608,7 @@ export default function SegurosPerrosPage() {
               </button>
             </div>}
 
+          </div>
           </div>
         </section>
       )}
