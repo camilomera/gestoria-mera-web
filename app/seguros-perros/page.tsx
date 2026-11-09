@@ -526,9 +526,9 @@ export default function SegurosPerrosPage() {
     <div className="pt-16 sm:pt-20">
       {/* Step: Choice between PPP and No PPP */}
       {step === 'choice' && (
-        <section className="py-16 sm:py-20">
-          <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
+        <section className="min-h-[calc(100vh-5rem)] flex items-center py-8 sm:py-10">
+          <div className="container-custom max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-5 sm:mb-6">
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                 ¿Qué tipo de perro tienes?
               </h2>
@@ -538,9 +538,9 @@ export default function SegurosPerrosPage() {
             {/* Banner informativo PPP */}
             <a
               href="/que-es-ppp"
-              className="block max-w-3xl mx-auto mb-12 group"
+              className="block max-w-3xl mx-auto mb-6 sm:mb-7 group"
             >
-              <div className="bg-white border border-midnight/10 rounded-2xl px-6 py-4 flex items-center justify-between gap-4 hover:border-orange transition-all duration-300 shadow-sm hover:shadow-md">
+              <div className="bg-white border border-midnight/10 rounded-2xl px-5 sm:px-6 py-3.5 flex items-center justify-between gap-4 hover:border-orange transition-all duration-300 shadow-sm hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">🐕‍🦺</span>
                   <p className="text-midnight/80 font-medium text-sm sm:text-base">
@@ -553,13 +553,13 @@ export default function SegurosPerrosPage() {
               </div>
             </a>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-5 sm:gap-6 max-w-5xl mx-auto">
               {/* PPP Card */}
               <button
                 onClick={() => pushFlowState('ppp-products', 0, null, '')}
                 className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
-                <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
+                <div className="relative h-44 sm:h-48 overflow-hidden rounded-t-3xl">
                   <img
                     src="https://res.cloudinary.com/r5v8fzlu/image/upload/c_fill,g_auto,w_1200,h_800/v1784824659/pexels-blanco-studio-2147970603-29985319_frztvu.jpg"
                     alt="Perro potencialmente peligroso"
@@ -571,16 +571,16 @@ export default function SegurosPerrosPage() {
                     </span>
                   </div>
                 </div>
-                <div className="p-6 sm:p-7">
-                  <h2 className="text-2xl font-black text-midnight leading-tight">
+                <div className="p-5">
+                  <h2 className="text-xl sm:text-2xl font-black text-midnight leading-tight">
                     Perros Potencialmente Peligrosos
                   </h2>
                   
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <span className="text-2xl font-black text-midnight">Desde 30€</span>
                     <span className="text-midnight/60 text-sm">/año</span>
                   </div>
-                  <div className="mt-4 w-full btn-cta bg-orange text-midnight font-black text-center py-3 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                  <div className="mt-3 w-full btn-cta bg-orange text-midnight font-black text-center py-3 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     Ver opciones y contratar
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -594,7 +594,7 @@ export default function SegurosPerrosPage() {
                 onClick={() => pushFlowState('noppp', 0, null, '')}
                 className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
-                <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
+                <div className="relative h-44 sm:h-48 overflow-hidden rounded-t-3xl">
                   <img
                     src="https://res.cloudinary.com/r5v8fzlu/image/upload/c_fill,g_auto,w_1200,h_800,e_improve,e_auto_brightness/v1784824746/pexels-adriendrj-14682199_aqa2kq.jpg"
                     alt="Perro no peligroso"
@@ -606,16 +606,16 @@ export default function SegurosPerrosPage() {
                     </span>
                   </div>
                 </div>
-                <div className="p-6 sm:p-7">
-                  <h2 className="text-2xl font-black text-midnight leading-tight">
+                <div className="p-5">
+                  <h2 className="text-xl sm:text-2xl font-black text-midnight leading-tight">
                     Perros <span className="text-orange underline decoration-4 underline-offset-4">No</span> Peligrosos
                   </h2>
                   
-                  <div className="mt-4">
+                  <div className="mt-3">
                     <span className="text-2xl font-black text-midnight">Desde 20,40€</span>
                     <span className="text-midnight/60 text-sm">/año</span>
                   </div>
-                  <div className="mt-4 w-full btn-cta bg-orange text-midnight font-black text-center py-3 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                  <div className="mt-3 w-full btn-cta bg-orange text-midnight font-black text-center py-3 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     Ver opciones y contratar
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -631,12 +631,12 @@ export default function SegurosPerrosPage() {
       
             {/* Step: PPP Products */}
       {step === 'ppp-products' && (
-        <section className="py-10 sm:py-14">
-          <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-8">
+          <div className="container-custom max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back button */}
             <button
               onClick={() => goBackTo('choice')}
-              className="mb-5 sm:mb-7 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
+              className="mb-4 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -646,7 +646,7 @@ export default function SegurosPerrosPage() {
 
             {/* Compact header shown after completing the mandatory first step */}
             {selectedCCAA && (
-              <div className="text-center mb-7 animate-fade-in">
+              <div className="text-center mb-5 animate-fade-in">
                 <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                   Elijamos el seguro de tu perro
                 </h2>
@@ -685,7 +685,7 @@ export default function SegurosPerrosPage() {
             <div className="relative">
 
 
-            <div className="relative min-h-[520px] sm:min-h-[560px]">
+            <div className="relative min-h-[430px] sm:min-h-[460px]">
             {/* Mandatory first step, floating above a preview of the plans */}
             {!selectedCCAA && (
               <div className="absolute inset-0 z-30 flex items-center justify-center px-2 pb-8 sm:pb-12">
@@ -733,7 +733,7 @@ export default function SegurosPerrosPage() {
                 return (
                 <div
                   key={index}
-                  className={`relative rounded-2xl p-6 sm:p-7 transition-all duration-300 shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col ${isAvailable ? 'hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)]' : 'opacity-50 grayscale-[80%] scale-[0.97]'}`}
+                  className={`relative rounded-2xl p-5 transition-all duration-300 shadow-[0_12px_45px_rgba(0,0,0,0.12)] flex flex-col ${isAvailable ? 'hover:-translate-y-3 hover:shadow-[0_25px_60px_rgba(0,0,0,0.18)]' : 'opacity-50 grayscale-[80%] scale-[0.97]'}`}
                   style={{ background: `linear-gradient(to top right, white 40%, ${product.gradientColor}40 70%, ${product.gradientColor}80 100%)` }}
                 >
                   {/* Unavailable overlay */}
@@ -756,26 +756,26 @@ export default function SegurosPerrosPage() {
                   )}
 
                   {/* Tier shield - centered, large */}
-                  <div className="flex justify-center mb-4">
+                  <div className="flex justify-center mb-3">
                     <img
                       src={product.shieldImg}
                       alt={product.name}
-                      className="w-24 h-24 object-contain drop-shadow-xl"
+                      className="w-20 h-20 object-contain drop-shadow-xl"
                     />
                   </div>
 
                   {/* Tier name */}
-                  <h3 className="text-xl font-black text-midnight text-center mb-5">{product.name}</h3>
+                  <h3 className="text-xl font-black text-midnight text-center mb-3">{product.name}</h3>
 
                   {/* Coverage - left aligned, smaller */}
-                  <div className="mb-4">
+                  <div className="mb-3">
                     <p className="text-midnight/70 text-xs font-semibold">cobertura</p>
                     <span className="text-base font-bold text-midnight">{product.coverage}</span>
                   </div>
 
                   {/* Price - center, prominent */}
-                  <div className="mb-6 text-center">
-                    <span className="text-4xl font-black text-midnight">{product.price}</span>
+                  <div className="mb-4 text-center">
+                    <span className="text-3xl font-black text-midnight">{product.price}</span>
                     <span className="text-midnight font-bold text-base">{product.period}</span>
                   </div>
 
@@ -801,12 +801,12 @@ export default function SegurosPerrosPage() {
 
       {/* Step: No PPP Product */}
       {step === 'noppp' && (
-        <section className="py-16 sm:py-20">
+        <section className="min-h-[calc(100vh-5rem)] flex items-center py-8 sm:py-10">
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back button */}
             <button
               onClick={() => goBackTo('choice')}
-              className="mb-8 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
+              className="mb-4 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -814,14 +814,14 @@ export default function SegurosPerrosPage() {
               Volver
             </button>
 
-            <div className="text-center mb-10">
+            <div className="text-center mb-5 sm:mb-6">
               <h2 className="text-3xl sm:text-4xl font-black text-midnight">
                 Seguro para perros <span className="text-orange underline decoration-4 underline-offset-4">no</span> peligrosos
               </h2>
             </div>
 
             <div className="max-w-sm mx-auto">
-              <div className="bg-gradient-to-b from-yellow-500/10 to-amber-400/5 border border-yellow-500/30 rounded-3xl p-8">
+              <div className="bg-gradient-to-b from-yellow-500/10 to-amber-400/5 border border-yellow-500/30 rounded-3xl p-6">
                 {/* Tier icon */}
                 <div className="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-5 text-yellow-500">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

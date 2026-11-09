@@ -153,6 +153,11 @@ export default function SegurosPage() {
     window.history.replaceState({ step: 0, formSection: 0 }, '')
   }, [])
 
+  // Every screen in the flow must start below the fixed header.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [step, formSection])
+
   // Go back handler
   const goBack = useCallback(() => {
     setErrors({})
@@ -504,7 +509,7 @@ export default function SegurosPage() {
   // Step 1: Age Selection
   if (step === 1) {
     return (
-      <main className="min-h-screen bg-mint-50 py-12 px-6">
+      <main className="min-h-screen bg-mint-50 pt-28 sm:pt-32 pb-12 px-6">
         <div className="max-w-3xl mx-auto">
           <button onClick={() => { setStep(0) }} className={secondaryBtnClass + ' mb-8'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -547,7 +552,7 @@ export default function SegurosPage() {
   // Step 2: Coverage Selection
   if (step === 2) {
     return (
-      <main className="min-h-screen bg-mint-50 py-12 px-6">
+      <main className="min-h-screen bg-mint-50 pt-28 sm:pt-32 pb-12 px-6">
         <div className="max-w-4xl mx-auto">
           <button onClick={() => { setStep(1) }} className={secondaryBtnClass + ' mb-8'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -670,7 +675,7 @@ export default function SegurosPage() {
   // Step 3: Summary before form
   if (step === 3 && selectedPlan) {
     return (
-      <main className="min-h-screen bg-mint-50 py-12 px-6">
+      <main className="min-h-screen bg-mint-50 pt-28 sm:pt-32 pb-12 px-6">
         <div className="max-w-2xl mx-auto">
           <button onClick={() => { setStep(2) }} className={secondaryBtnClass + ' mb-8'}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -714,7 +719,7 @@ export default function SegurosPage() {
   // Step 4: Progressive Form
   if (step === 4) {
     return (
-      <main className="min-h-screen bg-mint-50 py-8 px-6">
+      <main className="min-h-screen bg-mint-50 pt-24 sm:pt-28 pb-8 px-6">
         <div className="max-w-2xl mx-auto">
           {/* Progress bar */}
           <div className="mb-8">
@@ -1215,7 +1220,7 @@ export default function SegurosPage() {
   // Step 5: Confirmation
   if (step === 5) {
     return (
-      <main className="min-h-screen bg-mint-50 flex items-center justify-center py-12 px-6">
+      <main className="min-h-screen bg-mint-50 flex items-center justify-center pt-28 sm:pt-32 pb-12 px-6">
         <div className="max-w-lg mx-auto text-center">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-orange-50 flex items-center justify-center border-2 border-orange">
             <svg className="w-10 h-10 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
