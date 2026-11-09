@@ -11,6 +11,7 @@ interface PlanProduct {
   coverage: string
   subtitle: string
   features: string[]
+  shieldImg?: string
 }
 
 interface DogFormData {
@@ -21,6 +22,7 @@ interface DogFormData {
   dni: string
   calle: string
   numero: string
+  complemento: string
   codigoPostal: string
   localidad: string
   provincia: string
@@ -38,6 +40,59 @@ interface DogFormData {
 }
 
 type FormErrors = Partial<Record<keyof DogFormData | 'legal', string>>
+
+const provincias = [
+  'A Coruña', 'Álava', 'Albacete', 'Alicante', 'Almería', 'Asturias', 'Ávila',
+  'Badajoz', 'Barcelona', 'Bizkaia', 'Burgos', 'Cáceres', 'Cádiz', 'Cantabria',
+  'Castellón', 'Ceuta', 'Ciudad Real', 'Córdoba', 'Cuenca', 'Girona', 'Granada',
+  'Guadalajara', 'Gipuzkoa', 'Huelva', 'Huesca', 'Illes Balears', 'Jaén', 'La Rioja',
+  'Las Palmas', 'León', 'Lleida', 'Lugo', 'Madrid', 'Málaga', 'Melilla', 'Murcia',
+  'Navarra', 'Ourense', 'Palencia', 'Pontevedra', 'Salamanca', 'Santa Cruz de Tenerife',
+  'Segovia', 'Sevilla', 'Soria', 'Tarragona', 'Teruel', 'Toledo', 'Valencia',
+  'Valladolid', 'Zamora', 'Zaragoza',
+]
+
+const bancosPorCodigo: Record<string, string> = {
+  '0019': 'Deutsche Bank',
+  '0049': 'Banco Santander',
+  '0061': 'Banca March',
+  '0073': 'Openbank',
+  '0081': 'Banco Sabadell',
+  '0128': 'Bankinter',
+  '0182': 'BBVA',
+  '0186': 'Banco Mediolanum',
+  '2080': 'ABANCA',
+  '2085': 'Ibercaja',
+  '2095': 'Kutxabank',
+  '2100': 'CaixaBank',
+  '2103': 'Unicaja Banco',
+  '3058': 'Cajamar',
+}
+
+const formatDateInput = (value: string) => {
+  const digits = value.replace(/\D/g, '').slice(0, 8)
+  if (digits.length <= 2) return digits
+  if (digits.length <= 4) return `${digits.slice(0, 2)}/${digits.slice(2)}`
+  return `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`
+}
+
+const formatIbanInput = (value: string) =>
+  value
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, '')
+    .slice(0, 24)
+    .replace(/(.{4})/g, '$1 ')
+    .trim()
+
+const isValidSpanishIban = (value: string) => {
+  const iban = value.replace(/\s/g, '').toUpperCase()
+  if (!/^ES\d{22}$/.test(iban)) return false
+  const rearranged = `${iban.slice(4)}${iban.slice(0, 4)}`
+  const numeric = rearranged.replace(/[A-Z]/g, letter => String(letter.charCodeAt(0) - 55))
+  let remainder = 0
+  for (const digit of numeric) remainder = (remainder * 10 + Number(digit)) % 97
+  return remainder === 1
+}
 
 export default function SegurosPerrosPage() {
   const comunidades = [
@@ -67,7 +122,7 @@ export default function SegurosPerrosPage() {
   const [formSection, setFormSection] = useState(0)
   const [formData, setFormData] = useState<DogFormData>({
     nombre: '', apellido1: '', apellido2: '', fechaNacimiento: '', dni: '',
-    calle: '', numero: '', codigoPostal: '', localidad: '', provincia: '',
+    calle: '', numero: '', complemento: '', codigoPostal: '', localidad: '', provincia: '',
     telefono: '', email: '', emailRepeat: '',
     nombrePerro: '', razaPerro: '', sexoPerro: '', fechaNacimientoPerro: '', microchip: '',
     iban: '',
@@ -75,6 +130,10 @@ export default function SegurosPerrosPage() {
   })
   const [fotoCartilla, setFotoCartilla] = useState<File | null>(null)
   const [formErrors, setFormErrors] = useState<FormErrors>({})
+  const cleanIban = formData.iban.replace(/\s/g, '').toUpperCase()
+  const bancoDetectado = cleanIban.startsWith('ES') && cleanIban.length >= 8
+    ? bancosPorCodigo[cleanIban.slice(4, 8)]
+    : undefined
 
   const inputClass = "w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none focus:ring-2 focus:ring-orange/20 transition-all"
   const inputErrorClass = "w-full px-4 py-3 border-2 border-red-400 rounded-xl text-midnight placeholder-midnight/40 focus:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-200 transition-all"
@@ -94,7 +153,13 @@ export default function SegurosPerrosPage() {
     const year = parseInt(parts[2], 10)
     if (isNaN(day) || isNaN(month) || isNaN(year)) return -1
     const birth = new Date(year, month, day)
+    if (
+      birth.getFullYear() !== year ||
+      birth.getMonth() !== month ||
+      birth.getDate() !== day
+    ) return -1
     const today = new Date()
+    if (birth > today) return -1
     let age = today.getFullYear() - birth.getFullYear()
     const monthDiff = today.getMonth() - birth.getMonth()
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
@@ -112,7 +177,7 @@ export default function SegurosPerrosPage() {
         errors.fechaNacimiento = 'Campo obligatorio'
       } else {
         const age = calculateAge(formData.fechaNacimiento)
-        if (age < 0) errors.fechaNacimiento = 'Formato incorrecto. Usa DD/MM/AAAA'
+        if (age < 0) errors.fechaNacimiento = 'Introduce una fecha válida'
         else if (age < 18) errors.fechaNacimiento = 'Debes ser mayor de 18 años para contratar'
       }
       if (!formData.dni.trim()) {
@@ -125,6 +190,7 @@ export default function SegurosPerrosPage() {
       if (!formData.calle.trim()) errors.calle = 'Campo obligatorio'
       if (!formData.numero.trim()) errors.numero = 'Campo obligatorio'
       if (!formData.codigoPostal.trim()) errors.codigoPostal = 'Campo obligatorio'
+      else if (!/^\d{5}$/.test(formData.codigoPostal)) errors.codigoPostal = 'Debe tener exactamente 5 cifras'
       if (!formData.localidad.trim()) errors.localidad = 'Campo obligatorio'
       if (!formData.provincia.trim()) errors.provincia = 'Campo obligatorio'
     }
@@ -154,13 +220,15 @@ export default function SegurosPerrosPage() {
       } else if (!/^[0-9]{15}$/.test(formData.microchip.replace(/\s/g, ''))) {
         errors.microchip = 'El microchip debe tener exactamente 15 dígitos'
       }
+      if (formData.fechaNacimientoPerro && calculateAge(formData.fechaNacimientoPerro) < 0) {
+        errors.fechaNacimientoPerro = 'Introduce una fecha válida'
+      }
     }
     if (section === 4) {
-      const cleanIban = formData.iban.replace(/\s/g, '').toUpperCase()
       if (!cleanIban) {
         errors.iban = 'Campo obligatorio'
-      } else if (!/^ES[0-9]{22}$/.test(cleanIban)) {
-        errors.iban = 'El IBAN debe tener formato español: ES + 22 dígitos'
+      } else if (!isValidSpanishIban(cleanIban)) {
+        errors.iban = 'Revisa el IBAN: el formato o los dígitos de control no son válidos'
       }
     }
     if (section === 5) {
@@ -667,13 +735,23 @@ export default function SegurosPerrosPage() {
               Volver
             </button>
 
-            {/* Plan summary */}
-            <div className="bg-white rounded-2xl p-5 shadow-md mb-8 flex items-center justify-between">
-              <div>
-                <p className="text-sm text-midnight/60">Plan seleccionado</p>
-                <p className="font-black text-midnight text-lg">{selectedPlan.name} — {selectedPlan.coverage}</p>
+            {/* Product summary */}
+            <div className="bg-white rounded-2xl p-5 sm:p-6 shadow-md mb-8 border border-midnight/5">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-midnight/45">Tu seguro</p>
+                  <p className="mt-1 font-black text-midnight text-xl">
+                    Seguro para perro {selectedCCAA ? 'PPP' : 'no PPP'}
+                  </p>
+                  <p className="mt-1 text-sm text-midnight/65">
+                    Plan {selectedPlan.name} · Responsabilidad Civil hasta {selectedPlan.coverage}
+                  </p>
+                </div>
+                <div className="sm:text-right shrink-0">
+                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-midnight/45">Precio anual</p>
+                  <p className="mt-1 text-2xl font-black text-orange">{selectedPlan.price}</p>
+                </div>
               </div>
-              <span className="text-xl font-black text-orange">{selectedPlan.price}{selectedPlan.period}</span>
             </div>
 
             {/* Progress bar */}
@@ -711,8 +789,24 @@ export default function SegurosPerrosPage() {
                     </div>
                   </div>
                   <div>
-                    <label className={labelClass}>Fecha de nacimiento</label>
-                    <input type="text" placeholder="DD/MM/AAAA" value={formData.fechaNacimiento} onChange={(e) => handleFormChange('fechaNacimiento', e.target.value)} className={formErrors.fechaNacimiento ? inputErrorClass : inputClass} />
+                    <label htmlFor="fecha-nacimiento" className={labelClass}>Fecha de nacimiento</label>
+                    <div className="relative">
+                      <input
+                        id="fecha-nacimiento"
+                        type="text"
+                        inputMode="numeric"
+                        autoComplete="bday"
+                        maxLength={10}
+                        placeholder="día / mes / año"
+                        value={formData.fechaNacimiento}
+                        onChange={(e) => handleFormChange('fechaNacimiento', formatDateInput(e.target.value))}
+                        className={`${formErrors.fechaNacimiento ? inputErrorClass : inputClass} pr-12 tracking-wide`}
+                      />
+                      <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight/35 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3M5 11h14M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
+                      </svg>
+                    </div>
+                    <p className="text-midnight/45 text-xs mt-1.5">Las barras se añaden automáticamente</p>
                     {formErrors.fechaNacimiento && <p className="text-red-500 text-xs mt-1">{formErrors.fechaNacimiento}</p>}
                   </div>
                   <div>
@@ -739,10 +833,20 @@ export default function SegurosPerrosPage() {
                       {formErrors.numero && <p className="text-red-500 text-xs mt-1">{formErrors.numero}</p>}
                     </div>
                   </div>
+                  <div>
+                    <label className={labelClass}>Piso, escalera, puerta… <span className="font-normal text-midnight/45">(opcional)</span></label>
+                    <input
+                      type="text"
+                      placeholder="Ej.: 2º B, escalera izquierda"
+                      value={formData.complemento}
+                      onChange={(e) => handleFormChange('complemento', e.target.value)}
+                      className={inputClass}
+                    />
+                  </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className={labelClass}>Código postal</label>
-                      <input type="text" maxLength={5} value={formData.codigoPostal} onChange={(e) => handleFormChange('codigoPostal', e.target.value)} className={formErrors.codigoPostal ? inputErrorClass : inputClass} />
+                      <input type="text" inputMode="numeric" autoComplete="postal-code" placeholder="00000" maxLength={5} value={formData.codigoPostal} onChange={(e) => handleFormChange('codigoPostal', e.target.value.replace(/\D/g, '').slice(0, 5))} className={formErrors.codigoPostal ? inputErrorClass : inputClass} />
                       {formErrors.codigoPostal && <p className="text-red-500 text-xs mt-1">{formErrors.codigoPostal}</p>}
                     </div>
                     <div>
@@ -753,7 +857,19 @@ export default function SegurosPerrosPage() {
                   </div>
                   <div>
                     <label className={labelClass}>Provincia</label>
-                    <input type="text" value={formData.provincia} onChange={(e) => handleFormChange('provincia', e.target.value)} className={formErrors.provincia ? inputErrorClass : inputClass} />
+                    <input
+                      type="text"
+                      list="provincias-espana"
+                      autoComplete="address-level1"
+                      placeholder="Escribe para buscar"
+                      value={formData.provincia}
+                      onChange={(e) => handleFormChange('provincia', e.target.value)}
+                      className={formErrors.provincia ? inputErrorClass : inputClass}
+                    />
+                    <datalist id="provincias-espana">
+                      {provincias.map((provincia) => <option key={provincia} value={provincia} />)}
+                    </datalist>
+                    <p className="text-midnight/45 text-xs mt-1.5">Puedes escribir o elegir una opción de la lista</p>
                     {formErrors.provincia && <p className="text-red-500 text-xs mt-1">{formErrors.provincia}</p>}
                   </div>
                 </div>
@@ -802,17 +918,45 @@ export default function SegurosPerrosPage() {
                     {formErrors.sexoPerro && <p className="text-red-500 text-xs mt-1">{formErrors.sexoPerro}</p>}
                   </div>
                   <div>
-                    <input type="text" placeholder="Fecha de nacimiento del perro (DD/MM/AAAA o aproximada)" value={formData.fechaNacimientoPerro} onChange={(e) => handleFormChange('fechaNacimientoPerro', e.target.value)} className="w-full px-4 py-3 border-2 border-midnight/10 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors" />
-                    <p className="text-midnight/50 text-xs mt-1">Si no la sabes exactamente, aproxima</p>
+                    <label htmlFor="fecha-nacimiento-perro" className={labelClass}>Fecha de nacimiento <span className="font-normal text-midnight/45">(opcional)</span></label>
+                    <div className="relative">
+                      <input
+                        id="fecha-nacimiento-perro"
+                        type="text"
+                        inputMode="numeric"
+                        maxLength={10}
+                        placeholder="día / mes / año"
+                        value={formData.fechaNacimientoPerro}
+                        onChange={(e) => handleFormChange('fechaNacimientoPerro', formatDateInput(e.target.value))}
+                        className={`${formErrors.fechaNacimientoPerro ? inputErrorClass : inputClass} pr-12 tracking-wide`}
+                      />
+                      <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight/35 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3M5 11h14M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
+                      </svg>
+                    </div>
+                    {formErrors.fechaNacimientoPerro && <p className="text-red-500 text-xs mt-1">{formErrors.fechaNacimientoPerro}</p>}
                   </div>
                   <div>
                     <input type="text" placeholder="Microchip (15 dígitos)" value={formData.microchip} onChange={(e) => handleFormChange('microchip', e.target.value)} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors ${formErrors.microchip ? 'border-red-400' : 'border-midnight/10'}`} />
                     {formErrors.microchip && <p className="text-red-500 text-xs mt-1">{formErrors.microchip}</p>}
                   </div>
-                  <div>
-                    <label className="block text-midnight/80 text-sm font-medium mb-2">Foto de la cartilla sanitaria (opcional)</label>
-                    <input type="file" accept="image/*,.pdf" onChange={(e) => setFotoCartilla(e.target.files?.[0] || null)} className="w-full text-sm text-midnight/60 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange/10 file:text-orange hover:file:bg-orange/20 cursor-pointer" />
-                    {fotoCartilla && <p className="text-green-600 text-xs mt-1">✓ {fotoCartilla.name}</p>}
+                  <div className="pt-2">
+                    <label htmlFor="foto-cartilla" className="block cursor-pointer rounded-2xl border-2 border-dashed border-orange/35 bg-orange/5 p-6 text-center transition-all hover:border-orange hover:bg-orange/10 focus-within:ring-4 focus-within:ring-orange/20">
+                      <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 16.5V19a2 2 0 002 2h14a2 2 0 002-2v-2.5M12 3v12m0-12l-4 4m4-4l4 4" />
+                        </svg>
+                      </span>
+                      <span className="mt-3 block font-black text-midnight">Añadir cartilla sanitaria</span>
+                      <span className="mt-1 block text-sm text-midnight/55">Foto o PDF · opcional</span>
+                      <input id="foto-cartilla" type="file" accept="image/*,.pdf" onChange={(e) => setFotoCartilla(e.target.files?.[0] || null)} className="sr-only" />
+                    </label>
+                    {fotoCartilla && (
+                      <div className="mt-3 flex items-center gap-2 rounded-xl bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
+                        <span aria-hidden="true">✓</span>
+                        <span className="truncate">{fotoCartilla.name}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -824,9 +968,30 @@ export default function SegurosPerrosPage() {
                   <p className="text-midnight/60 text-sm">Introduce tu IBAN para la domiciliación del pago anual.</p>
                   <div>
                     <label className={labelClass}>IBAN</label>
-                    <input type="text" placeholder="ES12 1234 5678 9012 3456 7890" value={formData.iban} onChange={(e) => handleFormChange('iban', e.target.value.toUpperCase())} className={`${formErrors.iban ? inputErrorClass : inputClass} font-mono tracking-wider`} />
+                    <input
+                      type="text"
+                      inputMode="text"
+                      autoComplete="off"
+                      maxLength={29}
+                      placeholder="ES12 1234 5678 9012 3456 7890"
+                      value={formData.iban}
+                      onChange={(e) => handleFormChange('iban', formatIbanInput(e.target.value))}
+                      className={`${formErrors.iban ? inputErrorClass : inputClass} font-mono tracking-wider`}
+                    />
                     {formErrors.iban && <p className="text-red-500 text-xs mt-1">{formErrors.iban}</p>}
-                    <p className="text-midnight/40 text-xs mt-1.5">Formato: ES + 22 dígitos</p>
+                    {bancoDetectado ? (
+                      <div className="mt-3 flex items-center gap-3 rounded-xl border border-midnight/10 bg-mint-50 px-4 py-3">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-midnight text-xs font-black text-white" aria-hidden="true">
+                          {bancoDetectado.split(' ').map(word => word[0]).join('').slice(0, 2)}
+                        </span>
+                        <div>
+                          <p className="text-xs text-midnight/50">Entidad identificada</p>
+                          <p className="font-bold text-midnight">{bancoDetectado}</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-midnight/40 text-xs mt-1.5">Formato: ES + 22 dígitos</p>
+                    )}
                   </div>
                 </div>
               )}
@@ -837,11 +1002,21 @@ export default function SegurosPerrosPage() {
                   <h3 className="text-lg font-black text-midnight mb-2">Condiciones legales</h3>
                   <div className="space-y-4">
                     <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl border-2 border-midnight/5 hover:border-orange/30 transition-colors">
-                      <input type="checkbox" checked={formData.aceptaCondiciones} onChange={(e) => handleFormChange('aceptaCondiciones', e.target.checked)} className="mt-0.5 w-5 h-5 rounded border-midnight/20 text-orange focus:ring-orange accent-orange" />
+                      <span className="relative mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center">
+                        <input type="checkbox" checked={formData.aceptaCondiciones} onChange={(e) => handleFormChange('aceptaCondiciones', e.target.checked)} className="peer h-5 w-5 shrink-0 appearance-none rounded border-2 border-midnight/25 bg-white checked:border-orange checked:bg-orange focus:outline-none focus:ring-4 focus:ring-orange/20" />
+                        <svg className="pointer-events-none absolute h-3.5 w-3.5 text-midnight opacity-0 peer-checked:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
                       <span className="text-midnight/80 text-sm leading-relaxed">Acepto las condiciones generales del seguro y la política de privacidad.</span>
                     </label>
                     <label className="flex items-start gap-3 cursor-pointer p-3 rounded-xl border-2 border-midnight/5 hover:border-orange/30 transition-colors">
-                      <input type="checkbox" checked={formData.aceptaProteccion} onChange={(e) => handleFormChange('aceptaProteccion', e.target.checked)} className="mt-0.5 w-5 h-5 rounded border-midnight/20 text-orange focus:ring-orange accent-orange" />
+                      <span className="relative mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center">
+                        <input type="checkbox" checked={formData.aceptaProteccion} onChange={(e) => handleFormChange('aceptaProteccion', e.target.checked)} className="peer h-5 w-5 shrink-0 appearance-none rounded border-2 border-midnight/25 bg-white checked:border-orange checked:bg-orange focus:outline-none focus:ring-4 focus:ring-orange/20" />
+                        <svg className="pointer-events-none absolute h-3.5 w-3.5 text-midnight opacity-0 peer-checked:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
                       <span className="text-midnight/80 text-sm leading-relaxed">Autorizo el tratamiento de mis datos personales conforme al Reglamento General de Protección de Datos (RGPD).</span>
                     </label>
                   </div>
@@ -851,49 +1026,68 @@ export default function SegurosPerrosPage() {
 
               {/* Section 6: Resumen */}
               {formSection === 6 && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-black text-midnight mb-4">Revisa tus datos</h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Nombre</span>
-                      <span className="text-midnight font-medium">{formData.nombre} {formData.apellido1} {formData.apellido2}</span>
+                <div className="space-y-5">
+                  <div>
+                    <h3 className="text-xl font-black text-midnight">Revisa que todo esté correcto</h3>
+                    <p className="mt-1 text-sm text-midnight/55">Podrás volver atrás para modificar cualquier dato.</p>
+                  </div>
+
+                  <div className="rounded-2xl bg-midnight p-5 text-white">
+                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-white/50">Producto</p>
+                    <div className="mt-2 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                      <div>
+                        <p className="font-black text-lg">Seguro para perro {selectedCCAA ? 'PPP' : 'no PPP'} · Plan {selectedPlan.name}</p>
+                        <p className="text-sm text-white/65">Responsabilidad Civil hasta {selectedPlan.coverage}</p>
+                      </div>
+                      <p className="text-xl font-black text-orange">{selectedPlan.price}<span className="text-sm">/año</span></p>
                     </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">DNI/NIE</span>
-                      <span className="text-midnight font-medium">{formData.dni}</span>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="rounded-2xl border border-midnight/10 p-4">
+                      <h4 className="font-black text-midnight">Titular</h4>
+                      <dl className="mt-3 space-y-2 text-sm">
+                        <div><dt className="text-midnight/50">Nombre completo</dt><dd className="font-medium text-midnight break-words">{formData.nombre} {formData.apellido1} {formData.apellido2}</dd></div>
+                        <div><dt className="text-midnight/50">Fecha de nacimiento</dt><dd className="font-medium text-midnight">{formData.fechaNacimiento}</dd></div>
+                        <div><dt className="text-midnight/50">DNI/NIE</dt><dd className="font-medium text-midnight">{formData.dni}</dd></div>
+                      </dl>
                     </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Dirección</span>
-                      <span className="text-midnight font-medium">{formData.calle} {formData.numero}, {formData.codigoPostal} {formData.localidad}</span>
+
+                    <div className="rounded-2xl border border-midnight/10 p-4">
+                      <h4 className="font-black text-midnight">Dirección</h4>
+                      <dl className="mt-3 space-y-2 text-sm">
+                        <div><dt className="text-midnight/50">Domicilio</dt><dd className="font-medium text-midnight break-words">{formData.calle} {formData.numero}{formData.complemento ? `, ${formData.complemento}` : ''}</dd></div>
+                        <div><dt className="text-midnight/50">Localidad</dt><dd className="font-medium text-midnight">{formData.codigoPostal} {formData.localidad}</dd></div>
+                        <div><dt className="text-midnight/50">Provincia</dt><dd className="font-medium text-midnight">{formData.provincia}</dd></div>
+                      </dl>
                     </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Teléfono</span>
-                      <span className="text-midnight font-medium">{formData.telefono}</span>
+
+                    <div className="rounded-2xl border border-midnight/10 p-4">
+                      <h4 className="font-black text-midnight">Contacto</h4>
+                      <dl className="mt-3 space-y-2 text-sm">
+                        <div><dt className="text-midnight/50">Teléfono</dt><dd className="font-medium text-midnight">{formData.telefono}</dd></div>
+                        <div><dt className="text-midnight/50">Email</dt><dd className="font-medium text-midnight break-all">{formData.email}</dd></div>
+                      </dl>
                     </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Email</span>
-                      <span className="text-midnight font-medium">{formData.email}</span>
+
+                    <div className="rounded-2xl border border-midnight/10 p-4">
+                      <h4 className="font-black text-midnight">Tu perro</h4>
+                      <dl className="mt-3 space-y-2 text-sm">
+                        <div><dt className="text-midnight/50">Nombre y raza</dt><dd className="font-medium text-midnight">{formData.nombrePerro} · {formData.razaPerro}</dd></div>
+                        <div><dt className="text-midnight/50">Sexo y nacimiento</dt><dd className="font-medium text-midnight">{formData.sexoPerro} · {formData.fechaNacimientoPerro || 'No indicada'}</dd></div>
+                        <div><dt className="text-midnight/50">Microchip</dt><dd className="font-medium text-midnight break-all">{formData.microchip}</dd></div>
+                      </dl>
                     </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Perro</span>
-                      <span className="text-midnight font-medium">{formData.nombrePerro} ({formData.razaPerro})</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Sexo / Nacimiento</span>
-                      <span className="text-midnight font-medium">{formData.sexoPerro} — {formData.fechaNacimientoPerro}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">Microchip</span>
-                      <span className="text-midnight font-medium">{formData.microchip}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-b border-midnight/5">
-                      <span className="text-midnight/60">IBAN</span>
-                      <span className="text-midnight font-medium">{formData.iban}</span>
-                    </div>
-                    <div className="flex justify-between py-2">
-                      <span className="text-midnight/60">Plan</span>
-                      <span className="text-orange font-bold">{selectedPlan.name} — {selectedPlan.price}{selectedPlan.period}</span>
-                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-midnight/10 p-4">
+                    <h4 className="font-black text-midnight">Pago y documentación</h4>
+                    <dl className="mt-3 grid sm:grid-cols-2 gap-3 text-sm">
+                      <div><dt className="text-midnight/50">IBAN</dt><dd className="font-medium font-mono text-midnight break-all">{formData.iban}</dd></div>
+                      <div><dt className="text-midnight/50">Entidad</dt><dd className="font-medium text-midnight">{bancoDetectado || 'No identificada'}</dd></div>
+                      <div><dt className="text-midnight/50">Cartilla sanitaria</dt><dd className="font-medium text-midnight break-words">{fotoCartilla?.name || 'No adjuntada'}</dd></div>
+                      <div><dt className="text-midnight/50">Consentimientos</dt><dd className="font-medium text-green-700">Aceptados</dd></div>
+                    </dl>
                   </div>
                 </div>
               )}
@@ -930,7 +1124,7 @@ export default function SegurosPerrosPage() {
                     <input type="hidden" name="Nombre completo" value={`${formData.nombre} ${formData.apellido1} ${formData.apellido2}`} />
                     <input type="hidden" name="DNI/NIE" value={formData.dni} />
                     <input type="hidden" name="Fecha nacimiento" value={formData.fechaNacimiento} />
-                    <input type="hidden" name="Dirección" value={`${formData.calle} ${formData.numero}, ${formData.codigoPostal} ${formData.localidad} (${formData.provincia})`} />
+                    <input type="hidden" name="Dirección" value={`${formData.calle} ${formData.numero}${formData.complemento ? `, ${formData.complemento}` : ''}, ${formData.codigoPostal} ${formData.localidad} (${formData.provincia})`} />
                     <input type="hidden" name="Teléfono" value={formData.telefono} />
                     <input type="hidden" name="Email" value={formData.email} />
                     <input type="hidden" name="Nombre perro" value={formData.nombrePerro} />
@@ -943,7 +1137,7 @@ export default function SegurosPerrosPage() {
                       type="submit"
                       className="w-full btn-cta bg-orange text-midnight font-black py-3 rounded-full transition-all duration-300 hover:scale-[1.02]"
                     >
-                      Enviar solicitud ✓
+                      Contratar el seguro de mi perro
                     </button>
                   </form>
                 )}
