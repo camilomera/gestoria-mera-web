@@ -48,17 +48,15 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16">
           {/* Title with inline animal icons */}
-          <div className="text-center mb-4 sm:mb-6 animate-fade-in max-w-5xl mx-auto">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.15] text-midnight">
+          <div className="text-center mb-4 animate-fade-in max-w-5xl mx-auto">
+            <h1 className="text-[clamp(2.15rem,5.8vw,4.65rem)] lg:whitespace-nowrap font-black tracking-[-0.045em] leading-[1.05] text-midnight drop-shadow-[0_2px_0_rgba(255,255,255,0.35)]">
               Seguros para perros y caballos
             </h1>
+            <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-orange/30 via-orange to-orange/30" aria-hidden="true" />
           </div>
 
           {/* Value props */}
-          <div className="max-w-5xl mx-auto mb-6 sm:mb-8 animate-fade-in text-center">
-            <p className="text-midnight/70 text-base sm:text-lg mb-4">
-              Contrata online en 3 minutos. Póliza activa en 24 horas.
-            </p>
+          <div className="max-w-5xl mx-auto mb-5 sm:mb-6 animate-fade-in text-center">
             <div className="flex flex-wrap items-center justify-center gap-3">
               <span className="inline-flex items-center gap-1.5 bg-midnight text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                 ⚡ 100% online
