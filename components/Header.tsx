@@ -14,8 +14,8 @@ export default function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full p-3 sm:p-4">
-      <div className="relative w-full max-w-7xl mx-auto bg-midnight backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] px-6 sm:px-10">
+    <header className="fixed top-0 left-0 right-0 z-50 p-3 sm:p-4">
+      <div className="relative max-w-5xl mx-auto bg-midnight backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] px-6 sm:px-10">
         {/* Subtle glow */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange/5 via-transparent to-orange/5 pointer-events-none" />
         
@@ -74,7 +74,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="relative lg:hidden mt-2 w-full max-w-7xl mx-auto bg-midnight/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-5">
+        <div className="relative lg:hidden mt-2 max-w-5xl mx-auto bg-midnight/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] p-5">
           <div className="space-y-1">
             {navLinks.map((link) => (
               <Link

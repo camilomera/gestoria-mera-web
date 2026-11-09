@@ -523,7 +523,7 @@ export default function SegurosPerrosPage() {
   }
 
   return (
-    <div>
+    <div className="pt-16 sm:pt-20">
       {/* Step: Choice between PPP and No PPP */}
       {step === 'choice' && (
         <section className="py-16 sm:py-20">

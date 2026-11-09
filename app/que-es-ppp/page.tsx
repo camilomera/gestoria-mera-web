@@ -42,7 +42,7 @@ export default function QueEsPPPPage() {
   ]
 
   return (
-    <div>
+    <div className="pt-16 sm:pt-20">
       {/* Hero */}
       <section className="relative py-16 sm:py-20 bg-midnight overflow-hidden">
         <div className="relative container-custom mx-auto px-4 sm:px-6 lg:px-8 text-center">
