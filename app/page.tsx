@@ -49,7 +49,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16">
           {/* Title with inline animal icons */}
           <div className="text-center mb-4 animate-fade-in max-w-5xl mx-auto">
-            <h1 className="text-[clamp(2.15rem,5.8vw,4.65rem)] lg:whitespace-nowrap font-black tracking-[-0.045em] leading-[1.05] text-midnight drop-shadow-[0_2px_0_rgba(255,255,255,0.35)]">
+            <h1 className="text-[clamp(2.15rem,5.5vw,4.4rem)] lg:whitespace-nowrap font-black tracking-[-0.045em] leading-[1.05] text-midnight drop-shadow-[0_2px_0_rgba(255,255,255,0.35)]">
               Seguros para perros y caballos
             </h1>
             <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-orange/30 via-orange to-orange/30" aria-hidden="true" />
@@ -77,23 +77,23 @@ export default function HomePage() {
               href="/seguros-perros"
               className="group overflow-hidden rounded-3xl bg-white backdrop-blur-sm border border-midnight/8 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up shadow-lg"
             >
-              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#f5f5f0]">
+              <div className="h-48 sm:h-52 lg:h-52 overflow-hidden bg-[#f5f5f0]">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784798481/pexels-miami302-23383658_ytcubu.jpg"
                   alt="Perro Boyero de Berna"
                   className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6 sm:p-7">
+              <div className="p-5 sm:p-5">
                 <h2 className="text-2xl sm:text-[1.7rem] font-black text-midnight leading-tight">
                   Seguros para perros
                 </h2>
 
-                <div className="mt-5">
+                <div className="mt-3">
                   <span className="text-midnight font-black text-2xl">Desde 36,77 €<span className="text-midnight font-bold text-sm">/año</span></span>
                 </div>
-                <div className="mt-4">
-                  <span className="inline-flex items-center justify-center w-full gap-2 btn-cta bg-orange text-midnight font-black text-base px-6 py-4 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 group-hover:gap-3">
+                <div className="mt-3">
+                  <span className="inline-flex items-center justify-center w-full gap-2 btn-cta bg-orange text-midnight font-black text-base px-6 py-3.5 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 group-hover:gap-3">
                     Ver opciones y contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -108,23 +108,23 @@ export default function HomePage() {
               href="/seguros-caballos"
               className="group overflow-hidden rounded-3xl bg-white backdrop-blur-sm border border-midnight/8 hover:border-orange/50 transition-all duration-500 hover:shadow-2xl hover:shadow-midnight/10 hover:-translate-y-2 animate-slide-up delay-150 shadow-lg"
             >
-              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#f5f5f0]">
+              <div className="h-48 sm:h-52 lg:h-52 overflow-hidden bg-[#f5f5f0]">
                 <img
                   src="https://res.cloudinary.com/r5v8fzlu/image/upload/v1784808037/pexels-mographe-10942929_wcxh7z.jpg"
                   alt="Caballo"
                   className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6 sm:p-7">
+              <div className="p-5 sm:p-5">
                 <h2 className="text-2xl sm:text-[1.7rem] font-black text-midnight leading-tight">
                   Seguros para caballos
                 </h2>
 
-                <div className="mt-5">
+                <div className="mt-3">
                   <span className="text-midnight font-black text-2xl">Desde 48,27 €<span className="text-midnight font-bold text-sm">/año</span></span>
                 </div>
-                <div className="mt-4">
-                  <span className="inline-flex items-center justify-center w-full gap-2 btn-cta bg-orange text-midnight font-black text-base px-6 py-4 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 group-hover:gap-3">
+                <div className="mt-3">
+                  <span className="inline-flex items-center justify-center w-full gap-2 btn-cta bg-orange text-midnight font-black text-base px-6 py-3.5 rounded-full transition-all duration-300 group-hover:scale-[1.02] group-hover:-translate-y-0.5 group-hover:gap-3">
                     Ver opciones y contratar
                     <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
