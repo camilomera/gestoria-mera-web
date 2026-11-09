@@ -63,7 +63,6 @@ export default function SegurosPerrosPage() {
   ]
 
   const [step, setStep] = useState<PageStep>('choice')
-  const [showComparison, setShowComparison] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState<PlanProduct | null>(null)
   const [formSection, setFormSection] = useState(0)
   const [formData, setFormData] = useState<DogFormData>({
@@ -526,9 +525,8 @@ export default function SegurosPerrosPage() {
                     />
                   </div>
 
-                  {/* Name + subtitle */}
-                  <h3 className="text-xl font-black text-midnight text-center">{product.name}</h3>
-                  <p className="text-midnight/80 text-sm mt-1 mb-5 text-center">{product.subtitle}</p>
+                  {/* Tier name */}
+                  <h3 className="text-xl font-black text-midnight text-center mb-5">{product.name}</h3>
 
                   {/* Coverage - left aligned, smaller */}
                   <div className="mb-4">
@@ -547,14 +545,8 @@ export default function SegurosPerrosPage() {
                     <button 
                       onClick={() => isAvailable && handleContratarClick(product)}
                       disabled={!isAvailable}
-                      className={`block w-full text-center rounded-full py-3 text-sm font-black transition-all duration-300 mb-3 ${isAvailable ? 'btn-cta bg-orange text-midnight hover:scale-[1.02] hover:-translate-y-0.5' : 'bg-midnight/10 text-midnight/40 cursor-not-allowed'}`}>
+                      className={`block w-full text-center rounded-full py-3 text-sm font-black transition-all duration-300 ${isAvailable ? 'btn-cta bg-orange text-midnight hover:scale-[1.02] hover:-translate-y-0.5' : 'bg-midnight/10 text-midnight/40 cursor-not-allowed'}`}>
                       Contratar →
-                    </button>
-                    <button
-                      onClick={() => setShowComparison(true)}
-                      className="block w-full text-center text-midnight/80 hover:text-orange text-sm font-semibold transition-colors"
-                    >
-                      Leer más &gt;
                     </button>
                   </div>
                 </div>
@@ -562,19 +554,6 @@ export default function SegurosPerrosPage() {
               })}
             </div>
                         </div>
-
-{/* Comparar planes - floating blue button */}
-            {selectedCCAA && <div className="text-center mt-6">
-              <button
-                onClick={() => setShowComparison(true)}
-                className="inline-flex items-center gap-2 bg-midnight text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-midnight/30 hover:shadow-xl hover:shadow-midnight/40 transition-all duration-300 hover:-translate-y-0.5 animate-bounce-subtle"
-              >
-                Comparar planes
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>}
 
           </div>
           </div>
@@ -1002,111 +981,6 @@ export default function SegurosPerrosPage() {
             </div>
           </div>
         </section>
-      )}
-
-      {/* Comparison Table Modal */}
-      {showComparison && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" onClick={() => setShowComparison(false)}>
-          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-auto p-6 sm:p-8 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            {/* Close button */}
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-2xl font-black text-midnight">Comparativa de planes</h3>
-              <button
-                onClick={() => setShowComparison(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-midnight/5 transition-colors"
-              >
-                <svg className="w-6 h-6 text-midnight/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Comparison table */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-midnight/10">
-                    <th className="text-left py-3 pr-4 text-midnight/60 font-medium w-1/3"></th>
-                    <th className="py-3 px-3 text-center">
-                      <span className="text-amber-700 font-black">Bronce</span>
-                    </th>
-                    <th className="py-3 px-3 text-center">
-                      <span className="text-gray-500 font-black">Plata</span>
-                    </th>
-                    <th className="py-3 px-3 text-center">
-                      <span className="text-yellow-500 font-black">Oro</span>
-                    </th>
-                    <th className="py-3 px-3 text-center">
-                      <span className="text-emerald-600 font-black">Esmeralda</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-midnight/5">
-                    <td className="py-4 pr-4 font-medium text-midnight">Cobertura RC</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">120.250€</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">150.300€</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">180.350€</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">350.000€</td>
-                  </tr>
-                  <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
-                    <td className="py-4 pr-4 font-medium text-midnight">Precio</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">51,45€/año</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">52,49€/año</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">56,69€/año</td>
-                    <td className="py-4 px-3 text-center font-bold text-midnight">57,75€/año</td>
-                  </tr>
-                  <tr className="border-b border-midnight/5">
-                    <td className="py-4 pr-4 font-medium text-midnight">Daños corporales</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                  </tr>
-                  <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
-                    <td className="py-4 pr-4 font-medium text-midnight">Daños materiales</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                  </tr>
-                  <tr className="border-b border-midnight/5">
-                    <td className="py-4 pr-4 font-medium text-midnight">Defensa jurídica</td>
-                    <td className="py-4 px-3 text-center text-red-400">✗</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                  </tr>
-                  <tr className="border-b border-midnight/5 bg-midnight/[0.02]">
-                    <td className="py-4 pr-4 font-medium text-midnight">Fianzas judiciales</td>
-                    <td className="py-4 px-3 text-center text-red-400">✗</td>
-                    <td className="py-4 px-3 text-center text-red-400">✗</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                  </tr>
-                  <tr className="border-b border-midnight/5">
-                    <td className="py-4 pr-4 font-medium text-midnight">Asistencia veterinaria</td>
-                    <td className="py-4 px-3 text-center text-red-400">✗</td>
-                    <td className="py-4 px-3 text-center text-red-400">✗</td>
-                    <td className="py-4 px-3 text-center text-red-400">✗</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                  </tr>
-                  <tr>
-                    <td className="py-4 pr-4 font-medium text-midnight">Cobertura en toda España</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                    <td className="py-4 px-3 text-center text-green-500">✓</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p className="mt-4 text-midnight/50 text-xs text-center">
-              Todos los planes incluyen certificado en 24 horas y cobertura inmediata.
-            </p>
-          </div>
-        </div>
       )}
 
     </div>
