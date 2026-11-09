@@ -48,14 +48,14 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16">
           {/* Title with inline animal icons */}
-          <div className="text-center mb-12 sm:mb-16 animate-fade-in max-w-5xl mx-auto">
+          <div className="text-center mb-4 sm:mb-6 animate-fade-in max-w-5xl mx-auto">
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.15] text-midnight">
               Seguros para perros y caballos
             </h1>
           </div>
 
           {/* Value props */}
-          <div className="max-w-5xl mx-auto mb-10 animate-fade-in text-center">
+          <div className="max-w-5xl mx-auto mb-6 sm:mb-8 animate-fade-in text-center">
             <p className="text-midnight/70 text-base sm:text-lg mb-4">
               Contrata online en 3 minutos. Póliza activa en 24 horas.
             </p>
