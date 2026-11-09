@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type PageStep = 'choice' | 'ppp-products' | 'noppp' | 'form' | 'confirmation'
 
@@ -33,6 +33,7 @@ interface DogFormData {
   razaPerro: string
   sexoPerro: string
   fechaNacimientoPerro: string
+  soloAnioNacimientoPerro: boolean
   microchip: string
   iban: string
   aceptaCondiciones: boolean
@@ -52,21 +53,100 @@ const provincias = [
   'Valladolid', 'Zamora', 'Zaragoza',
 ]
 
-const bancosPorCodigo: Record<string, string> = {
-  '0019': 'Deutsche Bank',
-  '0049': 'Banco Santander',
-  '0061': 'Banca March',
-  '0073': 'Openbank',
-  '0081': 'Banco Sabadell',
-  '0128': 'Bankinter',
-  '0182': 'BBVA',
-  '0186': 'Banco Mediolanum',
-  '2080': 'ABANCA',
-  '2085': 'Ibercaja',
-  '2095': 'Kutxabank',
-  '2100': 'CaixaBank',
-  '2103': 'Unicaja Banco',
-  '3058': 'Cajamar',
+interface BankInfo {
+  name: string
+  logoDomain?: string
+}
+
+// Códigos NRBE publicados por el Banco de España. Los dominios se usan solo
+// para mostrar la marca; el IBAN nunca se envía a ningún servicio externo.
+const bancosPorCodigo: Record<string, BankInfo> = {
+  '0019': { name: 'Deutsche Bank', logoDomain: 'db.com' },
+  '0049': { name: 'Banco Santander', logoDomain: 'santander.com' },
+  '0061': { name: 'Banca March', logoDomain: 'bancamarch.es' },
+  '0073': { name: 'Openbank', logoDomain: 'openbank.es' },
+  '0078': { name: 'Banca Pueyo', logoDomain: 'bancapueyo.es' },
+  '0081': { name: 'Banco Sabadell', logoDomain: 'bancsabadell.com' },
+  '0128': { name: 'Bankinter', logoDomain: 'bankinter.com' },
+  '0149': { name: 'BNP Paribas', logoDomain: 'bnpparibas.es' },
+  '0169': { name: 'Banco de la Nación Argentina', logoDomain: 'bna.com.ar' },
+  '0182': { name: 'BBVA', logoDomain: 'bbva.es' },
+  '0186': { name: 'Banco Mediolanum', logoDomain: 'bancomediolanum.es' },
+  '0188': { name: 'Banco Alcalá' },
+  '0198': { name: 'Banco Cooperativo Español', logoDomain: 'bancocooperativo.es' },
+  '0234': { name: 'CBNK Banco de Colectivos', logoDomain: 'cbnk.es' },
+  '0235': { name: 'Banco Pichincha', logoDomain: 'bancopichincha.es' },
+  '0240': { name: 'Banco de Crédito Social Cooperativo', logoDomain: 'grupocooperativocajamar.es' },
+  '1465': { name: 'ING', logoDomain: 'ing.es' },
+  '2000': { name: 'Cecabank', logoDomain: 'cecabank.es' },
+  '2045': { name: 'Caixa Ontinyent', logoDomain: 'caixaontinyent.es' },
+  '2056': { name: 'Colonya Caixa Pollença', logoDomain: 'colonya.com' },
+  '2080': { name: 'ABANCA', logoDomain: 'abanca.com' },
+  '2085': { name: 'Ibercaja', logoDomain: 'ibercaja.es' },
+  '2095': { name: 'Kutxabank', logoDomain: 'kutxabank.es' },
+  '2100': { name: 'CaixaBank', logoDomain: 'caixabank.es' },
+  '2103': { name: 'Unicaja Banco', logoDomain: 'unicajabanco.es' },
+  '3001': { name: 'Caja Rural de Almendralejo' },
+  '3005': { name: 'Caja Rural Central', logoDomain: 'ruralcentral.es' },
+  '3007': { name: 'Caja Rural de Gijón' },
+  '3008': { name: 'Caja Rural de Navarra', logoDomain: 'cajaruraldenavarra.com' },
+  '3009': { name: 'Caja Rural de Extremadura', logoDomain: 'crextremadura.com' },
+  '3016': { name: 'Caja Rural de Salamanca' },
+  '3017': { name: 'Caja Rural de Soria', logoDomain: 'cajaruraldesoria.com' },
+  '3018': { name: 'Caja Rural Regional' },
+  '3020': { name: 'Caja Rural de Utrera' },
+  '3023': { name: 'Caja Rural de Granada', logoDomain: 'cajaruralgranada.es' },
+  '3025': { name: 'Caixa d’Enginyers', logoDomain: 'caixaenginyers.com' },
+  '3029': { name: 'Caja Rural de Petrer' },
+  '3035': { name: 'Laboral Kutxa', logoDomain: 'laboralkutxa.com' },
+  '3045': { name: 'Caixa Rural Altea' },
+  '3058': { name: 'Cajamar', logoDomain: 'cajamar.es' },
+  '3059': { name: 'Caja Rural de Asturias', logoDomain: 'cajaruraldeasturias.com' },
+  '3060': { name: 'Caja Rural de Burgos, Fuentepelayo, Segovia y Castelldans' },
+  '3067': { name: 'Caja Rural de Jaén', logoDomain: 'cajaruraldejaen.com' },
+  '3070': { name: 'Caixa Rural Galega', logoDomain: 'caixaruralgalega.gal' },
+  '3076': { name: 'Cajasiete', logoDomain: 'cajasiete.com' },
+  '3080': { name: 'Caja Rural de Teruel', logoDomain: 'ruralvia.com' },
+  '3081': { name: 'Eurocaja Rural', logoDomain: 'eurocajarural.es' },
+  '3085': { name: 'Caja Rural de Zamora', logoDomain: 'cajaruraldezamora.com' },
+  '3089': { name: 'Caja Rural de Baena' },
+  '3095': { name: 'Caja Rural San Roque de Almenara' },
+  '3096': { name: 'Caixa Rural de l’Alcúdia' },
+  '3098': { name: 'Caja Rural de Nueva Carteya' },
+  '3102': { name: 'Caixa Rural Sant Vicent Ferrer' },
+  '3104': { name: 'Caja Rural de Cañete de las Torres' },
+  '3105': { name: 'Caixa Rural Callosa d’en Sarrià' },
+  '3110': { name: 'Caja Rural Católico Agraria' },
+  '3111': { name: 'Caixa Rural La Vall San Isidro' },
+  '3112': { name: 'Caja Rural San José de Burriana' },
+  '3113': { name: 'Caja Rural San José de Alcora' },
+  '3115': { name: 'Caja Rural Nuestra Madre del Sol' },
+  '3117': { name: 'Caixa Rural d’Algemesí' },
+  '3118': { name: 'Caixa Rural Torrent' },
+  '3119': { name: 'Caixa Rural Alqueries' },
+  '3121': { name: 'Caja Rural de Cheste' },
+  '3123': { name: 'Caixa Rural de Turís' },
+  '3127': { name: 'Caja Rural de Casas Ibáñez' },
+  '3130': { name: 'Caja Rural San José de Almassora' },
+  '3134': { name: 'Caja Rural Nuestra Señora de la Esperanza de Onda' },
+  '3135': { name: 'Caja Rural San José de Nules' },
+  '3138': { name: 'Ruralnostra', logoDomain: 'ruralnostra.com' },
+  '3140': { name: 'Caja Rural de Guissona' },
+  '3144': { name: 'Caja Rural de Villamalea' },
+  '3150': { name: 'Caja Rural de Albal' },
+  '3152': { name: 'Caja Rural de Villar' },
+  '3157': { name: 'Caja Rural La Junquera de Chilches' },
+  '3159': { name: 'Caixa Popular', logoDomain: 'caixapopular.es' },
+  '3160': { name: 'Caixa Rural Sant Josep de Vilavella' },
+  '3162': { name: 'Caixa Rural Benicarló' },
+  '3165': { name: 'Caja Rural San Isidro de Vilafamés' },
+  '3166': { name: 'Caixa Rural Les Coves de Vinromà' },
+  '3174': { name: 'Caixa Rural Vinaròs' },
+  '3179': { name: 'Caja Rural de Alginet' },
+  '3183': { name: 'Arquia Banca', logoDomain: 'arquia.com' },
+  '3187': { name: 'Caja Rural del Sur', logoDomain: 'cajaruraldelsur.es' },
+  '3190': { name: 'Globalcaja', logoDomain: 'globalcaja.es' },
+  '3191': { name: 'Caja Rural de Aragón', logoDomain: 'cajaruraldearagon.es' },
 }
 
 const formatDateInput = (value: string) => {
@@ -124,12 +204,14 @@ export default function SegurosPerrosPage() {
     nombre: '', apellido1: '', apellido2: '', fechaNacimiento: '', dni: '',
     calle: '', numero: '', complemento: '', codigoPostal: '', localidad: '', provincia: '',
     telefono: '', email: '', emailRepeat: '',
-    nombrePerro: '', razaPerro: '', sexoPerro: '', fechaNacimientoPerro: '', microchip: '',
+    nombrePerro: '', razaPerro: '', sexoPerro: '', fechaNacimientoPerro: '', soloAnioNacimientoPerro: false, microchip: '',
     iban: '',
     aceptaCondiciones: false, aceptaProteccion: false,
   })
   const [fotoCartilla, setFotoCartilla] = useState<File | null>(null)
   const [formErrors, setFormErrors] = useState<FormErrors>({})
+  const historyReady = useRef(false)
+  const lastHistoryHash = useRef('')
   const cleanIban = formData.iban.replace(/\s/g, '').toUpperCase()
   const bancoDetectado = cleanIban.startsWith('ES') && cleanIban.length >= 8
     ? bancosPorCodigo[cleanIban.slice(4, 8)]
@@ -220,8 +302,16 @@ export default function SegurosPerrosPage() {
       } else if (!/^[0-9]{15}$/.test(formData.microchip.replace(/\s/g, ''))) {
         errors.microchip = 'El microchip debe tener exactamente 15 dígitos'
       }
-      if (formData.fechaNacimientoPerro && calculateAge(formData.fechaNacimientoPerro) < 0) {
-        errors.fechaNacimientoPerro = 'Introduce una fecha válida'
+      if (formData.fechaNacimientoPerro) {
+        if (formData.soloAnioNacimientoPerro) {
+          const year = Number(formData.fechaNacimientoPerro)
+          const currentYear = new Date().getFullYear()
+          if (!/^\d{4}$/.test(formData.fechaNacimientoPerro) || year < 1990 || year > currentYear) {
+            errors.fechaNacimientoPerro = `Introduce un año entre 1990 y ${currentYear}`
+          }
+        } else if (calculateAge(formData.fechaNacimientoPerro) < 0) {
+          errors.fechaNacimientoPerro = 'Introduce una fecha válida'
+        }
       }
     }
     if (section === 4) {
@@ -250,10 +340,91 @@ export default function SegurosPerrosPage() {
     'Revisa tus datos',
   ]
 
+  const pushFlowState = (
+    nextStep: PageStep,
+    nextSection = 0,
+    nextPlan: PlanProduct | null = selectedPlan,
+    nextCCAA: string = selectedCCAA,
+  ) => {
+    const flowHash = nextStep === 'form' ? `#form-${nextSection + 1}` : `#${nextStep}`
+    window.history.pushState({ dogFlow: true, step: nextStep, formSection: nextSection, selectedPlan: nextPlan, selectedCCAA: nextCCAA }, '', flowHash)
+    lastHistoryHash.current = flowHash
+    setStep(nextStep)
+    setFormSection(nextSection)
+    setSelectedPlan(nextPlan)
+    setSelectedCCAA(nextCCAA)
+    setFormErrors({})
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const goBackTo = (fallbackStep: PageStep, fallbackSection = 0) => {
+    setStep(fallbackStep)
+    setFormSection(fallbackSection)
+    setFormErrors({})
+    window.history.back()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    if (historyReady.current) return
+    historyReady.current = true
+    lastHistoryHash.current = window.location.hash
+    const existingState = window.history.state
+    if (existingState?.dogFlow) {
+      setStep(existingState.step as PageStep)
+      setFormSection(typeof existingState.formSection === 'number' ? existingState.formSection : 0)
+      setSelectedPlan(existingState.selectedPlan || null)
+      setSelectedCCAA(existingState.selectedCCAA || '')
+    } else {
+      window.history.replaceState({ dogFlow: true, step: 'choice', formSection: 0, selectedPlan: null, selectedCCAA: '' }, '')
+    }
+
+    const restoreFlowState = (state: any) => {
+      if (state?.dogFlow) {
+        const hash = window.location.hash.replace('#', '')
+        const hashStep = hash.startsWith('form-') ? 'form' : hash
+        const knownSteps: PageStep[] = ['choice', 'ppp-products', 'noppp', 'form', 'confirmation']
+        const restoredStep = knownSteps.includes(hashStep as PageStep) ? hashStep as PageStep : state.step as PageStep
+        const restoredSection = hash.startsWith('form-')
+          ? Math.max(0, Number(hash.replace('form-', '')) - 1)
+          : typeof state.formSection === 'number' ? state.formSection : 0
+        setStep(restoredStep)
+        setFormSection(restoredSection)
+        setSelectedPlan(state.selectedPlan || null)
+        setSelectedCCAA(state.selectedCCAA || '')
+        setFormErrors({})
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }
+
+    const handlePopState = (event: PopStateEvent) => {
+      lastHistoryHash.current = window.location.hash
+      restoreFlowState(event.state)
+    }
+    const handleHashChange = () => {
+      lastHistoryHash.current = window.location.hash
+      restoreFlowState(window.history.state)
+    }
+    // Algunos navegadores embebidos cambian el hash al usar Atrás/Adelante sin
+    // emitir popstate de forma fiable. Este control ligero mantiene la UI sincronizada.
+    const historySync = window.setInterval(() => {
+      if (window.location.hash !== lastHistoryHash.current) {
+        lastHistoryHash.current = window.location.hash
+        restoreFlowState(window.history.state)
+      }
+    }, 150)
+
+    window.addEventListener('popstate', handlePopState)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+      window.removeEventListener('hashchange', handleHashChange)
+      window.clearInterval(historySync)
+    }
+  }, [])
+
   const handleContratarClick = (product: PlanProduct) => {
-    setSelectedPlan(product)
-    setStep('form')
-    setFormSection(0)
+    pushFlowState('form', 0, product)
   }
 
   const handleFormChange = <K extends keyof DogFormData,>(field: K, value: DogFormData[K]) => {
@@ -352,7 +523,7 @@ export default function SegurosPerrosPage() {
   }
 
   return (
-    <div className="pt-16 sm:pt-20">
+    <div>
       {/* Step: Choice between PPP and No PPP */}
       {step === 'choice' && (
         <section className="py-16 sm:py-20">
@@ -385,7 +556,7 @@ export default function SegurosPerrosPage() {
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* PPP Card */}
               <button
-                onClick={() => setStep('ppp-products')}
+                onClick={() => pushFlowState('ppp-products', 0, null, '')}
                 className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
@@ -420,7 +591,7 @@ export default function SegurosPerrosPage() {
 
               {/* No PPP Card */}
               <button
-                onClick={() => setStep('noppp')}
+                onClick={() => pushFlowState('noppp', 0, null, '')}
                 className="group text-left bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange/30"
               >
                 <div className="relative h-64 sm:h-72 overflow-hidden rounded-t-3xl">
@@ -464,7 +635,7 @@ export default function SegurosPerrosPage() {
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back button */}
             <button
-              onClick={() => { setStep('choice'); setSelectedCCAA('') }}
+              onClick={() => goBackTo('choice')}
               className="mb-5 sm:mb-7 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -634,7 +805,7 @@ export default function SegurosPerrosPage() {
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8">
             {/* Back button */}
             <button
-              onClick={() => setStep('choice')}
+              onClick={() => goBackTo('choice')}
               className="mb-8 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -726,7 +897,7 @@ export default function SegurosPerrosPage() {
           <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
             {/* Back button */}
             <button
-              onClick={() => { setStep(selectedCCAA ? 'ppp-products' : 'noppp'); setFormSection(0) }}
+              onClick={() => goBackTo(selectedCCAA ? 'ppp-products' : 'noppp')}
               className="mb-6 flex items-center gap-2 text-midnight/70 hover:text-orange transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -846,7 +1017,7 @@ export default function SegurosPerrosPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className={labelClass}>Código postal</label>
-                      <input type="text" inputMode="numeric" autoComplete="postal-code" placeholder="00000" maxLength={5} value={formData.codigoPostal} onChange={(e) => handleFormChange('codigoPostal', e.target.value.replace(/\D/g, '').slice(0, 5))} className={formErrors.codigoPostal ? inputErrorClass : inputClass} />
+                      <input type="text" inputMode="numeric" autoComplete="postal-code" placeholder="Ej.: 28013" maxLength={5} value={formData.codigoPostal} onChange={(e) => handleFormChange('codigoPostal', e.target.value.replace(/\D/g, '').slice(0, 5))} className={formErrors.codigoPostal ? inputErrorClass : inputClass} />
                       {formErrors.codigoPostal && <p className="text-red-500 text-xs mt-1">{formErrors.codigoPostal}</p>}
                     </div>
                     <div>
@@ -881,7 +1052,7 @@ export default function SegurosPerrosPage() {
                   <h3 className="text-lg font-black text-midnight mb-2">Datos de contacto</h3>
                   <div>
                     <label className={labelClass}>Teléfono móvil</label>
-                    <input type="tel" placeholder="Ej: 667755976" maxLength={9} value={formData.telefono} onChange={(e) => handleFormChange('telefono', e.target.value.replace(/[^0-9]/g, ''))} className={formErrors.telefono ? inputErrorClass : inputClass} />
+                    <input type="tel" placeholder="Ej.: 612 345 678" maxLength={9} value={formData.telefono} onChange={(e) => handleFormChange('telefono', e.target.value.replace(/[^0-9]/g, ''))} className={formErrors.telefono ? inputErrorClass : inputClass} />
                     {formErrors.telefono && <p className="text-red-500 text-xs mt-1">{formErrors.telefono}</p>}
                   </div>
                   <div>
@@ -924,31 +1095,46 @@ export default function SegurosPerrosPage() {
                         id="fecha-nacimiento-perro"
                         type="text"
                         inputMode="numeric"
-                        maxLength={10}
-                        placeholder="día / mes / año"
+                        maxLength={formData.soloAnioNacimientoPerro ? 4 : 10}
+                        placeholder={formData.soloAnioNacimientoPerro ? 'año aproximado' : 'día / mes / año'}
                         value={formData.fechaNacimientoPerro}
-                        onChange={(e) => handleFormChange('fechaNacimientoPerro', formatDateInput(e.target.value))}
+                        onChange={(e) => handleFormChange('fechaNacimientoPerro', formData.soloAnioNacimientoPerro ? e.target.value.replace(/\D/g, '').slice(0, 4) : formatDateInput(e.target.value))}
                         className={`${formErrors.fechaNacimientoPerro ? inputErrorClass : inputClass} pr-12 tracking-wide`}
                       />
                       <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight/35 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3M5 11h14M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
                       </svg>
                     </div>
+                    <label className="mt-3 flex cursor-pointer items-start gap-3 rounded-xl bg-mint-50 px-3.5 py-3 text-sm text-midnight/75">
+                      <input
+                        type="checkbox"
+                        checked={formData.soloAnioNacimientoPerro}
+                        onChange={(e) => {
+                          handleFormChange('soloAnioNacimientoPerro', e.target.checked)
+                          handleFormChange('fechaNacimientoPerro', '')
+                          setFormErrors(prev => ({ ...prev, fechaNacimientoPerro: undefined }))
+                        }}
+                        className="mt-0.5 h-4 w-4 shrink-0 accent-orange"
+                      />
+                      <span><strong className="text-midnight">No sé la fecha exacta.</strong> Puedes indicar solo el año aproximado.</span>
+                    </label>
                     {formErrors.fechaNacimientoPerro && <p className="text-red-500 text-xs mt-1">{formErrors.fechaNacimientoPerro}</p>}
                   </div>
                   <div>
-                    <input type="text" placeholder="Microchip (15 dígitos)" value={formData.microchip} onChange={(e) => handleFormChange('microchip', e.target.value)} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors ${formErrors.microchip ? 'border-red-400' : 'border-midnight/10'}`} />
+                    <label htmlFor="microchip-perro" className={labelClass}>Microchip</label>
+                    <input id="microchip-perro" type="text" inputMode="numeric" maxLength={15} placeholder="15 dígitos" value={formData.microchip} onChange={(e) => handleFormChange('microchip', e.target.value.replace(/\D/g, '').slice(0, 15))} className={`w-full px-4 py-3 border-2 rounded-xl text-midnight placeholder-midnight/40 focus:border-orange focus:outline-none transition-colors ${formErrors.microchip ? 'border-red-400' : 'border-midnight/10'}`} />
                     {formErrors.microchip && <p className="text-red-500 text-xs mt-1">{formErrors.microchip}</p>}
                   </div>
                   <div className="pt-2">
+                    <p className={`${labelClass} mb-2`}>Cartilla sanitaria <span className="font-normal text-midnight/45">(opcional)</span></p>
                     <label htmlFor="foto-cartilla" className="block cursor-pointer rounded-2xl border-2 border-dashed border-orange/35 bg-orange/5 p-6 text-center transition-all hover:border-orange hover:bg-orange/10 focus-within:ring-4 focus-within:ring-orange/20">
                       <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
                         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 16.5V19a2 2 0 002 2h14a2 2 0 002-2v-2.5M12 3v12m0-12l-4 4m4-4l4 4" />
                         </svg>
                       </span>
-                      <span className="mt-3 block font-black text-midnight">Añadir cartilla sanitaria</span>
-                      <span className="mt-1 block text-sm text-midnight/55">Foto o PDF · opcional</span>
+                      <span className="mt-3 block font-black text-midnight">Añadir foto o PDF</span>
+                      <span className="mt-1 block text-sm text-midnight/55">Pulsa aquí para seleccionar el archivo</span>
                       <input id="foto-cartilla" type="file" accept="image/*,.pdf" onChange={(e) => setFotoCartilla(e.target.files?.[0] || null)} className="sr-only" />
                     </label>
                     {fotoCartilla && (
@@ -981,12 +1167,20 @@ export default function SegurosPerrosPage() {
                     {formErrors.iban && <p className="text-red-500 text-xs mt-1">{formErrors.iban}</p>}
                     {bancoDetectado ? (
                       <div className="mt-3 flex items-center gap-3 rounded-xl border border-midnight/10 bg-mint-50 px-4 py-3">
-                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-midnight text-xs font-black text-white" aria-hidden="true">
-                          {bancoDetectado.split(' ').map(word => word[0]).join('').slice(0, 2)}
+                        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-midnight text-xs font-black text-white" aria-hidden="true">
+                          {bancoDetectado.name.split(' ').map(word => word[0]).join('').slice(0, 2)}
+                          {bancoDetectado.logoDomain && (
+                            <img
+                              src={`https://logo.clearbit.com/${bancoDetectado.logoDomain}`}
+                              alt=""
+                              className="absolute inset-0 h-full w-full object-contain bg-white p-1"
+                              onError={(event) => { event.currentTarget.style.display = 'none' }}
+                            />
+                          )}
                         </span>
                         <div>
                           <p className="text-xs text-midnight/50">Entidad identificada</p>
-                          <p className="font-bold text-midnight">{bancoDetectado}</p>
+                          <p className="font-bold text-midnight">{bancoDetectado.name}</p>
                         </div>
                       </div>
                     ) : (
@@ -1033,7 +1227,10 @@ export default function SegurosPerrosPage() {
                   </div>
 
                   <div className="rounded-2xl bg-midnight p-5 text-white">
-                    <p className="text-xs font-bold uppercase tracking-[0.12em] text-white/50">Producto</p>
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-xs font-bold uppercase tracking-[0.12em] text-white/50">Producto</p>
+                      <button type="button" onClick={() => pushFlowState(selectedCCAA ? 'ppp-products' : 'noppp')} className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-white hover:bg-white/20">Editar</button>
+                    </div>
                     <div className="mt-2 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
                       <div>
                         <p className="font-black text-lg">Seguro para perro {selectedCCAA ? 'PPP' : 'no PPP'} · Plan {selectedPlan.name}</p>
@@ -1045,7 +1242,7 @@ export default function SegurosPerrosPage() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="rounded-2xl border border-midnight/10 p-4">
-                      <h4 className="font-black text-midnight">Titular</h4>
+                      <div className="flex items-center justify-between gap-3"><h4 className="font-black text-midnight">Titular</h4><button type="button" onClick={() => pushFlowState('form', 0)} className="text-xs font-bold text-orange hover:underline">Editar</button></div>
                       <dl className="mt-3 space-y-2 text-sm">
                         <div><dt className="text-midnight/50">Nombre completo</dt><dd className="font-medium text-midnight break-words">{formData.nombre} {formData.apellido1} {formData.apellido2}</dd></div>
                         <div><dt className="text-midnight/50">Fecha de nacimiento</dt><dd className="font-medium text-midnight">{formData.fechaNacimiento}</dd></div>
@@ -1054,7 +1251,7 @@ export default function SegurosPerrosPage() {
                     </div>
 
                     <div className="rounded-2xl border border-midnight/10 p-4">
-                      <h4 className="font-black text-midnight">Dirección</h4>
+                      <div className="flex items-center justify-between gap-3"><h4 className="font-black text-midnight">Dirección</h4><button type="button" onClick={() => pushFlowState('form', 1)} className="text-xs font-bold text-orange hover:underline">Editar</button></div>
                       <dl className="mt-3 space-y-2 text-sm">
                         <div><dt className="text-midnight/50">Domicilio</dt><dd className="font-medium text-midnight break-words">{formData.calle} {formData.numero}{formData.complemento ? `, ${formData.complemento}` : ''}</dd></div>
                         <div><dt className="text-midnight/50">Localidad</dt><dd className="font-medium text-midnight">{formData.codigoPostal} {formData.localidad}</dd></div>
@@ -1063,7 +1260,7 @@ export default function SegurosPerrosPage() {
                     </div>
 
                     <div className="rounded-2xl border border-midnight/10 p-4">
-                      <h4 className="font-black text-midnight">Contacto</h4>
+                      <div className="flex items-center justify-between gap-3"><h4 className="font-black text-midnight">Contacto</h4><button type="button" onClick={() => pushFlowState('form', 2)} className="text-xs font-bold text-orange hover:underline">Editar</button></div>
                       <dl className="mt-3 space-y-2 text-sm">
                         <div><dt className="text-midnight/50">Teléfono</dt><dd className="font-medium text-midnight">{formData.telefono}</dd></div>
                         <div><dt className="text-midnight/50">Email</dt><dd className="font-medium text-midnight break-all">{formData.email}</dd></div>
@@ -1071,23 +1268,24 @@ export default function SegurosPerrosPage() {
                     </div>
 
                     <div className="rounded-2xl border border-midnight/10 p-4">
-                      <h4 className="font-black text-midnight">Tu perro</h4>
+                      <div className="flex items-center justify-between gap-3"><h4 className="font-black text-midnight">Tu perro</h4><button type="button" onClick={() => pushFlowState('form', 3)} className="text-xs font-bold text-orange hover:underline">Editar</button></div>
                       <dl className="mt-3 space-y-2 text-sm">
                         <div><dt className="text-midnight/50">Nombre y raza</dt><dd className="font-medium text-midnight">{formData.nombrePerro} · {formData.razaPerro}</dd></div>
-                        <div><dt className="text-midnight/50">Sexo y nacimiento</dt><dd className="font-medium text-midnight">{formData.sexoPerro} · {formData.fechaNacimientoPerro || 'No indicada'}</dd></div>
+                        <div><dt className="text-midnight/50">Sexo y nacimiento</dt><dd className="font-medium text-midnight">{formData.sexoPerro} · {formData.fechaNacimientoPerro ? `${formData.fechaNacimientoPerro}${formData.soloAnioNacimientoPerro ? ' (aprox.)' : ''}` : 'No indicada'}</dd></div>
                         <div><dt className="text-midnight/50">Microchip</dt><dd className="font-medium text-midnight break-all">{formData.microchip}</dd></div>
                       </dl>
                     </div>
                   </div>
 
                   <div className="rounded-2xl border border-midnight/10 p-4">
-                    <h4 className="font-black text-midnight">Pago y documentación</h4>
+                    <div className="flex items-center justify-between gap-3"><h4 className="font-black text-midnight">Pago y documentación</h4><button type="button" onClick={() => pushFlowState('form', 4)} className="text-xs font-bold text-orange hover:underline">Editar</button></div>
                     <dl className="mt-3 grid sm:grid-cols-2 gap-3 text-sm">
                       <div><dt className="text-midnight/50">IBAN</dt><dd className="font-medium font-mono text-midnight break-all">{formData.iban}</dd></div>
-                      <div><dt className="text-midnight/50">Entidad</dt><dd className="font-medium text-midnight">{bancoDetectado || 'No identificada'}</dd></div>
+                      <div><dt className="text-midnight/50">Entidad</dt><dd className="font-medium text-midnight">{bancoDetectado?.name || 'No identificada'}</dd></div>
                       <div><dt className="text-midnight/50">Cartilla sanitaria</dt><dd className="font-medium text-midnight break-words">{fotoCartilla?.name || 'No adjuntada'}</dd></div>
                       <div><dt className="text-midnight/50">Consentimientos</dt><dd className="font-medium text-green-700">Aceptados</dd></div>
                     </dl>
+                    <div className="mt-3 border-t border-midnight/10 pt-3 text-right"><button type="button" onClick={() => pushFlowState('form', 5)} className="text-xs font-bold text-orange hover:underline">Editar condiciones legales</button></div>
                   </div>
                 </div>
               )}
@@ -1096,7 +1294,7 @@ export default function SegurosPerrosPage() {
               <div className="flex gap-3 mt-8">
                 {formSection > 0 && (
                   <button
-                    onClick={() => { setFormErrors({}); setFormSection(prev => prev - 1) }}
+                    onClick={() => goBackTo('form', formSection - 1)}
                     className="flex-1 py-3 border-2 border-midnight/10 rounded-full text-midnight font-bold hover:bg-midnight/5 transition-colors"
                   >
                     ← Anterior
@@ -1104,7 +1302,7 @@ export default function SegurosPerrosPage() {
                 )}
                 {formSection < formSections.length - 1 ? (
                   <button
-                    onClick={() => { if (validateSection(formSection)) setFormSection(prev => prev + 1) }}
+                    onClick={() => { if (validateSection(formSection)) pushFlowState('form', formSection + 1) }}
                     className="flex-1 btn-cta bg-orange text-midnight font-black py-3 rounded-full transition-all duration-300 hover:scale-[1.02]"
                   >
                     Siguiente →

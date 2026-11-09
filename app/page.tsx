@@ -46,7 +46,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[#F2EEC4]/55" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16">
+        <div className="relative z-10 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-12 sm:pb-16">
           {/* Title with inline animal icons */}
           <div className="text-center mb-12 sm:mb-16 animate-fade-in max-w-5xl mx-auto">
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black tracking-tight leading-[1.15] text-midnight">

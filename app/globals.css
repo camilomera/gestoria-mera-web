@@ -5,10 +5,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
-    @apply bg-mintcream text-midnight font-sans antialiased;
+    @apply bg-mintcream text-midnight font-sans antialiased w-full overflow-x-hidden;
   }
 
   ::selection {
@@ -55,7 +56,7 @@
   }
 
   .container-custom {
-    @apply max-w-7xl mx-auto px-5;
+    @apply w-full max-w-7xl mx-auto;
   }
 
   .input-field {

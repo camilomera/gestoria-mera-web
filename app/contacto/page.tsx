@@ -1,6 +1,6 @@
 export default function ContactoPage() {
   return (
-    <div className="pt-24 sm:pt-28">
+    <div>
       <section className="py-12 sm:py-16">
         <div className="container-custom mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <div className="text-center mb-10">
